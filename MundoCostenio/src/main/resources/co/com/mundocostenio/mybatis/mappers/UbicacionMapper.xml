@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.UbicacionMapper">
+	<resultMap type="co.com.mundocostenio.domain.Ubicacion" id="UbicacionResult">
+  	
+  		<id	property = "id" 	column = "id"/>
+ 		<result property ="nroPuerta" column ="nro_puerta"/>
+ 		<result property ="geoLocalizacion" column ="geo_localizacion"/>
+ 		
+ 		<association property="calle1" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult"/>
+			
+		<association property="calle2" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult"/>
+  	</resultMap>
+</mapper>

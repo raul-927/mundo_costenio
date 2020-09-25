@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper">
+	<resultMap type="co.com.mundocostenio.domain.ListaPrecios" id="ListaPreciosResult">
+  		<id			 property ="listaPrecioId" 		column ="lista_precio_id"/>
+  		<result property ="descripcionLista" 			column ="descripcion_lista"/>
+  		
+  		<association property="fechaVigencia" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.FechaVigenciaListaPreciosMapper.FechaVigenciaListaPreciosResult"/>
+
+ 		<collection property="precioProductoList" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.PrecioProductoMapper.PrecioProductoResult"/>
+  	</resultMap>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.PersonasMapper">
+	<resultMap type="co.com.mundocostenio.domain.Persona" id="PersonasResult">
+  	
+  		<id	property = "id" 	column = "id"/>
+ 		<result property ="nombre" column ="nombre"/>
+ 		<result property ="apellido" column ="apellido"/>
+ 		<result property = "cedula" column ="cedula"/>
+ 		<result property = "rol" column ="rol"/>
+ 		
+ 			
+ 		<collection property="direcciones" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.DireccionMapper.DireccionResult"/>
+
+  	</resultMap>
+</mapper>

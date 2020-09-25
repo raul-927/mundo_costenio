@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.CalleMapper">
+	<resultMap type="co.com.mundocostenio.domain.Calle" id="CalleResult">
+  	
+  		<id	property = "id" 	column = "id"/>
+ 		<result property ="tipoCalle" column ="tipo_calle"/>
+ 		<result property ="nombre" column ="nombre"/>
+  	</resultMap>
+</mapper>

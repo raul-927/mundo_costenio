@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.DireccionMapper">
+	<resultMap type="co.com.mundocostenio.domain.Direccion" id="DireccionResult">
+  	
+  		<id	property = "id" 	column = "id"/>
+ 		<association property="departamento" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.DepartamentoMapper.DepartamentoResult"/>
+  	</resultMap>
+</mapper>

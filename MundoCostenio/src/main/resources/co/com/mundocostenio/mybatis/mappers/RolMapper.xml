@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.RolMapper">
+	<resultMap type="co.com.mundocostenio.dto.RolesDTO" id="RolResult">
+  	
+  		<id	property = "id" 	column = "id"/>
+ 		<result property ="rolId" column ="rol_id"/>
+ 		<result property ="personaId" column ="persona_id"/>
+  	</resultMap>
+</mapper>
