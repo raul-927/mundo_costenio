@@ -64,6 +64,16 @@ public class ListaPreciosSqlProvider {
 							if(precProd.getMonto() > 0) {
 								WHERE("pre.monto = " + precProd.getMonto());
 							}
+							if(precProd.getProducto()!= null) {
+								if(precProd.getProducto().getNombre()!= null && precProd.getProducto().getNombre()!="") {
+									WHERE("pro.nombre = " + "'".concat(precProd.getProducto().getNombre()).concat("'"));
+								}
+								if(precProd.getProducto().getTipoProducto()!= null) {
+									if(precProd.getProducto().getTipoProducto().getDescripcion()!=null && precProd.getProducto().getTipoProducto().getDescripcion()!= "") {
+										WHERE("t.descripcion = " + "'".concat(precProd.getProducto().getTipoProducto().getDescripcion()).concat("'"));
+									}
+								}
+							}
 						}
 						
 					}

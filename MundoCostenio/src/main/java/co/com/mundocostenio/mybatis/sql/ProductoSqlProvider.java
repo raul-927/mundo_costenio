@@ -18,5 +18,30 @@ public class ProductoSqlProvider {
 			}
 		}}.toString();
 	}
+	
+	public String update(Producto producto) {
+		return new SQL() {{
+			UPDATE("producto");
+			if(producto.getNombre() != null) {
+				SET("nombre", "'".concat(producto.getNombre()).concat("'"));
+			}
+			if(producto.getTipoProducto() !=null) {
+				SET("tipo_prod_id", "'".concat(String.valueOf(producto.getTipoProducto().getTipProdId())).concat("'"));
+			}
+		}}.toString();
+	}
+	
+	public String delete(int id) {
+		return new SQL() {{
+			DELETE_FROM("producto");
+			WHERE("prodId = " + id);
+		}}.toString();
+	}
+	
+	public String selectProducto(Producto producto) {
+		return new SQL() {{
+			
+		}}.toString();
+	}
 
 }
