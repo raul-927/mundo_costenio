@@ -18,6 +18,22 @@ public class ListaPreciosSqlProvider {
 			}
 		}}.toString();
 	}
+	
+	public String update(ListaPrecios update) {
+		return new SQL() {{
+			UPDATE("lista_precios");
+			if(update.getDescripcionLista()!= null) {
+				SET("descripcion_lista", "'".concat(String.valueOf(update.getDescripcionLista())).concat("'"));
+			}
+			if(update.getFechaVigencia() != null) {
+				SET("fecha_vig_id", String.valueOf(update.getFechaVigencia().getFechaVigenciaId()));
+			}
+		}}.toString();
+	}
+	
+	public String delete(int id) {
+		return new SQL() {{}}.toString();
+	}
 
 	public String selectListaPrecios(ListaPrecios listaPrecios) {
 		String sql =  new SQL() {{

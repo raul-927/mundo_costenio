@@ -3,16 +3,15 @@ package co.com.mundocostenio.mybatis.mappers;
 import java.util.List;
 
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
-import org.springframework.stereotype.Component;
-
 import co.com.mundocostenio.domain.ListaPrecios;
 import co.com.mundocostenio.mybatis.sql.ListaPreciosSqlProvider;
 
-@Component("listaPreciosMapper")
+@Mapper
 public interface ListaPreciosMapper {
 	
 	
