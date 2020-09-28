@@ -1,5 +1,7 @@
 package co.com.mundocostenio.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,22 @@ public class ProductoServiceImpl implements ProductoService {
 	public Producto insert(Producto producto) {
 		this.productoMapper.insert(producto);
 		return producto;
+	}
+
+	@Override
+	public Producto update(Producto producto) {
+		this.productoMapper.update(producto);
+		return producto;
+	}
+
+	@Override
+	public int delete(int prodId) {
+		return this.productoMapper.delete(prodId);
+	}
+
+	@Override
+	public List<Producto> selectProducto(Producto producto) {
+		return this.productoMapper.selectProducto(producto);
 	}
 
 }

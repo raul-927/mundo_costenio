@@ -1,5 +1,6 @@
 package co.com.mundocostenio;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,6 +8,7 @@ import co.com.mundocostenio.domain.FechaVigenciaListaPrecios;
 import co.com.mundocostenio.domain.ListaPrecios;
 import co.com.mundocostenio.domain.PrecioProducto;
 import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.domain.TipoProducto;
 import co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +32,56 @@ public class ListaPreciosTest {
 	private static String FECHA_FIN = "2020-09-04";
 	private static int MONTO = 319000;
 	private static int PROD_ID = 1;
+	private static int TIP_PROD_ID = 1;
+	private static String NOMBRE = "Pezcado";
+	private static String DESCRIPCION ="Mercaderia Bruta";
+	
+	
+	@Before
+	void crearTabla() {
+		
+	}
+	
+	@Before
+	void insertDatos() {
+		
+	}
+	
+	//@Test
+	void insertListaPrecios() {
+		ListaPrecios 				listaPrecios 	   = new ListaPrecios();
+		FechaVigenciaListaPrecios 	fechaVigencia 	   = new FechaVigenciaListaPrecios();
+		TipoProducto 				tipoProducto 	   = new TipoProducto();
+		Producto 					producto 		   = new Producto();
+		PrecioProducto 				precioProducto 	   = new PrecioProducto();
+		List<PrecioProducto>		precioProductoList = new ArrayList<PrecioProducto>();
+		
+		LocalDate fechaIni =LocalDate.parse(FECHA_INI);
+		LocalDate fechaFin =LocalDate.parse(FECHA_FIN);
+		
+		fechaVigencia.setFechaIni(fechaIni);
+		fechaVigencia.setFechaFin(fechaFin);
+		
+		tipoProducto.setTipProdId(TIP_PROD_ID);
+		tipoProducto.setDescripcion(DESCRIPCION); 
+		
+		producto.setProdId(PROD_ID);
+		producto.setNombre(NOMBRE);
+		producto.setTipoProducto(tipoProducto);
+		
+		precioProducto.setProducto(producto);
+		
+		precioProductoList.add(precioProducto);
+		
+		listaPrecios.setDescripcionLista(DESCRIPCION_LISTA);
+		listaPrecios.setFechaVigencia(fechaVigencia);
+		listaPrecios.setPrecioProductoList(precioProductoList);
+		
+		listaPreciosMapper.insert(listaPrecios);
+		
+		assertThat(listaPrecios.getListaPrecioId()).isGreaterThan(0);
+		assertThat(listaPrecios.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
+	}
 	
 	@Test
 	void selectListaPreciosById() {
@@ -40,6 +92,7 @@ public class ListaPreciosTest {
 			assertThat(listPrec.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
 		}
 	}
+	
 	@Test
 	void selectListaPreciosByDescripcion() {
 		ListaPrecios listaPrecios = new ListaPrecios();
@@ -108,8 +161,71 @@ public class ListaPreciosTest {
 		
 		List<ListaPrecios> listaPreciosResult = listaPreciosMapper.selectListaPrecios(listaPrecios);
 		for(ListaPrecios listPrec: listaPreciosResult) {
-			assertThat(listPrec.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
+			if(listPrec.getListaPrecioId() == 1) {
+				assertThat(listPrec.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
+			}
 		}
 	}
 	
+	@Test
+	void selectListaPreciosByProductoNombre() {
+		List<PrecioProducto>precioProductoList  = new ArrayList<PrecioProducto>();
+		PrecioProducto precioProducto = new PrecioProducto();
+		Producto producto = new Producto();
+		producto.setNombre(NOMBRE);
+		precioProducto.setProducto(producto);
+		precioProductoList.add(precioProducto);
+		
+		ListaPrecios listaPrecios = new ListaPrecios();
+		listaPrecios.setPrecioProductoList(precioProductoList);
+		
+		List<ListaPrecios> listaPreciosResult = listaPreciosMapper.selectListaPrecios(listaPrecios);
+		for(ListaPrecios listPrec: listaPreciosResult) {
+			if(listPrec.getListaPrecioId() == 1) {
+				assertThat(listPrec.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
+			}
+		}
+	}
+	
+	@Test
+	void selectListaPreciosByTipoProductoDescripcion() {
+		List<PrecioProducto>precioProductoList  = new ArrayList<PrecioProducto>();
+		PrecioProducto precioProducto = new PrecioProducto();
+		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setDescripcion(DESCRIPCION);
+		Producto producto = new Producto();
+		producto.setTipoProducto(tipoProducto);
+		precioProducto.setProducto(producto);
+		precioProductoList.add(precioProducto);
+		
+		ListaPrecios listaPrecios = new ListaPrecios();
+		listaPrecios.setPrecioProductoList(precioProductoList);
+		
+		List<ListaPrecios> listaPreciosResult = listaPreciosMapper.selectListaPrecios(listaPrecios);
+		for(ListaPrecios listPrec: listaPreciosResult) {
+			if(listPrec.getListaPrecioId() == 1) {
+				assertThat(listPrec.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
+			}
+		}
+	}
+	
+	//@Test
+		void updateListaPrecios() {
+			ListaPrecios listaPrecios = new ListaPrecios();
+			listaPrecios.setListaPrecioId(LISTA_PRECIO_ID);
+			List<ListaPrecios> listaPreciosResult = listaPreciosMapper.selectListaPrecios(listaPrecios);
+			for(ListaPrecios listPrec: listaPreciosResult) {
+				assertThat(listPrec.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
+			}
+		}
+		
+		//@Test
+		void deleteListaPrecios() {
+			ListaPrecios listaPrecios = new ListaPrecios();
+			listaPrecios.setListaPrecioId(LISTA_PRECIO_ID);
+			List<ListaPrecios> listaPreciosResult = listaPreciosMapper.selectListaPrecios(listaPrecios);
+			for(ListaPrecios listPrec: listaPreciosResult) {
+				assertThat(listPrec.getDescripcionLista()).isEqualTo(DESCRIPCION_LISTA);
+			}
+		}
 }

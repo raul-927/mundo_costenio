@@ -1,7 +1,12 @@
 package co.com.mundocostenio.services;
 
+import java.util.List;
+
 import co.com.mundocostenio.domain.Producto;
 
 public interface ProductoService {
 	Producto insert(Producto producto);
+	Producto update(Producto producto);
+	int delete(int prodId);
+	List<Producto> selectProducto(Producto producto);
 }

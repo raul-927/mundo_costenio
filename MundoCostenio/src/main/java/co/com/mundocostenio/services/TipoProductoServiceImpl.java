@@ -19,4 +19,22 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 		return tipoProducto;
 	}
 
+	@Override
+	public TipoProducto update(TipoProducto tipoProducto) {
+		this.tipoProductoMapper.update(tipoProducto);
+		return tipoProducto;
+	}
+
+	@Override
+	public int delete(int tipProdId) {
+		
+		return this.tipoProductoMapper.delete(tipProdId);
+	}
+
+	@Override
+	public TipoProducto selectTipoProducto(TipoProducto tipoProducto) {
+		
+		return this.tipoProductoMapper.selectTipoProducto(tipoProducto);
+	}
+
 }
