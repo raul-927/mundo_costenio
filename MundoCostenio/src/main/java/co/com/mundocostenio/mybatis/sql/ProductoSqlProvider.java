@@ -42,7 +42,7 @@ public class ProductoSqlProvider {
 	
 	public String selectProducto(Producto producto) {
 		return new SQL() {{
-			SELECT("P-prod_id,p.nombre");
+			SELECT("p.prod_id, p.nombre");
 			SELECT("t.tip_prod_id, t.descripcion");
 			FROM("producto p");
 			FROM("tipo_producto t");
