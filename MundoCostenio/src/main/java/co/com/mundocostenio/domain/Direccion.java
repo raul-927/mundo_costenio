@@ -7,21 +7,21 @@ public class Direccion implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int direccionId;
 	private Departamento departamento;
 	
 	public Direccion() {};
 	
-	public Direccion(int id, Departamento departamento) {
-		this.id = id;
+	public Direccion(int direccionId, Departamento departamento) {
+		this.direccionId = direccionId;
 		this.departamento = departamento;
 	}
 	
-	public int getId() {
-		return id;
+	public int getDireccionId() {
+		return direccionId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setDireccionId(int direccionId) {
+		this.direccionId = direccionId;
 	}
 	
 	public Departamento getDepartamento() {

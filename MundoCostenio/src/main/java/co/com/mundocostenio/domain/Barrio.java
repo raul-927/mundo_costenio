@@ -9,23 +9,23 @@ public class Barrio implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int barrioId;
 	private String nombreBarrio;
 	private Ubicacion ubicacion;
 	
 	public Barrio() {};
 	
-	public Barrio(int id, String nombreBarrio, Ubicacion ubicacion) {
-		this.id = id;
+	public Barrio(int barrioId, String nombreBarrio, Ubicacion ubicacion) {
+		this.barrioId = barrioId;
 		this.nombreBarrio = nombreBarrio;
 		this.ubicacion = ubicacion;
 	}
 	
-	public int getId() {
-		return id;
+	public int getBarrioId() {
+		return barrioId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setBarrioId(int barrioId) {
+		this.barrioId = barrioId;
 	}
 	public String getNombreBarrio() {
 		return nombreBarrio;

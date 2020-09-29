@@ -4,7 +4,7 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.PersonasMapper">
 	<resultMap type="co.com.mundocostenio.domain.Persona" id="PersonasResult">
   	
-  		<id	property = "id" 	column = "id"/>
+  		<id	property = "personaId" 	column = "persona_id"/>
  		<result property ="nombre" column ="nombre"/>
  		<result property ="apellido" column ="apellido"/>
  		<result property = "cedula" column ="cedula"/>

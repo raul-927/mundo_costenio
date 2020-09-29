@@ -14,7 +14,7 @@ public class DireccionSqlProvider {
 			
 			for(Direccion direccion:direcciones) {
 			
-				VALUES("departamento_id", String.valueOf(direccion.getDepartamento().getId()));
+				VALUES("departamento_id", String.valueOf(direccion.getDepartamento().getDepartamentoId()));
 			}
 			
 		}}.toString();
@@ -23,10 +23,10 @@ public class DireccionSqlProvider {
 	public String update(Direccion direccion) {
 		return new SQL() {{
 			UPDATE("direccion");
-			if(direccion.getDepartamento().getId() >0) {
-				SET("departamento_id", String.valueOf(direccion.getDepartamento().getId()));
+			if(direccion.getDepartamento().getDepartamentoId() >0) {
+				SET("departamento_id", String.valueOf(direccion.getDepartamento().getDepartamentoId()));
 			}
-			WHERE("id = "+"'".concat(String.valueOf(direccion.getId())).concat("'"));
+			WHERE("id = "+"'".concat(String.valueOf(direccion.getDireccionId())).concat("'"));
 		}}.toString();
 	}
 	
@@ -41,8 +41,8 @@ public class DireccionSqlProvider {
 		return new SQL() {{
 			SELECT("*");
 			FROM("direccion");
-			if(direccion.getId() >0) {
-				WHERE("id ="+direccion.getId());
+			if(direccion.getDireccionId() >0) {
+				WHERE("id ="+direccion.getDireccionId());
 			}
 		}}.toString();
 	}

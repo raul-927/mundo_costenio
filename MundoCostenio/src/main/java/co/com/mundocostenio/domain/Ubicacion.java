@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class Ubicacion implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int ubicacionId;
 	private Calle calle1;
 	private Calle calle2;
 	private int nroPuerta;
 	private String geoLocalizacion;
 	
-	public int getId() {
-		return id;
+	public int getUbicacionId() {
+		return ubicacionId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUbicacionId(int ubicacionId) {
+		this.ubicacionId = ubicacionId;
 	}
 	public Calle getCalle1() {
 		return calle1;

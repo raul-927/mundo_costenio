@@ -15,10 +15,10 @@ public class UbicacionSqlProvider {
 			INSERT_INTO("ubicacion");
 			
 			if(ubicacion.getCalle1() != null) {
-				VALUES("id_calle_1", String.valueOf(ubicacion.getCalle1().getId()));
+				VALUES("id_calle_1", String.valueOf(ubicacion.getCalle1().getCalleId()));
 			}
 			if(ubicacion.getCalle2() != null) {
-				VALUES("id_calle_2", String.valueOf(ubicacion.getCalle2().getId()));
+				VALUES("id_calle_2", String.valueOf(ubicacion.getCalle2().getCalleId()));
 			}
 			if(ubicacion.getNroPuerta() >0) {
 				VALUES("nro_puerta", String.valueOf(ubicacion.getNroPuerta()));
@@ -32,10 +32,10 @@ public class UbicacionSqlProvider {
 		return new SQL() {{
 			UPDATE("ubicacion");
 			if(ubicacion.getCalle1() != null) {
-				SET("id_calle_1", String.valueOf(ubicacion.getCalle1().getId()));
+				SET("id_calle_1", String.valueOf(ubicacion.getCalle1().getCalleId()));
 			}
 			if(ubicacion.getCalle2() != null) {
-				SET("id_calle_2", String.valueOf(ubicacion.getCalle2().getId()));
+				SET("id_calle_2", String.valueOf(ubicacion.getCalle2().getCalleId()));
 			}
 			if(ubicacion.getNroPuerta() >0) {
 				SET("nro_puerta", String.valueOf(ubicacion.getNroPuerta()));
@@ -43,15 +43,15 @@ public class UbicacionSqlProvider {
 			if(ubicacion.getGeoLocalizacion()!= null) {
 				SET("geo_localizacion", ubicacion.getGeoLocalizacion());
 			}
-			WHERE("id = "+ubicacion.getId());
+			WHERE("id = "+ubicacion.getUbicacionId());
 		}}.toString();
 	}
 	
 	public String delete(Ubicacion ubicacion) {
 		return new SQL() {{
-			if(ubicacion.getId() >0) {
+			if(ubicacion.getUbicacionId() >0) {
 				DELETE_FROM("ubicacion");
-				WHERE("id = "+ubicacion.getId());
+				WHERE("id = "+ubicacion.getUbicacionId());
 			}
 		}}.toString();
 	}
@@ -68,10 +68,10 @@ public class UbicacionSqlProvider {
 				WHERE("id = "+id);
 			}
 			if(calle1 !=null){
-				WHERE("id_calle_1 = "+"'".concat(String.valueOf(calle1.getId())).concat("'"));
+				WHERE("id_calle_1 = "+"'".concat(String.valueOf(calle1.getCalleId())).concat("'"));
 			}
 			if(calle2 !=null){
-				WHERE("id_calle_2 = "+calle2.getId());
+				WHERE("id_calle_2 = "+calle2.getCalleId());
 			}
 			if(geoLocalizacion !=null && geoLocalizacion !=""){
 				WHERE("geo_localizacion = "+geoLocalizacion);

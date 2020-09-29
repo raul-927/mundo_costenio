@@ -8,18 +8,18 @@ public enum RolesEnum implements Serializable{
 	STAF(3, "Staf personal de trabajo"),
 	CLIENT(3, "Cliente");
 	
-	private int id;
+	private int rolId;
 	private String descripcion;
 	
 	
-	private RolesEnum(int id, String descripcion) {
-		this.id = id;
+	private RolesEnum(int rolId, String descripcion) {
+		this.rolId = rolId;
 		this.descripcion = descripcion;
 	}
 	
 	
-	public int getId() {
-		return this.id;
+	public int getRolId() {
+		return this.rolId;
 	}
 	
 	public String getDescripcion() {
@@ -28,7 +28,7 @@ public enum RolesEnum implements Serializable{
 
 
 	public String getAsString() {
-		return this.id+"-"+this.descripcion;
+		return this.rolId+"-"+this.descripcion;
 	}
 
 }

@@ -4,7 +4,7 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.DepartamentoMapper">
 	<resultMap type="co.com.mundocostenio.domain.Departamento" id="DepartamentoResult">
   	
-  		<id	property = "id" 	column = "id"/>
+  		<id	property = "departamentoId" 	column = "departamento_id"/>
  		<result property ="nombreDepartamento" column ="nombre_departamento"/>
  		
  		<association property="barrio" 

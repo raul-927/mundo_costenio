@@ -13,18 +13,18 @@ public enum TipoCalleEnum implements Serializable{
 	AK(8, "AVENIDA_CARRERA"),
 	AC(9, "AVENIDA_CALLE");
 	
-	private int id;
+	private int tipoCalleId;
 	private String descripcion;
 	
 	
-	private TipoCalleEnum(int id, String descripcion) {
-		this.id = id;
+	private TipoCalleEnum(int tipoCalleId, String descripcion) {
+		this.tipoCalleId = tipoCalleId;
 		this.descripcion = descripcion;
 	}
 
 
-	public int getId() {
-		return id;
+	public int getTipoCalleId() {
+		return tipoCalleId;
 	}
 
 

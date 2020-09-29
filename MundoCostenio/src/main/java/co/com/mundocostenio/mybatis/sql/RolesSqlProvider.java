@@ -15,12 +15,11 @@ public class RolesSqlProvider {
 		return new SQL() {{
 			
 			INSERT_INTO("roles_personas");
+			INTO_COLUMNS("rol_id","persona_id");
 			for(RolesEnum r :rolesEnum) {
-				VALUES("rol_id",String.valueOf(r.getId()));
-				VALUES("persona_id", String.valueOf(id));
+				INTO_VALUES(String.valueOf(r.getRolId()), String.valueOf(id));
+				ADD_ROW();
 			}
-			
-			
 			
 		}}.toString();
 	}

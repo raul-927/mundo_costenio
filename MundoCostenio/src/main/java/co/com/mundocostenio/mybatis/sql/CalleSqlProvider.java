@@ -28,15 +28,15 @@ public class CalleSqlProvider {
 				SET("tipo_calle", String.valueOf(calle.getTipoCalle()));
 			}
 			
-			WHERE("id = "+calle.getId());
+			WHERE("id = "+calle.getCalleId());
 		}}.toString();
 	}
 	
 	public String delete(Calle calle) {
 		return new SQL() {{
-			if(calle.getId() >0) {
+			if(calle.getCalleId() >0) {
 				DELETE_FROM("calle");
-				WHERE("id = "+"'".concat(String.valueOf(calle.getId())).concat("'"));
+				WHERE("id = "+"'".concat(String.valueOf(calle.getCalleId())).concat("'"));
 			}
 		}}.toString();
 	}

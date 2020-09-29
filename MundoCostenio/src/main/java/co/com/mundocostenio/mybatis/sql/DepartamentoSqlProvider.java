@@ -23,7 +23,7 @@ public class DepartamentoSqlProvider {
 			if(departamento.getNombreDepartamento() !=null && departamento.getNombreDepartamento()!="") {
 				SET("nombre_departamento",departamento.getNombreDepartamento());
 			}
-			WHERE("id = " +departamento.getId());
+			WHERE("id = " +departamento.getDepartamentoId());
 		}}.toString();
 	}
 	

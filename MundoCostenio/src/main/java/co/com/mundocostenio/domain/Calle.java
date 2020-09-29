@@ -10,17 +10,17 @@ public class Calle implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int calleId;
 	private TipoCalleEnum tipoCalle;
 	private String nombre;
 	
 	
 	
-	public int getId() {
-		return id;
+	public int getCalleId() {
+		return calleId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCalleId(int calleId) {
+		this.calleId = calleId;
 	}
 	public TipoCalleEnum getTipoCalle() {
 		return tipoCalle;

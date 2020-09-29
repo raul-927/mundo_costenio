@@ -1,7 +1,6 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,7 +19,7 @@ public class Persona implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
+	private int personaId;
 	@NotNull(message = PersonasErrorMessage.NOMBRE_NULL)
 	@Size(min = 3, max = 15, message = PersonasErrorMessage.NOMBRE_LENGTH)
 	private String nombre;
@@ -40,9 +39,9 @@ public class Persona implements Serializable{
 	
 	public Persona() {};
 	
-	public Persona(int id, String nombre, String apellido, int cedula,
+	public Persona(int personaId, String nombre, String apellido, int cedula,
 			List<Direccion> direcciones, RolesEnum rol) {
-		this.id = id;
+		this.personaId = personaId;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cedula = cedula;
@@ -54,13 +53,13 @@ public class Persona implements Serializable{
 	public Persona(String string) {
 		if(string != null){
 			String[] parts = string.split("-");
-			if(parts.length>0) this.id=Integer.parseInt(parts[0]);
+			if(parts.length>0) this.personaId=Integer.parseInt(parts[0]);
 			if(parts.length>1) this.nombre = parts[1];
 			if(parts.length>2) this.apellido =parts[2];
 			if(parts.length>3) this.cedula =Integer.parseInt(parts[3]);
 			if(parts.length>4) this.apellido =parts[4];
 			if(parts.length>5) {
-				List<Direccion> direcciones = new ArrayList<Direccion>();
+				//List<Direccion> direcciones = new ArrayList<Direccion>();
 				
 			}
 		}
@@ -74,11 +73,11 @@ public class Persona implements Serializable{
 		return result;
 	}
 	*/
-	public int getId() {
-		return id;
+	public int getPersonaId() {
+		return personaId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setPersonaId(int personaId) {
+		this.personaId = personaId;
 	}
 	public String getNombre() {
 		return nombre;

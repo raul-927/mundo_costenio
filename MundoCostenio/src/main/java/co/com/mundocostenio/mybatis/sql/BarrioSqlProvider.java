@@ -24,15 +24,15 @@ public class BarrioSqlProvider {
 			if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
 				SET("nombre_barrio", barrio.getNombreBarrio());
 			}
-			WHERE("id = "+barrio.getId());
+			WHERE("barrio_id = "+barrio.getBarrioId());
 		}}.toString();
 	}
 	
 	public String delete(Barrio barrio) {
 		return new SQL() {{
-			if(barrio.getId() >0) {
+			if(barrio.getBarrioId() >0) {
 				DELETE_FROM("barrio");
-				WHERE("id = "+barrio.getId());
+				WHERE("id = "+barrio.getBarrioId());
 			}else if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
 				DELETE_FROM("barrio");
 				WHERE("nombre_barrio", barrio.getNombreBarrio());

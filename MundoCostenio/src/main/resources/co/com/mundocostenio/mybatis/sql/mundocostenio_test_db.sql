@@ -31,19 +31,19 @@ CREATE TABLE IF NOT EXISTS `addresses` (
 
 -- Volcando estructura para tabla mundocostenio_db.barrio
 CREATE TABLE IF NOT EXISTS `barrio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `barrio_id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_barrio` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`barrio_id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla mundocostenio_db.barrio_departamento
 CREATE TABLE IF NOT EXISTS `barrio_departamento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `barrio_departamento_id` int(11) NOT NULL AUTO_INCREMENT,
   `id_barrio` int(11) NOT NULL DEFAULT 0,
   `id_departamento` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`barrio_departamento_id`) USING BTREE,
   KEY `FK_barrio_departamento_barrio` (`id_barrio`),
   KEY `FK_barrio_departamento_departamento` (`id_departamento`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -52,10 +52,10 @@ CREATE TABLE IF NOT EXISTS `barrio_departamento` (
 
 -- Volcando estructura para tabla mundocostenio_db.calle
 CREATE TABLE IF NOT EXISTS `calle` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calle_id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_calle` enum('CALLE','CARRERA','DIAGONAL','CIRCUNVALAR','AVENIDA','VIA','TRANSVERSAL','AVENIDA_CARRERA','AVENIDA_CALLE') DEFAULT NULL,
   `nombre` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`calle_id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
@@ -89,16 +89,16 @@ CREATE TABLE IF NOT EXISTS `course_enrollment` (
 
 -- Volcando estructura para tabla mundocostenio_db.departamento
 CREATE TABLE IF NOT EXISTS `departamento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `departamento_id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_departamento` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`departamento_id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla mundocostenio_db.direccion
 CREATE TABLE IF NOT EXISTS `direccion` (
-  `id` int(11) DEFAULT NULL,
+  `direccion_id` int(11) DEFAULT NULL,
   `departamento_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `direccion` (
 
 -- Volcando estructura para tabla mundocostenio_db.direccion_personas
 CREATE TABLE IF NOT EXISTS `direccion_personas` (
-  `id` int(11) DEFAULT NULL,
+  `direccion_personas_id` int(11) DEFAULT NULL,
   `direccion_id` int(11) DEFAULT NULL,
   `persona_id` int(11) DEFAULT NULL,
   KEY `FK_direccion_personas_persona` (`persona_id`),
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `list_prod_and_prec_prod` (
 
 -- Volcando estructura para tabla mundocostenio_db.persona
 CREATE TABLE IF NOT EXISTS `persona` (
-  `id` int(11) DEFAULT NULL,
+  `persona_id` int(11) DEFAULT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `apellido` varchar(50) DEFAULT NULL,
   `cedula` int(11) DEFAULT NULL,
@@ -183,10 +183,10 @@ CREATE TABLE IF NOT EXISTS `producto` (
 
 -- Volcando estructura para tabla mundocostenio_db.roles_personas
 CREATE TABLE IF NOT EXISTS `roles_personas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rol_persona_id` int(11) NOT NULL AUTO_INCREMENT,
   `rol_id` int(11) DEFAULT NULL,
   `persona_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`rol_persona_id`) USING BTREE,
   UNIQUE KEY `rol_id_persona_id` (`rol_id`,`persona_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -237,12 +237,12 @@ CREATE TABLE IF NOT EXISTS `tutors` (
 
 -- Volcando estructura para tabla mundocostenio_db.ubicacion
 CREATE TABLE IF NOT EXISTS `ubicacion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ubicacion_id` int(11) NOT NULL AUTO_INCREMENT,
   `id_calle_1` int(11) DEFAULT NULL,
   `id_calle_2` int(11) DEFAULT NULL,
   `nro_puerta` int(11) DEFAULT NULL,
   `geo_localizacion` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`ubicacion_id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.

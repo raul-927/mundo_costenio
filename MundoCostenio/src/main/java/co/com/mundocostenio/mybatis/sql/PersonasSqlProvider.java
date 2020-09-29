@@ -25,8 +25,8 @@ public class PersonasSqlProvider {
 		return new SQL() {{
 			SELECT("*");
 			FROM("persona");
-			if(persona.getId() > 0) {
-				WHERE("id = "+"'".concat(String.valueOf(persona.getId())).concat("'"));
+			if(persona.getPersonaId() > 0) {
+				WHERE("id = "+"'".concat(String.valueOf(persona.getPersonaId())).concat("'"));
 			}
 			if(persona.getCedula() > 0) {
 				WHERE("cedula = "+"'".concat(String.valueOf(persona.getCedula())).concat("'"));

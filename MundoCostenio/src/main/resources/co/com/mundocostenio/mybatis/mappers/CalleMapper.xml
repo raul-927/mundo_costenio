@@ -4,7 +4,7 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.CalleMapper">
 	<resultMap type="co.com.mundocostenio.domain.Calle" id="CalleResult">
   	
-  		<id	property = "id" 	column = "id"/>
+  		<id	property = "calleId" 	column = "calle_id"/>
  		<result property ="tipoCalle" column ="tipo_calle"/>
  		<result property ="nombre" column ="nombre"/>
   	</resultMap>
