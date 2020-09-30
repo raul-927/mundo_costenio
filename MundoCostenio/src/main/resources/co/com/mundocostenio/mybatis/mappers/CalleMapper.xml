@@ -6,6 +6,6 @@
   	
   		<id	property = "calleId" 	column = "calle_id"/>
  		<result property ="tipoCalle" column ="tipo_calle"/>
- 		<result property ="nombre" column ="nombre"/>
+ 		<result property ="nombreCalle" column ="nombre_calle"/>
   	</resultMap>
 </mapper>

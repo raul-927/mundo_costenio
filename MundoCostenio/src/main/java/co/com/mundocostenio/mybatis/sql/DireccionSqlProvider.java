@@ -8,12 +8,10 @@ import co.com.mundocostenio.domain.Direccion;
 
 public class DireccionSqlProvider {
 	
-	public String insert(List<Direccion> direcciones, int idPersona) {
+	public String insert(Direccion direccion) {
 		return new SQL() {{
 			INSERT_INTO("direccion");
-			
-			for(Direccion direccion:direcciones) {
-			
+			if(direccion.getDepartamento()!=null) {
 				VALUES("departamento_id", String.valueOf(direccion.getDepartamento().getDepartamentoId()));
 			}
 			
@@ -26,18 +24,18 @@ public class DireccionSqlProvider {
 			if(direccion.getDepartamento().getDepartamentoId() >0) {
 				SET("departamento_id", String.valueOf(direccion.getDepartamento().getDepartamentoId()));
 			}
-			WHERE("id = "+"'".concat(String.valueOf(direccion.getDireccionId())).concat("'"));
+			WHERE("direccion_id = "+"'".concat(String.valueOf(direccion.getDireccionId())).concat("'"));
 		}}.toString();
 	}
 	
 	public String delete(int id) {
 		return new SQL() {{
 			DELETE_FROM("direccion");
-			WHERE("id = "+String.valueOf(id));
+			WHERE("direccion_id = "+String.valueOf(id));
 		}}.toString();
 	}
 	
-	public String showDireccion(Direccion direccion) {
+	public String select(Direccion direccion) {
 		return new SQL() {{
 			SELECT("*");
 			FROM("direccion");

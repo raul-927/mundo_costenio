@@ -7,7 +7,7 @@
   		<id	property = "departamentoId" 	column = "departamento_id"/>
  		<result property ="nombreDepartamento" column ="nombre_departamento"/>
  		
- 		<association property="barrio" 
+ 		<collection property="barrios" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.BarrioMapper.BarrioResult"/>
   	</resultMap>
 </mapper>

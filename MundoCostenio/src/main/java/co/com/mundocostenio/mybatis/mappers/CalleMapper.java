@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -17,17 +18,17 @@ public interface CalleMapper {
 	
 	
 	@InsertProvider(type = CalleSqlProvider.class, method ="insert")
-	@Options(useGeneratedKeys=true, keyProperty="id", keyColumn = "id") 
-	void insertCalle(Calle calle);
+	@Options(useGeneratedKeys=true, keyProperty="calleId", keyColumn = "calle_id") 
+	void insert(@Param("calle") Calle calle);
 	
 	@UpdateProvider(type = CalleSqlProvider.class, method ="update")
-	Calle updateCalle(Calle calle);
+	Calle update(@Param("calle") Calle calle);
 	
 	@DeleteProvider(type = CalleSqlProvider.class, method ="delete")
-	void deleteCalle(Calle calle);
+	void delete(int calleId);
 	
-	@SelectProvider(type = CalleSqlProvider.class, method = "showCalle")
+	@SelectProvider(type = CalleSqlProvider.class, method = "select")
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult")
-	List<Calle> showCalle(Calle calle);
+	List<Calle> select(@Param("calle") Calle calle);
 
 }

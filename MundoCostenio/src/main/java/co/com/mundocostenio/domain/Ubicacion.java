@@ -1,12 +1,12 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Ubicacion implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int ubicacionId;
-	private Calle calle1;
-	private Calle calle2;
+	private List<Calle> calles;
 	private int nroPuerta;
 	private String geoLocalizacion;
 	
@@ -16,18 +16,7 @@ public class Ubicacion implements Serializable{
 	public void setUbicacionId(int ubicacionId) {
 		this.ubicacionId = ubicacionId;
 	}
-	public Calle getCalle1() {
-		return calle1;
-	}
-	public void setCalle1(Calle calle1) {
-		this.calle1 = calle1;
-	}
-	public Calle getCalle2() {
-		return calle2;
-	}
-	public void setCalle2(Calle calle2) {
-		this.calle2 = calle2;
-	}
+	
 	public int getNroPuerta() {
 		return nroPuerta;
 	}
@@ -39,6 +28,12 @@ public class Ubicacion implements Serializable{
 	}
 	public void setGeoLocalizacion(String geoLocalizacion) {
 		this.geoLocalizacion = geoLocalizacion;
+	}
+	public List<Calle> getCalles() {
+		return calles;
+	}
+	public void setCalles(List<Calle> calles) {
+		this.calles = calles;
 	}
 
 }

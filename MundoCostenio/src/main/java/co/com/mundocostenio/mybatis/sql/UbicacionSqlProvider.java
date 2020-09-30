@@ -1,7 +1,5 @@
 package co.com.mundocostenio.mybatis.sql;
 
-import java.util.Map;
-
 import org.apache.ibatis.jdbc.SQL;
 
 import co.com.mundocostenio.domain.Calle;
@@ -13,68 +11,67 @@ public class UbicacionSqlProvider {
 	public String insert(Ubicacion ubicacion) {
 		return new SQL() {{
 			INSERT_INTO("ubicacion");
-			
-			if(ubicacion.getCalle1() != null) {
-				VALUES("id_calle_1", String.valueOf(ubicacion.getCalle1().getCalleId()));
-			}
-			if(ubicacion.getCalle2() != null) {
-				VALUES("id_calle_2", String.valueOf(ubicacion.getCalle2().getCalleId()));
-			}
 			if(ubicacion.getNroPuerta() >0) {
 				VALUES("nro_puerta", String.valueOf(ubicacion.getNroPuerta()));
 			}
-			if(ubicacion.getGeoLocalizacion()!= null) {
-				VALUES("geo_localizacion", ubicacion.getGeoLocalizacion());
+			if(ubicacion.getGeoLocalizacion()!= null && ubicacion.getGeoLocalizacion()!="") {
+				VALUES("geo_localizacion", "'".concat(ubicacion.getGeoLocalizacion()).concat("'"));
 			}
 		}}.toString();
 	}
 	public String update(Ubicacion ubicacion) {
 		return new SQL() {{
-			UPDATE("ubicacion");
-			if(ubicacion.getCalle1() != null) {
-				SET("id_calle_1", String.valueOf(ubicacion.getCalle1().getCalleId()));
+			if(ubicacion.getUbicacionId() > 0) {
+				UPDATE("ubicacion");
+				if(ubicacion.getNroPuerta() >0) {
+					SET("nro_puerta", String.valueOf(ubicacion.getNroPuerta()));
+				}
+				if(ubicacion.getGeoLocalizacion()!= null) {
+					SET("geo_localizacion", "'".concat(ubicacion.getGeoLocalizacion()).concat("'"));
+				}
+				WHERE("ubicacion_id = "+ String.valueOf(ubicacion.getUbicacionId()));
 			}
-			if(ubicacion.getCalle2() != null) {
-				SET("id_calle_2", String.valueOf(ubicacion.getCalle2().getCalleId()));
-			}
-			if(ubicacion.getNroPuerta() >0) {
-				SET("nro_puerta", String.valueOf(ubicacion.getNroPuerta()));
-			}
-			if(ubicacion.getGeoLocalizacion()!= null) {
-				SET("geo_localizacion", ubicacion.getGeoLocalizacion());
-			}
-			WHERE("id = "+ubicacion.getUbicacionId());
 		}}.toString();
 	}
 	
-	public String delete(Ubicacion ubicacion) {
+	public String delete(int  ubicacionId) {
 		return new SQL() {{
-			if(ubicacion.getUbicacionId() >0) {
+			if(ubicacionId >0) {
 				DELETE_FROM("ubicacion");
-				WHERE("id = "+ubicacion.getUbicacionId());
+				WHERE("ubicacion_id = "+ubicacionId);
 			}
 		}}.toString();
 	}
 	
-	public String showUbicacion(Map<String,Object>map) {
-		int id = Integer.parseInt(map.get("id").toString());
-		String geoLocalizacion = map.get("geoLocalizacion").toString();
-		Calle calle1 = (Calle) map.get("calle1");
-		Calle calle2 = (Calle) map.get("calle2");
+	public String select(Ubicacion ubicacion) {
+		
 		return new SQL() {{
-			SELECT("*");
-			FROM("ubicacion");
-			if( id > 0) {
-				WHERE("id = "+id);
-			}
-			if(calle1 !=null){
-				WHERE("id_calle_1 = "+"'".concat(String.valueOf(calle1.getCalleId())).concat("'"));
-			}
-			if(calle2 !=null){
-				WHERE("id_calle_2 = "+calle2.getCalleId());
-			}
-			if(geoLocalizacion !=null && geoLocalizacion !=""){
-				WHERE("geo_localizacion = "+geoLocalizacion);
+			SELECT("u.ubicacion_id, u.nro_puerta, u.geo_localizacion");
+			SELECT("c.calle_id, c.tipo_calle, c.nombre_calle");
+			FROM("ubicacion u");
+			FROM("calle c");
+			FROM("ubicacion_calle ubc");
+			WHERE("u.ubicacion_id= ubc.ubicacion_id");
+			WHERE("ubc.calle_id = c.calle_id");
+			if(ubicacion != null) {
+				if(ubicacion.getUbicacionId() > 0) {
+					WHERE("u.ubicacion_id = " + String.valueOf(ubicacion.getUbicacionId()));
+				}else {
+					if(ubicacion.getGeoLocalizacion()!= null && ubicacion.getGeoLocalizacion()!="") {
+						WHERE("u.geo_localizacion = " + "'".concat(ubicacion.getGeoLocalizacion()).concat("'"));
+					}
+					if(ubicacion.getNroPuerta() > 0) {
+						WHERE("u.nro_puerta = " + String.valueOf(ubicacion.getNroPuerta()));
+					}
+					if(ubicacion.getCalles()!= null && ubicacion.getCalles().size() > 0) {
+						if(ubicacion.getCalles().get(0).getNombreCalle()!= null && ubicacion.getCalles().get(0).getNombreCalle()!="") {
+							WHERE("c.nombre_calle = " + "'".concat(ubicacion.getCalles().get(0).getNombreCalle()).concat("'"));
+						}
+						if(ubicacion.getCalles().get(1).getNombreCalle()!= null && ubicacion.getCalles().get(1).getNombreCalle()!="") {
+							WHERE("c.nombre_calle = " + "'".concat(ubicacion.getCalles().get(1).getNombreCalle()).concat("'"));
+						}
+					}
+				}
 			}
 		}}.toString();
 	}

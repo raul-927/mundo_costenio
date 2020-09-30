@@ -37,17 +37,21 @@ public class PrecioProductoSqlProvider {
 	
 	public String selectPrecioProductoByListId(int id) {
 		return new SQL() {{
-			SELECT("pre.id, pre.monto, pro.id, pro.nombre, t.id, t.descripcion");
-			FROM("lista_precios l");
-			FROM("list_prod_and_prec_prod ls");
+			SELECT("pre.id, pre.monto");
+			SELECT("pro.id, pro.nombre");
+			SELECT("t.id, t.descripcion");
+			
 			FROM("precio_producto pre");
 			FROM("producto pro");
 			FROM("tipo_producto t");
+			FROM("lista_precios l");
+			FROM("list_prod_and_prec_prod ls");
+			
 			WHERE("l.id = ls.lis_prec_id");
 			WHERE("ls.prec_prod_id = pre.id");
 			WHERE("pre.prod_id = pro.id");
 			WHERE("pro.tipo_prod_id = t.id");
-			WHERE("l.id = " + id);
+			WHERE("l.id = " + String.valueOf(id));
 		}}.toString();
 	}
 }

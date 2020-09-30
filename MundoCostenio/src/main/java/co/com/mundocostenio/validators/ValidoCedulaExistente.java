@@ -28,7 +28,7 @@ public class ValidoCedulaExistente extends NroVerifCedula implements ConstraintV
 			int cedula = value;
 			Persona p = new Persona();
 			p.setCedula(cedula);
-			List<Persona> personas = personasService.showPersonas(p);
+			List<Persona> personas = personasService.select(p);
 			try{
 				if(personas.size() > 0){
 					control=false;

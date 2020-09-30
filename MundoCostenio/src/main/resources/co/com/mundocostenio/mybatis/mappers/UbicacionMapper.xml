@@ -8,10 +8,7 @@
  		<result property ="nroPuerta" column ="nro_puerta"/>
  		<result property ="geoLocalizacion" column ="geo_localizacion"/>
  		
- 		<association property="calle1" 
-			resultMap="co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult"/>
-			
-		<association property="calle2" 
+ 		<collection property="calles"
 			resultMap="co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult"/>
   	</resultMap>
 </mapper>

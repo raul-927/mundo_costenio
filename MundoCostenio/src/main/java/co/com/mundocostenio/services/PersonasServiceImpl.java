@@ -16,22 +16,30 @@ public class PersonasServiceImpl implements PersonasService {
 	@Autowired
 	PersonasMapper personasMapper;
 
-	@Override
 	@Transactional
-	public void insertPersonas(Persona personas) {
-		personasMapper.insertPersonas(personas);
-
+	@Override
+	public Persona insert(Persona persona) {
+		this.personasMapper.insert(persona);
+		return persona;
+	}
+	@Transactional
+	@Override
+	public Persona update(Persona persona) {
+		this.personasMapper.update(persona);
+		return persona;
 	}
 
 	@Override
-	public List<Persona> showPersonas(Persona personas) {
+	public void delete(int personaId) {
+		this.personasMapper.delete(personaId);
 		
-		return personasMapper.showPersonas(personas);
 	}
 
 	@Override
-	public List<Persona> showAllPersonas() {
-		return personasMapper.showAllPersonas();
+	public List<Persona> select(Persona persona) {
+		
+		return this.personasMapper.select(persona);
 	}
 
+	
 }

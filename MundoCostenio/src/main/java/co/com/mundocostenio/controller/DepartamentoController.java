@@ -17,74 +17,73 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.mundocostenio.domain.Calle;
-import co.com.mundocostenio.services.CalleService;
+import co.com.mundocostenio.domain.Departamento;
+import co.com.mundocostenio.services.DepartamentoService;
 
 @RestController
-public class CalleController {
+public class DepartamentoController {
 	
 	@Autowired
-	private CalleService calleService;
-	
+	private DepartamentoService departamentoService;
 	
 	@RequestMapping(
-			value ="/calle", method =RequestMethod.POST,
+			value ="/departamento", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> insertCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?> insert(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		Calle calleResult = this.calleService.insert(calle);
+		Departamento departamentoResult = this.departamentoService.insert(departamento);
 		
-		return new ResponseEntity<Calle>(calleResult, headers, HttpStatus.OK);
+		return new ResponseEntity<Departamento>(departamentoResult,headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
-			value ="/calle", method =RequestMethod.PUT,
+			value ="/departamento", method =RequestMethod.PUT,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> updateCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?> update(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		this.calleService.update(calle);
+		Departamento departamentoResult = this.departamentoService.update(departamento);
 		
-		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
+		return new ResponseEntity<Departamento>(departamentoResult,headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
-			value ="/calle", method =RequestMethod.DELETE,
+			value ="/departamento", method =RequestMethod.DELETE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> deleteCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?> delete(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		this.calleService.delete(calle);
+		this.departamentoService.delete(departamento.getDepartamentoId());
 		
-		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
+		return new ResponseEntity<Departamento>(null,headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
-			value ="/calles", method =RequestMethod.POST,
+			value ="/departamentos", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> showCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?> select(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		List<Calle> calles = this.calleService.select(calle);
+		List<Departamento> departamentoResult = this.departamentoService.select(departamento);
 		
-		return new ResponseEntity<List<Calle>>(calles, headers, HttpStatus.OK);
+		return new ResponseEntity<List<Departamento>>(departamentoResult,headers, HttpStatus.OK);
 	}
 
 }

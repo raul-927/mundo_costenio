@@ -5,8 +5,8 @@ import java.util.List;
 import co.com.mundocostenio.domain.Calle;
 
 public interface CalleService {
-	Calle insertCalle(Calle calle);
-	Calle updateCalle(Calle calle);
-	void deleteCalle(Calle calle);
-	List<Calle> showCalle(Calle calle);
+	Calle insert(Calle calle);
+	Calle update(Calle calle);
+	void delete(Calle calle);
+	List<Calle> select(Calle calle);
 }

@@ -14,28 +14,30 @@ import co.com.mundocostenio.mybatis.mappers.CalleMapper;
 public class CalleServiceImpl implements CalleService {
 	@Autowired
 	private CalleMapper calleMapper;
-	
-	@Transactional
+
 	@Override
-	public Calle insertCalle(Calle calle) {
-		this.calleMapper.insertCalle(calle);
+	public Calle insert(Calle calle) {
+		this.calleMapper.insert(calle);
 		return calle;
 	}
+
+	@Override
+	public Calle update(Calle calle) {
+		this.calleMapper.update(calle);
+		return calle;
+	}
+
+	@Override
+	public void delete(Calle calle) {
+		this.calleMapper.delete(calle.getCalleId());
+		
+	}
+
+	@Override
+	public List<Calle> select(Calle calle) {
+		
+		return this.calleMapper.select(calle);
+	}
 	
-	@Transactional
-	@Override
-	public Calle updateCalle(Calle calle) {
-		return this.calleMapper.updateCalle(calle);
-	}
-
-	@Override
-	public void deleteCalle(Calle calle) {
-		this.calleMapper.deleteCalle(calle);
-	}
-
-	@Override
-	public List<Calle> showCalle(Calle calle) {
-		return this.calleMapper.showCalle(calle);
-	}
-
+	
 }

@@ -6,10 +6,13 @@ import co.com.mundocostenio.domain.Persona;
 
 public interface PersonasService {
 	
-	void insertPersonas(Persona personas);
+	Persona insert(Persona persona);
+	Persona update(Persona persona);
+	void delete(int personaId);
+	List<Persona>select(Persona persona);
 	
-	List<Persona> showPersonas(Persona personas);
 	
-	List<Persona> showAllPersonas();
+	
+	
 
 }

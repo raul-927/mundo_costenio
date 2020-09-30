@@ -12,7 +12,7 @@ public interface DireccionMapper {
 	
 	
 	@InsertProvider(type = DireccionSqlProvider.class, method ="insert")
-	@Options(useGeneratedKeys=true, keyProperty="id") 
+	@Options(useGeneratedKeys=true, keyProperty="direccionId", keyColumn = "direccion_id") 
 	void insertDireccion(List<Direccion> direcciones, int idPersona);
 
 }

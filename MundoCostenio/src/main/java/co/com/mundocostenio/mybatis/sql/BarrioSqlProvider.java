@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
 import co.com.mundocostenio.domain.Barrio;
+import co.com.mundocostenio.domain.Calle;
 
 
 public class BarrioSqlProvider {
@@ -20,38 +21,72 @@ public class BarrioSqlProvider {
 	}
 	public String update(Barrio barrio) {
 		return new SQL() {{
-			UPDATE("barrio");
-			if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
-				SET("nombre_barrio", barrio.getNombreBarrio());
+			if(barrio.getBarrioId() > 0) {
+				UPDATE("barrio");
+				if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
+					SET("nombre_barrio", "'".concat(barrio.getNombreBarrio()).concat("'"));
+				}
+				WHERE("barrio_id = "+ String.valueOf(barrio.getBarrioId()));
 			}
-			WHERE("barrio_id = "+barrio.getBarrioId());
+			
 		}}.toString();
 	}
 	
-	public String delete(Barrio barrio) {
+	public String delete(int barrioId) {
 		return new SQL() {{
-			if(barrio.getBarrioId() >0) {
+			if(barrioId >0) {
 				DELETE_FROM("barrio");
-				WHERE("id = "+barrio.getBarrioId());
-			}else if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
-				DELETE_FROM("barrio");
-				WHERE("nombre_barrio", barrio.getNombreBarrio());
+				WHERE("barrio_id = "+barrioId);
 			}
 		}}.toString();
 	}
 	
-	public String showBarrio(Map<String,Object>map) {
-		int id = Integer.parseInt(map.get("id").toString());
-		String nombreBarrio = map.get("nombreBarrio").toString();
+	public String select(Barrio barrio) {
 		return new SQL() {{
-			SELECT("*");
-			FROM("barrio");
-			if( id > 0) {
-				WHERE("id = "+id);
+			SELECT("b.barrio_id, b.nombre_barrio");
+			SELECT("u.ubicacion_id, u.nro_puerta, u.geo_localizacion");
+			SELECT("c.calle_id, c.tipo_calle, c.nombre_calle");
+			
+			FROM("barrio b");
+			FROM("ubicacion u");
+			FROM("calle c");
+			FROM("ubicacion_calle ubc");
+			
+			WHERE("b.ubicacion_id = u.ubicacion_id");
+			WHERE("u.ubicacion_id= ubc.ubicacion_id");
+			WHERE("ubc.calle_id = c.calle_id");
+			
+			if( barrio.getBarrioId() > 0) {
+				WHERE("barrio_id = "+ String.valueOf(barrio.getBarrioId()));
+			}else {
+				if(barrio.getNombreBarrio() !=null && barrio.getNombreBarrio() !=""){
+					WHERE("nombre_barrio = " + "'".concat(barrio.getNombreBarrio()).concat("'"));
+				}
+				if(barrio.getUbicacion()!= null) {
+					if(barrio.getUbicacion().getCalles()!=null && barrio.getUbicacion().getCalles().size() > 0) {
+						if(barrio.getUbicacion().getCalles().get(0).getNombreCalle()!=null && barrio.getUbicacion().getCalles().get(0).getNombreCalle()!="") {
+							WHERE("c.nombre_calle LIKE '%" + barrio.getUbicacion().getCalles().get(0).getNombreCalle() + "%'");
+						}
+						if(barrio.getUbicacion().getCalles().get(1).getNombreCalle()!=null && barrio.getUbicacion().getCalles().get(1).getNombreCalle()!="") {
+							WHERE("c.nombre_calle LIKE '%" + barrio.getUbicacion().getCalles().get(1).getNombreCalle() + "%'");
+						}
+					}
+					
+						/*
+						 * if(barrio.getUbicacion().getCalle1()!= null) {
+						 * if(barrio.getUbicacion().getCalle1().getNombreCalle()!=null &&
+						 * barrio.getUbicacion().getCalle1().getNombreCalle()!="") {
+						 * WHERE("c.nombre_calle = " +
+						 * "'".concat(barrio.getUbicacion().getCalle1().getNombreCalle()).concat("'"));
+						 * } if(barrio.getUbicacion().getCalle2().getNombreCalle()!=null &&
+						 * barrio.getUbicacion().getCalle2().getNombreCalle()!="") {
+						 * WHERE("c.nombre_calle = " +
+						 * "'".concat(barrio.getUbicacion().getCalle2().getNombreCalle()).concat("'"));
+						 * } }
+						 */
+				}
 			}
-			if(nombreBarrio !=null && nombreBarrio !=""){
-				WHERE("nombre_barrio = "+nombreBarrio);
-			}
+			
 			
 		}}.toString();
 	}

@@ -12,7 +12,7 @@ public class Calle implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int calleId;
 	private TipoCalleEnum tipoCalle;
-	private String nombre;
+	private String nombreCalle;
 	
 	
 	
@@ -28,11 +28,11 @@ public class Calle implements Serializable{
 	public void setTipoCalle(TipoCalleEnum tipoCalle) {
 		this.tipoCalle = tipoCalle;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombreCalle() {
+		return nombreCalle;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreCalle(String nombreCalle) {
+		this.nombreCalle = nombreCalle;
 	}
 	
 }

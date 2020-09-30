@@ -32,15 +32,47 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>insertPersonas(@RequestBody @Valid Persona personas, BindingResult bindingResult){
+	public ResponseEntity<?>insert(@RequestBody @Valid Persona persona, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		this.personasService.insertPersonas(personas);
+		Persona personaResult =this.personasService.insert(persona);
 		
-		return new ResponseEntity<Persona>(personas, headers,HttpStatus.OK);
+		return new ResponseEntity<Persona>(personaResult, headers,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value ="/persona", method =RequestMethod.PUT,
+			consumes ={MediaType.APPLICATION_JSON_VALUE},
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?>update(@RequestBody @Valid Persona persona, BindingResult bindingResult){
+		HttpHeaders headers = new HttpHeaders();
+		if(bindingResult.hasErrors()) {
+
+			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		Persona personaResult = this.personasService.update(persona);
+		
+		return new ResponseEntity<Persona>(personaResult, headers,HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value ="/persona", method =RequestMethod.DELETE,
+			consumes ={MediaType.APPLICATION_JSON_VALUE},
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?>delete(@RequestBody @Valid Persona persona, BindingResult bindingResult){
+		HttpHeaders headers = new HttpHeaders();
+		if(bindingResult.hasErrors()) {
+
+			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		this.personasService.delete(persona.getPersonaId());
+		
+		return new ResponseEntity<Persona>(persona, headers,HttpStatus.OK);
 	}
 	
 	
@@ -49,22 +81,10 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<List<Persona>>showPersonas(@RequestBody Persona personas){
+	public ResponseEntity<List<Persona>>select(@RequestBody Persona persona){
 		HttpHeaders headers = new HttpHeaders();
-		List<Persona> personasList = this.personasService.showPersonas(personas);
+		List<Persona> personasList = this.personasService.select(persona);
 		
-		return new ResponseEntity<List<Persona>>(personasList, headers,HttpStatus.OK);
-	}
-	
-	@RequestMapping(
-			value ="/personas/all", method =RequestMethod.GET,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
-	@ResponseBody
-	public ResponseEntity<List<Persona>>showAllPersonas(){
-		
-		HttpHeaders headers = new HttpHeaders();
-		List<Persona> personasList = this.personasService.showAllPersonas();
 		return new ResponseEntity<List<Persona>>(personasList, headers,HttpStatus.OK);
 	}
 

@@ -1,5 +1,6 @@
 package co.com.mundocostenio.controller;
 
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,74 +18,74 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.mundocostenio.domain.Calle;
-import co.com.mundocostenio.services.CalleService;
+import co.com.mundocostenio.domain.Barrio;
+import co.com.mundocostenio.services.BarrioService;
 
 @RestController
-public class CalleController {
+public class BarrioController {
 	
 	@Autowired
-	private CalleService calleService;
+	private BarrioService barrioService;
 	
 	
 	@RequestMapping(
-			value ="/calle", method =RequestMethod.POST,
+			value ="/barrio", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> insertCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?>insert(@RequestBody @Valid Barrio barrio, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		Calle calleResult = this.calleService.insert(calle);
+		Barrio barrioResult = this.barrioService.insert(barrio);
 		
-		return new ResponseEntity<Calle>(calleResult, headers, HttpStatus.OK);
+		return new ResponseEntity<Barrio>(barrioResult, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
-			value ="/calle", method =RequestMethod.PUT,
+			value ="/barrio", method =RequestMethod.PUT,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> updateCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?>update(@RequestBody @Valid Barrio barrio, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		this.calleService.update(calle);
+		Barrio barrioResult = this.barrioService.update(barrio);
 		
-		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
+		return new ResponseEntity<Barrio>(barrioResult, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
-			value ="/calle", method =RequestMethod.DELETE,
+			value ="/barrio", method =RequestMethod.DELETE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> deleteCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?>delete(@RequestBody @Valid Barrio barrio, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		this.calleService.delete(calle);
+		int barrioResult = this.barrioService.delete(barrio.getBarrioId());
 		
-		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
+		return new ResponseEntity<Integer>(barrioResult, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
-			value ="/calles", method =RequestMethod.POST,
+			value ="/barrios", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> showCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?>select(@RequestBody @Valid Barrio barrio, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		List<Calle> calles = this.calleService.select(calle);
+		List<Barrio> barrioResult = this.barrioService.select(barrio);
 		
-		return new ResponseEntity<List<Calle>>(calles, headers, HttpStatus.OK);
+		return new ResponseEntity<List<Barrio>>(barrioResult, headers, HttpStatus.OK);
 	}
 
 }
