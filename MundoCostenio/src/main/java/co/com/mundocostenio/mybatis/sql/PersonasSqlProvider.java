@@ -72,6 +72,7 @@ public class PersonasSqlProvider {
 			FROM("calle c");
 			FROM("departamento_barrio depb");
 			FROM("direccion_personas dp");
+			FROM("ubicacion_calle ubc");
 			
 			WHERE("p.persona_id = dp.persona_id");
 			WHERE("dp.direccion_id = dir.direccion_id");
@@ -79,8 +80,9 @@ public class PersonasSqlProvider {
 			WHERE("dep.departamento_id = depb.departamento_id");
 			WHERE("depb.barrio_id = b.barrio_id");
 			WHERE("b.ubicacion_id = u.ubicacion_id");
-			WHERE("u.id_calle_1 = c.calle_id");
-			WHERE("u.id_calle_2 = c.calle_id");
+			WHERE("u.ubicacion_id= ubc.ubicacion_id");
+			WHERE("ubc.calle_id = c.calle_id");
+			
 			if(persona != null) {
 				if(persona.getPersonaId() > 0) {
 					WHERE("p.persona_id = " + String.valueOf(persona.getPersonaId()));
@@ -101,7 +103,7 @@ public class PersonasSqlProvider {
 						for(Direccion direccion: persona.getDirecciones()) {
 							if(direccion.getDepartamento()!=null) {
 								if(direccion.getDepartamento().getNombreDepartamento()!=null && direccion.getDepartamento().getNombreDepartamento()!="") {
-									WHERE("dir.nombre_departamento = " + "'".concat(direccion.getDepartamento().getNombreDepartamento()).concat("'"));
+									WHERE("dep.nombre_departamento = " + "'".concat(direccion.getDepartamento().getNombreDepartamento()).concat("'"));
 								}
 								if(direccion.getDepartamento().getBarrios() != null && direccion.getDepartamento().getBarrios().size() > 0) {
 									for(Barrio barrio: direccion.getDepartamento().getBarrios()) {
