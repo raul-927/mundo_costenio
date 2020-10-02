@@ -20,6 +20,12 @@ public class CalleServiceImpl implements CalleService {
 		this.calleMapper.insert(calle);
 		return calle;
 	}
+	
+	@Override
+	public void insertDireccionCalles(int direccionId, List<Calle> calles) {
+		this.calleMapper.insertDireccionCalles(direccionId, calles);
+	}
+	
 
 	@Override
 	public Calle update(Calle calle) {
@@ -38,6 +44,7 @@ public class CalleServiceImpl implements CalleService {
 		
 		return this.calleMapper.select(calle);
 	}
+
 	
 	
 }

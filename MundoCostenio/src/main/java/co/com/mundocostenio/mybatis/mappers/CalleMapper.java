@@ -21,6 +21,9 @@ public interface CalleMapper {
 	@Options(useGeneratedKeys=true, keyProperty="calleId", keyColumn = "calle_id") 
 	void insert(@Param("calle") Calle calle);
 	
+	@InsertProvider(type = CalleSqlProvider.class, method ="insertDireccionCalles")
+	void insertDireccionCalles(@Param("direccionId") int direccionId, @Param("calles") List<Calle>calles);
+	
 	@UpdateProvider(type = CalleSqlProvider.class, method ="update")
 	Calle update(@Param("calle") Calle calle);
 	
