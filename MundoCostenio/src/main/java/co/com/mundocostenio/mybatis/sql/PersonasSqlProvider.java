@@ -102,13 +102,13 @@ public class PersonasSqlProvider {
 							}
 							if(direccion.getBarrio()!=null) {
 								if(direccion.getBarrio().getNombreBarrio()!=null && direccion.getBarrio().getNombreBarrio()!="") {
-									WHERE("b.nombre_barrio = " + "'".concat(direccion.getBarrio().getNombreBarrio()).concat("'"));
+									WHERE("b.nombre_barrio LIKE " + "'%".concat(direccion.getBarrio().getNombreBarrio()).concat("%'"));
 								}
 							}
 							if(direccion.getCalles()!=null && direccion.getCalles().size() > 0) {
 								for(Calle calle: direccion.getCalles()) {
 									if(calle.getNombreCalle()!= null && calle.getNombreCalle()!="") {
-										WHERE("c.nombre_calle = " + "'".concat(calle.getNombreCalle()).concat("'"));
+										WHERE("c.nombre_calle LIKE " + "'%".concat(calle.getNombreCalle()).concat("%'"));
 									}
 									if(calle.getTipoCalle()!=null) {
 										WHERE("c.tipo_calle = " + "'".concat(calle.getTipoCalle().name()).concat("'"));
