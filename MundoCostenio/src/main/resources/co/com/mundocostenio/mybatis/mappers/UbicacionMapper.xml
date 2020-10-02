@@ -4,11 +4,8 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.UbicacionMapper">
 	<resultMap type="co.com.mundocostenio.domain.Ubicacion" id="UbicacionResult">
   	
-  		<id	property = "ubicacionId" 	column = "ubicacion_id"/>
- 		<result property ="nroPuerta" column ="nro_puerta"/>
- 		<result property ="geoLocalizacion" column ="geo_localizacion"/>
- 		
- 		<collection property="calles"
-			resultMap="co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult"/>
+  		<id		property = "ubicacionId" 	column = "ubicacion_id"/>
+ 		<result property = "nroPuerta" 		column ="nro_puerta"/>
+ 		<result property = "geoLocalizacion" column ="geo_localizacion"/>
   	</resultMap>
 </mapper>

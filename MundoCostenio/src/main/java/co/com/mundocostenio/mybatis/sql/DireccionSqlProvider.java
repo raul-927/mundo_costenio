@@ -11,9 +11,6 @@ public class DireccionSqlProvider {
 	public String insert(Direccion direccion) {
 		return new SQL() {{
 			INSERT_INTO("direccion");
-			if(direccion.getDepartamento()!=null) {
-				VALUES("departamento_id", String.valueOf(direccion.getDepartamento().getDepartamentoId()));
-			}
 			
 		}}.toString();
 	}
@@ -21,9 +18,7 @@ public class DireccionSqlProvider {
 	public String update(Direccion direccion) {
 		return new SQL() {{
 			UPDATE("direccion");
-			if(direccion.getDepartamento().getDepartamentoId() >0) {
-				SET("departamento_id", String.valueOf(direccion.getDepartamento().getDepartamentoId()));
-			}
+			
 			WHERE("direccion_id = "+"'".concat(String.valueOf(direccion.getDireccionId())).concat("'"));
 		}}.toString();
 	}

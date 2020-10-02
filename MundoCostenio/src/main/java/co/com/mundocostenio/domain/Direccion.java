@@ -1,20 +1,23 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Direccion implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int direccionId;
-	private Departamento departamento;
+	private int 		direccionId;
+	private Barrio 		barrio;
+	private String 		geoLocalizacion;
+	private int 		nroPuerta;
+	private List<Calle> calles;
 	
 	public Direccion() {};
 	
-	public Direccion(int direccionId, Departamento departamento) {
+	public Direccion(int direccionId) {
 		this.direccionId = direccionId;
-		this.departamento = departamento;
 	}
 	
 	public int getDireccionId() {
@@ -24,11 +27,35 @@ public class Direccion implements Serializable{
 		this.direccionId = direccionId;
 	}
 	
-	public Departamento getDepartamento() {
-		return departamento;
+	public Barrio getBarrio() {
+		return barrio;
 	}
 
-	public void setBarrio(Departamento departamento) {
-		this.departamento = departamento;
+	public void setBarrio(Barrio barrio) {
+		this.barrio = barrio;
+	}
+
+	public int getNroPuerta() {
+		return nroPuerta;
+	}
+
+	public void setNroPuerta(int nroPuerta) {
+		this.nroPuerta = nroPuerta;
+	}
+
+	public String getGeoLocalizacion() {
+		return geoLocalizacion;
+	}
+
+	public void setGeoLocalizacion(String geoLocalizacion) {
+		this.geoLocalizacion = geoLocalizacion;
+	}
+
+	public List<Calle> getCalles() {
+		return calles;
+	}
+
+	public void setCalles(List<Calle> calles) {
+		this.calles = calles;
 	}
 }

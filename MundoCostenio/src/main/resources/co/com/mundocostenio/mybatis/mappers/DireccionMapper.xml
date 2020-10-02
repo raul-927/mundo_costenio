@@ -4,8 +4,13 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.DireccionMapper">
 	<resultMap type="co.com.mundocostenio.domain.Direccion" id="DireccionResult">
   	
-  		<id	property = "direccionId" 	column = "direccion_id"/>
- 		<association property="departamento" 
-			resultMap="co.com.mundocostenio.mybatis.mappers.DepartamentoMapper.DepartamentoResult"/>
+  		<id		property = "direccionId" 	column = "direccion_id"/>
+ 		<result property ="nroPuerta" 		column ="nro_puerta"/>
+ 		<result property ="geoLocalizacion" column ="geo_localizacion"/>
+ 		
+		<association property="barrio" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.BarrioMapper.BarrioResult"/>
+		<collection property="calles" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult"/>
   	</resultMap>
 </mapper>

@@ -3,6 +3,7 @@ package co.com.mundocostenio.mybatis.sql;
 import org.apache.ibatis.jdbc.SQL;
 
 import co.com.mundocostenio.domain.Barrio;
+import co.com.mundocostenio.domain.Calle;
 import co.com.mundocostenio.domain.Direccion;
 import co.com.mundocostenio.domain.Persona;
 public class PersonasSqlProvider {
@@ -58,30 +59,25 @@ public class PersonasSqlProvider {
 		
 		return new SQL() {{
 			SELECT("p.persona_id, p.nombre, p.apellido, p.cedula, p.rol");
-			SELECT("dir.direccion_id");
-			SELECT("dep.departamento_id, dep.nombre_departamento");
+			SELECT("dir.direccion_id, dir.nro_puerta, dir.geo_localizacion");
 			SELECT("b.barrio_id, b.nombre_barrio");
-			SELECT("u.ubicacion_id, u.nro_puerta, u.geo_localizacion");
 			SELECT("c.calle_id, c.tipo_calle, c.nombre_calle");
+			SELECT("dep.departamento_id, dep.nombre_departamento");
 			
 			FROM("persona p");
 			FROM("direccion dir");
 			FROM("departamento dep");
-			FROM("barrio b");
-			FROM("ubicacion u");
 			FROM("calle c");
-			FROM("departamento_barrio depb");
-			FROM("direccion_personas dp");
-			FROM("ubicacion_calle ubc");
+			FROM("barrio b");
+			FROM("persona_direcciones perdir");
+			FROM("direccion_calles dirca");
 			
-			WHERE("p.persona_id = dp.persona_id");
-			WHERE("dp.direccion_id = dir.direccion_id");
-			WHERE("dir.departamento_id = dep.departamento_id");
-			WHERE("dep.departamento_id = depb.departamento_id");
-			WHERE("depb.barrio_id = b.barrio_id");
-			WHERE("b.ubicacion_id = u.ubicacion_id");
-			WHERE("u.ubicacion_id= ubc.ubicacion_id");
-			WHERE("ubc.calle_id = c.calle_id");
+			WHERE("p.persona_id = perdir.persona_id");
+			WHERE("perdir.direccion_id = dir.direccion_id");
+			WHERE("dir.direccion_id = dirca.direccion_id");
+			WHERE("dirca.calle_id = c.calle_id");
+			WHERE("dir.barrio_id = b.barrio_id");
+			WHERE("b.departamento_id = dep.departamento_id");
 			
 			if(persona != null) {
 				if(persona.getPersonaId() > 0) {
@@ -101,32 +97,21 @@ public class PersonasSqlProvider {
 					}
 					if(persona.getDirecciones() != null && persona.getDirecciones().size() > 0) {
 						for(Direccion direccion: persona.getDirecciones()) {
-							if(direccion.getDepartamento()!=null) {
-								if(direccion.getDepartamento().getNombreDepartamento()!=null && direccion.getDepartamento().getNombreDepartamento()!="") {
-									WHERE("dep.nombre_departamento = " + "'".concat(direccion.getDepartamento().getNombreDepartamento()).concat("'"));
+							if(direccion.getNroPuerta() > 0) {
+								WHERE("d.nro_puerta = " + String.valueOf(direccion.getNroPuerta()));
+							}
+							if(direccion.getBarrio()!=null) {
+								if(direccion.getBarrio().getNombreBarrio()!=null && direccion.getBarrio().getNombreBarrio()!="") {
+									WHERE("b.nombre_barrio = " + "'".concat(direccion.getBarrio().getNombreBarrio()).concat("'"));
 								}
-								if(direccion.getDepartamento().getBarrios() != null && direccion.getDepartamento().getBarrios().size() > 0) {
-									for(Barrio barrio: direccion.getDepartamento().getBarrios()) {
-										if(barrio.getNombreBarrio()!= null && barrio.getNombreBarrio()!="") {
-											WHERE("b.nombre_barrio = " + "'".concat(barrio.getNombreBarrio()).concat("'"));
-										}
-										if(barrio.getUbicacion()!= null) {
-											if(barrio.getUbicacion().getGeoLocalizacion()!=null && barrio.getUbicacion().getGeoLocalizacion()!="") {
-												WHERE("u.geo_localizacion = " + "'".concat(barrio.getUbicacion().getGeoLocalizacion()).concat("'"));
-											}
-											if(barrio.getUbicacion().getNroPuerta() > 0) {
-												WHERE ("u.nro_puerta = " + String.valueOf(barrio.getUbicacion().getNroPuerta()));
-											}
-											if(barrio.getUbicacion().getCalles()!=null && barrio.getUbicacion().getCalles().size() > 0) {
-												
-												if(barrio.getUbicacion().getCalles().get(0).getNombreCalle()!= null && barrio.getUbicacion().getCalles().get(0).getNombreCalle() !="") {
-													WHERE("c.nombre_calle = " + "'".concat(barrio.getUbicacion().getCalles().get(0).getNombreCalle()).concat("'"));
-												}
-												if(barrio.getUbicacion().getCalles().get(1).getNombreCalle()!= null && barrio.getUbicacion().getCalles().get(1).getNombreCalle() !="") {
-													WHERE("c.nombre_calle = " + "'".concat(barrio.getUbicacion().getCalles().get(1).getNombreCalle()).concat("'"));
-												}	
-											}
-										}
+							}
+							if(direccion.getCalles()!=null && direccion.getCalles().size() > 0) {
+								for(Calle calle: direccion.getCalles()) {
+									if(calle.getNombreCalle()!= null && calle.getNombreCalle()!="") {
+										WHERE("c.nombre_calle = " + "'".concat(calle.getNombreCalle()).concat("'"));
+									}
+									if(calle.getTipoCalle()!=null) {
+										WHERE("c.tipo_calle = " + "'".concat(calle.getTipoCalle().name()).concat("'"));
 									}
 								}
 							}

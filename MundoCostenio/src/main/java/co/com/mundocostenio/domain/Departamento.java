@@ -10,14 +10,13 @@ public class Departamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int departamentoId;
 	private String nombreDepartamento;
-	private List<Barrio> barrios;
 	
 	public Departamento() {};
 	
-	public Departamento(int departamentoId, String nombreDepartamento, List<Barrio> barrios) {
+	public Departamento(int departamentoId, String nombreDepartamento) {
 		this.departamentoId = departamentoId;
 		this.nombreDepartamento = nombreDepartamento;
-		this.barrios = barrios;
+		
 	}
 	
 	
@@ -32,13 +31,5 @@ public class Departamento implements Serializable{
 	}
 	public void setNombreDepartamento(String nombreDepartamento) {
 		this.nombreDepartamento = nombreDepartamento;
-	}
-
-	public List<Barrio> getBarrios() {
-		return barrios;
-	}
-
-	public void setBarrio(List<Barrio> barrios) {
-		this.barrios = barrios;
 	}
 }

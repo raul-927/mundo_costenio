@@ -9,16 +9,16 @@ public class Barrio implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int barrioId;
-	private String nombreBarrio;
-	private Ubicacion ubicacion;
+	private int 		  barrioId;
+	private String 		  nombreBarrio;
+	private Departamento  departamento;
 	
 	public Barrio() {};
 	
 	public Barrio(int barrioId, String nombreBarrio, Ubicacion ubicacion) {
 		this.barrioId = barrioId;
 		this.nombreBarrio = nombreBarrio;
-		this.ubicacion = ubicacion;
+		
 	}
 	
 	public int getBarrioId() {
@@ -34,11 +34,11 @@ public class Barrio implements Serializable{
 		this.nombreBarrio = nombreBarrio;
 	}
 
-	public Ubicacion getUbicacion() {
-		return ubicacion;
+	public Departamento getDepartamento() {
+		return departamento;
 	}
 
-	public void setUbicacion(Ubicacion ubicacion) {
-		this.ubicacion = ubicacion;
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 }

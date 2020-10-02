@@ -63,14 +63,7 @@ public class UbicacionSqlProvider {
 					if(ubicacion.getNroPuerta() > 0) {
 						WHERE("u.nro_puerta = " + String.valueOf(ubicacion.getNroPuerta()));
 					}
-					if(ubicacion.getCalles()!= null && ubicacion.getCalles().size() > 0) {
-						if(ubicacion.getCalles().get(0).getNombreCalle()!= null && ubicacion.getCalles().get(0).getNombreCalle()!="") {
-							WHERE("c.nombre_calle = " + "'".concat(ubicacion.getCalles().get(0).getNombreCalle()).concat("'"));
-						}
-						if(ubicacion.getCalles().get(1).getNombreCalle()!= null && ubicacion.getCalles().get(1).getNombreCalle()!="") {
-							WHERE("c.nombre_calle = " + "'".concat(ubicacion.getCalles().get(1).getNombreCalle()).concat("'"));
-						}
-					}
+					
 				}
 			}
 		}}.toString();
