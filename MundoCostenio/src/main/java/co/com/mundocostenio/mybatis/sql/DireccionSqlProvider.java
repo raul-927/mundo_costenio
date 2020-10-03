@@ -22,6 +22,7 @@ public class DireccionSqlProvider {
 							String.valueOf(direccion.getNroPuerta()), 
 							"'".concat(direccion.getGeoLocalizacion()).concat("'"), 
 							String.valueOf(direccion.getBarrio()!=null ? direccion.getBarrio().getBarrioId():0));
+					ADD_ROW();
 				}
 			}
 		}}.toString();
