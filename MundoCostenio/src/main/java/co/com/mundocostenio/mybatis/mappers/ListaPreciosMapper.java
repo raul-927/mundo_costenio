@@ -23,4 +23,8 @@ public interface ListaPreciosMapper {
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper.ListaPreciosResult")
 	List<ListaPrecios> selectListaPrecios(@Param("listaPrecios") ListaPrecios listaPrecios);
 	
+	@SelectProvider(type = ListaPreciosSqlProvider.class, method ="selectActualListaPrecios")
+	@ResultMap("co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper.ListaPreciosResult")
+	ListaPrecios selectActualListaPrecios();
+	
 }

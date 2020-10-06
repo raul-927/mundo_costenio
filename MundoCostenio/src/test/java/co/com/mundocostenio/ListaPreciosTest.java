@@ -63,7 +63,7 @@ public class ListaPreciosTest {
 		fechaVigencia.setFechaFin(fechaFin);
 		
 		tipoProducto.setTipProdId(TIP_PROD_ID);
-		tipoProducto.setDescripcion(DESCRIPCION); 
+		tipoProducto.setDescTipoProducto(DESCRIPCION); 
 		
 		producto.setProdId(PROD_ID);
 		producto.setNombre(NOMBRE);
@@ -192,7 +192,7 @@ public class ListaPreciosTest {
 		List<PrecioProducto>precioProductoList  = new ArrayList<PrecioProducto>();
 		PrecioProducto precioProducto = new PrecioProducto();
 		TipoProducto tipoProducto = new TipoProducto();
-		tipoProducto.setDescripcion(DESCRIPCION);
+		tipoProducto.setDescTipoProducto(DESCRIPCION);
 		Producto producto = new Producto();
 		producto.setTipoProducto(tipoProducto);
 		precioProducto.setProducto(producto);

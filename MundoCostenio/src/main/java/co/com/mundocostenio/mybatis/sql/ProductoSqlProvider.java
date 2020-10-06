@@ -58,8 +58,8 @@ public class ProductoSqlProvider {
 					if(producto.getTipoProducto()!=null) {
 						if(producto.getTipoProducto().getTipProdId() > 0) {
 							WHERE("t.tip_prod_id = " + String.valueOf(producto.getTipoProducto().getTipProdId()));
-						}else if(producto.getTipoProducto().getDescripcion()!=null && producto.getTipoProducto().getDescripcion()!=""){
-							WHERE("t.descripcion = " + "'".concat(producto.getTipoProducto().getDescripcion()).concat("'"));
+						}else if(producto.getTipoProducto().getDescTipoProducto()!=null && producto.getTipoProducto().getDescTipoProducto()!=""){
+							WHERE("t.descripcion = " + "'".concat(producto.getTipoProducto().getDescTipoProducto()).concat("'"));
 						}
 					}
 				}

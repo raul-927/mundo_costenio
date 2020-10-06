@@ -8,4 +8,5 @@ public interface ListaPreciosService {
 	ListaPrecios insert(ListaPrecios listaPrecios);
 	
 	List<ListaPrecios> selectListaPrecios(ListaPrecios listaPrecios);
+	ListaPrecios selectActualListaPrecios();
 }

@@ -34,6 +34,7 @@ public class DireccionSqlProvider {
 			INTO_COLUMNS("persona_id", "direccion_id");
 			for(Direccion direccion: direcciones) {
 				INTO_VALUES(String.valueOf(personaId),String.valueOf(direccion.getDireccionId()));
+				ADD_ROW();
 			}
 		}}.toString();
 	}
@@ -48,9 +49,22 @@ public class DireccionSqlProvider {
 	
 	public String update(Direccion direccion) {
 		return new SQL() {{
-			UPDATE("direccion");
+			if(direccion !=null) {
+				if(direccion.getDireccionId() > 0) {
+					UPDATE("direccion");
+					if(direccion.getNroPuerta() > 0) {
+						SET("nro_puerta", String.valueOf(direccion.getNroPuerta()));
+					}
+					if(direccion.getGeoLocalizacion()!=null && direccion.getGeoLocalizacion()!="") {
+						SET("geo_localizacion", "'".concat(direccion.getGeoLocalizacion()).concat("'"));
+					}
+					if(direccion.getBarrio()!=null && direccion.getBarrio().getBarrioId() > 0) {
+						SET("barrio_id", String.valueOf(direccion.getBarrio().getBarrioId()));
+					}
+					WHERE("direccion_id = "+"'".concat(String.valueOf(direccion.getDireccionId())).concat("'"));
+				}
+			}
 			
-			WHERE("direccion_id = "+"'".concat(String.valueOf(direccion.getDireccionId())).concat("'"));
 		}}.toString();
 	}
 	
@@ -88,13 +102,13 @@ public class DireccionSqlProvider {
 				}
 				if(direccion.getBarrio()!=null) {
 					if(direccion.getBarrio().getNombreBarrio()!=null && direccion.getBarrio().getNombreBarrio()!="") {
-						WHERE("b.nombre_barrio = " + "'".concat(direccion.getBarrio().getNombreBarrio()).concat("'"));
+						WHERE("b.nombre_barrio LIKE " + "'%".concat(direccion.getBarrio().getNombreBarrio()).concat("%'"));
 					}
 				}
 				if(direccion.getCalles()!=null && direccion.getCalles().size() > 0) {
 					for(Calle calle: direccion.getCalles()) {
 						if(calle.getNombreCalle()!=null && calle.getNombreCalle()!="") {
-							WHERE("c.nombre_calle = " + "'".concat(calle.getNombreCalle()).concat("'"));
+							WHERE("c.nombre_calle LIKE " + "'%".concat(calle.getNombreCalle()).concat("%'"));
 						}if(calle.getTipoCalle()!=null) {
 							WHERE("c.tipo_calle = " + "'".concat(calle.getTipoCalle().name()).concat("'"));
 						}

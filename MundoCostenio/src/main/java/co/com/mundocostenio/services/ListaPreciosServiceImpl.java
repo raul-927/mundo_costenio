@@ -36,4 +36,10 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 		return this.listaPreciosMapper.selectListaPrecios(listaPrecios);
 	}
 
+	@Override
+	public ListaPrecios selectActualListaPrecios() {
+		return this.listaPreciosMapper.selectActualListaPrecios();
+		
+	}
+
 }

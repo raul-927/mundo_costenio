@@ -56,4 +56,15 @@ public class ListaPreciosController {
 		List<ListaPrecios> listaPreciosResult = this.listaPreciosService.selectListaPrecios(listaPrecios);
 		return new ResponseEntity<List<ListaPrecios>>(listaPreciosResult, headers, HttpStatus.OK);
 	}
+	
+	@RequestMapping(
+			value ="/listaPreciosSearch", method =RequestMethod.GET,
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?> selectActualListaPrecios(){
+		HttpHeaders headers = new HttpHeaders();
+		ListaPrecios listaPreciosResult = this.listaPreciosService.selectActualListaPrecios();
+		return new ResponseEntity<ListaPrecios>(listaPreciosResult, headers, HttpStatus.OK);
+		
+	}
 }

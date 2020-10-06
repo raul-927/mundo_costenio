@@ -14,6 +14,11 @@ public class BarrioSqlProvider {
 			if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
 				VALUES("nombre_barrio", barrio.getNombreBarrio());
 			}
+			if(barrio.getDepartamento()!=null) {
+				if(barrio.getDepartamento().getDepartamentoId() > 0) {
+					VALUES("departamento_id", String.valueOf(barrio.getDepartamento().getDepartamentoId()));
+				}
+			}
 		}}.toString();
 	}
 	public String update(Barrio barrio) {
@@ -22,6 +27,11 @@ public class BarrioSqlProvider {
 				UPDATE("barrio");
 				if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
 					SET("nombre_barrio", "'".concat(barrio.getNombreBarrio()).concat("'"));
+				}
+				if(barrio.getDepartamento()!=null) {
+					if(barrio.getDepartamento().getDepartamentoId() > 0) {
+						SET("departamento_id", String.valueOf(barrio.getDepartamento().getDepartamentoId()));
+					}
 				}
 				WHERE("barrio_id = "+ String.valueOf(barrio.getBarrioId()));
 			}
@@ -37,7 +47,6 @@ public class BarrioSqlProvider {
 			}
 		}}.toString();
 	}
-	
 	public String select(Barrio barrio) {
 		return new SQL() {{
 			SELECT("b.barrio_id, b.nombre_barrio");
@@ -51,17 +60,14 @@ public class BarrioSqlProvider {
 				WHERE("barrio_id = "+ String.valueOf(barrio.getBarrioId()));
 			}else {
 				if(barrio.getNombreBarrio() !=null && barrio.getNombreBarrio() !=""){
-					WHERE("nombre_barrio = " + "'".concat(barrio.getNombreBarrio()).concat("'"));
+					WHERE("nombre_barrio LIKE " + "'%".concat(barrio.getNombreBarrio()).concat("%'"));
+				}
+				if(barrio.getDepartamento()!=null) {
+					if(barrio.getDepartamento().getNombreDepartamento()!=null && barrio.getDepartamento().getNombreDepartamento()!="") {
+						WHERE("d.nombre_departamento  LIKE" + "'%".concat(barrio.getDepartamento().getNombreDepartamento()).concat("%'"));
+					}
 				}
 			}
-			if(barrio.getDepartamento()!=null) {
-				if(barrio.getDepartamento().getNombreDepartamento()!=null && barrio.getDepartamento().getNombreDepartamento()!="") {
-					WHERE("d.nombre_departamento = " + "'".concat(barrio.getDepartamento().getNombreDepartamento()).concat("'"));
-				}
-			}
-			
-			
 		}}.toString();
 	}
-	
 }

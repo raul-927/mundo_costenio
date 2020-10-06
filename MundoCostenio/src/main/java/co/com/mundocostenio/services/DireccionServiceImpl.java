@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Direccion;
 import co.com.mundocostenio.mybatis.mappers.CalleMapper;
@@ -19,12 +20,14 @@ public class DireccionServiceImpl implements DireccionService {
 	@Autowired
 	private CalleMapper calleMapper;
 
+	@Transactional
 	@Override
 	public List<Direccion> insert(List<Direccion> direcciones) {
 		
 		return this.ejutarInsert(direcciones);
 	}
 
+	@Transactional
 	@Override
 	public void insertPersonaDirecciones(int personaId, List<Direccion> direcciones) {
 		this.direccionMapper.insertPersonaDirecciones(personaId, direcciones);

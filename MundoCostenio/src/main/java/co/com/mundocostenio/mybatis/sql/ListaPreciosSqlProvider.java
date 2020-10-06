@@ -41,7 +41,7 @@ public class ListaPreciosSqlProvider {
 			SELECT("f.fecha_vigencia_id, f.fecha_ini,f.fecha_fin");
 			SELECT("pre.precio_prod_id, pre.monto");
 			SELECT("pro.prod_id, pro.nombre");
-			SELECT("t.tip_prod_id, t.descripcion");
+			SELECT("t.tip_prod_id, t.desc_tipo_producto");
 			
 			FROM("lista_precios l");
 			FROM("fecha_vig_list_prec f");
@@ -85,8 +85,8 @@ public class ListaPreciosSqlProvider {
 									WHERE("pro.nombre = " + "'".concat(precProd.getProducto().getNombre()).concat("'"));
 								}
 								if(precProd.getProducto().getTipoProducto()!= null) {
-									if(precProd.getProducto().getTipoProducto().getDescripcion()!=null && precProd.getProducto().getTipoProducto().getDescripcion()!= "") {
-										WHERE("t.descripcion = " + "'".concat(precProd.getProducto().getTipoProducto().getDescripcion()).concat("'"));
+									if(precProd.getProducto().getTipoProducto().getDescTipoProducto()!=null && precProd.getProducto().getTipoProducto().getDescTipoProducto()!= "") {
+										WHERE("t.desc_tipo_producto = " + "'".concat(precProd.getProducto().getTipoProducto().getDescTipoProducto()).concat("'"));
 									}
 								}
 							}
@@ -94,9 +94,37 @@ public class ListaPreciosSqlProvider {
 					}
 				}
 			}
-			
 		}}.toString();
-		System.out.println(sql);
 		return sql;
 	}
+	
+	public String selectActualListaPrecios() {
+		return new SQL() {{
+			SELECT("l.lista_precio_id, l.descripcion_lista");
+			SELECT("f.fecha_vigencia_id, f.fecha_ini,f.fecha_fin");
+			SELECT("pre.precio_prod_id, pre.monto");
+			SELECT("pro.prod_id, pro.nombre");
+			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			
+			FROM("lista_precios l");
+			FROM("fecha_vig_list_prec f");
+			FROM("precio_producto pre");
+			FROM("producto pro");
+			FROM("tipo_producto t");
+			FROM("list_prod_and_prec_prod ls");
+			
+			WHERE("l.fecha_vig_id = f.fecha_vigencia_id"); 
+			WHERE("l.lista_precio_id = ls.lis_prec_id"); 
+			WHERE("ls.prec_prod_id = pre.precio_prod_id"); 
+			WHERE("pre.prod_id = pro.prod_id"); 
+			WHERE("pro.tipo_prod_id = t.tip_prod_id");
+			WHERE("CURRENT_DATE() BETWEEN f.fecha_ini AND f.fecha_fin");
+			OR();
+			WHERE("CURRENT_DATE() > f.fecha_ini");
+			WHERE("f.fecha_fin = '01/01/3030'");
+		}}.toString();
+	}
+	
+	
+	
 }

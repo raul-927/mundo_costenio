@@ -15,19 +15,20 @@ public class TipoProducto implements Serializable{
 	private int tipProdId;
 	@NotNull(message =TipoProductoErrorMessage.DESCRIPCION_NULL)
 	@Size(min = 3, max = 30, message = TipoProductoErrorMessage.DESCRIPCION_LENGTH)
-	private String descripcion;
+	private String descTipoProducto;
 	
 	
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	
 	public int getTipProdId() {
 		return tipProdId;
 	}
 	public void setTipProdId(int tipProdId) {
 		this.tipProdId = tipProdId;
+	}
+	public String getDescTipoProducto() {
+		return descTipoProducto;
+	}
+	public void setDescTipoProducto(String descTipoProducto) {
+		this.descTipoProducto = descTipoProducto;
 	}
 }

@@ -5,7 +5,7 @@
 	<resultMap type="co.com.mundocostenio.domain.TipoProducto" id="TipoProductoResult">
   	
   		<id		property = "tipProdId" 		column = "tip_prod_id"/>
- 		<result property ="descripcion" column ="descripcion"/>
+ 		<result property ="descTipoProducto" 	column ="desc_tipo_producto"/>
 
   	</resultMap>
 </mapper>

@@ -20,16 +20,6 @@ public class DepartamentoSqlProvider {
 		}}.toString();
 	}
 	
-	public String insertDepartamentoBarrio(int departamentoId, List<Barrio>barrios) {
-		return new SQL() {{
-			INSERT_INTO("departamento_barrio");
-			INTO_COLUMNS("departamento_id", "barrio_id");
-			for(Barrio barrio: barrios) {
-				INTO_VALUES(String.valueOf(departamentoId), String.valueOf(barrio.getBarrioId()));
-			}
-		}}.toString();
-	}
-	
 	public String update(Departamento departamento) {
 		return new SQL() {{
 			if(departamento.getDepartamentoId() > 0) {
