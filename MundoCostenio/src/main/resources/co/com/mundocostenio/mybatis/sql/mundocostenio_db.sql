@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS `barrio` (
   `barrio_id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_barrio` varchar(50) NOT NULL,
   `departamento_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`barrio_id`) USING BTREE
+  PRIMARY KEY (`barrio_id`) USING BTREE,
+  KEY `FK_barrio_departamento` (`departamento_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
@@ -51,17 +52,19 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   `nro_puerta` int(11) DEFAULT NULL,
   `geo_localizacion` varchar(50) DEFAULT NULL,
   `barrio_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`direccion_id`)
+  PRIMARY KEY (`direccion_id`),
+  KEY `FK_direccion_barrio` (`barrio_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla mundocostenio_db.direccion_calles
 CREATE TABLE IF NOT EXISTS `direccion_calles` (
-  `dir_calles_id` int(11) DEFAULT NULL,
+  `dir_calles_id` int(11) NOT NULL AUTO_INCREMENT,
   `direccion_id` int(11) DEFAULT NULL,
-  `calle_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `calle_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`dir_calles_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -70,8 +73,11 @@ CREATE TABLE IF NOT EXISTS `fecha_vig_list_prec` (
   `fecha_vigencia_id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha_ini` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
-  PRIMARY KEY (`fecha_vigencia_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`fecha_vigencia_id`) USING BTREE,
+  UNIQUE KEY `fecha_ini_fecha_fin` (`fecha_ini`,`fecha_fin`),
+  UNIQUE KEY `fecha_ini` (`fecha_ini`),
+  UNIQUE KEY `fecha_fin` (`fecha_fin`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -82,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `lista_precios` (
   `descripcion_lista` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`lista_precio_id`) USING BTREE,
   KEY `FK_lista_precios_fecha_vig_list_prec` (`fecha_vig_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -94,18 +100,19 @@ CREATE TABLE IF NOT EXISTS `list_prod_and_prec_prod` (
   PRIMARY KEY (`id`),
   KEY `FK_list_prod_and_prec_prod_lista_precios` (`lis_prec_id`),
   KEY `FK_list_prod_and_prec_prod_precio_producto` (`prec_prod_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla mundocostenio_db.persona
 CREATE TABLE IF NOT EXISTS `persona` (
-  `persona_id` int(11) DEFAULT NULL,
+  `persona_id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `apellido` varchar(50) DEFAULT NULL,
   `cedula` int(11) DEFAULT NULL,
-  `rol` enum('ADMIN','USER','STAF','CLIENT') DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `rol` enum('ADMIN','USER','STAF','CLIENT') DEFAULT NULL,
+  PRIMARY KEY (`persona_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -127,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `precio_producto` (
   `monto` int(11) DEFAULT NULL,
   PRIMARY KEY (`precio_prod_id`) USING BTREE,
   KEY `FK_precio_producto_producto` (`prod_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -156,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `roles_personas` (
 -- Volcando estructura para tabla mundocostenio_db.tipo_producto
 CREATE TABLE IF NOT EXISTS `tipo_producto` (
   `tip_prod_id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(50) DEFAULT NULL,
+  `desc_tipo_producto` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`tip_prod_id`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
