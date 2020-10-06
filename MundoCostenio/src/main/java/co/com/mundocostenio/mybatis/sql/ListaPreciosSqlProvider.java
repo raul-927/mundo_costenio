@@ -125,6 +125,38 @@ public class ListaPreciosSqlProvider {
 		}}.toString();
 	}
 	
+	public String selectNuevoProducto() {
+		return new SQL() {{
+			SELECT("p.prod_id, p.nombre");
+			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			FROM("producto p");
+			FROM("tipo_producto t");
+			WHERE("p.prod_id NOT IN (" + verificarProductoExistenteEnListaActual() + ")");
+		}}.toString();
+	}
 	
+	private String verificarProductoExistenteEnListaActual() {
+		return new SQL() {{
+			SELECT("pro.prod_id");
+			
+			FROM("producto pro");
+			FROM("lista_precios l");
+			FROM("fecha_vig_list_prec f");
+			FROM("precio_producto pre");
+			
+			FROM("tipo_producto t");
+			FROM("list_prod_and_prec_prod ls");
+			
+			WHERE("l.fecha_vig_id = f.fecha_vigencia_id"); 
+			WHERE("l.lista_precio_id = ls.lis_prec_id"); 
+			WHERE("ls.prec_prod_id = pre.precio_prod_id"); 
+			WHERE("pre.prod_id = pro.prod_id"); 
+			WHERE("pro.tipo_prod_id = t.tip_prod_id");
+			WHERE("CURRENT_DATE() BETWEEN f.fecha_ini AND f.fecha_fin");
+			OR();
+			WHERE("CURRENT_DATE() > f.fecha_ini");
+			WHERE("f.fecha_fin = '01/01/3030'");
+		}}.toString();
+	}
 	
 }

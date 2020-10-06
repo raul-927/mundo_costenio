@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.ListaPrecios;
+import co.com.mundocostenio.domain.Producto;
 import co.com.mundocostenio.services.ListaPreciosService;
 
 @RestController
@@ -67,4 +68,17 @@ public class ListaPreciosController {
 		return new ResponseEntity<ListaPrecios>(listaPreciosResult, headers, HttpStatus.OK);
 		
 	}
+	
+	@RequestMapping(
+			value ="/nuevoProducto", method =RequestMethod.GET,
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?> selectNuevoProducto(){
+		HttpHeaders headers = new HttpHeaders();
+		List<Producto> productosResult = this.listaPreciosService.selectNuevoProducto();
+		return new ResponseEntity<List<Producto>>(productosResult, headers, HttpStatus.OK);
+		
+	}
+	
+	
 }

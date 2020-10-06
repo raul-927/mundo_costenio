@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.mundocostenio.domain.ListaPrecios;
+import co.com.mundocostenio.domain.Producto;
 import co.com.mundocostenio.mybatis.mappers.FechaVigenciaListaPreciosMapper;
 import co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper;
 import co.com.mundocostenio.mybatis.mappers.PrecioProductoMapper;
@@ -39,6 +40,12 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 	@Override
 	public ListaPrecios selectActualListaPrecios() {
 		return this.listaPreciosMapper.selectActualListaPrecios();
+		
+	}
+
+	@Override
+	public List<Producto> selectNuevoProducto() {
+		return this.listaPreciosMapper.selectNuevoProducto();
 		
 	}
 
