@@ -126,16 +126,14 @@
             <column name="rol_id" 	type="int"/>
             <column name="persona_id"			type="int"/>
         </createTable>
-        
+
         <createTable tableName="tipo_producto">
             <column name="tip_prod_id" 	type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="desc_tipo_producto" 	type="varchar(50)"/>
         </createTable>
-        
-        
-        
+
          <addForeignKeyConstraint  baseColumnNames="departamento_id"  
             baseTableName="barrio"  
             constraintName="fk_barrio_departamento"
@@ -144,7 +142,7 @@
             referencedColumnNames="departamento_id"
             referencedTableName="departamento"   
             validate="true"/>
-           
+
         <addForeignKeyConstraint  baseColumnNames="barrio_id"  
             baseTableName="direccion"  
             constraintName="fk_direccion_barrio"
@@ -154,7 +152,7 @@
             referencedTableName="barrio"   
             validate="true"/>
             
-            <addForeignKeyConstraint  baseColumnNames="fecha_vig_id"  
+        <addForeignKeyConstraint  baseColumnNames="fecha_vig_id"  
 	            baseTableName="lista_precios"  
 	            constraintName="fk_lista_precios_fecha_vig"
 	            onDelete="CASCADE"  
@@ -162,7 +160,7 @@
 	            referencedColumnNames="fecha_vig_id"   
 	            referencedTableName="fecha_vig_list_prec"   
 	            validate="true"/>
-           
+
         <addForeignKeyConstraint  baseColumnNames="lis_prec_id"  
             baseTableName="list_prod_and_prec_prod"  
             constraintName="fk_lis_prod_prec_prod_lis_prec"
@@ -171,8 +169,7 @@
             referencedColumnNames="lista_precio_id"   
             referencedTableName="lista_precios"   
             validate="true"/>
-           
-        
+
         <addForeignKeyConstraint  baseColumnNames="persona_id"  
             baseTableName="persona_direcciones"  
             constraintName="fk_persona_direcciones_persona"
@@ -181,7 +178,7 @@
             referencedColumnNames="persona_id"   
             referencedTableName="personas"   
             validate="true"/>
-        
+
         <addForeignKeyConstraint  baseColumnNames="direccion_id"  
             baseTableName="persona_direcciones"  
             constraintName="fk_persona_direcciones_direccion"
@@ -190,7 +187,7 @@
             referencedColumnNames="direccion_id"   
             referencedTableName="direccion"   
             validate="true"/>
-        
+
         <addForeignKeyConstraint  baseColumnNames="prod_id"  
             baseTableName="precio_producto"  
             constraintName="fk_precio_producto_producto"
@@ -199,7 +196,7 @@
             referencedColumnNames="prod_id"   
             referencedTableName="producto"   
             validate="true"/>
-      
+
         <addForeignKeyConstraint  baseColumnNames="tipo_prod_id"  
             baseTableName="producto"  
             constraintName="fk_producto_tipo_producto"
@@ -208,7 +205,7 @@
             referencedColumnNames="tipo_prod_id"   
             referencedTableName="tipo_producto"   
             validate="true"/>
-            
+
        <addUniqueConstraint 
             columnNames="fecha_ini, fecha_fin"  
             deferrable="true"  
@@ -216,6 +213,6 @@
             initiallyDeferred="true"    
             tableName="fecha_vig_list_prec"    
             validate="true"/>
-            
+
     </changeSet>
 </databaseChangeLog>
