@@ -13,7 +13,8 @@
     <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
 
-   	<include file="db/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+   	<include file="db/changelog/00000000000001_initial_schema.xml" relativeToChangelogFile="false"/>
+   	<include file="db/changelog/00000000000002_Impuesto_cuenta_grupo_cuenta.xml" relativeToChangelogFile="false"/>
     
     
 </databaseChangeLog>

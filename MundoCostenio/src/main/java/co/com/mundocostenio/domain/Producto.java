@@ -21,8 +21,7 @@ public class Producto implements Serializable{
 	@NotNull(message = ProductoErrorMessage.TIPO_PRODUCTO_NULL)
 	private TipoProducto tipoProducto;
 	
-	
-	
+	private Impuesto impuesto;
 	
 	public TipoProducto getTipoProducto() {
 		return tipoProducto;
@@ -41,6 +40,12 @@ public class Producto implements Serializable{
 	}
 	public void setProdId(int prodId) {
 		this.prodId = prodId;
+	}
+	public Impuesto getImpuesto() {
+		return impuesto;
+	}
+	public void setImpuesto(Impuesto impuesto) {
+		this.impuesto = impuesto;
 	}
 	
 

@@ -126,6 +126,7 @@
             </column>
             <column name="tipo_prod_id" 	type="int"/>
             <column name="nombre"			type="varchar(50)"/>
+             <column name="impuesto_id" 	type="int"/>
         </createTable>
         
         <createTable tableName="tipo_producto">

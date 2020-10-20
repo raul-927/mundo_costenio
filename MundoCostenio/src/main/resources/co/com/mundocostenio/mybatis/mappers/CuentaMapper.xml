@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.CuentaMapper">
+	<resultMap type="co.com.mundocostenio.domain.Cuenta" id="CuentaResult">
+  	
+  		<id		property = "cuentaId" 	  column = "cuenta_id"/>
+ 		<result property ="cuentaDesc" 	  column ="cuenta_desc"/>
+ 		<result property ="tipoCuenta" 	  column ="tipo_cuenta"/>
+ 		<result property ="cuentaFecha"   column ="cuenta_fecha"/>
+ 		<result property ="cuentaHora" 	  column ="cuenta_hora"/>
+ 		<result property ="cuentaUsuario" column ="cuenta_usuario"/>
+ 		
+ 		<association property ="grupoCuenta" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.GrupoCuentaMapper.GrupoCuentaResult"/>
+  	</resultMap>
+</mapper>
