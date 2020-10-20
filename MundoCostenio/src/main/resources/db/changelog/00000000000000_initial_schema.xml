@@ -53,6 +53,15 @@
             <column name="barrio_id" type="int"/>
         </createTable>
         
+        
+        <createTable tableName="calle">
+            <column name="calle_id" 	type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="tipo_calle" type="ENUM('CALLE','CARRERA','DIAGONAL','CIRCUNVALAR','AVENIDA','VIA','TRANSVERSAL','AVENIDA_CARRERA','AVENIDA_CALLE')"/>
+            <column name="nombre_calle" type="varchar(50)"/>
+        </createTable>
+        
         <createTable tableName="direccion_calles">
             <column name="dir_calles_id" 	type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
@@ -119,14 +128,6 @@
             <column name="nombre"			type="varchar(50)"/>
         </createTable>
         
-        <createTable tableName="roles_personas">
-            <column name="rol_persona_id" 	type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" />
-            </column>
-            <column name="rol_id" 	type="int"/>
-            <column name="persona_id"			type="int"/>
-        </createTable>
-
         <createTable tableName="tipo_producto">
             <column name="tip_prod_id" 	type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
@@ -169,6 +170,24 @@
             referencedColumnNames="lista_precio_id"   
             referencedTableName="lista_precios"   
             validate="true"/>
+            
+            <addForeignKeyConstraint  baseColumnNames="prec_prod_id"  
+	            baseTableName="list_prod_and_prec_prod"  
+	            constraintName="fk_lis_prod_prec_precio_producto"
+	            onDelete="CASCADE"  
+	            onUpdate="RESTRICT"  
+	            referencedColumnNames="precio_prod_id"   
+	            referencedTableName="precio_producto"   
+	            validate="true"/>
+	            
+	       <addForeignKeyConstraint  baseColumnNames="calle_id"  
+	            baseTableName="direccion_calles"  
+	            constraintName="fk_direccion_calles_calle"
+	            onDelete="CASCADE"  
+	            onUpdate="RESTRICT"  
+	            referencedColumnNames="calle_id"   
+	            referencedTableName="calle"   
+	            validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="persona_id"  
             baseTableName="persona_direcciones"  
