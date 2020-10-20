@@ -154,13 +154,13 @@
             validate="true"/>
             
         <addForeignKeyConstraint  baseColumnNames="fecha_vig_id"  
-	            baseTableName="lista_precios"  
-	            constraintName="fk_lista_precios_fecha_vig"
-	            onDelete="CASCADE"  
-	            onUpdate="RESTRICT"  
-	            referencedColumnNames="fecha_vig_id"   
-	            referencedTableName="fecha_vig_list_prec"   
-	            validate="true"/>
+	        baseTableName="lista_precios"  
+	        constraintName="fk_lista_precios_fecha_vig"
+	        onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="fecha_vig_id"   
+	        referencedTableName="fecha_vig_list_prec"   
+	        validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="lis_prec_id"  
             baseTableName="list_prod_and_prec_prod"  
@@ -171,23 +171,23 @@
             referencedTableName="lista_precios"   
             validate="true"/>
             
-            <addForeignKeyConstraint  baseColumnNames="prec_prod_id"  
-	            baseTableName="list_prod_and_prec_prod"  
-	            constraintName="fk_lis_prod_prec_precio_producto"
-	            onDelete="CASCADE"  
-	            onUpdate="RESTRICT"  
-	            referencedColumnNames="precio_prod_id"   
-	            referencedTableName="precio_producto"   
-	            validate="true"/>
+       	<addForeignKeyConstraint  baseColumnNames="prec_prod_id"  
+	    	baseTableName="list_prod_and_prec_prod"  
+	        constraintName="fk_lis_prod_prec_precio_producto"
+	       	onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="precio_prod_id"   
+	        referencedTableName="precio_producto"   
+	        validate="true"/>
 	            
-	       <addForeignKeyConstraint  baseColumnNames="calle_id"  
-	            baseTableName="direccion_calles"  
-	            constraintName="fk_direccion_calles_calle"
-	            onDelete="CASCADE"  
-	            onUpdate="RESTRICT"  
-	            referencedColumnNames="calle_id"   
-	            referencedTableName="calle"   
-	            validate="true"/>
+	   <addForeignKeyConstraint  baseColumnNames="calle_id"  
+	        baseTableName="direccion_calles"  
+	        constraintName="fk_direccion_calles_calle"
+	        onDelete="CASCADE"  
+	        onUpdate="RESTRICT"  
+	        referencedColumnNames="calle_id"   
+	        referencedTableName="calle"   
+	        validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="persona_id"  
             baseTableName="persona_direcciones"  
