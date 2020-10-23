@@ -77,8 +77,5 @@ public class ListaPreciosController {
 		HttpHeaders headers = new HttpHeaders();
 		List<Producto> productosResult = this.listaPreciosService.selectNuevoProducto();
 		return new ResponseEntity<List<Producto>>(productosResult, headers, HttpStatus.OK);
-		
 	}
-	
-	
 }
