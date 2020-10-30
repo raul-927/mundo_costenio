@@ -1,10 +1,12 @@
 package co.com.mundocostenio.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,9 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true, mode= AdviceMode.PROXY)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-
-	//@Autowired
-	//private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Value("${spring.queries.users-query}")
 	private String usersQuery;
@@ -36,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	  auth.inMemoryAuthentication()
 	    .withUser("user")
 	    .password(passwordEncoder().encode("user"))
-	    .roles("ADMIN");
+	    .roles("ADMIN","USER");
 	}
 	
 	/*

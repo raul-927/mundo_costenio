@@ -24,11 +24,12 @@ import org.springframework.security.acls.model.PermissionGrantingStrategy;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.context.annotation.AdviceMode;
 
 import co.com.mundocostenio.domain.Post;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true, mode= AdviceMode.PROXY)
 public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfiguration{
 	
 	private static final String className 	="com.mysql.cj.jdbc.Driver";
