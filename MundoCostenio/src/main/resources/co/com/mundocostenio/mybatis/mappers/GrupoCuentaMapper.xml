@@ -7,5 +7,6 @@
   		<id		property = "grupoCuentaId" 	column = "grupo_cuenta_id"/>
  		<result property ="tipoGrupoCuenta" column ="tipo_grupo_cuenta"/>
  		<result property ="grupoCuentaDesc" column ="grupo_cuenta_desc"/>
+ 		<result property ="objectIdIdentity" column ="object_id_identity"/>
   	</resultMap>
 </mapper>

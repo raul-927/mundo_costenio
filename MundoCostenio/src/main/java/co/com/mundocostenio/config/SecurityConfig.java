@@ -2,8 +2,12 @@ package co.com.mundocostenio.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,10 +17,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true, mode= AdviceMode.PROXY)
+@Import(value = {AclMethodSecurityConfiguration.class})
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Value("${spring.queries.users-query}")
@@ -24,6 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
+	
+	@Autowired
+	private AuthenticationEntryPoint authEntryPoint;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -33,10 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	  auth.inMemoryAuthentication()
-	    .withUser("user")
-	    .password(passwordEncoder().encode("user"))
-	    .roles("ADMIN","USER");
+	  	.withUser("car").password(passwordEncoder().encode("scarvarez")).roles("USER")
+	    .and()
+	    .withUser("mon").password(passwordEncoder().encode("scarvarez")).roles("ADMIN")
+	    .and()
+	    .withUser("bea").password(passwordEncoder().encode("scarvarez")).roles("USER", "ADMIN");
 	}
+	
+	
 	
 	/*
 	@Override
@@ -89,15 +101,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
     public void configure(HttpSecurity http) throws Exception {
+		http .httpBasic()
+        .authenticationEntryPoint(authEntryPoint);
        http
        	.csrf().disable()
        		.authorizeRequests()
-		        .antMatchers("/").permitAll()
 		        .antMatchers(HttpMethod.POST,"/listaPreciosSearch").authenticated()
 		        .antMatchers(HttpMethod.POST, "/login").permitAll()
-		        .antMatchers(HttpMethod.POST,"/newuser/*").permitAll()
-		        .antMatchers(HttpMethod.GET,"/master/*").permitAll()
-		        .antMatchers(HttpMethod.GET,"/exploreCourse").permitAll()
+		        .antMatchers(HttpMethod.GET,"/forum").authenticated()
+		        .antMatchers(HttpMethod.POST,"/forum").authenticated()
 		        .anyRequest().authenticated();
     }
 }

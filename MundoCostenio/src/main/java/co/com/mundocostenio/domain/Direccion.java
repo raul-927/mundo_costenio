@@ -13,6 +13,7 @@ public class Direccion implements Serializable{
 	private String 		geoLocalizacion;
 	private int 		nroPuerta;
 	private List<Calle> calles;
+	private Long 		objectIdIdentity;
 	
 	public Direccion() {};
 	
@@ -57,5 +58,13 @@ public class Direccion implements Serializable{
 
 	public void setCalles(List<Calle> calles) {
 		this.calles = calles;
+	}
+
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 }

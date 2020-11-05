@@ -12,6 +12,7 @@ public class Barrio implements Serializable{
 	private int 		  barrioId;
 	private String 		  nombreBarrio;
 	private Departamento  departamento;
+	private Long 		  objectIdIdentity;
 	
 	public Barrio() {};
 	
@@ -40,5 +41,13 @@ public class Barrio implements Serializable{
 
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
+	}
+
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 }

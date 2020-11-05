@@ -18,6 +18,7 @@ public class Cuenta implements Serializable{
 	private String 			cuentaHora;
 	private String			cuentaUsuario;
 	private GrupoCuenta		grupoCuenta;
+	private Long 			objectIdIdentity;
 	
 	
 	public int getCuentaId() {
@@ -62,6 +63,12 @@ public class Cuenta implements Serializable{
 	}
 	public void setTipoCuenta(TipoCuentaEnum tipoCuenta) {
 		this.tipoCuenta = tipoCuenta;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 
 }

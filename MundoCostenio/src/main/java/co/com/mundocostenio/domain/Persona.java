@@ -35,7 +35,7 @@ public class Persona implements Serializable{
 	private RolesEnum rol;
 	
 	private List<Direccion> direcciones;
-	
+	private Long objectIdIdentity;
 	
 	
 	public Persona() {};
@@ -113,6 +113,14 @@ public class Persona implements Serializable{
 	}
 	public void setDirecciones(List<Direccion> direcciones) {
 		this.direcciones = direcciones;
+	}
+
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 	
 	

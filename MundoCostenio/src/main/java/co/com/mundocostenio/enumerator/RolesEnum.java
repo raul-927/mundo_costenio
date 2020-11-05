@@ -3,10 +3,12 @@ package co.com.mundocostenio.enumerator;
 import java.io.Serializable;
 
 public enum RolesEnum implements Serializable{
-	ADMIN(1, "Administrador"),
-	USER(2, "Usuario"),
-	STAF(3, "Staf personal de trabajo"),
-	CLIENT(3, "Cliente");
+	ADMIN(1, "ROLE_ADMIN"),
+	USER(2, "ROLE_USER"),
+	STAF(3, "ROLE_STAF"),
+	CLIENT(3, "ROLE_CLIENT"),
+	GUESS(4,"ROLE_GUESS"),
+	ANONIMOUS(5,"ROLE_ANONIMOUS");
 	
 	private int rolId;
 	private String descripcion;

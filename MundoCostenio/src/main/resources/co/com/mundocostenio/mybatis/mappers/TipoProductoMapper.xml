@@ -6,6 +6,6 @@
   	
   		<id		property = "tipProdId" 		column = "tip_prod_id"/>
  		<result property ="descTipoProducto" 	column ="desc_tipo_producto"/>
-
+ 		<result property ="objectIdIdentity" column ="object_id_identity"/>
   	</resultMap>
 </mapper>

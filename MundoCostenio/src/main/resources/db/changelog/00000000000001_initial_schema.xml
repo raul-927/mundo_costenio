@@ -29,12 +29,21 @@
             <column name="uid" 						type="varchar(50)"/>
         </createTable>
         
+        <createTable tableName="post">
+            <column name="id" 	type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="content" 		type="varchar(255)"/>
+            <column name="calle_id" 	type="int"/>
+        </createTable>
+        
         <createTable tableName="barrio">
             <column name="barrio_id" 	type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="nombre_barrio" 	type="varchar(50)"/>
             <column name="departamento_id" 	type="int"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         <createTable tableName="departamento">
@@ -42,6 +51,7 @@
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="nombre_departamento" 	 type="varchar(255)"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         <createTable tableName="direccion">
@@ -51,6 +61,7 @@
             <column name="nro_puerta" type="int"/>
             <column name="geo_localizacion" type="varchar(50)"/>
             <column name="barrio_id" type="int"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         
@@ -58,8 +69,9 @@
             <column name="calle_id" 	type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="tipo_calle" type="ENUM('CALLE','CARRERA','DIAGONAL','CIRCUNVALAR','AVENIDA','VIA','TRANSVERSAL','AVENIDA_CARRERA','AVENIDA_CALLE')"/>
+            <column name="tipo_calle" type="ENUM('C','K','DG','CI','AV','V','TR','AK','AC')"/>
             <column name="nombre_calle" type="varchar(50)"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         <createTable tableName="direccion_calles">
@@ -76,6 +88,7 @@
             </column>
             <column name="fecha_ini"	type="date"/>
             <column name="fecha_fin"	type="date"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         <createTable tableName="lista_precios">
@@ -84,6 +97,7 @@
             </column>
             <column name="fecha_vig_id"  		   type="int"/>
             <column name="descripcion_lista" 	   type="varchar(50)"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         <createTable tableName="list_prod_and_prec_prod">
@@ -102,6 +116,7 @@
             <column name="apellido" type="varchar(50)"/>
             <column name="cedula"	type="int"/>
             <column name="rol"	type="ENUM('ADMIN','USER','STAF','CLIENT')"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         <createTable tableName="persona_direcciones">
@@ -127,6 +142,7 @@
             <column name="tipo_prod_id" 	type="int"/>
             <column name="nombre"			type="varchar(50)"/>
              <column name="impuesto_id" 	type="int"/>
+             <column name="object_id_identity" type="bigint"/>
         </createTable>
         
         <createTable tableName="tipo_producto">
@@ -134,6 +150,7 @@
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="desc_tipo_producto" 	type="varchar(50)"/>
+            <column name="object_id_identity" type="bigint"/>
         </createTable>
 
          <addForeignKeyConstraint  baseColumnNames="departamento_id"  

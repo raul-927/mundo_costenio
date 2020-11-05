@@ -11,12 +11,21 @@
     <changeSet id="00000000000002" author="rhernandez">
     
         <createTable tableName="acl_sid">
-            <column name="id" 			type="bigint" autoIncrement="false">
+            <column name="id" 			type="bigint" autoIncrement="true">
+            
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="principal" 		type="boolean"/>
             <column name="sid" 				type="varchar(10)"/>
         </createTable>
+        
+        <!-- <addAutoIncrement
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_sid"/> -->  
         
          <addUniqueConstraint 
             columnNames="sid, principal"  
@@ -27,11 +36,19 @@
             validate="true"/>
             
         <createTable tableName="acl_class">
-            <column name="id" 	type="bigint" autoIncrement="false">
+            <column name="id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="class" 	   type="varchar(100)"/>
         </createTable>
+        
+         <!-- <addAutoIncrement 
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_class"/> -->
         
         <addUniqueConstraint 
             columnNames="class"  
@@ -42,7 +59,7 @@
             validate="true"/>
         
         <createTable tableName="acl_object_identity">
-            <column name="id" 	type="bigint" autoIncrement="false">
+            <column name="id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="object_id_class" 	 	type="bigint"/>
@@ -51,6 +68,14 @@
             <column name="owner_sid"			type="bigint"/>
             <column name="entries_inheriting"	type="boolean"/>
         </createTable>
+        
+        <!-- <addAutoIncrement 
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_object_identity"/> -->
             
         <addUniqueConstraint 
             columnNames="object_id_class, object_id_identity"  
@@ -88,7 +113,7 @@
 	        validate="true"/>
 	        
 	  <createTable tableName="acl_entry">
-      	<column name="id" 			type="bigint" autoIncrement="false">
+      	<column name="id" 			type="bigint" autoIncrement="true">
         	<constraints primaryKey="true" 	nullable="false"/>
        	</column>
         <column name="acl_object_identity"	type="bigint"/>
@@ -100,6 +125,14 @@
          <column name="audit_success" 			type="boolean"/>
          <column name="audit_failure" 			type="boolean"/>
       </createTable>
+      
+       <!-- <addAutoIncrement 
+			columnDataType="bigint"
+			columnName="id" 
+			defaultOnNull="false"
+			incrementBy="1"  
+			startWith="100"  
+			tableName="acl_entry"/> -->
         
     <addUniqueConstraint 
     	columnNames="acl_object_identity,ace_order"  

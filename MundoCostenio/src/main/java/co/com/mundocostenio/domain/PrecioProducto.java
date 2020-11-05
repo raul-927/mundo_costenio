@@ -9,9 +9,10 @@ public class PrecioProducto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int precioProdId;
+	private int 	 precioProdId;
 	private Producto producto;
-	private int monto;
+	private int 	 monto;
+	private Long 	 objectIdIdentity;
 	
 	
 	public Producto getProducto() {
@@ -31,6 +32,12 @@ public class PrecioProducto implements Serializable{
 	}
 	public void setPrecioProdId(int precioProdId) {
 		this.precioProdId = precioProdId;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 	
 	

@@ -13,6 +13,7 @@ public class Calle implements Serializable{
 	private int calleId;
 	private TipoCalleEnum tipoCalle;
 	private String nombreCalle;
+	private Long objectIdIdentity;
 	
 	
 	
@@ -33,6 +34,12 @@ public class Calle implements Serializable{
 	}
 	public void setNombreCalle(String nombreCalle) {
 		this.nombreCalle = nombreCalle;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 	
 }

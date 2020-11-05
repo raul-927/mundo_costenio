@@ -12,16 +12,16 @@ public class Producto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int prodId;
+	private int 			prodId;
 	
 	@NotNull(message = ProductoErrorMessage.NOMBRE_NULL)
 	@Size(min = 3, max = 15, message = ProductoErrorMessage.NOMBRE_LENGTH)
-	private String nombre;
+	private String 			nombre;
 	
 	@NotNull(message = ProductoErrorMessage.TIPO_PRODUCTO_NULL)
-	private TipoProducto tipoProducto;
-	
-	private Impuesto impuesto;
+	private TipoProducto 	tipoProducto;
+	private Impuesto 		impuesto;
+	private Long			objectIdIdentity;
 	
 	public TipoProducto getTipoProducto() {
 		return tipoProducto;
@@ -46,6 +46,12 @@ public class Producto implements Serializable{
 	}
 	public void setImpuesto(Impuesto impuesto) {
 		this.impuesto = impuesto;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 	
 

@@ -4,12 +4,13 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.CuentaMapper">
 	<resultMap type="co.com.mundocostenio.domain.Cuenta" id="CuentaResult">
   	
-  		<id		property = "cuentaId" 	  column = "cuenta_id"/>
- 		<result property ="cuentaDesc" 	  column ="cuenta_desc"/>
- 		<result property ="tipoCuenta" 	  column ="tipo_cuenta"/>
- 		<result property ="cuentaFecha"   column ="cuenta_fecha"/>
- 		<result property ="cuentaHora" 	  column ="cuenta_hora"/>
- 		<result property ="cuentaUsuario" column ="cuenta_usuario"/>
+  		<id		property = "cuentaId" 	  	 column = "cuenta_id"/>
+ 		<result property ="cuentaDesc" 	  	 column ="cuenta_desc"/>
+ 		<result property ="tipoCuenta" 	  	 column ="tipo_cuenta"/>
+ 		<result property ="cuentaFecha"   	 column ="cuenta_fecha"/>
+ 		<result property ="cuentaHora" 	  	 column ="cuenta_hora"/>
+ 		<result property ="cuentaUsuario" 	 column ="cuenta_usuario"/>
+ 		<result property ="objectIdIdentity" column ="object_id_identity"/>
  		
  		<association property ="grupoCuenta" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.GrupoCuentaMapper.GrupoCuentaResult"/>

@@ -10,7 +10,7 @@ public class TipoProductoSqlProvider {
 		return new SQL() {{
 			if(tipoProducto.getDescTipoProducto()!= null && tipoProducto.getDescTipoProducto() !="") {
 				INSERT_INTO("tipo_producto");
-				VALUES("descripcion","'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
+				VALUES("desc_tipo_producto","'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
 			}
 			
 		}}.toString();
@@ -20,7 +20,7 @@ public class TipoProductoSqlProvider {
 		return new SQL() {{
 			if(tipoProducto.getDescTipoProducto()!= null && tipoProducto.getDescTipoProducto() !="") {
 				UPDATE("tipo_producto");
-				SET("descripcion","'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
+				SET("desc_tipo_producto","'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
 				WHERE("tip_prod_id = " + String.valueOf(tipoProducto.getTipProdId()));
 			}
 			
@@ -39,12 +39,12 @@ public class TipoProductoSqlProvider {
 	
 	public String selectTipoProducto(TipoProducto tipoProducto) {
 		return new SQL() {{
-			SELECT("tip_prod_id, descripcion");
+			SELECT("tip_prod_id, desc_tipo_producto");
 			FROM("tipo_producto");
 			if(tipoProducto.getTipProdId() > 0) {
 				WHERE("tip_prod_id = " + String.valueOf(tipoProducto.getTipProdId()));
 			}else if(tipoProducto.getDescTipoProducto()!=null && tipoProducto.getDescTipoProducto()!="") {
-				WHERE("descripcion = " + "'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
+				WHERE("desc_tipo_producto = " + "'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
 			}
 		}}.toString();
 	}

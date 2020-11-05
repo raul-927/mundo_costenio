@@ -14,6 +14,7 @@ public class GrupoCuenta implements Serializable{
 	private int 				grupoCuentaId;
 	private	TipoGrupoCuentaEnum tipoGrupoCuenta;
 	private String 				grupoCuentaDesc;
+	private Long 				objectIdIdentity;
 	
 	
 	public int getGrupoCuentaId() {
@@ -34,6 +35,12 @@ public class GrupoCuenta implements Serializable{
 	}
 	public void setTipoGrupoCuenta(TipoGrupoCuentaEnum tipoGrupoCuenta) {
 		this.tipoGrupoCuenta = tipoGrupoCuenta;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 
 }

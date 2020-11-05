@@ -6,6 +6,7 @@
   	
   		<id		property = "precioProdId" 	column = "precio_prod_id"/>
  		<result property ="monto" 	column ="monto"/>
+ 		<result property ="objectIdIdentity" column ="object_id_identity"/>
  		<association property="producto" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.ProductoMapper.ProductoResult"/>
   	</resultMap>

@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Ubicacion implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int ubicacionId;
-	private int nroPuerta;
-	private String geoLocalizacion;
+	private int 	ubicacionId;
+	private int 	nroPuerta;
+	private String 	geoLocalizacion;
+	private Long 	objectIdIdentity;
 	
 	public int getUbicacionId() {
 		return ubicacionId;
@@ -27,5 +28,11 @@ public class Ubicacion implements Serializable{
 	}
 	public void setGeoLocalizacion(String geoLocalizacion) {
 		this.geoLocalizacion = geoLocalizacion;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 }

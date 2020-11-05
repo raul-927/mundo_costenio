@@ -6,6 +6,6 @@
   	
   		<id	property = "departamentoId" 		column = "departamento_id"/>
  		<result property ="nombreDepartamento"  column ="nombre_departamento"/>
- 		
+ 		<result property ="objectIdIdentity" 	column ="object_id_identity"/>
   	</resultMap>
 </mapper>

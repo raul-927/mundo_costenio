@@ -1,13 +1,28 @@
 package co.com.mundocostenio.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.ehcache.EhCacheFactoryBean;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
+import org.springframework.security.access.expression.method.ExpressionBasedPreInvocationAdvice;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
+import org.springframework.security.access.intercept.RunAsManager;
+import org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor;
+import org.springframework.security.access.intercept.aspectj.AspectJMethodSecurityInterceptor;
+import org.springframework.security.access.method.MethodSecurityMetadataSource;
+import org.springframework.security.access.prepost.PreInvocationAuthorizationAdviceVoter;
+import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.acls.AclEntryVoter;
 import org.springframework.security.acls.AclPermissionEvaluator;
 import org.springframework.security.acls.domain.AclAuthorizationStrategy;
@@ -23,12 +38,15 @@ import org.springframework.security.acls.model.Permission;
 import org.springframework.security.acls.model.PermissionGrantingStrategy;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.context.annotation.AdviceMode;
 
 import co.com.mundocostenio.domain.Post;
 
 @Configuration
+@EnableTransactionManagement
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true, mode= AdviceMode.PROXY)
 public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfiguration{
 	
@@ -38,8 +56,16 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	private static final String passWord 	="";
 	
 	@Autowired
-    MethodSecurityExpressionHandler 
-      defaultMethodSecurityExpressionHandler;
+    MethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler;
+
+	/*
+	@Override 
+	protected AccessDecisionManager accessDecisionManager() {
+		AffirmativeBased manager = customAccessDecisionManager(); 
+		return manager; 
+	}
+	*/
+		 
 	
 	@Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
@@ -68,14 +94,18 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	}
 	
 	@Bean 
-	public JdbcMutableAclService aclService() { 
-	    return new JdbcMutableAclService(
-	      dataSource2(), lookupStrategy(), aclCache()); 
+	public JdbcMutableAclService aclService() {
+		JdbcMutableAclService jdbcMutableAclService = new JdbcMutableAclService(dataSource2(), lookupStrategy(), aclCache());
+		jdbcMutableAclService.setClassIdentityQuery("SELECT @@IDENTITY");
+		  jdbcMutableAclService.setSidIdentityQuery("SELECT @@IDENTITY");	
+	    return jdbcMutableAclService;
 	}
 
 	@Bean
 	public AclAuthorizationStrategy aclAuthorizationStrategy() {
 	    return new AclAuthorizationStrategyImpl(
+	      new SimpleGrantedAuthority("ROLE_ADMINISTRATOR"), 
+	      new SimpleGrantedAuthority("ROLE_ADMINISTRATOR"), 
 	      new SimpleGrantedAuthority("ROLE_ADMINISTRATOR"));
 	}
 	
@@ -121,7 +151,7 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	public AclEntryVoter aclDeletePostVoter() {
 		Permission[] requirePermission = {BasePermission.DELETE};
 		AclEntryVoter aclEntryVoter = new AclEntryVoter(aclService(),"ACL_POST_DELETE",requirePermission);
-		aclEntryVoter.setProcessDomainObjectClass(Post.class);
+		aclEntryVoter.setProcessDomainObjectClass(Object.class);
 		return aclEntryVoter;
 	}
 	
@@ -129,7 +159,7 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	public AclEntryVoter aclUpdatePostVoter() {
 		Permission[] requirePermission = {BasePermission.ADMINISTRATION};
 		AclEntryVoter aclEntryVoter = new AclEntryVoter(aclService(),"ACL_POST_UPDATE",requirePermission);
-		aclEntryVoter.setProcessDomainObjectClass(Post.class);
+		aclEntryVoter.setProcessDomainObjectClass(Object.class);
 		return aclEntryVoter;
 	}
 	
@@ -137,7 +167,41 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	public AclEntryVoter aclReadPostVoter() {
 		Permission[] requirePermission = {BasePermission.READ};
 		AclEntryVoter aclEntryVoter = new AclEntryVoter(aclService(),"ACL_POST_READ",requirePermission);
-		aclEntryVoter.setProcessDomainObjectClass(Post.class);
+		aclEntryVoter.setProcessDomainObjectClass(Object.class);
 		return aclEntryVoter;
+	}
+	
+	@Bean
+	public AffirmativeBased customAccessDecisionManager() {
+		List<AccessDecisionVoter<?>> decisionVoters = new ArrayList<AccessDecisionVoter<?>>();
+		decisionVoters.add(aclDeletePostVoter());
+		decisionVoters.add(aclUpdatePostVoter());
+		decisionVoters.add(aclReadPostVoter());
+		decisionVoters.add(preInvocationAuthorizationAdviceVoter());
+		AffirmativeBased affirmativeBased = new AffirmativeBased(decisionVoters);
+		return affirmativeBased;
+	}
+	
+	@Bean
+	public PreInvocationAuthorizationAdviceVoter preInvocationAuthorizationAdviceVoter() {
+		PreInvocationAuthorizationAdviceVoter preInvocationAuthorizationAdviceVoter = new PreInvocationAuthorizationAdviceVoter(new ExpressionBasedPreInvocationAdvice());
+		return preInvocationAuthorizationAdviceVoter;
+	}
+	
+	@Bean
+	public AclPermissionEvaluator customPermissionEvaluator() {
+		return new AclPermissionEvaluator(aclService());
+	}
+	
+	@Bean
+	public MethodSecurityExpressionHandler customExpressionHandler() {
+		DefaultMethodSecurityExpressionHandler handler = new DefaultMethodSecurityExpressionHandler();
+		handler.setPermissionEvaluator(customPermissionEvaluator());
+		return handler;
+	}
+	
+	@Bean
+	public DataSourceTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(dataSource2());
 	}
 }

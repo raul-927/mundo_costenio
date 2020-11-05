@@ -8,8 +8,9 @@ public class Departamento implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int departamentoId;
-	private String nombreDepartamento;
+	private int 	departamentoId;
+	private String 	nombreDepartamento;
+	private Long 	objectIdIdentity;
 	
 	public Departamento() {};
 	
@@ -31,5 +32,13 @@ public class Departamento implements Serializable{
 	}
 	public void setNombreDepartamento(String nombreDepartamento) {
 		this.nombreDepartamento = nombreDepartamento;
+	}
+
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 }

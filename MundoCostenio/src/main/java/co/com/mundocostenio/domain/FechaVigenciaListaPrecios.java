@@ -20,6 +20,7 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate  fechaFin;
 	
+	private Long objectIdIdentity;
 	
 	public LocalDate  getFechaIni() {
 		return fechaIni;
@@ -38,5 +39,11 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	}
 	public void setFechaVigenciaId(int fechaVigenciaId) {
 		this.fechaVigenciaId = fechaVigenciaId;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 }

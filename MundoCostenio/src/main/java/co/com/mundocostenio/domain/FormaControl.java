@@ -14,6 +14,7 @@ public class FormaControl implements Serializable {
 	private int id;
 	private TipoControlEnum tipoControl;
 	private int cantidad;
+	private Long objectIdIdentity;
 	
 	
 	public int getId() {
@@ -33,6 +34,12 @@ public class FormaControl implements Serializable {
 	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+	public Long getObjectIdIdentity() {
+		return objectIdIdentity;
+	}
+	public void setObjectIdIdentity(Long objectIdIdentity) {
+		this.objectIdIdentity = objectIdIdentity;
 	}
 	
 
