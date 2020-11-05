@@ -25,6 +25,7 @@ import co.com.mundocostenio.domain.ListaPrecios;
 import co.com.mundocostenio.domain.LoggedUser;
 import co.com.mundocostenio.domain.Post;
 import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.enumerator.RolesEnum;
 import co.com.mundocostenio.mybatis.mappers.FechaVigenciaListaPreciosMapper;
 import co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper;
 import co.com.mundocostenio.mybatis.mappers.PrecioProductoMapper;
@@ -46,16 +47,16 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 
 	@Override
 	@Transactional
+	@PreAuthorize("hasRole('ROLE_SALES')")
 	public ListaPrecios insert(ListaPrecios listaPrecios) {
-		
 		Integer id = Math.abs(listaPrecios.hashCode());
 		System.out.println("id: " + id);
 		ObjectIdentity objectIdentity = new ObjectIdentityImpl(ListaPrecios.class, id);
 		MutableAcl mutableAcl = mutableAclService.createAcl(objectIdentity);
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
-        mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid("ROLE_ADMIN"), true);
-        mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid("ROLE_USER"), true);
+        mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
+        mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.SALES.getDescripcion()), true);
 		mutableAclService.updateAcl(mutableAcl);
 		listaPrecios.setListaPrecioId(id);
 		this.fechaVigenciaMapper.insert(listaPrecios.getFechaVigencia());
@@ -64,9 +65,7 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 		this.precioProductoMapper.insertListaAndPrecioProducto(listaPrecios.getListaPrecioId(), listaPrecios.getPrecioProductoList());
 		return listaPrecios;
 	}
-	//@PostFilter("hasPermission(filterObject, 'READ')")
-	//@PreAuthorize("hasRole('ROLE_ADMIN')")
-	//@Secured("hasRole('ROLE_ADMIN')")
+	@PostFilter("hasPermission(filterObject, 'READ')")
 	@Override
 	public List<ListaPrecios> selectListaPrecios(ListaPrecios listaPrecios) {
 		Authentication userDetails = (Authentication) SecurityContextHolder.getContext().getAuthentication();
@@ -78,6 +77,7 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 	}
 
 	@Override
+	@PostFilter("hasPermission(filterObject, 'READ')")
 	public ListaPrecios selectActualListaPrecios() {
 		return this.listaPreciosMapper.selectActualListaPrecios();
 		
