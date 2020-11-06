@@ -88,7 +88,6 @@ public class AccesControlListService<T> {
 	}
 	
 	public void delete(T ob) {
-		
 		ObjectIdentity oid = new ObjectIdentityImpl(Post.class, ((Post) ob).getId());
 		mutableAclService.deleteAcl(oid, true);
 	}
