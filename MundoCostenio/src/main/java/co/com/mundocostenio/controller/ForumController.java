@@ -46,5 +46,16 @@ public class ForumController {
 		
 		return new ResponseEntity<List<Post>>(postList, header, HttpStatus.OK);
 	}
+	
+	@RequestMapping(
+			value ="/forum", method =RequestMethod.DELETE,
+			consumes ={MediaType.APPLICATION_JSON_VALUE},
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?> deletePost(@RequestBody Post post){
+		HttpHeaders header = new HttpHeaders();
+		forumService.deletePost(post);
+		return new ResponseEntity<Post>(post, header, HttpStatus.OK);
+	}
 
 }

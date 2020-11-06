@@ -16,32 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 import co.com.mundocostenio.domain.Post;
 import co.com.mundocostenio.domain.TipoProducto;
 import co.com.mundocostenio.mybatis.mappers.TipoProductoMapper;
+import co.com.mundocostenio.security.acl.AccesControlListService;
 
 
 @Service("tipoProductoService")
 public class TipoProductoServiceImpl implements TipoProductoService {
 	
 	@Autowired
-	private MutableAclService mutableAclService;
+	private TipoProductoMapper tipoProductoMapper;
 	
 	@Autowired
-	private TipoProductoMapper tipoProductoMapper;
+	private AccesControlListService<TipoProducto> accesControlListService;
 
 	@Override
 	@Transactional
 	public TipoProducto insert(TipoProducto tipoProducto) {
-		Integer id = Math.abs(tipoProducto.hashCode());
-		System.out.println("id: " + id);
-		ObjectIdentity objectIdentity = new ObjectIdentityImpl(TipoProducto.class, id);
-		MutableAcl mutableAcl = mutableAclService.createAcl(objectIdentity);
-        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-        mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
-        mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid("ROLE_ADMIN"), true);
-        mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid("ROLE_USER"), true);
-		mutableAclService.updateAcl(mutableAcl);
+		Integer id = accesControlListService.insert(tipoProducto);
 		tipoProducto.setTipProdId(id);
-		
 		this.tipoProductoMapper.insert(tipoProducto);
 		return tipoProducto;
 	}

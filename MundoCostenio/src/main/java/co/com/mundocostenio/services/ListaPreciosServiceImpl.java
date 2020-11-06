@@ -84,9 +84,9 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 	}
 
 	@Override
+	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Producto> selectNuevoProducto() {
 		return this.listaPreciosMapper.selectNuevoProducto();
-		
 	}
 
 }

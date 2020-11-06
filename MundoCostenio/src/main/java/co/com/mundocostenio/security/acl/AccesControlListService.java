@@ -1,0 +1,100 @@
+package co.com.mundocostenio.security.acl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.domain.GrantedAuthoritySid;
+import org.springframework.security.acls.domain.ObjectIdentityImpl;
+import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.acls.model.MutableAcl;
+import org.springframework.security.acls.model.MutableAclService;
+import org.springframework.security.acls.model.ObjectIdentity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
+
+import co.com.mundocostenio.domain.Cuenta;
+import co.com.mundocostenio.domain.GrupoCuenta;
+import co.com.mundocostenio.domain.Impuesto;
+import co.com.mundocostenio.domain.ListaPrecios;
+import co.com.mundocostenio.domain.Post;
+import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.domain.TipoProducto;
+import co.com.mundocostenio.enumerator.RolesEnum;
+
+@Component
+public class AccesControlListService<T> {
+	
+	@Autowired
+	private MutableAclService mutableAclService;
+	
+	public int insert(T object) {
+		Integer id = Math.abs(object.hashCode());
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		ObjectIdentity objectIdentity  = null;
+		MutableAcl mutableAcl = null;
+		if(object instanceof Post) {
+			objectIdentity = new ObjectIdentityImpl(Post.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
+            mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+            mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+            mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.USER.getDescripcion()), true);
+		}else if(object instanceof ListaPrecios) {
+			objectIdentity = new ObjectIdentityImpl(ListaPrecios.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.SALES.getDescripcion()), true);
+		}else if(object instanceof Impuesto) {
+			objectIdentity = new ObjectIdentityImpl(Impuesto.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
+		}else if(object instanceof Cuenta) {
+			objectIdentity = new ObjectIdentityImpl(Cuenta.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
+		}else if(object instanceof GrupoCuenta) {
+			objectIdentity = new ObjectIdentityImpl(GrupoCuenta.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
+		}else if(object instanceof Producto) {
+			objectIdentity = new ObjectIdentityImpl(Producto.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
+		}else if(object instanceof TipoProducto) {
+			objectIdentity = new ObjectIdentityImpl(TipoProducto.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
+		}
+		
+		mutableAclService.updateAcl(mutableAcl);
+		return id;
+	}
+	
+	public void delete(T ob) {
+		
+		ObjectIdentity oid = new ObjectIdentityImpl(Post.class, ((Post) ob).getId());
+		mutableAclService.deleteAcl(oid, true);
+	}
+	
+	public void setMutableAclService(MutableAclService mutableAclService) {
+		this.mutableAclService = mutableAclService;
+	}
+
+}

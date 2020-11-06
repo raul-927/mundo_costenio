@@ -61,7 +61,8 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	/*
 	@Override 
 	protected AccessDecisionManager accessDecisionManager() {
-		AffirmativeBased manager = customAccessDecisionManager(); 
+		AffirmativeBased manager = customAccessDecisionManagcustomAccessDecisionManager
+		er(); 
 		return manager; 
 	}
 	*/
@@ -146,7 +147,7 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	      new ConsoleAuditLogger()
 	    ); 
 	}
-	
+	/*
 	@Bean
 	public AclEntryVoter aclDeletePostVoter() {
 		Permission[] requirePermission = {BasePermission.DELETE};
@@ -180,7 +181,7 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 		decisionVoters.add(preInvocationAuthorizationAdviceVoter());
 		AffirmativeBased affirmativeBased = new AffirmativeBased(decisionVoters);
 		return affirmativeBased;
-	}
+	}*/
 	
 	@Bean
 	public PreInvocationAuthorizationAdviceVoter preInvocationAuthorizationAdviceVoter() {
