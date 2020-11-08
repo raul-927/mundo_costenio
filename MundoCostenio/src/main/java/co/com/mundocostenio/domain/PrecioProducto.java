@@ -1,6 +1,7 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PrecioProducto implements Serializable{
@@ -9,9 +10,9 @@ public class PrecioProducto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int 	 precioProdId;
+	private Integer	 precioProdId;
 	private Producto producto;
-	private int 	 monto;
+	private Integer 	 monto;
 	private Long 	 objectIdIdentity;
 	
 	
@@ -21,16 +22,16 @@ public class PrecioProducto implements Serializable{
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-	public int getMonto() {
+	public Integer getMonto() {
 		return monto;
 	}
-	public void setMonto(int monto) {
+	public void setMonto(Integer monto) {
 		this.monto = monto;
 	}
-	public int getPrecioProdId() {
+	public Integer getPrecioProdId() {
 		return precioProdId;
 	}
-	public void setPrecioProdId(int precioProdId) {
+	public void setPrecioProdId(Integer precioProdId) {
 		this.precioProdId = precioProdId;
 	}
 	public Long getObjectIdIdentity() {
@@ -40,5 +41,15 @@ public class PrecioProducto implements Serializable{
 		this.objectIdIdentity = objectIdIdentity;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((precioProdId == null) ? 0 : precioProdId.hashCode());
+		result += prime * result + ((producto == null) ? 0 : producto.hashCode());
+		result += prime * result + ((monto == null) ? 0 : monto.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
+	}
 }

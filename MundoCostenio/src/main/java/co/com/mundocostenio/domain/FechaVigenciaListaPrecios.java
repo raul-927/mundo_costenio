@@ -2,6 +2,7 @@ package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -12,7 +13,7 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int fechaVigenciaId;
+	private Integer fechaVigenciaId;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate  fechaIni;
@@ -34,10 +35,10 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	public void setFechaFin(LocalDate  fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-	public int getFechaVigenciaId() {
+	public Integer getFechaVigenciaId() {
 		return fechaVigenciaId;
 	}
-	public void setFechaVigenciaId(int fechaVigenciaId) {
+	public void setFechaVigenciaId(Integer fechaVigenciaId) {
 		this.fechaVigenciaId = fechaVigenciaId;
 	}
 	public Long getObjectIdIdentity() {
@@ -45,5 +46,17 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	}
 	public void setObjectIdIdentity(Long objectIdIdentity) {
 		this.objectIdIdentity = objectIdIdentity;
+	}
+	
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fechaVigenciaId == null) ? 0 : fechaVigenciaId.hashCode());
+		result += prime * result + ((fechaIni == null) ? 0 : fechaIni.hashCode());
+		result += prime * result + ((fechaFin == null) ? 0 : fechaFin.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
 	}
 }

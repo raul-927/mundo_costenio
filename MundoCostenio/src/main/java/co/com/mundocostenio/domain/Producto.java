@@ -1,6 +1,7 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +13,7 @@ public class Producto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int 			prodId;
+	private Integer 		prodId;
 	
 	@NotNull(message = ProductoErrorMessage.NOMBRE_NULL)
 	@Size(min = 3, max = 15, message = ProductoErrorMessage.NOMBRE_LENGTH)
@@ -35,10 +36,10 @@ public class Producto implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getProdId() {
+	public Integer getProdId() {
 		return prodId;
 	}
-	public void setProdId(int prodId) {
+	public void setProdId(Integer prodId) {
 		this.prodId = prodId;
 	}
 	public Impuesto getImpuesto() {
@@ -54,5 +55,16 @@ public class Producto implements Serializable{
 		this.objectIdIdentity = objectIdIdentity;
 	}
 	
-
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
+		result += prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result += prime * result + ((tipoProducto == null) ? 0 : tipoProducto.hashCode());
+		result += prime * result + ((impuesto == null) ? 0 : impuesto.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
+	}
 }

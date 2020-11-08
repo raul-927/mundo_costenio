@@ -69,8 +69,12 @@ public class Impuesto implements Serializable{
 		LocalDateTime localDateTime = LocalDateTime.now();
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((impuestoDesc == null) ? 0 : impuestoDesc.hashCode());
-		result += prime * result + ((impuestoId == null) ? 0 : impuestoId.hashCode());
+		result =  prime * result + ((impuestoId == null) ? 0 : impuestoId.hashCode());
+		result += prime * result + ((impuestoDesc == null) ? 0 : impuestoDesc.hashCode());
+		result += prime * result + ((impuestoDescAbrv == null) ? 0 : impuestoDescAbrv.hashCode());
+		result += prime * result + ((impuestoValor == null) ? 0 : impuestoValor.hashCode());
+		result += prime * result + ((tipoImpuesto == null) ? 0 : tipoImpuesto.hashCode());
+		result += prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
 		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
 		return result;
 	}
