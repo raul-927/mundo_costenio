@@ -29,6 +29,7 @@ import co.com.mundocostenio.enumerator.RolesEnum;
 import co.com.mundocostenio.mybatis.mappers.FechaVigenciaListaPreciosMapper;
 import co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper;
 import co.com.mundocostenio.mybatis.mappers.PrecioProductoMapper;
+import co.com.mundocostenio.security.acl.AccesControlListService;
 
 @Service("listaPreciosService")
 public class ListaPreciosServiceImpl implements ListaPreciosService {
@@ -43,21 +44,13 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 	private FechaVigenciaListaPreciosMapper fechaVigenciaMapper;
 	
 	@Autowired
-	private MutableAclService mutableAclService;
+	private AccesControlListService<ListaPrecios> accesControlListService;
 
 	@Override
 	@Transactional
 	@PreAuthorize("hasRole('ROLE_SALES')")
 	public ListaPrecios insert(ListaPrecios listaPrecios) {
-		Integer id = Math.abs(listaPrecios.hashCode());
-		System.out.println("id: " + id);
-		ObjectIdentity objectIdentity = new ObjectIdentityImpl(ListaPrecios.class, id);
-		MutableAcl mutableAcl = mutableAclService.createAcl(objectIdentity);
-        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        mutableAcl.insertAce(0, BasePermission.ADMINISTRATION, new PrincipalSid(user.getUsername()), true);
-        mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
-        mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.SALES.getDescripcion()), true);
-		mutableAclService.updateAcl(mutableAcl);
+		Integer id = this.accesControlListService.insert(listaPrecios);
 		listaPrecios.setListaPrecioId(id);
 		this.fechaVigenciaMapper.insert(listaPrecios.getFechaVigencia());
 		this.precioProductoMapper.insert(listaPrecios.getPrecioProductoList());
@@ -65,14 +58,9 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 		this.precioProductoMapper.insertListaAndPrecioProducto(listaPrecios.getListaPrecioId(), listaPrecios.getPrecioProductoList());
 		return listaPrecios;
 	}
-	@PostFilter("hasPermission(filterObject, 'READ')")
 	@Override
+	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<ListaPrecios> selectListaPrecios(ListaPrecios listaPrecios) {
-		Authentication userDetails = (Authentication) SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("User has authorities: " + userDetails.getAuthorities());
-		System.out.println("User has Name: " + userDetails.getName());
-		System.out.println("User has Credentials: " + userDetails.getCredentials());
-
 		return this.listaPreciosMapper.selectListaPrecios(listaPrecios);
 	}
 
@@ -88,5 +76,4 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 	public List<Producto> selectNuevoProducto() {
 		return this.listaPreciosMapper.selectNuevoProducto();
 	}
-
 }

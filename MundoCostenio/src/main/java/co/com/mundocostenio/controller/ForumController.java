@@ -35,6 +35,17 @@ public class ForumController {
 		Post postResult = forumService.createPost(post);
 		return new ResponseEntity<Post>(postResult, header, HttpStatus.OK);
 	}
+	
+	@RequestMapping(
+			value ="/forum", method =RequestMethod.PUT,
+			consumes ={MediaType.APPLICATION_JSON_VALUE},
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?> updatePost(@RequestBody Post post){
+		HttpHeaders header = new HttpHeaders();
+		Post postResult = forumService.updatePost(post);
+		return new ResponseEntity<Post>(postResult, header, HttpStatus.OK);
+	}
 
 	@RequestMapping(
 			value ="/forum", method =RequestMethod.GET,

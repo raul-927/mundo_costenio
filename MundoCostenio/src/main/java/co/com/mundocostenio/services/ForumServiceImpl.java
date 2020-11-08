@@ -3,9 +3,11 @@ package co.com.mundocostenio.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +37,7 @@ public class ForumServiceImpl implements ForumService {
 	}
 	
 	@Override
-	//@PostAuthorize("hasPermission(filterObject, 'READ')")
-	//@PreAuthorize("hasPermission(filterObject, 'READ')")
+	@PostAuthorize("hasPermission(filterObject,'READ')")
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Post> getPosts(){
 		return this.postMapper.select();
@@ -49,5 +50,17 @@ public class ForumServiceImpl implements ForumService {
 	@PreAuthorize("hasPermission(#post, 'DELETE')")
 	public void deletePost(@Param("post") Post post){
 		this.accesControlListService.delete(post);
+		this.postMapper.delete(post.getId());
+	}
+
+	@Override
+	@Transactional
+	//@PostFilter("hasPermission(filterObject, 'DELETE')")
+	@PreAuthorize("hasPermission(#post, 'WRITE')")
+	//@PreAuthorize(value ="hasRole('ACL_POST_UPDATE')")
+	public Post updatePost(@Param("post") Post post) {
+		// TODO Auto-generated method stub
+		this.postMapper.update(post);
+		return post;
 	}
 }

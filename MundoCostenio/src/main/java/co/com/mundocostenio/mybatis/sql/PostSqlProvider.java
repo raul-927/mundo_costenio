@@ -24,6 +24,19 @@ public class PostSqlProvider {
 		}}.toString();
 	}
 	
+	public String update(Post post) {
+		return new SQL() {{
+			UPDATE("post");
+			if(post.getContent()!=null && post.getContent()!="") {
+				SET("content = "+ "'".concat(post.getContent()).concat("'"));
+			}
+			if(post.getCalle()!=null && post.getCalle().getCalleId() >0) {
+				SET("calle_id = "+ String.valueOf(post.getCalle().getCalleId()));
+			}
+			WHERE("id = " + String.valueOf(post.getId()));
+		}}.toString();
+	}
+	
 	public String select() {
 		return new SQL() {{
 			SELECT("p.id, p.content");
@@ -32,6 +45,13 @@ public class PostSqlProvider {
 			FROM("calle c");
 			WHERE("p.calle_id = c.calle_id");
 			
+		}}.toString();
+	}
+	
+	public String delete(int id) {
+		return new SQL() {{
+			DELETE_FROM("post");
+			WHERE("id = " + String.valueOf(id));
 		}}.toString();
 	}
 }

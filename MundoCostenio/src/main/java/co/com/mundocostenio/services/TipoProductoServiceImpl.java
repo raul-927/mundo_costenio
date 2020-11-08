@@ -1,19 +1,11 @@
 package co.com.mundocostenio.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.acls.domain.BasePermission;
-import org.springframework.security.acls.domain.GrantedAuthoritySid;
-import org.springframework.security.acls.domain.ObjectIdentityImpl;
-import org.springframework.security.acls.domain.PrincipalSid;
-import org.springframework.security.acls.model.MutableAcl;
-import org.springframework.security.acls.model.MutableAclService;
-import org.springframework.security.acls.model.ObjectIdentity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.mundocostenio.domain.Post;
 import co.com.mundocostenio.domain.TipoProducto;
 import co.com.mundocostenio.mybatis.mappers.TipoProductoMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
@@ -30,6 +22,7 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 
 	@Override
 	@Transactional
+	@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
 	public TipoProducto insert(TipoProducto tipoProducto) {
 		Integer id = accesControlListService.insert(tipoProducto);
 		tipoProducto.setTipProdId(id);
@@ -38,20 +31,24 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 	}
 
 	@Override
+	@PreAuthorize("hasPermission(#tipProdId, 'WRITE')")
 	public TipoProducto update(TipoProducto tipoProducto) {
 		this.tipoProductoMapper.update(tipoProducto);
 		return tipoProducto;
 	}
 
 	@Override
-	public int delete(int tipProdId) {
-		
+	@PreAuthorize("hasPermission(#tipProdId, 'DELETE')")
+	public int delete(@Param("tipProdId") int tipProdId) {
+		TipoProducto tipoProducto = new TipoProducto();
+		tipoProducto.setTipProdId(tipProdId);
+		this.accesControlListService.delete(tipoProducto);
 		return this.tipoProductoMapper.delete(tipProdId);
 	}
 
 	@Override
-	public TipoProducto selectTipoProducto(TipoProducto tipoProducto) {
-		
+	@PreAuthorize("hasPermission(#tipoProducto, 'READ')")
+	public TipoProducto selectTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto) {
 		return this.tipoProductoMapper.selectTipoProducto(tipoProducto);
 	}
 
