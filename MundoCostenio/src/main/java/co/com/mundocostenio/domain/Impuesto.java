@@ -2,6 +2,7 @@ package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import co.com.mundocostenio.enumerator.TipoImpuestoEnum;
 public class Impuesto implements Serializable{
@@ -11,7 +12,7 @@ public class Impuesto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int 			 impuestoId;
+	private Integer 		 impuestoId;
 	private String 			 impuestoDesc;
 	private String 			 impuestoDescAbrv;
 	private BigDecimal 		 impuestoValor;
@@ -19,10 +20,10 @@ public class Impuesto implements Serializable{
 	private Cuenta 			 cuenta;
 	private Long 			 objectIdIdentity;
 	
-	public int getImpuestoId() {
+	public Integer getImpuestoId() {
 		return impuestoId;
 	}
-	public void setImpuestoId(int impuestoId) {
+	public void setImpuestoId(Integer impuestoId) {
 		this.impuestoId = impuestoId;
 	}
 	public String getImpuestoDesc() {
@@ -63,5 +64,15 @@ public class Impuesto implements Serializable{
 		this.objectIdIdentity = objectIdIdentity;
 	}
 	
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((impuestoDesc == null) ? 0 : impuestoDesc.hashCode());
+		result += prime * result + ((impuestoId == null) ? 0 : impuestoId.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
+	}
 	
 }

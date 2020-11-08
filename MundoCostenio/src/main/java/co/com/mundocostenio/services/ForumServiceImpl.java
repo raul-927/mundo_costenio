@@ -46,7 +46,6 @@ public class ForumServiceImpl implements ForumService {
 	
 	@Override
 	@Transactional
-	//@PostFilter("hasPermission(filterObject, 'DELETE')")
 	@PreAuthorize("hasPermission(#post, 'DELETE')")
 	public void deletePost(@Param("post") Post post){
 		this.accesControlListService.delete(post);
@@ -55,9 +54,7 @@ public class ForumServiceImpl implements ForumService {
 
 	@Override
 	@Transactional
-	//@PostFilter("hasPermission(filterObject, 'DELETE')")
 	@PreAuthorize("hasPermission(#post, 'WRITE')")
-	//@PreAuthorize(value ="hasRole('ACL_POST_UPDATE')")
 	public Post updatePost(@Param("post") Post post) {
 		// TODO Auto-generated method stub
 		this.postMapper.update(post);
