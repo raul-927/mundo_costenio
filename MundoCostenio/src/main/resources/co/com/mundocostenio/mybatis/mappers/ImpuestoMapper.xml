@@ -9,7 +9,6 @@
  		<result property ="impuestoDescAbrv" column ="impuesto_desc_abrv"/>
  		<result property ="impuestoValor" 	 column ="impuesto_valor"/>
  		<result property ="tipoImpuesto" 	 column ="tipo_impuesto"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
  		
  		<association property ="cuenta" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.CuentaMapper.CuentaResult"/>

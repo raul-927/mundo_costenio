@@ -1,17 +1,16 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class Departamento implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int 	departamentoId;
+	private Integer 	departamentoId;
 	private String 	nombreDepartamento;
-	private Long 	objectIdIdentity;
-	
+
 	public Departamento() {};
 	
 	public Departamento(int departamentoId, String nombreDepartamento) {
@@ -21,10 +20,10 @@ public class Departamento implements Serializable{
 	}
 	
 	
-	public int getDepartamentoId() {
+	public Integer getDepartamentoId() {
 		return departamentoId;
 	}
-	public void setDepartamentoId(int departamentoId) {
+	public void setDepartamentoId(Integer departamentoId) {
 		this.departamentoId = departamentoId;
 	}
 	public String getNombreDepartamento() {
@@ -33,12 +32,15 @@ public class Departamento implements Serializable{
 	public void setNombreDepartamento(String nombreDepartamento) {
 		this.nombreDepartamento = nombreDepartamento;
 	}
-
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((departamentoId == null) ? 0 : departamentoId.hashCode());
+		result += prime * result + ((nombreDepartamento == null) ? 0 : nombreDepartamento.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
 	}
 
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
-	}
 }

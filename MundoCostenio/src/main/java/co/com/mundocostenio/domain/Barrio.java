@@ -1,6 +1,7 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,23 +10,22 @@ public class Barrio implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int 		  barrioId;
+	private Integer 	  barrioId;
 	private String 		  nombreBarrio;
 	private Departamento  departamento;
-	private Long 		  objectIdIdentity;
 	
 	public Barrio() {};
 	
-	public Barrio(int barrioId, String nombreBarrio, Ubicacion ubicacion) {
+	public Barrio(Integer barrioId, String nombreBarrio, Ubicacion ubicacion) {
 		this.barrioId = barrioId;
 		this.nombreBarrio = nombreBarrio;
 		
 	}
 	
-	public int getBarrioId() {
+	public Integer getBarrioId() {
 		return barrioId;
 	}
-	public void setBarrioId(int barrioId) {
+	public void setBarrioId(Integer barrioId) {
 		this.barrioId = barrioId;
 	}
 	public String getNombreBarrio() {
@@ -42,12 +42,16 @@ public class Barrio implements Serializable{
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
-
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
-	}
-
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
+	
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((barrioId == null) ? 0 : barrioId.hashCode());
+		result += prime * result + ((nombreBarrio == null) ? 0 : nombreBarrio.hashCode());
+		result += prime * result + ((departamento == null) ? 0 : departamento.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
 	}
 }

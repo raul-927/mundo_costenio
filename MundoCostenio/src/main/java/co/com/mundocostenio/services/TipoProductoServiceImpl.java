@@ -3,6 +3,7 @@ package co.com.mundocostenio.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +48,7 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 	}
 
 	@Override
-	@PreAuthorize("hasPermission(#tipoProducto, 'READ')")
+	@PreFilter("hasPermission(#tipoProducto, 'READ')")
 	public TipoProducto selectTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto) {
 		return this.tipoProductoMapper.selectTipoProducto(tipoProducto);
 	}

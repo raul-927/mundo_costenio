@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.Cuenta;
 import co.com.mundocostenio.domain.GrupoCuenta;
 import co.com.mundocostenio.domain.Impuesto;
@@ -81,6 +82,13 @@ public class AccesControlListService<T> {
 		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
+		}else if(object instanceof Barrio) {
+			objectIdentity = new ObjectIdentityImpl(Barrio.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);
 		}
 		
 		mutableAclService.updateAcl(mutableAcl);

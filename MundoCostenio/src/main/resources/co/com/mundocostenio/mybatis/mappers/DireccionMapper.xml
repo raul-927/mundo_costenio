@@ -7,7 +7,6 @@
   		<id		property = "direccionId" 	column = "direccion_id"/>
  		<result property ="nroPuerta" 		column ="nro_puerta"/>
  		<result property ="geoLocalizacion" column ="geo_localizacion"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
  		
 		<association property="barrio" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.BarrioMapper.BarrioResult"/>

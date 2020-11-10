@@ -18,7 +18,6 @@ public class Impuesto implements Serializable{
 	private BigDecimal 		 impuestoValor;
 	private TipoImpuestoEnum tipoImpuesto;
 	private Cuenta 			 cuenta;
-	private Long 			 objectIdIdentity;
 	
 	public Integer getImpuestoId() {
 		return impuestoId;
@@ -56,12 +55,6 @@ public class Impuesto implements Serializable{
 	}
 	public void setTipoImpuesto(TipoImpuestoEnum tipoImpuesto) {
 		this.tipoImpuesto = tipoImpuesto;
-	}
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
-	}
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
 	}
 	
 	@Override

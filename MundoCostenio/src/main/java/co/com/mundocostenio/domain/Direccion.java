@@ -1,6 +1,7 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Direccion implements Serializable{
@@ -8,20 +9,19 @@ public class Direccion implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int 		direccionId;
+	private Integer 	direccionId;
 	private Barrio 		barrio;
 	private String 		geoLocalizacion;
-	private int 		nroPuerta;
+	private Integer 	nroPuerta;
 	private List<Calle> calles;
-	private Long 		objectIdIdentity;
 	
 	public Direccion() {};
 	
-	public Direccion(int direccionId) {
+	public Direccion(Integer direccionId) {
 		this.direccionId = direccionId;
 	}
 	
-	public int getDireccionId() {
+	public Integer getDireccionId() {
 		return direccionId;
 	}
 	public void setDireccionId(int direccionId) {
@@ -36,11 +36,11 @@ public class Direccion implements Serializable{
 		this.barrio = barrio;
 	}
 
-	public int getNroPuerta() {
+	public Integer getNroPuerta() {
 		return nroPuerta;
 	}
 
-	public void setNroPuerta(int nroPuerta) {
+	public void setNroPuerta(Integer nroPuerta) {
 		this.nroPuerta = nroPuerta;
 	}
 
@@ -59,12 +59,19 @@ public class Direccion implements Serializable{
 	public void setCalles(List<Calle> calles) {
 		this.calles = calles;
 	}
-
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
+	
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result =  prime * result + ((direccionId == null) ? 0 : direccionId.hashCode());
+		result += prime * result + ((barrio == null) ? 0 : barrio.hashCode());
+		result += prime * result + ((geoLocalizacion == null) ? 0 : geoLocalizacion.hashCode());
+		result += prime * result + ((nroPuerta == null) ? 0 : nroPuerta.hashCode());
+		result += prime * result + ((calles == null) ? 0 : calles.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
 	}
 
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
-	}
 }

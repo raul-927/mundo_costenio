@@ -6,7 +6,6 @@
   	
   		<id		property 	= "barrioId" 	column = "barrio_id"/>
  		<result property 	="nombreBarrio" column ="nombre_barrio"/>
- 		<result property 	="objectIdIdentity" column ="object_id_identity"/>
  		
  		<association property ="departamento" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.DepartamentoMapper.DepartamentoResult"/>

@@ -7,6 +7,6 @@
   		<id	property = "id" 	column = "id"/>
  		<result property ="rolId" column ="rol_id"/>
  		<result property ="personaId" column ="persona_id"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
+
   	</resultMap>
 </mapper>

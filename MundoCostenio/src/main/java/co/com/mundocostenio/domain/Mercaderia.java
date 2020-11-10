@@ -1,6 +1,7 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class Mercaderia implements Serializable{
 
@@ -9,9 +10,8 @@ public class Mercaderia implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int 			merId;
+	private Integer 		merId;
 	private TipoMercaderia 	tipoMercaderia;
-	private Long 			objectIdIdentity;
 	
 	public int getMerId() {
 		return merId;
@@ -25,10 +25,15 @@ public class Mercaderia implements Serializable{
 	public void setTipoMercaderia(TipoMercaderia tipoMercaderia) {
 		this.tipoMercaderia = tipoMercaderia;
 	}
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
-	}
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
+	
+	@Override
+	public int hashCode() {
+		LocalDateTime localDateTime = LocalDateTime.now();
+		final int prime = 31;
+		int result = 1;
+		result =  prime * result + ((merId == null) ? 0 : merId.hashCode());
+		result += prime * result + ((tipoMercaderia == null) ? 0 : tipoMercaderia.hashCode());
+		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
+		return result;
 	}
 }

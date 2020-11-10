@@ -10,7 +10,6 @@
  		<result property ="cuentaFecha"   	 column ="cuenta_fecha"/>
  		<result property ="cuentaHora" 	  	 column ="cuenta_hora"/>
  		<result property ="cuentaUsuario" 	 column ="cuenta_usuario"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
  		
  		<association property ="grupoCuenta" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.GrupoCuentaMapper.GrupoCuentaResult"/>

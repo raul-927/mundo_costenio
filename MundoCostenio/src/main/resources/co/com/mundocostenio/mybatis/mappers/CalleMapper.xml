@@ -7,6 +7,5 @@
   		<id	property = "calleId" 	column = "calle_id"/>
  		<result property ="tipoCalle" column ="tipo_calle"/>
  		<result property ="nombreCalle" column ="nombre_calle"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
   	</resultMap>
 </mapper>

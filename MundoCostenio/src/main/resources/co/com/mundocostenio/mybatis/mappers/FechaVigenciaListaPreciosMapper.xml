@@ -7,6 +7,6 @@
   		<id	property = "fechaVigenciaId" 	column = "fecha_vigencia_id"/>
  		<result property ="fechaIni" column ="fecha_ini"/>
  		<result property ="fechaFin" column ="fecha_fin"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
+ 		
   	</resultMap>
 </mapper>

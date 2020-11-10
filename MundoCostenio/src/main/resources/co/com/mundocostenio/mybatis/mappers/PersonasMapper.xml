@@ -9,8 +9,6 @@
  		<result property ="apellido" column ="apellido"/>
  		<result property = "cedula" column ="cedula"/>
  		<result property = "rol" column ="rol"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
- 		
  			
  		<collection property="direcciones" 
  			resultMap="co.com.mundocostenio.mybatis.mappers.DireccionMapper.DireccionResult"/>

@@ -7,6 +7,6 @@
   		<id		property = "ubicacionId" 	column = "ubicacion_id"/>
  		<result property = "nroPuerta" 		column ="nro_puerta"/>
  		<result property = "geoLocalizacion" column ="geo_localizacion"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
+ 		
   	</resultMap>
 </mapper>

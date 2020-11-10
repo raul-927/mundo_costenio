@@ -6,7 +6,6 @@
   	
   		<id		property = "prodId" 			column = "prod_id"/>
  		<result property ="nombre" 			column ="nombre"/>
- 		<result property ="objectIdIdentity" column ="object_id_identity"/>
  		
  		<association property="tipoProducto" 
  			resultMap="co.com.mundocostenio.mybatis.mappers.TipoProductoMapper.TipoProductoResult"/>

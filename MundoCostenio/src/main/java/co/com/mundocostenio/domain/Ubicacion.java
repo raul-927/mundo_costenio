@@ -5,22 +5,21 @@ import java.util.List;
 
 public class Ubicacion implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int 	ubicacionId;
-	private int 	nroPuerta;
+	private Integer 	ubicacionId;
+	private Integer 	nroPuerta;
 	private String 	geoLocalizacion;
-	private Long 	objectIdIdentity;
 	
-	public int getUbicacionId() {
+	public Integer getUbicacionId() {
 		return ubicacionId;
 	}
-	public void setUbicacionId(int ubicacionId) {
+	public void setUbicacionId(Integer ubicacionId) {
 		this.ubicacionId = ubicacionId;
 	}
 	
-	public int getNroPuerta() {
+	public Integer getNroPuerta() {
 		return nroPuerta;
 	}
-	public void setNroPuerta(int nroPuerta) {
+	public void setNroPuerta(Integer nroPuerta) {
 		this.nroPuerta = nroPuerta;
 	}
 	public String getGeoLocalizacion() {
@@ -29,10 +28,5 @@ public class Ubicacion implements Serializable{
 	public void setGeoLocalizacion(String geoLocalizacion) {
 		this.geoLocalizacion = geoLocalizacion;
 	}
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
-	}
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
-	}
+	
 }

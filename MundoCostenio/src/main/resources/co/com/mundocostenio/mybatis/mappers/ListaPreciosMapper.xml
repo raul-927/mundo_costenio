@@ -5,7 +5,6 @@
 	<resultMap type="co.com.mundocostenio.domain.ListaPrecios" id="ListaPreciosResult">
   		<id		property ="listaPrecioId" 		column ="lista_precio_id"/>
   		<result property ="descripcionLista" 	column ="descripcion_lista"/>
-  		<result property ="objectIdIdentity" 	column ="object_id_identity"/>
   		
   		<association property="fechaVigencia" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.FechaVigenciaListaPreciosMapper.FechaVigenciaListaPreciosResult"/>

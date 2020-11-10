@@ -12,8 +12,7 @@ public class PrecioProducto implements Serializable{
 
 	private Integer	 precioProdId;
 	private Producto producto;
-	private Integer 	 monto;
-	private Long 	 objectIdIdentity;
+	private Integer  monto;
 	
 	
 	public Producto getProducto() {
@@ -33,12 +32,6 @@ public class PrecioProducto implements Serializable{
 	}
 	public void setPrecioProdId(Integer precioProdId) {
 		this.precioProdId = precioProdId;
-	}
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
-	}
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
 	}
 	
 	@Override
