@@ -25,9 +25,9 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 	@Transactional
 	@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
 	public TipoProducto insert(TipoProducto tipoProducto) {
-		Integer id = accesControlListService.insert(tipoProducto);
-		tipoProducto.setTipProdId(id);
 		this.tipoProductoMapper.insert(tipoProducto);
+		accesControlListService.insert(tipoProducto);
+		
 		return tipoProducto;
 	}
 

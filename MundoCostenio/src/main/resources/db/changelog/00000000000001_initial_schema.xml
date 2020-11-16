@@ -38,7 +38,7 @@
         </createTable>
         
         <createTable tableName="barrio">
-            <column name="barrio_id" 	type="bigint" autoIncrement="false">
+            <column name="barrio_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="nombre_barrio" 	type="varchar(50)"/>
@@ -46,14 +46,14 @@
         </createTable>
         
         <createTable tableName="departamento">
-            <column name="departamento_id" 	type="bigint" autoIncrement="false">
+            <column name="departamento_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="nombre_departamento" 	 type="varchar(255)"/>
         </createTable>
         
         <createTable tableName="direccion">
-            <column name="direccion_id" 	type="igint" autoIncrement="false">
+            <column name="direccion_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="nro_puerta" type="int"/>
@@ -63,7 +63,7 @@
         
         
         <createTable tableName="calle">
-            <column name="calle_id" 	type="bigint" autoIncrement="false">
+            <column name="calle_id" 	type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="tipo_calle" type="ENUM('C','K','DG','CI','AV','V','TR','AK','AC')"/>
@@ -71,7 +71,7 @@
         </createTable>
         
         <createTable tableName="direccion_calles">
-            <column name="dir_calles_id" 	type="bigint" autoIncrement="false">
+            <column name="dir_calles_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="direccion_id"  type="int"/>
@@ -79,7 +79,7 @@
         </createTable>
         
         <createTable tableName="fecha_vig_list_prec">
-            <column name="fecha_vigencia_id" 	type="bigint" autoIncrement="false">
+            <column name="fecha_vigencia_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="fecha_ini"	type="date"/>
@@ -87,7 +87,7 @@
         </createTable>
         
         <createTable tableName="lista_precios">
-            <column name="lista_precio_id" 	type="bigint" autoIncrement="false">
+            <column name="lista_precio_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="fecha_vig_id"  		   type="int"/>
@@ -103,7 +103,7 @@
         </createTable>
         
         <createTable tableName="persona">
-            <column name="persona_id" 	type="bigint" autoIncrement="false">
+            <column name="persona_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="nombre" 	type="varchar(50)"/>
@@ -129,7 +129,7 @@
         </createTable>
         
          <createTable tableName="producto">
-            <column name="prod_id" 	type="bigint" autoIncrement="false">
+            <column name="prod_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="tipo_prod_id" 	type="int"/>
@@ -138,7 +138,7 @@
         </createTable>
         
         <createTable tableName="tipo_producto">
-            <column name="tip_prod_id" 	type="bigint" autoIncrement="false">
+            <column name="tip_prod_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="desc_tipo_producto" 	type="varchar(50)"/>

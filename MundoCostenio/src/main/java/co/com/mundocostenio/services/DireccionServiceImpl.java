@@ -3,16 +3,22 @@ package co.com.mundocostenio.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.com.mundocostenio.domain.Calle;
 import co.com.mundocostenio.domain.Direccion;
 import co.com.mundocostenio.mybatis.mappers.CalleMapper;
 import co.com.mundocostenio.mybatis.mappers.DireccionMapper;
+import co.com.mundocostenio.security.acl.AccesControlListService;
 
 
 @Service("direccionService")
 public class DireccionServiceImpl implements DireccionService {
+	
+	@Autowired
+	private AccesControlListService<Direccion> accesControlListService;
 	
 	@Autowired
 	private DireccionMapper direccionMapper;
@@ -20,11 +26,15 @@ public class DireccionServiceImpl implements DireccionService {
 	@Autowired
 	private CalleMapper calleMapper;
 
-	@Transactional
 	@Override
+	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
+	@Transactional
 	public List<Direccion> insert(List<Direccion> direcciones) {
-		
-		return this.ejutarInsert(direcciones);
+		List<Direccion> direccionesResult = this.ejutarInsert(direcciones);
+		for(Direccion dir: direccionesResult) {
+			this.accesControlListService.insert(dir);
+		}
+		return direccionesResult;
 	}
 
 	@Transactional

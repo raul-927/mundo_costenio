@@ -1,7 +1,9 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import co.com.mundocostenio.enumerator.TipoCuentaEnum;
 
@@ -15,8 +17,8 @@ public class Cuenta implements Serializable{
 	private Integer 		cuentaId;
 	private String 			cuentaDesc;
 	private TipoCuentaEnum	tipoCuenta;
-	private String 			cuentaFecha;
-	private String 			cuentaHora;
+	private LocalDate 		cuentaFecha;
+	private LocalTime 		cuentaHora;
 	private String			cuentaUsuario;
 	private GrupoCuenta		grupoCuenta;
 	
@@ -39,16 +41,16 @@ public class Cuenta implements Serializable{
 		this.cuentaDesc = cuentaDesc;
 	}
 
-	public String getCuentaFecha() {
+	public LocalDate getCuentaFecha() {
 		return cuentaFecha;
 	}
-	public void setCuentaFecha(String cuentaFecha) {
+	public void setCuentaFecha(LocalDate cuentaFecha) {
 		this.cuentaFecha = cuentaFecha;
 	}
-	public String getCuentaHora() {
+	public LocalTime getCuentaHora() {
 		return cuentaHora;
 	}
-	public void setCuentaHora(String cuentaHora) {
+	public void setCuentaHora(LocalTime cuentaHora) {
 		this.cuentaHora = cuentaHora;
 	}
 	public String getCuentaUsuario() {

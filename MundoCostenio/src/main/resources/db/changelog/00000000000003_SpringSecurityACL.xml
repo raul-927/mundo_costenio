@@ -16,7 +16,7 @@
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="principal" 		type="boolean"/>
-            <column name="sid" 				type="varchar(10)"/>
+            <column name="sid" 				type="varchar(50)"/>
         </createTable>
         
         <!-- <addAutoIncrement

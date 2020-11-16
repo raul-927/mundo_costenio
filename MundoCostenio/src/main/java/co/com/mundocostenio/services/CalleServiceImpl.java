@@ -3,21 +3,32 @@ package co.com.mundocostenio.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.domain.Post;
 import co.com.mundocostenio.mybatis.mappers.CalleMapper;
+import co.com.mundocostenio.security.acl.AccesControlListService;
 
 
 @Service("calleService")
 public class CalleServiceImpl implements CalleService {
+	
+	@Autowired
+	private AccesControlListService<Calle> accesControlListService;
+	
 	@Autowired
 	private CalleMapper calleMapper;
 
 	@Override
-	public Calle insert(Calle calle) {
+	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
+	@Transactional
+	public Calle insert(@Param("calle") Calle calle) {
 		this.calleMapper.insert(calle);
+		accesControlListService.insert(calle);
 		return calle;
 	}
 	
@@ -28,6 +39,8 @@ public class CalleServiceImpl implements CalleService {
 	
 
 	@Override
+	@Transactional
+	@PreAuthorize("hasPermission(#barrio, 'WRITE')")
 	public Calle update(Calle calle) {
 		this.calleMapper.update(calle);
 		return calle;

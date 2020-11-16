@@ -28,9 +28,8 @@ public class BarrioServiceImpl implements BarrioService {
 	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
 	@Transactional
 	public Barrio insert(Barrio barrio) {
-		Integer id = this.accesControlListService.insert(barrio);
-		barrio.setBarrioId(id);
 		this.barrioMapper.insert(barrio);
+		this.accesControlListService.insert(barrio);
 		return barrio;
 	}
 

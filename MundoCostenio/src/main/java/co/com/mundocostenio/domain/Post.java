@@ -17,8 +17,9 @@ public class Post implements Serializable{
 	
 	public Post() {}
 	
-	public Post(String postContent) {
+	public Post(String postContent, Calle calle) {
 		this.content = postContent;
+		this.calle = calle;
 	}
 	
 	public void setContent(String content) {
@@ -36,6 +37,14 @@ public class Post implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Calle getCalle() {
+		return calle;
+	}
+
+	public void setCalle(Calle calle) {
+		this.calle = calle;
 	}
 
 	@Override
@@ -71,11 +80,4 @@ public class Post implements Serializable{
 		return true;
 	}
 
-	public Calle getCalle() {
-		return calle;
-	}
-
-	public void setCalle(Calle calle) {
-		this.calle = calle;
-	}
 }

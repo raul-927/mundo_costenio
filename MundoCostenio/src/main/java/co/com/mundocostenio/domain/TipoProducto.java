@@ -18,6 +18,11 @@ public class TipoProducto implements Serializable{
 	@Size(min = 3, max = 30, message = TipoProductoErrorMessage.DESCRIPCION_LENGTH)
 	private String descTipoProducto;
 	
+	public TipoProducto() {}
+	public TipoProducto(Integer tipProdId, String descTipoProducto) {
+		this.tipProdId = tipProdId;
+		this.descTipoProducto = descTipoProducto;
+	}
 	
 	
 	public Integer getTipProdId() {
@@ -37,8 +42,8 @@ public class TipoProducto implements Serializable{
 		LocalDateTime localDateTime = LocalDateTime.now();
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descTipoProducto == null) ? 0 : descTipoProducto.hashCode());
-		result = prime * result + ((tipProdId == null) ? 0 : tipProdId.hashCode());
+		//result = prime * result + ((descTipoProducto == null) ? 0 : descTipoProducto.hashCode());
+		//result = prime * result + ((tipProdId == null) ? 0 : tipProdId.hashCode());
 		result = prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
 		return result;
 	}
