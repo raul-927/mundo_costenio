@@ -241,6 +241,5 @@
             initiallyDeferred="true"    
             tableName="fecha_vig_list_prec"    
             validate="true"/>
-
     </changeSet>
 </databaseChangeLog>

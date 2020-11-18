@@ -156,7 +156,7 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	
 	@Bean
 	public AclEntryVoter aclUpdatePostVoter() {
-		Permission[] requirePermission = {BasePermission.ADMINISTRATION};
+		Permission[] requirePermission = {BasePermission.WRITE};
 		AclEntryVoter aclEntryVoter = new AclEntryVoter(aclService(),"ACL_POST_UPDATE",requirePermission);
 		aclEntryVoter.setProcessDomainObjectClass(Object.class);
 		return aclEntryVoter;
