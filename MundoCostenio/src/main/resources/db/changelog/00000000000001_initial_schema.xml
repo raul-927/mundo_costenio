@@ -10,23 +10,22 @@
         
     <changeSet id="00000000000001" author="rhernandez">
     
-        <createTable tableName="usuario">
-            <column name="usuario_id" 				type="int" autoIncrement="true">
+        <createTable tableName="domain_user">
+            <column name="dom_usr_id" 				type="int" autoIncrement="true">
                 <constraints primaryKey="true" 		nullable="false"/>
             </column>
-            <column name="nombre" 					type="varchar(50)"/>
-            <column name="apellido" 				type="varchar(50)"/>
-            <column name="user_profile_id" 			type="int"/>
-            <column name="document_type" 			type="varchar(50)"/>
-            <column name="clave_temporal" 			type="varchar(50)"/>
-            <column name="es_usuario_inspira" 		type="varchar(50)"/>
-            <column name="es_solicitar_registro" 	type="varchar(50)"/>
-            <column name="es_cambio_nombre_usuario" type="varchar(50)"/>
-            <column name="role_id" 					type="int"/>
-            <column name="tipo_cliente_id" 			type="int"/>
-            <column name="tipo_usuario_id" 			type="int"/>
-            <column name="token_sso" 				type="varchar(50)"/>
-            <column name="uid" 						type="varchar(50)"/>
+            <column name="dom_usr_nom" 				type="varchar(50)"/>
+            <column name="dom_usr_ap" 				type="varchar(50)"/>
+            <column name="dom_usr_nic" 				type="varchar(50)"/>
+            <column name="dom_usr_pass" 			type="varchar(50)"/>
+            <column name="dom_usr_enabled" 			type="boolean"/>
+        </createTable>
+        
+        <createTable tableName="roles">
+            <column name="rol_id" 				type="int" autoIncrement="true">
+                <constraints primaryKey="true" 		nullable="false"/>
+            </column>
+            <column name="rol_name" 				type="varchar(50)"/>
         </createTable>
         
         <createTable tableName="post">
@@ -240,6 +239,14 @@
             disabled="true" 
             initiallyDeferred="true"    
             tableName="fecha_vig_list_prec"    
+            validate="true"/>
+            
+       <addUniqueConstraint 
+            columnNames="rol_name"  
+            deferrable="true"  
+            disabled="true" 
+            initiallyDeferred="true"    
+            tableName="roles"    
             validate="true"/>
     </changeSet>
 </databaseChangeLog>
