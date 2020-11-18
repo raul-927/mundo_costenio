@@ -1,6 +1,10 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import co.com.mundocostenio.enumerator.EstadoCajaEnum;
 
 public class Caja implements Serializable {
 
@@ -8,13 +12,11 @@ public class Caja implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int 	cajaId;
-	private String 	cajaEstado;
-	
-	private String 	cajaFecha;
-	
-	private String 	cajaHora;
-	private String 	cajaUsr;
+	private int 			cajaId;
+	private EstadoCajaEnum 	estado;
+	private LocalDate 		cajaFecha;
+	private LocalTime 		cajaHora;
+	private String 			cajaUsr;
 	
 	public int getCajaId() {
 		return cajaId;
@@ -22,28 +24,29 @@ public class Caja implements Serializable {
 	public void setCajaId(int cajaId) {
 		this.cajaId = cajaId;
 	}
-	public String getCajaEstado() {
-		return cajaEstado;
-	}
-	public void setCajaEstado(String cajaEstado) {
-		this.cajaEstado = cajaEstado;
-	}
-	public String getCajaFecha() {
-		return cajaFecha;
-	}
-	public void setCajaFecha(String cajaFecha) {
-		this.cajaFecha = cajaFecha;
-	}
-	public String getCajaHora() {
-		return cajaHora;
-	}
-	public void setCajaHora(String cajaHora) {
-		this.cajaHora = cajaHora;
-	}
+	
 	public String getCajaUsr() {
 		return cajaUsr;
 	}
 	public void setCajaUsr(String cajaUsr) {
 		this.cajaUsr = cajaUsr;
+	}
+	public EstadoCajaEnum getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadoCajaEnum estado) {
+		this.estado = estado;
+	}
+	public LocalDate getCajaFecha() {
+		return cajaFecha;
+	}
+	public void setCajaFecha(LocalDate cajaFecha) {
+		this.cajaFecha = cajaFecha;
+	}
+	public LocalTime getCajaHora() {
+		return cajaHora;
+	}
+	public void setCajaHora(LocalTime cajaHora) {
+		this.cajaHora = cajaHora;
 	}
 }

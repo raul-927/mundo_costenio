@@ -16,6 +16,6 @@
    	<include file="db/changelog/00000000000001_initial_schema.xml" relativeToChangelogFile="false"/>
    	<include file="db/changelog/00000000000002_Impuesto_cuenta_grupo_cuenta.xml" relativeToChangelogFile="false"/>
    	<include file="db/changelog/00000000000003_SpringSecurityACL.xml" relativeToChangelogFile="false"/>
-    
+    <include file="db/changelog/00000000000004_Asiento.xml" relativeToChangelogFile="false"/>
     
 </databaseChangeLog>
