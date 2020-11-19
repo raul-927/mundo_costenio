@@ -12,7 +12,7 @@ public class Asiento implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	private Integer		id;
 	private Integer 	asientoId;
 	private String		descripcion;
 	private Cuenta		cuentaDebe;
@@ -24,6 +24,11 @@ public class Asiento implements Serializable{
 	private LocalTime	hora;
 	
 	//private TipoAsientoEnum tipoAsiento;
+	
+	public Integer getId() {
+		id = asientoId;
+		return id;
+	}
 	public Integer getAsientoId() {
 		return asientoId;
 	}

@@ -53,6 +53,7 @@ public class CalleController {
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		verificarCalle(calle.getCalleId());
 		this.calleService.update(calle);
 		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
@@ -68,7 +69,7 @@ public class CalleController {
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		verificarCalle(calle.getCalleId());
+		//verificarCalle(calle.getCalleId());
 		this.calleService.delete(calle);
 		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);

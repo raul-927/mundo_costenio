@@ -8,11 +8,16 @@ public class Rol implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private Integer rolId;
 	private String nombre;
 	
 	public Rol() {}
 	
+	public Integer getId() {
+		id = rolId;
+		return id;
+	}
 	
 	public String getNombre() {
 		return nombre;

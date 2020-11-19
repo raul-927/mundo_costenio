@@ -16,6 +16,7 @@ public class GrupoCuenta implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Integer				id;
 	private Integer 			grupoCuentaId;
 	
 	@NotNull(message = GrupoCuentaErrorMessage.TIPO_CUENTA_NULL)
@@ -25,6 +26,10 @@ public class GrupoCuenta implements Serializable{
 	@Size(min = 3, max = 15, message = GrupoCuentaErrorMessage.DESCRIPCION_LENGHT)
 	private String 				grupoCuentaDesc;
 	
+	public Integer getId() {
+		id = grupoCuentaId;
+		return id;
+	}
 	public Integer getGrupoCuentaId() {
 		return grupoCuentaId;
 	}

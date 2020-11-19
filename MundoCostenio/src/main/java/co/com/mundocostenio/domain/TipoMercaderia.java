@@ -10,9 +10,15 @@ public class TipoMercaderia implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
 	private Integer tipMercId;
 	private FormaControl formaControl;
 	private String nombre;
+	
+	public Integer getId() {
+		id = tipMercId;
+		return id;
+	}
 	public Integer getTipMercId() {
 		return tipMercId;
 	}

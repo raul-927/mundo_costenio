@@ -29,7 +29,7 @@ public class GrupoCuentaController {
 	
 	
 	@RequestMapping(
-			value ="/calle", method =RequestMethod.POST,
+			value ="/grupoCuenta", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody

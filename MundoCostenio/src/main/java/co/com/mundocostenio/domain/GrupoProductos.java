@@ -10,11 +10,16 @@ public class GrupoProductos implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Integer			id;
 	private Integer 		grupProdId;
 	private List<Producto>	productos;
 	private ListaPrecios	listaPrecios;
 	private Asiento 		asiento;
 	
+	public Integer getId() {
+		id = grupProdId;
+		return id;
+	}
 	public Integer getGrupProdId() {
 		return grupProdId;
 	}

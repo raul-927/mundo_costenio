@@ -32,8 +32,8 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 	}
 
 	@Override
-	@PreAuthorize("hasPermission(#tipProdId, 'WRITE')")
-	public TipoProducto update(TipoProducto tipoProducto) {
+	@PreAuthorize("hasPermission(#tipoProducto, 'WRITE')")
+	public TipoProducto update(@Param("tipoProducto") TipoProducto tipoProducto) {
 		this.tipoProductoMapper.update(tipoProducto);
 		return tipoProducto;
 	}

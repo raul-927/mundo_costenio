@@ -37,11 +37,11 @@ public class CalleSqlProvider {
 			if(calle.getCalleId() > 0) {
 				UPDATE("calle");
 				if(calle.getNombreCalle()!= null && calle.getNombreCalle()!="") {
-					SET("nombre_calle", "'".concat(calle.getNombreCalle()).concat("'"));
+					SET("nombre_calle = "+ "'".concat(calle.getNombreCalle()).concat("'"));
 				} if(calle.getTipoCalle()!= null) {
-					SET("tipo_calle", "'".concat(calle.getTipoCalle().name()).concat("'"));
+					SET("tipo_calle = "+ "'".concat(calle.getTipoCalle().name()).concat("'"));
 				}
-				WHERE("calle_id = "+calle.getCalleId());
+				WHERE("calle_id = "+String.valueOf(calle.getCalleId()));
 			}
 		}}.toString();
 	}

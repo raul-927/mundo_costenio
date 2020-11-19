@@ -25,7 +25,7 @@ public interface CalleMapper {
 	void insertDireccionCalles(@Param("direccionId") int direccionId, @Param("calles") List<Calle>calles);
 	
 	@UpdateProvider(type = CalleSqlProvider.class, method ="update")
-	Calle update(@Param("calle") Calle calle);
+	void update(@Param("calle") Calle calle);
 	
 	@DeleteProvider(type = CalleSqlProvider.class, method ="delete")
 	void delete(int calleId);

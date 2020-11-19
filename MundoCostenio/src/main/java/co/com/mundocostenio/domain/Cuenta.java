@@ -14,6 +14,7 @@ public class Cuenta implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Integer			id;
 	private Integer 		cuentaId;
 	private String 			cuentaDesc;
 	private TipoCuentaEnum	tipoCuenta;
@@ -22,6 +23,10 @@ public class Cuenta implements Serializable{
 	private String			cuentaUsuario;
 	private GrupoCuenta		grupoCuenta;
 	
+	public Integer getId() {
+		id = cuentaId;
+		return id;
+	}
 	public Integer getCuentaId() {
 		return cuentaId;
 	}

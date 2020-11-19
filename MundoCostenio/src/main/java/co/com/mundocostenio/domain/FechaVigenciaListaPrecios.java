@@ -13,6 +13,7 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private Integer fechaVigenciaId;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
@@ -39,7 +40,10 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	public void setFechaVigenciaId(Integer fechaVigenciaId) {
 		this.fechaVigenciaId = fechaVigenciaId;
 	}
-
+	public Integer getId() {
+		id = fechaVigenciaId;
+		return id;
+	}
 	@Override
 	public int hashCode() {
 		LocalDateTime localDateTime = LocalDateTime.now();

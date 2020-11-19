@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Calle;
-import co.com.mundocostenio.domain.Post;
 import co.com.mundocostenio.mybatis.mappers.CalleMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 
@@ -40,8 +39,8 @@ public class CalleServiceImpl implements CalleService {
 
 	@Override
 	@Transactional
-	@PreAuthorize("hasPermission(#barrio, 'WRITE')")
-	public Calle update(Calle calle) {
+	@PreAuthorize("hasPermission(#calle, 'WRITE')")
+	public Calle update(@Param("calle") Calle calle) {
 		this.calleMapper.update(calle);
 		return calle;
 	}

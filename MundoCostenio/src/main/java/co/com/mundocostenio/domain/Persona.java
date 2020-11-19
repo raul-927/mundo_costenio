@@ -20,6 +20,7 @@ public class Persona implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
 	private Integer personaId;
 	@NotNull(message = PersonasErrorMessage.NOMBRE_NULL)
 	@Size(min = 3, max = 15, message = PersonasErrorMessage.NOMBRE_LENGTH)
@@ -73,6 +74,10 @@ public class Persona implements Serializable{
 		return result;
 	}
 	*/
+	public Integer getId() {
+		id = personaId;
+		return id;
+	}
 	public Integer getPersonaId() {
 		return personaId;
 	}

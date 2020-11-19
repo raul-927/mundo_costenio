@@ -12,12 +12,17 @@ public class Caja implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int				id;
 	private int 			cajaId;
 	private EstadoCajaEnum 	estado;
 	private LocalDate 		cajaFecha;
 	private LocalTime 		cajaHora;
 	private String 			cajaUsr;
 	
+	public int getId() {
+		id = cajaId;
+		return id;
+	}
 	public int getCajaId() {
 		return cajaId;
 	}

@@ -3,6 +3,8 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.Id;
+
 import co.com.mundocostenio.enumerator.TipoCalleEnum;
 
 public class Calle implements Serializable{
@@ -11,7 +13,11 @@ public class Calle implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Id
 	private Integer calleId;
+	
+	private Integer id;
+	
 	private TipoCalleEnum tipoCalle;
 	private String nombreCalle;
 	
@@ -44,6 +50,13 @@ public class Calle implements Serializable{
 		result += prime * result + ((nombreCalle == null) ? 0 : nombreCalle.hashCode());
 		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
 		return result;
+	}
+	public Integer getId() {
+		id = calleId;
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = calleId;
 	}
 	
 }

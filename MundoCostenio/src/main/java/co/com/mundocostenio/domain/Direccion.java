@@ -9,6 +9,7 @@ public class Direccion implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer		id;
 	private Integer 	direccionId;
 	private Barrio 		barrio;
 	private String 		geoLocalizacion;
@@ -21,6 +22,10 @@ public class Direccion implements Serializable{
 		this.direccionId = direccionId;
 	}
 	
+	public Integer getId() {
+		id = direccionId;
+		return id;
+	}
 	public Integer getDireccionId() {
 		return direccionId;
 	}

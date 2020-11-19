@@ -20,7 +20,7 @@ public class TipoProductoSqlProvider {
 		return new SQL() {{
 			if(tipoProducto.getDescTipoProducto()!= null && tipoProducto.getDescTipoProducto() !="") {
 				UPDATE("tipo_producto");
-				SET("desc_tipo_producto","'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
+				SET("desc_tipo_producto = "+"'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
 				WHERE("tip_prod_id = " + String.valueOf(tipoProducto.getTipProdId()));
 			}
 			

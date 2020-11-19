@@ -13,6 +13,8 @@ public class Producto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Integer 		id;
 	private Integer 		prodId;
 	
 	@NotNull(message = ProductoErrorMessage.NOMBRE_NULL)
@@ -24,6 +26,10 @@ public class Producto implements Serializable{
 	private Impuesto 		impuesto;
 	private Long			objectIdIdentity;
 	
+	public Integer getId() {
+		id = prodId;
+		return id;
+	}
 	public TipoProducto getTipoProducto() {
 		return tipoProducto;
 	}

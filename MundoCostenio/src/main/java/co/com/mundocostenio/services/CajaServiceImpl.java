@@ -23,19 +23,6 @@ public class CajaServiceImpl implements CajaService {
 	}
 
 	@Override
-	@Transactional
-	public Caja update(Caja caja) {
-		this.cajaMapper.update(caja);
-		return caja;
-	}
-
-	@Override
-	@Transactional
-	public int delete(Caja caja) {
-		return this.cajaMapper.delete(caja);
-	}
-
-	@Override
 	public List<Caja> select(Caja caja) {
 		return this.cajaMapper.select(caja);
 	}

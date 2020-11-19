@@ -12,6 +12,7 @@ public class Impuesto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Integer			 id;
 	private Integer 		 impuestoId;
 	private String 			 impuestoDesc;
 	private String 			 impuestoDescAbrv;
@@ -19,6 +20,10 @@ public class Impuesto implements Serializable{
 	private TipoImpuestoEnum tipoImpuesto;
 	private Cuenta 			 cuenta;
 	
+	public Integer getId() {
+		id = impuestoId;
+		return id;
+	}
 	public Integer getImpuestoId() {
 		return impuestoId;
 	}

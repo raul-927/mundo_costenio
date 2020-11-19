@@ -10,6 +10,7 @@ public class Barrio implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer		  id;
 	private Integer 	  barrioId;
 	private String 		  nombreBarrio;
 	private Departamento  departamento;
@@ -22,6 +23,10 @@ public class Barrio implements Serializable{
 		
 	}
 	
+	public Integer getId() {
+		id = barrioId;
+		return id;
+	}
 	public Integer getBarrioId() {
 		return barrioId;
 	}

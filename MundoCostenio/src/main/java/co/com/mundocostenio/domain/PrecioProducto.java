@@ -9,11 +9,16 @@ public class PrecioProducto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	private Integer  id;
 	private Integer	 precioProdId;
 	private Producto producto;
 	private Integer  monto;
 	
+	public Integer getId() {
+		id = precioProdId;
+		return id;
+	}
 	
 	public Producto getProducto() {
 		return producto;

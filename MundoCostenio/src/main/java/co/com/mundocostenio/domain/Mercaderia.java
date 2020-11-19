@@ -10,9 +10,14 @@ public class Mercaderia implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private Integer 		id;
 	private Integer 		merId;
 	private TipoMercaderia 	tipoMercaderia;
 	
+	public Integer getId() {
+		id = merId;
+		return id;
+	}
 	public int getMerId() {
 		return merId;
 	}

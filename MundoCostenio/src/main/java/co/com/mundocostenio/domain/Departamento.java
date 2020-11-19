@@ -8,6 +8,8 @@ public class Departamento implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Integer		id;
 	private Integer 	departamentoId;
 	private String 	nombreDepartamento;
 
@@ -19,7 +21,10 @@ public class Departamento implements Serializable{
 		
 	}
 	
-	
+	public Integer getId() {
+		id = departamentoId;
+		return id;
+	}
 	public Integer getDepartamentoId() {
 		return departamentoId;
 	}

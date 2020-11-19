@@ -13,6 +13,7 @@ public class TipoProducto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private Integer tipProdId;
 	@NotNull(message =TipoProductoErrorMessage.DESCRIPCION_NULL)
 	@Size(min = 3, max = 30, message = TipoProductoErrorMessage.DESCRIPCION_LENGTH)
@@ -36,6 +37,11 @@ public class TipoProducto implements Serializable{
 	}
 	public void setDescTipoProducto(String descTipoProducto) {
 		this.descTipoProducto = descTipoProducto;
+	}
+	
+	public Integer getId() {
+		id = tipProdId;
+		return id;
 	}
 	@Override
 	public int hashCode() {
