@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.AsientoMapper">
+	<resultMap type="co.com.mundocostenio.domain.Asiento" id="AsientoResult">
+  	
+  		<id		property = "asientoId" 	 column = "asiento_id"/>
+ 		<result property ="nombreBarrio" column ="nombre_barrio"/>
+ 		<result property ="montoDebe" 	 column ="monto_debe"/>
+ 		<result property ="montoHaber" 	 column ="monto_haber"/>
+ 		<result property ="fecha" 		 column ="fecha"/>
+ 		<result property ="hora" 		 column ="horq"/>
+ 		
+ 		<association property ="cuentaDebe" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.CuentaMapper.CuentaResult"/>
+
+ 		<association property ="cuentaHaber" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.CuentaMapper.CuentaResult"/>
+			
+	<association property ="caja" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.CajaMapper.CajaResult"/>
+  	</resultMap>
+</mapper>

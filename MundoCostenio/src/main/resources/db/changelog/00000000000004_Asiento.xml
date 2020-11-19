@@ -29,9 +29,9 @@
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="estado" 			type="enum('OPEN','CLOSED')"/>
-            <column name="cajaFecha" 		type="date"/>
-            <column name="cajaHora" 		type="time"/>
-            <column name="cajaUsr" 			type="varchar(50)"/>
+            <column name="caja_fecha" 		type="date"/>
+            <column name="caja_hora" 		type="time"/>
+            <column name="caja_usr" 		type="varchar(50)"/>
         </createTable>
         
          <addForeignKeyConstraint  baseColumnNames="cuenta_debe_id"  

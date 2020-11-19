@@ -1,0 +1,34 @@
+package co.com.mundocostenio.mybatis.mappers;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.DeleteProvider;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
+
+import co.com.mundocostenio.domain.Caja;
+import co.com.mundocostenio.mybatis.sql.CajaSqlProvider;
+
+
+public interface CajaMapper {
+	
+	
+	@InsertProvider(type = CajaSqlProvider.class, method ="insert")
+	@Options(useGeneratedKeys=true, keyProperty="barrioId", keyColumn = "barrio_id") 
+	void insert(@Param("caja") Caja caja);
+	
+	@UpdateProvider(type = CajaSqlProvider.class, method ="update")
+	void update(@Param("caja") Caja caja);
+	
+	@DeleteProvider(type = CajaSqlProvider.class, method ="delete")
+	int delete(@Param("caja") Caja caja);
+	
+	@SelectProvider(type = CajaSqlProvider.class, method ="select")
+	@ResultMap("co.com.mundocostenio.mybatis.mappers.BarrioMapper.BarrioResult")
+	List<Caja> select(@Param("caja") Caja caja);
+
+}

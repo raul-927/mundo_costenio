@@ -3,7 +3,11 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import co.com.mundocostenio.enumerator.TipoGrupoCuentaEnum;
+import co.com.mundocostenio.messageerror.GrupoCuentaErrorMessage;
 
 public class GrupoCuenta implements Serializable{
 
@@ -13,7 +17,12 @@ public class GrupoCuenta implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer 			grupoCuentaId;
+	
+	@NotNull(message = GrupoCuentaErrorMessage.TIPO_CUENTA_NULL)
 	private	TipoGrupoCuentaEnum tipoGrupoCuenta;
+	
+	@NotNull(message = GrupoCuentaErrorMessage.DESCRIPCION_NULL)
+	@Size(min = 3, max = 15, message = GrupoCuentaErrorMessage.DESCRIPCION_LENGHT)
 	private String 				grupoCuentaDesc;
 	
 	public Integer getGrupoCuentaId() {

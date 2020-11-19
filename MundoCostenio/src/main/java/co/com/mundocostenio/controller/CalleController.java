@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.CalleService;
 
 @RestController
@@ -67,6 +68,7 @@ public class CalleController {
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		verificarCalle(calle.getCalleId());
 		this.calleService.delete(calle);
 		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
@@ -85,6 +87,16 @@ public class CalleController {
 		List<Calle> calles = this.calleService.select(calle);
 		
 		return new ResponseEntity<List<Calle>>(calles, headers, HttpStatus.OK);
+	}
+	
+	private void verificarCalle(int calleId) {
+		Calle calle = new Calle();
+		calle.setCalleId(calleId);
+		List<Calle> calleResult = this.calleService.select(calle);
+		if(calleResult.size() == 0) {
+			throw new ResourceNotFoundException("Calle con id: " + calleId + ", no encontrada");
+		}
+		
 	}
 
 }
