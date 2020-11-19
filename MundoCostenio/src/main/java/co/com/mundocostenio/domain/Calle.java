@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import co.com.mundocostenio.enumerator.TipoCalleEnum;
+import co.com.mundocostenio.messageerror.CalleErrorMessage;
+import co.com.mundocostenio.messageerror.PersonasErrorMessage;
 
 public class Calle implements Serializable{
 	
@@ -13,9 +16,10 @@ public class Calle implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
+	@NotNull(message = CalleErrorMessage.CALLE_ID_NULL)
 	private Integer calleId;
 	
+	//@NotNull(message = PersonasErrorMessage.NOMBRE_NULL)
 	private Integer id;
 	
 	private TipoCalleEnum tipoCalle;
