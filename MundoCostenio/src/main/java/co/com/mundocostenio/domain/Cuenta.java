@@ -5,6 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.com.mundocostenio.enumerator.TipoCuentaEnum;
 
 public class Cuenta implements Serializable{
@@ -14,13 +19,23 @@ public class Cuenta implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	private Integer			id;
+	
+	@NotNull(message="cuentaId no debe ser Null")
 	private Integer 		cuentaId;
+	
+	@NotNull(message=" cuentaDesc no debe ser null")
+	@Size(min=3, max=30, message="cuentaDesc debe contener entre 3 y 30 caracteres")
 	private String 			cuentaDesc;
+	
+	@NotNull(message="tipoCuenta no debe ser null")
 	private TipoCuentaEnum	tipoCuenta;
 	private LocalDate 		cuentaFecha;
 	private LocalTime 		cuentaHora;
 	private String			cuentaUsuario;
+	
+	@NotNull(message="grupoCuenta no debe ser null")
 	private GrupoCuenta		grupoCuenta;
 	
 	public Integer getId() {

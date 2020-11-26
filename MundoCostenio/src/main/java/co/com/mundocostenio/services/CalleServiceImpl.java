@@ -40,23 +40,29 @@ public class CalleServiceImpl implements CalleService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasPermission(#calle, 'WRITE')")
-	public Calle update(@Param("calle") Calle calle) {
-		this.calleMapper.update(calle);
+	public Calle update(@Param("calle") Calle calle) throws Exception {
+		if(calle!=null && calle.getCalleId()!=null) {
+			this.calleMapper.update(calle);
+		}
+		else {
+			throw new Exception("calleId no debe ser null");
+		}
 		return calle;
 	}
 
 	@Override
-	public void delete(Calle calle) {
-		this.calleMapper.delete(calle.getCalleId());
+	public void delete(Calle calle)throws Exception {
+		if(calle!=null && calle.getCalleId()!=null) {
+			this.calleMapper.delete(calle);
+		}
+		else {
+			throw new Exception("calleId no debe ser null");
+		}
 		
 	}
 
 	@Override
 	public List<Calle> select(Calle calle) {
-		
 		return this.calleMapper.select(calle);
 	}
-
-	
-	
 }

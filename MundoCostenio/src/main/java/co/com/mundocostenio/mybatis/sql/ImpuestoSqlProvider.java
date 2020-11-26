@@ -2,7 +2,6 @@ package co.com.mundocostenio.mybatis.sql;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.Impuesto;
 
 
@@ -63,9 +62,11 @@ public class ImpuestoSqlProvider {
 			SELECT("i.impuesto_id, i.impuesto_desc, i.impuesto_desc_abrv, i.impuesto_valor, i.tipo_impuesto");
 			SELECT("c.cuenta_id, c.cuenta_desc, c.tipo_cuenta, c.cuenta_fecha, c.cuenta_hora, c.cuenta_usuario");
 			SELECT("g.grupo_cuenta_id, g.tipo_grupo_cuenta, g.grupo_cuenta_desc");
+			
 			FROM("impuesto i");
 			FROM("cuenta c");
 			FROM("grupo_cuenta g");
+			
 			WHERE("i.cuenta_id = c.cuenta_id");
 			WHERE("c.grupo_cuenta_id = g.grupo_cuenta_id");
 			if(impuesto.getImpuestoId()> 0) {

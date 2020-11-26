@@ -1,5 +1,6 @@
 package co.com.mundocostenio.mybatis.sql;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.jdbc.SQL;
@@ -46,13 +47,16 @@ public class CalleSqlProvider {
 		}}.toString();
 	}
 	
-	public String delete(int calleId) {
-		return new SQL() {{
-			if(calleId >0) {
-				DELETE_FROM("calle");
-				WHERE("calle_id = " + String.valueOf(calleId));
-			}
-		}}.toString();
+	public String delete(Calle calle)  throws SQLException {
+			return new SQL() {{
+				if(calle.getCalleId()!=null && calle.getCalleId() > 0) {
+					DELETE_FROM("calle");
+					WHERE("calle_id = " + String.valueOf(calle.getCalleId()));
+				}
+				else {
+					throw new SQLException("calle_id no debe ser cero o null");
+				}
+			}}.toString();
 	}
 	
 	public String select(Calle calle) {
@@ -60,7 +64,7 @@ public class CalleSqlProvider {
 			SELECT("calle_id, tipo_calle, nombre_calle");
 			FROM("calle");
 			if(calle != null) {
-				if(calle.getCalleId() >0) {
+				if(calle.getCalleId()!= null && calle.getCalleId() >0) {
 					WHERE("calle_id = " + String.valueOf(calle.getCalleId()));
 				} else {
 					if(calle.getNombreCalle()!= null && calle.getNombreCalle() !="") {

@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import co.com.mundocostenio.enumerator.TipoCalleEnum;
 import co.com.mundocostenio.messageerror.CalleErrorMessage;
@@ -16,13 +19,16 @@ public class Calle implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@NotNull(message = CalleErrorMessage.CALLE_ID_NULL)
-	private Integer calleId;
-	
-	//@NotNull(message = PersonasErrorMessage.NOMBRE_NULL)
+	@JsonIgnore
 	private Integer id;
 	
+	private Integer calleId;
+	
+	@NotNull(message=CalleErrorMessage.TIPO_CALLE_NOT_NULL)
 	private TipoCalleEnum tipoCalle;
+	
+	@NotNull(message=CalleErrorMessage.NOMBRE_CALLE_NOT_NULL)
+	@Size(min=2, max=15, message=CalleErrorMessage.NOMBRE_CALLE_SIZE)
 	private String nombreCalle;
 	
 	public Integer getCalleId() {
@@ -49,7 +55,6 @@ public class Calle implements Serializable{
 		LocalDateTime localDateTime = LocalDateTime.now();
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((calleId == null) ? 0 : calleId.hashCode());
 		result += prime * result + ((tipoCalle == null) ? 0 : tipoCalle.hashCode());
 		result += prime * result + ((nombreCalle == null) ? 0 : nombreCalle.hashCode());
 		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
@@ -59,8 +64,4 @@ public class Calle implements Serializable{
 		id = calleId;
 		return id;
 	}
-	public void setId(Integer id) {
-		this.id = calleId;
-	}
-	
 }

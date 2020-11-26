@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Departamento;
+import co.com.mundocostenio.exceptions.ErrorField;
+import co.com.mundocostenio.exceptions.ErrorFieldVerify;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.DepartamentoService;
 
 @RestController
@@ -25,6 +28,9 @@ public class DepartamentoController {
 	
 	@Autowired
 	private DepartamentoService departamentoService;
+	
+	@Autowired
+	private ErrorFieldVerify errorFieldVerify;
 	
 	@RequestMapping(
 			value ="/departamento", method =RequestMethod.POST,
@@ -34,7 +40,8 @@ public class DepartamentoController {
 	public ResponseEntity<?> insert(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		Departamento departamentoResult = this.departamentoService.insert(departamento);
 		
@@ -46,11 +53,9 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
+	public ResponseEntity<?> update(@RequestBody Departamento departamento){
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		verificarDepartamento(departamento);
 		Departamento departamentoResult = this.departamentoService.update(departamento);
 		
 		return new ResponseEntity<Departamento>(departamentoResult,headers, HttpStatus.OK);
@@ -61,11 +66,9 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
+	public ResponseEntity<?> delete(@RequestBody Departamento departamento){
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		verificarDepartamento(departamento);
 		this.departamentoService.delete(departamento.getDepartamentoId());
 		
 		return new ResponseEntity<Departamento>(null,headers, HttpStatus.OK);
@@ -76,14 +79,28 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody @Valid Departamento departamento, BindingResult bindingResult){
+	public ResponseEntity<?> select(@RequestBody Departamento departamento){
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		verificarDepartamento(departamento);
 		List<Departamento> departamentoResult = this.departamentoService.select(departamento);
 		
 		return new ResponseEntity<List<Departamento>>(departamentoResult,headers, HttpStatus.OK);
 	}
-
+	
+	private void verificarDepartamento(Departamento departamento) {
+		List<Departamento> barrioResult = this.departamentoService.select(departamento);
+		if(barrioResult.size() == 0) {
+			if(departamento.getDepartamentoId()!= null || departamento.getId() != null || departamento.getNombreDepartamento()!=null) {
+				if(departamento.getDepartamentoId()!= null && departamento.getDepartamentoId() > 0) {
+					throw new ResourceNotFoundException("Departamento con id: " +departamento.getDepartamentoId()+"  no encontrado");
+				}
+				else {
+					throw new ResourceNotFoundException("Departamento no encontrado");
+				}
+			}
+			else {
+				throw new ResourceNotFoundException("No existen registros en la tabla departamento");
+			}
+		}
+	}
 }

@@ -1,5 +1,6 @@
 package co.com.mundocostenio.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.exceptions.ErrorField;
+import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.CalleService;
 
@@ -26,6 +29,9 @@ public class CalleController {
 	
 	@Autowired
 	private CalleService calleService;
+	
+	@Autowired
+	private ErrorFieldVerify errorFieldVerify;
 	
 	
 	@RequestMapping(
@@ -36,7 +42,8 @@ public class CalleController {
 	public ResponseEntity<?> insertCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		Calle calleResult = this.calleService.insert(calle);
 		
@@ -48,13 +55,16 @@ public class CalleController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> updateCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?> updateCalle(@RequestBody Calle calle)throws Exception{
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		verificarCalle(calle);
+		try {
+			this.calleService.update(calle);
 		}
-		verificarCalle(calle.getCalleId());
-		this.calleService.update(calle);
+		catch(Exception e) {
+			FieldError fieldError = new FieldError("co.com.mundocostenio.domain.Calle", "calleId", e.getMessage());
+			return new ResponseEntity<FieldError>(fieldError, headers, HttpStatus.NOT_FOUND);
+		}
 		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
 	}
@@ -64,14 +74,16 @@ public class CalleController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> deleteCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?> deleteCalle(@RequestBody Calle calle) throws Exception{
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		verificarCalle(calle);
+		try {
+			this.calleService.delete(calle);
 		}
-		//verificarCalle(calle.getCalleId());
-		this.calleService.delete(calle);
-		
+		catch(Exception e) {
+			FieldError fieldError = new FieldError("co.com.mundocostenio.domain.Calle", "calleId", e.getMessage());
+			return new ResponseEntity<FieldError>(fieldError, headers, HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
 	}
 	
@@ -80,24 +92,28 @@ public class CalleController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> showCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
+	public ResponseEntity<?> showCalle(@RequestBody Calle calle){
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		verificarCalle(calle);
 		List<Calle> calles = this.calleService.select(calle);
 		
 		return new ResponseEntity<List<Calle>>(calles, headers, HttpStatus.OK);
 	}
 	
-	private void verificarCalle(int calleId) {
-		Calle calle = new Calle();
-		calle.setCalleId(calleId);
+	private void verificarCalle(Calle calle) {
 		List<Calle> calleResult = this.calleService.select(calle);
 		if(calleResult.size() == 0) {
-			throw new ResourceNotFoundException("Calle con id: " + calleId + ", no encontrada");
+			if(calle.getCalleId()!= null || calle.getId() != null || calle.getNombreCalle()!=null || calle.getTipoCalle()!=null) {
+				if(calle.getCalleId()!= null && calle.getCalleId() > 0) {
+					throw new ResourceNotFoundException("Calle con id: " +calle.getCalleId()+"  no encontrada");
+				}
+				else {
+					throw new ResourceNotFoundException("Calle no encontrada");
+				}
+			}
+			else {
+				throw new ResourceNotFoundException("No existen registros en la tabla calle");
+			}
 		}
-		
 	}
-
 }

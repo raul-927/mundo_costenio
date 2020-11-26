@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.com.mundocostenio.messageerror.ProductoErrorMessage;
 
 public class Producto implements Serializable{
@@ -14,7 +16,10 @@ public class Producto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	private Integer 		id;
+	
+	@NotNull(message = ProductoErrorMessage.PROD_ID_NOT_NULL)
 	private Integer 		prodId;
 	
 	@NotNull(message = ProductoErrorMessage.NOMBRE_NULL)
@@ -23,8 +28,9 @@ public class Producto implements Serializable{
 	
 	@NotNull(message = ProductoErrorMessage.TIPO_PRODUCTO_NULL)
 	private TipoProducto 	tipoProducto;
+	
+	@NotNull(message = ProductoErrorMessage.IMPUESTO_NOT_NULL)
 	private Impuesto 		impuesto;
-	private Long			objectIdIdentity;
 	
 	public Integer getId() {
 		id = prodId;
@@ -54,13 +60,7 @@ public class Producto implements Serializable{
 	public void setImpuesto(Impuesto impuesto) {
 		this.impuesto = impuesto;
 	}
-	public Long getObjectIdIdentity() {
-		return objectIdIdentity;
-	}
-	public void setObjectIdIdentity(Long objectIdIdentity) {
-		this.objectIdIdentity = objectIdIdentity;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		LocalDateTime localDateTime = LocalDateTime.now();

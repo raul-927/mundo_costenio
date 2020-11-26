@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.TipoProducto;
+import co.com.mundocostenio.exceptions.ErrorField;
+import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.services.TipoProductoService;
 
 @RestController
@@ -26,6 +28,9 @@ public class TipoProductoController {
 	
 	@Autowired
 	private TipoProductoService tipoProductoService;
+	
+	@Autowired
+	private ErrorFieldVerify errorFieldVerify;
 	
 	
 	@RequestMapping(
@@ -36,7 +41,8 @@ public class TipoProductoController {
 	public ResponseEntity<?> insert(@RequestBody @Valid TipoProducto tipoProducto, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.NOT_ACCEPTABLE);
+			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		TipoProducto result = this.tipoProductoService.insert(tipoProducto);
 		

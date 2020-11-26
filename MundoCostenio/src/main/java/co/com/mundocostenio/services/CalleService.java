@@ -8,7 +8,7 @@ public interface CalleService {
 	Calle insert(Calle calle);
 	
 	void insertDireccionCalles(int direccionId, List<Calle>calles);
-	Calle update(Calle calle);
-	void delete(Calle calle);
+	Calle update(Calle calle)throws Exception ;
+	void delete(Calle calle) throws Exception;
 	List<Calle> select(Calle calle);
 }

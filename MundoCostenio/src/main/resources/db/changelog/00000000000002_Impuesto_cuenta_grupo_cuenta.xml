@@ -27,7 +27,7 @@
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="cuenta_desc" 	   type="varchar(50)"/>
-            <column name="tipo_cuenta" 	   type="ENUM('VENTA','IMPOSITIVO','PRODUCTO','RETIRO','GASTOS')"/>
+            <column name="tipo_cuenta" 	   type="ENUM('VENTA','IMPOSITIVO','PRODUCTO','RETIRO','GASTOS','INGRESO','DEUDAS','PATRIMONIO','EGRESO')"/>
             <column name="cuenta_fecha"    type="date"/>
             <column name="cuenta_hora" 	   type="time"/>
             <column name="cuenta_usuario"  type="varchar(50)"/>

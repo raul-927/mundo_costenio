@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.mundocostenio.domain.Departamento;
 import co.com.mundocostenio.domain.GrupoCuenta;
+import co.com.mundocostenio.exceptions.ErrorField;
+import co.com.mundocostenio.exceptions.ErrorFieldVerify;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.GrupoCuentaService;
 
 
@@ -26,6 +30,9 @@ public class GrupoCuentaController {
 	
 	@Autowired
 	private GrupoCuentaService grupoCuentaService;
+	
+	@Autowired
+	private ErrorFieldVerify errorFieldVerify;
 	
 	
 	@RequestMapping(
@@ -36,10 +43,28 @@ public class GrupoCuentaController {
 	public ResponseEntity<?> insert(@RequestBody @Valid GrupoCuenta grupoCuenta, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		GrupoCuenta grupoCuentaResult = this.grupoCuentaService.insert(grupoCuenta);
 		return new ResponseEntity<GrupoCuenta>(grupoCuentaResult, headers, HttpStatus.OK);
+	}
+	
+	private void verificarGrupoCuenta(GrupoCuenta grupoCuenta) {
+		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
+		if(grupoCuentaResult.size() == 0) {
+			if(grupoCuenta.getGrupoCuentaId()!= null || grupoCuenta.getId() != null) {
+				if(grupoCuenta.getGrupoCuentaId()!= null && grupoCuenta.getGrupoCuentaId() > 0) {
+					throw new ResourceNotFoundException("Grupo Cuenta con id: " +grupoCuenta.getGrupoCuentaId()+"  no encontrado");
+				}
+				else {
+					throw new ResourceNotFoundException("Grupo Cuenta no encontrado");
+				}
+			}
+			else {
+				throw new ResourceNotFoundException("No existen registros en la tabla grupo_cuenta");
+			}
+		}
 	}
 
 }

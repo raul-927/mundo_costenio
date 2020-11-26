@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.com.mundocostenio.enumerator.EstadoCajaEnum;
 
 public class Caja implements Serializable {
@@ -12,7 +14,10 @@ public class Caja implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@JsonIgnore
 	private int				id;
+	
 	private int 			cajaId;
 	private EstadoCajaEnum 	estado;
 	private LocalDate 		cajaFecha;

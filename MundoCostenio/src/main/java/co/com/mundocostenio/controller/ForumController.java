@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.mundocostenio.domain.Departamento;
 import co.com.mundocostenio.domain.Post;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.ForumService;
 
 @RestController
@@ -43,6 +45,7 @@ public class ForumController {
 	@ResponseBody
 	public ResponseEntity<?> updatePost(@RequestBody Post post){
 		HttpHeaders header = new HttpHeaders();
+		
 		Post postResult = forumService.updatePost(post);
 		return new ResponseEntity<Post>(postResult, header, HttpStatus.OK);
 	}
@@ -68,5 +71,4 @@ public class ForumController {
 		forumService.deletePost(post);
 		return new ResponseEntity<Post>(post, header, HttpStatus.OK);
 	}
-
 }

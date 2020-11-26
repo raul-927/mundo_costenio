@@ -1,5 +1,6 @@
 package co.com.mundocostenio.mybatis.mappers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -28,7 +29,7 @@ public interface CalleMapper {
 	void update(@Param("calle") Calle calle);
 	
 	@DeleteProvider(type = CalleSqlProvider.class, method ="delete")
-	void delete(int calleId);
+	void delete(@Param("calle") Calle calle) throws SQLException;
 	
 	@SelectProvider(type = CalleSqlProvider.class, method = "select")
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult")

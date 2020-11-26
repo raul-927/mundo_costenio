@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.ListaStockMapper">
+	<resultMap type="co.com.mundocostenio.domain.ListaStock" id="ListaStockResult">
+  	
+  		<id		property ="listStockId" 	 column ="list_stock_id"/>
+ 		<result property ="descripcion" 	 column ="descripcion"/>
+ 		<result property ="fecha" 	 		 column ="fecha"/>
+ 		<result property ="hora" 	 		 column ="hora"/>
+ 		
+ 		<collection property ="stockList" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.StockMapper.StockResult"/>
+  	</resultMap>
+</mapper>

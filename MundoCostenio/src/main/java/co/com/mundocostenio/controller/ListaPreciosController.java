@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.ListaPrecios;
 import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.exceptions.ErrorField;
+import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.services.ListaPreciosService;
 
 @RestController
@@ -28,6 +30,9 @@ public class ListaPreciosController {
 	
 	@Autowired
 	private ListaPreciosService listaPreciosService;
+	
+	@Autowired
+	private ErrorFieldVerify errorFieldVerify;
 	
 	
 	@RequestMapping(
@@ -39,7 +44,8 @@ public class ListaPreciosController {
 												BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		ListaPrecios listaPreciosResult = this.listaPreciosService.insert(listaPrecios);
 		return new ResponseEntity<ListaPrecios>(listaPreciosResult, headers, HttpStatus.OK);

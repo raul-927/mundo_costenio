@@ -5,14 +5,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Asiento implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	@JsonIgnore
 	private Integer		id;
+	
 	private Integer 	asientoId;
 	private String		descripcion;
 	private Cuenta		cuentaDebe;
@@ -22,8 +25,6 @@ public class Asiento implements Serializable{
 	private Caja		caja;
 	private LocalDate	fecha;
 	private LocalTime	hora;
-	
-	//private TipoAsientoEnum tipoAsiento;
 	
 	public Integer getId() {
 		id = asientoId;
