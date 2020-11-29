@@ -5,12 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.statemachine.StateMachine;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.mybatis.mappers.AsientoMapper;
 import co.com.mundocostenio.mybatis.mappers.CalleMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
+import co.com.mundocostenio.statemachine.Events;
+import co.com.mundocostenio.statemachine.States;
 
 
 @Service("calleService")
@@ -21,6 +25,9 @@ public class CalleServiceImpl implements CalleService {
 	
 	@Autowired
 	private CalleMapper calleMapper;
+	
+	@Autowired
+	private StateMachine<States, Events> stateMachine;
 
 	@Override
 	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
@@ -34,14 +41,15 @@ public class CalleServiceImpl implements CalleService {
 	@Override
 	public void insertDireccionCalles(int direccionId, List<Calle> calles) {
 		this.calleMapper.insertDireccionCalles(direccionId, calles);
+		stateMachine.sendEvent(Events.EVENT1);
 	}
 	
 
 	@Override
 	@Transactional
-	@PreAuthorize("hasPermission(#calle, 'WRITE')")
+	@PreAuthorize(value="hasPermission(#calle, 'WRITE')")
 	public Calle update(@Param("calle") Calle calle) throws Exception {
-		if(calle!=null && calle.getCalleId()!=null) {
+		if(calle!=null && calle.getCalleId()!=null && calle.getId()!=null) {
 			this.calleMapper.update(calle);
 		}
 		else {
@@ -51,7 +59,9 @@ public class CalleServiceImpl implements CalleService {
 	}
 
 	@Override
-	public void delete(Calle calle)throws Exception {
+	@Transactional
+	@PreAuthorize(value="hasPermission(#calle, 'DELETE')")
+	public void delete(@Param("calle") Calle calle)throws Exception {
 		if(calle!=null && calle.getCalleId()!=null) {
 			this.calleMapper.delete(calle);
 		}

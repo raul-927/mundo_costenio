@@ -69,7 +69,7 @@ public class AsientoSqlProvider {
 	
 	public String select(Asiento asiento) {
 		return new SQL() {{
-			SELECT("a.asiento_id, a.descripcion, a.monto_debe, a.monto_haber, a.fecha, a.hora");
+			SELECT("a.asiento_id, a.asiento_nro, a.descripcion, a.monto_debe, a.monto_haber, a.fecha, a.hora");
 			SELECT("cd.cuenta_id, cd.cuenta_desc, cd.tipo_cuenta, cd.cuenta_fecha, cd.cuenta_hora, cd.cuenta_usuario");
 			SELECT("ch.cuenta_id, ch.cuenta_desc, ch.tipo_cuenta, ch.cuenta_fecha, ch.cuenta_hora, ch.cuenta_usuario");
 			SELECT("gd.grupo_cuenta_id, gd.tipo_grupo_cuenta, gd.grupo_cuenta_desc");
@@ -118,6 +118,13 @@ public class AsientoSqlProvider {
 					WHERE("a.monto_haber = " +String.valueOf(asiento.getMontoHaber()));
 				}
 			}
+		}}.toString();
+	}
+	
+	public String selectMaxNroAsiento() {
+		return new SQL() {{
+			SELECT("MAX(asiento_nro) +1 max_num");
+			FROM("asiento");
 		}}.toString();
 	}
 }

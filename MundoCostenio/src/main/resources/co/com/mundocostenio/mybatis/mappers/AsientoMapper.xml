@@ -5,12 +5,13 @@
 	<resultMap type="co.com.mundocostenio.domain.Asiento" id="AsientoResult">
   	
   		<id		property = "asientoId" 	 column = "asiento_id"/>
+  		<result property ="asientoNro" 	 column ="asiento_nro"/>
  		<result property ="nombreBarrio" column ="nombre_barrio"/>
  		<result property ="montoDebe" 	 column ="monto_debe"/>
  		<result property ="montoHaber" 	 column ="monto_haber"/>
  		<result property ="fecha" 		 column ="fecha"/>
  		<result property ="hora" 		 column ="horq"/>
- 		
+ 		<result property ="tipoCuenta"   column ="tipo_cuenta"/>
  		<association property ="cuentaDebe" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.CuentaMapper.CuentaResult"/>
 
@@ -19,5 +20,10 @@
 			
 	<association property ="caja" 
 			resultMap="co.com.mundocostenio.mybatis.mappers.CajaMapper.CajaResult"/>
+  	</resultMap>
+  	
+  	<resultMap type="Integer" id="MaxAsientoNroResult">
+  		<result javaType="Integer" column="max_num"/>
+
   	</resultMap>
 </mapper>

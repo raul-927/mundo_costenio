@@ -141,6 +141,7 @@
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="desc_tipo_producto" 	type="varchar(50)"/>
+            <column name="cuenta_id" 			type="int"/>
         </createTable>
 
          <addForeignKeyConstraint  baseColumnNames="departamento_id"  
@@ -231,6 +232,15 @@
             onUpdate="RESTRICT"  
             referencedColumnNames="tipo_prod_id"   
             referencedTableName="tipo_producto"   
+            validate="true"/>
+            
+      <addForeignKeyConstraint  baseColumnNames="cuenta_id"  
+            baseTableName="tipo_producto"  
+            constraintName="fk_tipo_producto_cuenta"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="cuenta_id"
+            referencedTableName="cuenta"   
             validate="true"/>
 
        <addUniqueConstraint 

@@ -19,6 +19,8 @@ public class TipoProducto implements Serializable{
 	@NotNull(message =TipoProductoErrorMessage.DESCRIPCION_NULL)
 	@Size(min = 3, max = 30, message = TipoProductoErrorMessage.DESCRIPCION_LENGTH)
 	private String descTipoProducto;
+	@NotNull(message= TipoProductoErrorMessage.CUENTA_NOT_NULL)
+	private Cuenta cuenta;
 	
 	public TipoProducto() {}
 	public TipoProducto(Integer tipProdId, String descTipoProducto) {
@@ -75,5 +77,11 @@ public class TipoProducto implements Serializable{
 		} else if (!tipProdId.equals(other.tipProdId))
 			return false;
 		return true;
+	}
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
 	}
 }

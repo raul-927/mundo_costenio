@@ -26,5 +26,9 @@ public interface AsientoMapper {
 	@SelectProvider(type = AsientoSqlProvider.class, method ="select")
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.AsientoMapper.AsientoResult")
 	List<Asiento> select(@Param("asiento") Asiento asiento);
+	
+	@SelectProvider(type = AsientoSqlProvider.class, method ="selectMaxNroAsiento")
+	@ResultMap("co.com.mundocostenio.mybatis.mappers.AsientoMapper.MaxAsientoNroResult")
+	Integer selectMaxNroAsiento();
 
 }

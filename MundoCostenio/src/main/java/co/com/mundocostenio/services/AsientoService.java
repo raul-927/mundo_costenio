@@ -3,10 +3,14 @@ package co.com.mundocostenio.services;
 import java.util.List;
 
 import co.com.mundocostenio.domain.Asiento;
+import co.com.mundocostenio.domain.ListaPrecios;
+import co.com.mundocostenio.domain.MedioDePago;
+import co.com.mundocostenio.domain.Pago;
+import co.com.mundocostenio.domain.Producto;
 
 public interface AsientoService {
 	
-	Asiento insert(Asiento asiento);
+	List<Asiento> insert(Pago pago, Producto producto);
 	Asiento update(Asiento asiento);
 	List<Asiento> select(Asiento asiento);
 }

@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public enum TipoGrupoCuentaEnum implements Serializable{
 	ECONOMICO(1,"Economico"),
-	PERSONAS(2,"Personas");
+	PERSONAS(2,"Personas"),
+	PRODUCTO(3, "Producto");
 	
 	private int id;
 	private String descripcion;

@@ -8,4 +8,6 @@ public class TipoProductoErrorMessage {
 	public static final String APELLIDO_LENGHT = "El largo del apellido debe ser entre 3 y 15 caracteres";
 	public static final String CEDULA_INVALIDA = "";
 	public static final String CEDULA_INEXISTENE = "";
+	public static final String CUENTA_NOT_NULL ="Cuenta no debe ser null";
+	
 }

@@ -7,6 +7,8 @@ import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import co.com.mundocostenio.enumerator.TipoCuentaEnum;
+
 public class Asiento implements Serializable{
 
 	/**
@@ -17,6 +19,8 @@ public class Asiento implements Serializable{
 	private Integer		id;
 	
 	private Integer 	asientoId;
+	
+	private Integer		asientoNro;
 	private String		descripcion;
 	private Cuenta		cuentaDebe;
 	private BigDecimal 	montoDebe;
@@ -25,6 +29,7 @@ public class Asiento implements Serializable{
 	private Caja		caja;
 	private LocalDate	fecha;
 	private LocalTime	hora;
+	private TipoCuentaEnum tipoCuenta;
 	
 	public Integer getId() {
 		id = asientoId;
@@ -84,6 +89,18 @@ public class Asiento implements Serializable{
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public TipoCuentaEnum getTipoCuenta() {
+		return tipoCuenta;
+	}
+	public void setTipoCuenta(TipoCuentaEnum tipoCuenta) {
+		this.tipoCuenta = tipoCuenta;
+	}
+	public Integer getAsientoNro() {
+		return asientoNro;
+	}
+	public void setAsientoNro(Integer asientoNro) {
+		this.asientoNro = asientoNro;
 	}
 
 }
