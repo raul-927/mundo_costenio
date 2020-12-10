@@ -76,5 +76,18 @@ public class ProductoController {
 		
 		return new ResponseEntity<Integer>(result, headers, HttpStatus.OK);
 	}
+	
+	@RequestMapping(
+			value ="/productos", method =RequestMethod.POST,
+			consumes ={MediaType.APPLICATION_JSON_VALUE},
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?> select(@RequestBody Producto producto) {
+		HttpHeaders headers = new HttpHeaders();
+		
+		List<Producto> productoResult = this.productoService.selectProducto(producto);
+		
+		return new ResponseEntity<List<Producto>>(productoResult, headers, HttpStatus.OK);
+	}
 
 }

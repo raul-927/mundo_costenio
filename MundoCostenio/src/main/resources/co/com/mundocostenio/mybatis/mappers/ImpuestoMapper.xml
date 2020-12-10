@@ -10,7 +10,7 @@
  		<result property ="impuestoValor" 	 column ="impuesto_valor"/>
  		<result property ="tipoImpuesto" 	 column ="tipo_impuesto"/>
  		
- 		<association property ="cuenta" 
-			resultMap="co.com.mundocostenio.mybatis.mappers.CuentaMapper.CuentaResult"/>
+ 		<association property ="cuentaImpuesto" 
+			resultMap="co.com.mundocostenio.mybatis.mappers.CuentaImpuestoMapper.CuentaResult"/>
   	</resultMap>
 </mapper>

@@ -34,7 +34,7 @@ public class AsientoServiceImpl implements AsientoService {
 		Cuenta cuentaL1 = pago.getCuenta();
 		BigDecimal montoDebeL1 = null;
 		BigDecimal montoHaberL1 = new BigDecimal(00);
-		Cuenta cuentaImpuesto = producto.getImpuesto().getCuenta();
+		Cuenta cuentaImpuesto = producto.getImpuesto().getCuentaImpuesto();
 		for(PrecioProducto precProd: listaPreciosActual.getPrecioProductoList()) {
 			if(producto.getProdId() == precProd.getProducto().getProdId()) {
 				montoDebeL1 = new BigDecimal((double)precProd.getMonto());

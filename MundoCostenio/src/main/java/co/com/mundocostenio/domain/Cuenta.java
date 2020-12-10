@@ -22,7 +22,6 @@ public class Cuenta implements Serializable{
 	@JsonIgnore
 	private Integer			id;
 	
-	@NotNull(message="cuentaId no debe ser Null")
 	private Integer 		cuentaId;
 	
 	@NotNull(message=" cuentaDesc no debe ser null")

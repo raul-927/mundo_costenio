@@ -40,7 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-	  auth.inMemoryAuthentication()
+	  auth
+//	  	.jdbcAuthentication()
+//	  	.usersByUsernameQuery(usersQuery)
+//	  	.groupAuthoritiesByUsername(rolesQuery)
+//	  	.passwordEncoder(passwordEncoder())
+//	  .and()
+//	  	.eraseCredentials(false);
+	  .inMemoryAuthentication()
 	  	.withUser("car").password(passwordEncoder().encode("scarvarez")).roles("USER")
 	    .and()
 	    .withUser("car2").password(passwordEncoder().encode("scarvarez")).roles("USER")
@@ -57,7 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    .and()
 	    .withUser("anonimous").password(passwordEncoder().encode("scarvarez")).roles("ANONIMOUS")
 	    .and()
-	    .withUser("config").password(passwordEncoder().encode("scarvarez")).roles("CONFIG");
+	    .withUser("config").password(passwordEncoder().encode("scarvarez")).roles("CONFIG")
+	    .and()
+	    .withUser("rrhh").password(passwordEncoder().encode("scarvarez")).roles("RRHH");
 	}
 	
 	

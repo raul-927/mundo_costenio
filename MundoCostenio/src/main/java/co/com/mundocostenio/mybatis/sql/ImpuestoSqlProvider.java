@@ -22,8 +22,8 @@ public class ImpuestoSqlProvider {
 			if(impuesto.getImpuestoValor()!=null) {
 				VALUES("impuesto_valor", String.valueOf(impuesto.getImpuestoValor()));
 			}
-			if(impuesto.getCuenta()!=null) {
-				VALUES("cuenta_id", String.valueOf(impuesto.getCuenta().getCuentaId()));
+			if(impuesto.getCuentaImpuesto()!=null) {
+				VALUES("cuenta_id", String.valueOf(impuesto.getCuentaImpuesto().getCuentaId()));
 			}
 		}}.toString();
 	}
@@ -43,8 +43,8 @@ public class ImpuestoSqlProvider {
 			if(impuesto.getImpuestoValor()!=null) {
 				SET("impuesto_valor = "+ String.valueOf(impuesto.getImpuestoValor()));
 			}
-			if(impuesto.getCuenta()!=null) {
-				SET("cuenta_id = "+ String.valueOf(impuesto.getCuenta().getCuentaId()));
+			if(impuesto.getCuentaImpuesto()!=null) {
+				SET("cuenta_id = "+ String.valueOf(impuesto.getCuentaImpuesto().getCuentaId()));
 			}
 			WHERE("impuesto_id = " + String.valueOf(impuesto.getImpuestoId()));
 		}}.toString();
@@ -69,7 +69,7 @@ public class ImpuestoSqlProvider {
 			
 			WHERE("i.cuenta_id = c.cuenta_id");
 			WHERE("c.grupo_cuenta_id = g.grupo_cuenta_id");
-			if(impuesto.getImpuestoId()> 0) {
+			if(impuesto.getImpuestoId()!=null && impuesto.getImpuestoId()> 0) {
 				WHERE("i.impuesto_id = " + String.valueOf(impuesto.getImpuestoId()));
 			}
 			else {
@@ -85,11 +85,11 @@ public class ImpuestoSqlProvider {
 				if(impuesto.getTipoImpuesto()!=null) {
 					WHERE("i.tipo_impuesto = " + "'".concat(impuesto.getTipoImpuesto().name()).concat("'"));
 				}
-				if(impuesto.getCuenta()!=null && impuesto.getCuenta().getCuentaId() > 0) {
-					WHERE("i.cuenta_id = " + String.valueOf(impuesto.getCuenta().getCuentaId()));
+				if(impuesto.getCuentaImpuesto()!=null && impuesto.getCuentaImpuesto().getCuentaId() > 0) {
+					WHERE("i.cuenta_id = " + String.valueOf(impuesto.getCuentaImpuesto().getCuentaId()));
 				}
-				else if(impuesto.getCuenta()!=null && impuesto.getCuenta().getCuentaDesc()!=null && impuesto.getCuenta().getCuentaDesc()!="") {
-					WHERE("c.cuenta_desc= " + "'".concat(impuesto.getCuenta().getCuentaDesc()).concat("'"));
+				else if(impuesto.getCuentaImpuesto()!=null && impuesto.getCuentaImpuesto().getCuentaDesc()!=null && impuesto.getCuentaImpuesto().getCuentaDesc()!="") {
+					WHERE("c.cuenta_desc= " + "'".concat(impuesto.getCuentaImpuesto().getCuentaDesc()).concat("'"));
 				}
 			}
 			

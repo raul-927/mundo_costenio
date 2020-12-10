@@ -18,9 +18,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import co.com.mundocostenio.domain.Impuesto;
 import co.com.mundocostenio.domain.Producto;
 import co.com.mundocostenio.enumerator.RolesEnum;
+import co.com.mundocostenio.mybatis.mappers.ImpuestoMapper;
 import co.com.mundocostenio.mybatis.mappers.ProductoMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 
@@ -33,13 +36,16 @@ public class ProductoServiceImpl implements ProductoService {
 	
 	@Autowired
 	private ProductoMapper productoMapper;
+	
+	@Autowired
+	private ImpuestoMapper impuestoMapper;
 
 	@Override
 	@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
+	@Transactional
 	public Producto insert(Producto producto) {
-		Integer id = this.accesControlListService.insert(producto);
-		producto.setProdId(id);
 		this.productoMapper.insert(producto);
+		this.accesControlListService.insert(producto);
 		return producto;
 	}
 
@@ -60,9 +66,21 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
+	//@PostAuthorize("hasPermission(#producto, 'READ')")
 	@PostFilter("hasPermission(filterObject, 'READ')")
-	public List<Producto> selectProducto(Producto producto) {
-		return this.productoMapper.selectProducto(producto);
+	public List<Producto> selectProducto(@Param("producto") Producto producto) {
+		
+		List<Producto> productoList = this.productoMapper.selectProducto(producto);
+		for(Producto prod: productoList) {
+			List<Impuesto> impuestoList = this.impuestoMapper.select(prod.getImpuesto());
+			for(Impuesto imp: impuestoList) {
+				if(prod.getImpuesto().getImpuestoId()== imp.getImpuestoId()) {
+					prod.getImpuesto().setCuentaImpuesto(imp.getCuentaImpuesto());
+					int index = productoList.indexOf(prod);
+					productoList.set(index, prod);
+				}
+			}
+		}
+		return productoList;
 	}
-
 }

@@ -27,20 +27,27 @@ public class DireccionServiceImpl implements DireccionService {
 	private CalleMapper calleMapper;
 
 	@Override
-	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
+	@PreAuthorize(value ="hasRole('ROLE_RRHH')")
 	@Transactional
 	public List<Direccion> insert(List<Direccion> direcciones) {
-		List<Direccion> direccionesResult = this.ejutarInsert(direcciones);
-		for(Direccion dir: direccionesResult) {
-			this.accesControlListService.insert(dir);
+		List<Direccion> direccionesResult = null;
+		if(direcciones!= null && direcciones.size() > 0) {
+			direccionesResult = this.ejutarInsert(direcciones);
+			for(Direccion dir: direccionesResult) {
+				this.accesControlListService.insert(dir);
+			}
 		}
+		
 		return direccionesResult;
 	}
 
 	@Transactional
 	@Override
 	public void insertPersonaDirecciones(int personaId, List<Direccion> direcciones) {
-		this.direccionMapper.insertPersonaDirecciones(personaId, direcciones);
+		if(direcciones !=null && direcciones.size() > 0) {
+			this.direccionMapper.insertPersonaDirecciones(personaId, direcciones);
+		}
+		
 
 	}
 	

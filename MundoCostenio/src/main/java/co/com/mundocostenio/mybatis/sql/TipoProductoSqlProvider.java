@@ -11,6 +11,7 @@ public class TipoProductoSqlProvider {
 			if(tipoProducto.getDescTipoProducto()!= null && tipoProducto.getDescTipoProducto() !="") {
 				INSERT_INTO("tipo_producto");
 				VALUES("desc_tipo_producto","'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
+				VALUES("cuenta_id", String.valueOf(tipoProducto.getCuenta().getCuentaId()));
 			}
 			
 		}}.toString();
@@ -39,12 +40,22 @@ public class TipoProductoSqlProvider {
 	
 	public String selectTipoProducto(TipoProducto tipoProducto) {
 		return new SQL() {{
-			SELECT("tip_prod_id, desc_tipo_producto");
-			FROM("tipo_producto");
-			if(tipoProducto.getTipProdId() > 0) {
-				WHERE("tip_prod_id = " + String.valueOf(tipoProducto.getTipProdId()));
-			}else if(tipoProducto.getDescTipoProducto()!=null && tipoProducto.getDescTipoProducto()!="") {
-				WHERE("desc_tipo_producto = " + "'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
+			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			SELECT("c.cuenta_id, c.cuenta_desc, c.tipo_cuenta, c.cuenta_fecha, c.cuenta_hora, c.cuenta_usuario");
+			SELECT("g.grupo_cuenta_id, g.tipo_grupo_cuenta, g.grupo_cuenta_desc");
+			
+			FROM("tipo_producto t");
+			FROM("cuenta c");
+			FROM("grupo_cuenta g");
+			
+			WHERE("t.cuenta_id = c.cuenta_id");
+			WHERE("c.grupo_cuenta_id = g.grupo_cuenta_id");
+			if(tipoProducto != null) {
+				if(tipoProducto.getTipProdId()!= null && tipoProducto.getTipProdId() > 0) {
+					WHERE("tip_prod_id = " + String.valueOf(tipoProducto.getTipProdId()));
+				}else if(tipoProducto.getDescTipoProducto()!=null && tipoProducto.getDescTipoProducto()!="") {
+					WHERE("desc_tipo_producto = " + "'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
+				}
 			}
 		}}.toString();
 	}

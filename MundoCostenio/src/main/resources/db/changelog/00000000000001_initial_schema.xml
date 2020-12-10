@@ -9,24 +9,6 @@
         <property name="autoIncrement" value="true"/>
         
     <changeSet id="00000000000001" author="rhernandez">
-    
-        <createTable tableName="domain_user">
-            <column name="dom_usr_id" 				type="int" autoIncrement="true">
-                <constraints primaryKey="true" 		nullable="false"/>
-            </column>
-            <column name="dom_usr_nom" 				type="varchar(50)"/>
-            <column name="dom_usr_ap" 				type="varchar(50)"/>
-            <column name="dom_usr_nic" 				type="varchar(50)"/>
-            <column name="dom_usr_pass" 			type="varchar(50)"/>
-            <column name="dom_usr_enabled" 			type="boolean"/>
-        </createTable>
-        
-        <createTable tableName="roles">
-            <column name="rol_id" 				type="int" autoIncrement="true">
-                <constraints primaryKey="true" 		nullable="false"/>
-            </column>
-            <column name="rol_name" 				type="varchar(50)"/>
-        </createTable>
         
         <createTable tableName="post">
             <column name="id" 	type="bigint">
@@ -249,14 +231,6 @@
             disabled="true" 
             initiallyDeferred="true"    
             tableName="fecha_vig_list_prec"    
-            validate="true"/>
-            
-       <addUniqueConstraint 
-            columnNames="rol_name"  
-            deferrable="true"  
-            disabled="true" 
-            initiallyDeferred="true"    
-            tableName="roles"    
             validate="true"/>
     </changeSet>
 </databaseChangeLog>

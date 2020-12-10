@@ -19,7 +19,7 @@ public class Producto implements Serializable{
 	@JsonIgnore
 	private Integer 		id;
 	
-	@NotNull(message = ProductoErrorMessage.PROD_ID_NOT_NULL)
+	
 	private Integer 		prodId;
 	
 	@NotNull(message = ProductoErrorMessage.NOMBRE_NULL)
@@ -34,6 +34,9 @@ public class Producto implements Serializable{
 	
 	public Integer getId() {
 		id = prodId;
+		if(id == null) {
+			id = 0;
+		}
 		return id;
 	}
 	public TipoProducto getTipoProducto() {

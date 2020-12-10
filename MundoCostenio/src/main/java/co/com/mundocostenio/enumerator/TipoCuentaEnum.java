@@ -2,7 +2,7 @@ package co.com.mundocostenio.enumerator;
 
 public enum TipoCuentaEnum{
 	VENTA(1,"Venta"), 
-	IMPOSTIVO(2, "Impositivo"), 
+	IMPOSITIVO(2, "Impositivo"), 
 	PRODUCTO(3,"Producto"),
 	RETIRO(4, "Retiro"),
 	GASTOS(5, "Gastos"),

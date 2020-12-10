@@ -9,5 +9,8 @@
  		
  		<association property="tipoProducto" 
  			resultMap="co.com.mundocostenio.mybatis.mappers.TipoProductoMapper.TipoProductoResult"/>
+ 			
+ 		<association property="impuesto" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.ImpuestoMapper.ImpuestoResult"/>
   	</resultMap>
 </mapper>

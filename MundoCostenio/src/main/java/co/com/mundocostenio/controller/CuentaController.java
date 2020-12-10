@@ -77,6 +77,20 @@ public class CuentaController {
 	}
 	
 	
+	@RequestMapping(
+			value ="/cuentas", method =RequestMethod.POST,
+			consumes ={MediaType.APPLICATION_JSON_VALUE},
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?> select(@RequestBody Cuenta cuenta){
+		HttpHeaders headers = new HttpHeaders();
+		verificarCuenta(cuenta);
+		List<Cuenta> cuentaResult = this.cuentaService.select(cuenta);
+		
+		return new ResponseEntity<List<Cuenta>>(cuentaResult, headers, HttpStatus.OK);
+	}
+	
+	
 	private void verificarCuenta(Cuenta cuenta) {
 		List<Cuenta> cuentaResult = this.cuentaService.select(cuenta);
 		if(cuentaResult.size() == 0) {

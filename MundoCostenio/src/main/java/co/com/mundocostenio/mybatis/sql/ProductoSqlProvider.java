@@ -15,6 +15,9 @@ public class ProductoSqlProvider {
 			if(producto.getTipoProducto() !=null) {
 				VALUES("tipo_prod_id", "'".concat(String.valueOf(producto.getTipoProducto().getTipProdId())).concat("'"));
 			}
+			if(producto.getImpuesto()!=null && producto.getImpuesto().getImpuestoId() > 0) {
+				VALUES("impuesto_id", String.valueOf(producto.getImpuesto().getImpuestoId()));
+			}
 		}}.toString();
 	}
 
@@ -43,11 +46,29 @@ public class ProductoSqlProvider {
 	public String selectProducto(Producto producto) {
 		return new SQL() {{
 			SELECT("p.prod_id, p.nombre");
-			SELECT("t.tip_prod_id, t.descripcion");
+			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			SELECT("ct.cuenta_id, ct.cuenta_desc, ct.tipo_cuenta, ct.cuenta_fecha, ct.cuenta_hora, ct.cuenta_usuario");
+			SELECT("gct.grupo_cuenta_id, gct.tipo_grupo_cuenta, gct.grupo_cuenta_desc");
+			SELECT("i.impuesto_id, i.impuesto_desc, i.impuesto_desc_abrv, i.impuesto_valor, i.tipo_impuesto");
+			SELECT("ci.cuenta_id, ci.cuenta_desc, ci.tipo_cuenta, ci.cuenta_fecha, ci.cuenta_hora, ci.cuenta_usuario");
+			SELECT("gci.grupo_cuenta_id, gci.tipo_grupo_cuenta, gci.grupo_cuenta_desc");
+			
 			FROM("producto p");
 			FROM("tipo_producto t");
-			WHERE("p.tipo_prod_id = t.tipo_prod_id");
-			if(producto.getProdId() > 0) {
+			FROM("cuenta ct");
+			FROM("grupo_cuenta gct");
+			FROM("impuesto i");
+			FROM("cuenta ci");
+			FROM("grupo_cuenta gci");
+			
+			WHERE("p.tipo_prod_id = t.tip_prod_id");
+			WHERE("t.cuenta_id = ct.cuenta_id");
+			WHERE("ct.grupo_cuenta_id = gct.grupo_cuenta_id");
+			WHERE("p.impuesto_id = i.impuesto_id");
+			WHERE("i.cuenta_id = ci.cuenta_id");
+			WHERE("ci.grupo_cuenta_id = gci.grupo_cuenta_id");
+			
+			if(producto.getProdId()!=null && producto.getProdId() > 0) {
 				WHERE("prod_id = " + String.valueOf(producto.getProdId()));
 			}
 			else {

@@ -82,7 +82,7 @@ public class PersonasSqlProvider {
 			WHERE("b.departamento_id = dep.departamento_id");
 			
 			if(persona != null) {
-				if(persona.getPersonaId() > 0) {
+				if(persona.getPersonaId()!= null && persona.getPersonaId() > 0) {
 					WHERE("p.persona_id = " + String.valueOf(persona.getPersonaId()));
 				}
 				else if(persona.getCedula() > 0) {

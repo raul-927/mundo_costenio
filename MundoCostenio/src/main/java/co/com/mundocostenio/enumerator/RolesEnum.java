@@ -12,7 +12,8 @@ public enum RolesEnum implements Serializable{
 	MARKETING(7, "ROLE_MARKETING"),
 	HUMAN_RESOURCES(8,"ROLE_RRHH"),
 	PROMOUTION(9, "ROLE_PROMOUTION"),
-	CONFIG(10, "ROLE_CONFIG");
+	CONFIG(10, "ROLE_CONFIG"),
+	RRHH(11, "ROLE_RRHH");
 	
 	private int rolId;
 	private String descripcion;

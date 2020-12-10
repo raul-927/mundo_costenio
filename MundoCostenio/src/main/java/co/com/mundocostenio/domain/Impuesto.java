@@ -18,7 +18,7 @@ public class Impuesto implements Serializable{
 	private String 			 impuestoDescAbrv;
 	private BigDecimal 		 impuestoValor;
 	private TipoImpuestoEnum tipoImpuesto;
-	private Cuenta 			 cuenta;
+	private Cuenta 			 cuentaImpuesto;
 	
 	public Integer getId() {
 		id = impuestoId;
@@ -49,12 +49,7 @@ public class Impuesto implements Serializable{
 		this.impuestoValor = impuestoValor;
 	}
 	
-	public Cuenta getCuenta() {
-		return cuenta;
-	}
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
-	}
+	
 	public TipoImpuestoEnum getTipoImpuesto() {
 		return tipoImpuesto;
 	}
@@ -72,9 +67,15 @@ public class Impuesto implements Serializable{
 		result += prime * result + ((impuestoDescAbrv == null) ? 0 : impuestoDescAbrv.hashCode());
 		result += prime * result + ((impuestoValor == null) ? 0 : impuestoValor.hashCode());
 		result += prime * result + ((tipoImpuesto == null) ? 0 : tipoImpuesto.hashCode());
-		result += prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
+		
 		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
 		return result;
+	}
+	public Cuenta getCuentaImpuesto() {
+		return cuentaImpuesto;
+	}
+	public void setCuentaImpuesto(Cuenta cuentaImpuesto) {
+		this.cuentaImpuesto = cuentaImpuesto;
 	}
 	
 }

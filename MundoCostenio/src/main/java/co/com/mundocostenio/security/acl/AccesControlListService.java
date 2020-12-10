@@ -19,6 +19,7 @@ import co.com.mundocostenio.domain.Direccion;
 import co.com.mundocostenio.domain.GrupoCuenta;
 import co.com.mundocostenio.domain.Impuesto;
 import co.com.mundocostenio.domain.ListaPrecios;
+import co.com.mundocostenio.domain.Persona;
 import co.com.mundocostenio.domain.Post;
 import co.com.mundocostenio.domain.Producto;
 import co.com.mundocostenio.domain.TipoProducto;
@@ -106,6 +107,14 @@ public class AccesControlListService<T> {
 		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);
+		}
+		else if(object instanceof Persona) {
+			objectIdentity = new ObjectIdentityImpl(Persona.class, ((Persona)object).getPersonaId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE, new PrincipalSid(user.getUsername()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
 		}
 		 PrincipalSid pSid = new PrincipalSid(user.getUsername());
 		 
