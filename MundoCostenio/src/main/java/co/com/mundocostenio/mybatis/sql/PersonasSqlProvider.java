@@ -21,8 +21,10 @@ public class PersonasSqlProvider {
 			if(persona.getApellido() !=null && persona.getApellido()!="") {
 				VALUES("apellido", "'".concat(persona.getApellido()).concat("'"));
 			}
-			if(persona.getRol()!=null) {
-				VALUES("rol", "'".concat(persona.getRol().name()).concat("'"));
+			if(persona.getUser() != null) {
+				if(persona.getUser().getUserId()!=null && persona.getUser().getUserId() > 0) {
+					VALUES("user_id", String.valueOf(persona.getUser().getUserId()));
+				}
 			}
 		}}.toString();
 	}
@@ -41,8 +43,10 @@ public class PersonasSqlProvider {
 			if(persona.getApellido() !=null && persona.getApellido()!="") {
 				SET("apellido", "'".concat(persona.getApellido()).concat("'"));
 			}
-			if(persona.getRol()!=null) {
-				SET("rol", "'".concat(persona.getRol().name()).concat("'"));
+			if(persona.getUser() != null) {
+				if(persona.getUser().getUserId()!=null && persona.getUser().getUserId() > 0) {
+					SET("user_id = "+ String.valueOf(persona.getUser().getUserId()));
+				}
 			}
 		}}.toString();
 	}
@@ -65,6 +69,7 @@ public class PersonasSqlProvider {
 			SELECT("b.barrio_id, b.nombre_barrio");
 			SELECT("c.calle_id, c.tipo_calle, c.nombre_calle");
 			SELECT("dep.departamento_id, dep.nombre_departamento");
+			SELECT("usr.user_id, usr.nic, user.password, usr.enabled");
 			
 			FROM("persona p");
 			FROM("direccion dir");
@@ -73,6 +78,7 @@ public class PersonasSqlProvider {
 			FROM("barrio b");
 			FROM("persona_direcciones perdir");
 			FROM("direccion_calles dirca");
+			FROM("user usr");
 			
 			WHERE("p.persona_id = perdir.persona_id");
 			WHERE("perdir.direccion_id = dir.direccion_id");
@@ -80,6 +86,7 @@ public class PersonasSqlProvider {
 			WHERE("dirca.calle_id = c.calle_id");
 			WHERE("dir.barrio_id = b.barrio_id");
 			WHERE("b.departamento_id = dep.departamento_id");
+			WHERE("p.user_id = usr.user_id");
 			
 			if(persona != null) {
 				if(persona.getPersonaId()!= null && persona.getPersonaId() > 0) {
@@ -94,9 +101,7 @@ public class PersonasSqlProvider {
 					if(persona.getApellido()!=null && persona.getApellido()!="") {
 						WHERE("p.apellido LIKE '%" + persona.getApellido() + "%'");
 					}
-					if(persona.getRol()!=null) {
-						WHERE("p.rol = " + "'".concat(persona.getRol().name()).concat("'"));
-					}
+					
 					if(persona.getDirecciones() != null && persona.getDirecciones().size() > 0) {
 						for(Direccion direccion: persona.getDirecciones()) {
 							if(direccion.getNroPuerta() > 0) {

@@ -3,6 +3,8 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import co.com.mundocostenio.enumerator.RolesEnum;
+
 public class Rol implements Serializable{
 	/**
 	 * 
@@ -10,7 +12,7 @@ public class Rol implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer rolId;
-	private String nombre;
+	private RolesEnum rol;
 	
 	public Rol() {}
 	
@@ -19,13 +21,6 @@ public class Rol implements Serializable{
 		return id;
 	}
 	
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public Integer getRolId() {
 		return rolId;
 	}
@@ -40,7 +35,7 @@ public class Rol implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((rolId == null) ? 0 : rolId.hashCode());
-		result += prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result += prime * result + ((rol == null) ? 0 : rol.hashCode());
 		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
 		return result;
 	}

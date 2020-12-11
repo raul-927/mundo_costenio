@@ -23,7 +23,7 @@
             <column name="rol_id" 			type="int" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
-            <column name="rol_name"		type="varchar(50)"/>
+            <column name="rol_name"		type="enum('ADMIN','USER', 'COUNTER', 'SALES','GUESS','ANONIMOUS','MARKETING','RRHH','PROMOUTION','CONFIG')"/>
         </createTable>
         
         <createTable tableName="user_rol">
@@ -33,6 +33,15 @@
             <column name="user_id"		type="int"/>
              <column name="rol_id"		type="int"/>
         </createTable>
+        
+        <addForeignKeyConstraint  baseColumnNames="user_id"  
+            baseTableName="persona"  
+            constraintName="fk_persona_user"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="user_id"
+            referencedTableName="user"   
+            validate="true"/>
         
          <addForeignKeyConstraint  baseColumnNames="user_id"  
             baseTableName="user_rol"  

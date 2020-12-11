@@ -90,7 +90,7 @@
             <column name="nombre" 	type="varchar(50)"/>
             <column name="apellido" type="varchar(50)"/>
             <column name="cedula"	type="int"/>
-            <column name="rol"	type="ENUM('ADMIN','USER','STAF','CLIENT')"/>
+            <column name="user_id"	type="int"/>
         </createTable>
         
         <createTable tableName="persona_direcciones">

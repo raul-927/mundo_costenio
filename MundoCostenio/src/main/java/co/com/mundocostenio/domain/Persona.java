@@ -34,19 +34,19 @@ public class Persona implements Serializable{
 	@CedulaExistente(message=PersonasErrorMessage.CEDULA_INEXISTENTE)
 	private Integer cedula;
 	
-	private RolesEnum rol;
+	private User user;
 	
 	private List<Direccion> direcciones;
 	
 	public Persona() {};
 	
 	public Persona(Integer personaId, String nombre, String apellido, Integer cedula,
-			List<Direccion> direcciones, RolesEnum rol) {
+			List<Direccion> direcciones, User user) {
 		this.personaId = personaId;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cedula = cedula;
-		this.rol  = rol;
+		this.user  = user;
 		this.direcciones = direcciones;
 		
 	}
@@ -97,20 +97,15 @@ public class Persona implements Serializable{
 		this.apellido = apellido;
 	}
 	
-	public int getCedula() {
+	public Integer getCedula() {
 		return cedula;
 	}
 
-	public void setCedula(int cedula) {
+	public void setCedula(Integer cedula) {
 		this.cedula = cedula;
 	}
 	
-	public RolesEnum getRol() {
-		return rol;
-	}
-	public void setRol(RolesEnum rol) {
-		this.rol = rol;
-	}
+	
 
 	public List<Direccion> getDirecciones() {
 		return direcciones;
@@ -128,10 +123,18 @@ public class Persona implements Serializable{
 		result += prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result += prime * result + ((apellido == null) ? 0 : apellido.hashCode());
 		result += prime * result + ((cedula == null) ? 0 : cedula.hashCode());
-		result += prime * result + ((rol == null) ? 0 : rol.hashCode());
+		result += prime * result + ((user == null) ? 0 : user.hashCode());
 		result += prime * result + ((direcciones == null) ? 0 : direcciones.hashCode());
 		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
 		return result;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 

@@ -4,13 +4,16 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.PersonasMapper">
 	<resultMap type="co.com.mundocostenio.domain.Persona" id="PersonasResult">
   	
-  		<id	property = "personaId" 	column = "persona_id"/>
- 		<result property ="nombre" column ="nombre"/>
- 		<result property ="apellido" column ="apellido"/>
- 		<result property = "cedula" column ="cedula"/>
- 		<result property = "rol" column ="rol"/>
+  		<id			 property ="personaId"	column ="persona_id"/>
+ 		<result 	 property ="nombre" 	column ="nombre"/>
+ 		<result 	 property ="apellido" 	column ="apellido"/>
+ 		<result 	 property ="cedula" 	column ="cedula"/>
+ 		<result 	 property ="rol" 		column ="rol"/>
+ 		
+ 		<association property ="user"
+ 			resultMap ="co.com.mundocostenio.mybatis.mappers.UserMapper.UserResult"/>
  			
- 		<collection property="direcciones" 
+ 		<collection property ="direcciones" 
  			resultMap="co.com.mundocostenio.mybatis.mappers.DireccionMapper.DireccionResult"/>
 
   	</resultMap>
