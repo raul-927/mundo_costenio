@@ -3,6 +3,8 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotNull;
+
 import co.com.mundocostenio.enumerator.RolesEnum;
 
 public class Rol implements Serializable{
@@ -12,6 +14,8 @@ public class Rol implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer rolId;
+	
+	@NotNull(message="rol no debe ser null")
 	private RolesEnum rol;
 	
 	public Rol() {}
