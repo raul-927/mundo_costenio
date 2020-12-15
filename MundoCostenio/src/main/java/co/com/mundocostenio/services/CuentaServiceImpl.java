@@ -50,7 +50,7 @@ public class CuentaServiceImpl implements CuentaService {
 
 	@Override
 	@PostFilter("hasPermission(filterObject, 'READ')")
-	public List<Cuenta> select(Cuenta cuenta) {
+	public List<Cuenta> select(@Param("cuenta") Cuenta cuenta) {
 		return this.cuentaMapper.select(cuenta);
 	}
 

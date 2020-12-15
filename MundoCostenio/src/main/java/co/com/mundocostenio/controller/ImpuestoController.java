@@ -91,7 +91,7 @@ public class ImpuestoController {
 	
 	private void verificarImpuesto(Impuesto impuesto) {
 		List<Impuesto> impuestoResult = this.impuestoService.select(impuesto);
-		if(impuestoResult.size() == 0) {
+		if(impuestoResult == null ) {
 			if(impuesto.getImpuestoId()!= null || impuesto.getId() != null) {
 				if(impuesto.getImpuestoId()!= null && impuesto.getImpuestoId() > 0) {
 					throw new ResourceNotFoundException("Impuesto con id: " +impuesto.getImpuestoId()+"  no encontrado");
