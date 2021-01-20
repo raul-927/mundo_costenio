@@ -1,6 +1,8 @@
 package co.com.mundocostenio.enumerator;
 
-public enum TipoCuentaEnum{
+import java.io.Serializable;
+
+public enum TipoCuentaEnum implements Serializable{
 	VENTA(1,"Venta"), 
 	IMPOSITIVO(2, "Impositivo"), 
 	PRODUCTO(3,"Producto"),

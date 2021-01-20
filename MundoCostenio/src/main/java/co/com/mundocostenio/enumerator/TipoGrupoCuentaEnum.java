@@ -3,9 +3,15 @@ package co.com.mundocostenio.enumerator;
 import java.io.Serializable;
 
 public enum TipoGrupoCuentaEnum implements Serializable{
-	ECONOMICO(1,"Economico"),
-	PERSONAS(2,"Personas"),
-	PRODUCTO(3, "Producto");
+	VENTA(1,"Venta"), 
+	IMPOSITIVO(2, "Impositivo"), 
+	PRODUCTO(3,"Producto"),
+	RETIRO(4, "Retiro"),
+	GASTOS(5, "Gastos"),
+	INGRESO(6, "Ingreso Ganancias"),
+	DEUDAS(7, "Deudas Prestamos"),
+	PATRIMONIO(8,"Patrimonio"),
+	EGRESO(9,"Egreso");
 	
 	private int id;
 	private String descripcion;

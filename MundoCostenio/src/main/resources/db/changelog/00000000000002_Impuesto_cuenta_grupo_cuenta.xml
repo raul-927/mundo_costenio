@@ -38,7 +38,7 @@
             <column name="grupo_cuenta_id" 	type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="tipo_grupo_cuenta" 	 type="ENUM('ECONOMICO','PERSONAS','PRODUCTO')"/>
+            <column name="tipo_grupo_cuenta" 	 type="ENUM('VENTA','IMPOSITIVO','PRODUCTO','RETIRO','GASTOS','INGRESO','DEUDAS','PATRIMONIO','EGRESO')"/>
             <column name="grupo_cuenta_desc" 	 type="varchar(255)"/>
         </createTable>
         

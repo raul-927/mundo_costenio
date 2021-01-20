@@ -54,7 +54,7 @@ public class GrupoCuentaSqlProvider {
 			SELECT("grupo_cuenta_id, tipo_grupo_cuenta, grupo_cuenta_desc");
 			FROM("grupo_cuenta");
 			if(grupoCuenta !=null) {
-				if(grupoCuenta.getGrupoCuentaId() > 0) {
+				if(grupoCuenta.getGrupoCuentaId()!=null && grupoCuenta.getGrupoCuentaId() > 0) {
 					WHERE("grupo_cuenta_id = " + String.valueOf(grupoCuenta.getGrupoCuentaId()));
 				}else {
 					if(grupoCuenta.getGrupoCuentaDesc()!=null && grupoCuenta.getGrupoCuentaDesc()!="") {

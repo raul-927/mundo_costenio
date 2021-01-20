@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.com.mundocostenio.enumerator.TipoGrupoCuentaEnum;
 import co.com.mundocostenio.messageerror.GrupoCuentaErrorMessage;
 
@@ -16,6 +18,7 @@ public class GrupoCuenta implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	private Integer				id;
 	private Integer 			grupoCuentaId;
 	

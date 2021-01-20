@@ -131,6 +131,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		        .antMatchers(HttpMethod.POST, "/login").permitAll()
 		        .antMatchers(HttpMethod.GET,"/forum").authenticated()
 		        .antMatchers(HttpMethod.POST,"/forum").authenticated()
-		        .anyRequest().authenticated();
+		        .antMatchers(HttpMethod.GET,"/grupoCuenta").permitAll()
+		        .antMatchers(HttpMethod.POST,"/grupoCuenta").permitAll()
+		        .antMatchers(HttpMethod.PUT,"/grupoCuenta").permitAll()
+		        .antMatchers(HttpMethod.DELETE,"/grupoCuenta").permitAll()
+		        .antMatchers(HttpMethod.POST,"/grupoCuentaSearch").permitAll()
+		        .antMatchers(HttpMethod.POST,"/tipProducto").permitAll()
+		        .antMatchers(HttpMethod.PUT,"/tipProducto").permitAll()
+		        .antMatchers(HttpMethod.DELETE,"/tipProducto").permitAll()
+		        .antMatchers(HttpMethod.GET,"/tipProducto").permitAll()
+		        .antMatchers(HttpMethod.POST,"/tipoProductoSearch").permitAll()
+		        .anyRequest().permitAll();
     }
 }
