@@ -84,9 +84,8 @@ public class GrupoCuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> selectListaPrecios(@RequestBody GrupoCuenta grupoCuenta){
+	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta){
 		HttpHeaders headers = new HttpHeaders();
-		verificarGrupoCuenta(grupoCuenta);
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
 		return new ResponseEntity<List<GrupoCuenta>>(grupoCuentaResult, headers, HttpStatus.OK);
 	}
@@ -100,24 +99,6 @@ public class GrupoCuentaController {
 		HttpHeaders headers = new HttpHeaders();
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(null);
 		return new ResponseEntity<List<GrupoCuenta>>(grupoCuentaResult, headers, HttpStatus.OK);
-	}
-	
-	@SuppressWarnings("unused")
-	private void verificarGrupoCuenta(GrupoCuenta grupoCuenta) {
-		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
-		if(grupoCuentaResult.size() == 0) {
-			if(grupoCuenta.getGrupoCuentaId()!= null || grupoCuenta.getId() != null) {
-				if(grupoCuenta.getGrupoCuentaId()!= null && grupoCuenta.getGrupoCuentaId() > 0) {
-					throw new ResourceNotFoundException("Grupo Cuenta con id: " +grupoCuenta.getGrupoCuentaId()+"  no encontrado");
-				}
-				else {
-					throw new ResourceNotFoundException("Grupo Cuenta no encontrado");
-				}
-			}
-			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla grupo_cuenta");
-			}
-		}
 	}
 
 }
