@@ -136,6 +136,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		        .antMatchers(HttpMethod.PUT,"/grupoCuenta").permitAll()
 		        .antMatchers(HttpMethod.DELETE,"/grupoCuenta").permitAll()
 		        .antMatchers(HttpMethod.POST,"/grupoCuentaSearch").permitAll()
+		        
+		        .antMatchers(HttpMethod.PUT,"/cuenta").permitAll()
+		        .antMatchers(HttpMethod.DELETE,"/cuenta").permitAll()
+		        .antMatchers(HttpMethod.GET,"/cuenta").permitAll()
+		        .antMatchers(HttpMethod.POST,"/cuenta").permitAll()
+		        .antMatchers(HttpMethod.POST,"/cuentas").permitAll()
+		        
 		        .antMatchers(HttpMethod.POST,"/tipProducto").permitAll()
 		        .antMatchers(HttpMethod.PUT,"/tipProducto").permitAll()
 		        .antMatchers(HttpMethod.DELETE,"/tipProducto").permitAll()

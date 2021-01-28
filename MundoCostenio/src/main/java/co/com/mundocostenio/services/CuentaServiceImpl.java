@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Cuenta;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.mybatis.mappers.CuentaMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 
@@ -36,6 +37,7 @@ public class CuentaServiceImpl implements CuentaService {
 	@Transactional
 	@PreAuthorize(value="hasPermission(#cuenta, 'WRITE')")
 	public Cuenta update(@Param("cuenta") Cuenta cuenta) {
+		this.select(cuenta);
 		this.cuentaMapper.update(cuenta);
 		return cuenta;
 	}
@@ -44,6 +46,7 @@ public class CuentaServiceImpl implements CuentaService {
 	@Transactional
 	@PreAuthorize(value="hasPermission(#cuenta, 'DELETE')")
 	public void delete(@Param("cuenta") Cuenta cuenta) {
+		this.select(cuenta);
 		this.cuentaMapper.delete(cuenta);
 
 	}
@@ -51,7 +54,26 @@ public class CuentaServiceImpl implements CuentaService {
 	@Override
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Cuenta> select(@Param("cuenta") Cuenta cuenta) {
-		return this.cuentaMapper.select(cuenta);
+		List<Cuenta> cuentaResult = this.cuentaMapper.select(cuenta);
+		this.verificarCuenta(cuentaResult, cuenta);
+		return cuentaResult;
+	}
+	
+	private void verificarCuenta(List<Cuenta>cuentaResult, Cuenta cuenta) {
+		
+		if(cuentaResult.size() == 0) {
+			if(cuenta.getCuentaId()!= null || cuenta.getId() != null) {
+				if(cuenta.getCuentaId()!= null && cuenta.getCuentaId() > 0) {
+					throw new ResourceNotFoundException("Cuenta con id: " +cuenta.getCuentaId()+"  no encontrada");
+				}
+				else {
+					throw new ResourceNotFoundException("Cuenta no encontrada");
+				}
+			}
+			else {
+				throw new ResourceNotFoundException("No existen registros en la tabla cuenta");
+			}
+		}
 	}
 
 }
