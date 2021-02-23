@@ -24,14 +24,14 @@
             <column name="tipo" 		type="varchar(50)"/>
         </createTable>
         
-        <createTable tableName="documentos">
+        <createTable tableName="documento">
             <column name="doc_id" 			type="int" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="descripcion" 		type="varchar(50)"/>
         </createTable>
         
-        <createTable tableName="formularios">
+        <createTable tableName="formulario">
             <column name="form_id" 			type="int" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
@@ -88,7 +88,7 @@
             onDelete="CASCADE"  
             onUpdate="RESTRICT"  
             referencedColumnNames="doc_id"
-            referencedTableName="documentos"   
+            referencedTableName="documento"   
             validate="true"/>
             
             
@@ -107,7 +107,7 @@
             onDelete="CASCADE"  
             onUpdate="RESTRICT"  
             referencedColumnNames="form_id"
-            referencedTableName="formularios"   
+            referencedTableName="formulario"   
             validate="true"/> 
             
        <addForeignKeyConstraint  baseColumnNames="doc_id"
@@ -116,7 +116,7 @@
             onDelete="CASCADE"  
             onUpdate="RESTRICT"  
             referencedColumnNames="doc_id"
-            referencedTableName="documentos"   
+            referencedTableName="documento"   
             validate="true"/>
     </changeSet>
 </databaseChangeLog>
