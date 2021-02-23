@@ -19,5 +19,5 @@
     <include file="db/changelog/00000000000004_Asiento.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/00000000000005_MediosDePagos_y_Tarjetas.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/00000000000006_Login.xml" relativeToChangelogFile="false"/>
-    
+    <include file="db/changelog/00000000000007_Tags.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

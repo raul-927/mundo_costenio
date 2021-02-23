@@ -41,11 +41,11 @@ public class ProductoServiceImpl implements ProductoService {
 	private ImpuestoMapper impuestoMapper;
 
 	@Override
-	@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
+	//@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
 	@Transactional
 	public Producto insert(Producto producto) {
 		this.productoMapper.insert(producto);
-		this.accesControlListService.insert(producto);
+	//	this.accesControlListService.insert(producto);
 		return producto;
 	}
 

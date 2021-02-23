@@ -27,33 +27,33 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 
 	@Override
 	@Transactional
-	@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
+	//@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
 	public TipoProducto insert(TipoProducto tipoProducto) {
 		this.tipoProductoMapper.insert(tipoProducto);
-		accesControlListService.insert(tipoProducto);
+		//accesControlListService.insert(tipoProducto);
 		
 		return tipoProducto;
 	}
 
 	@Override
-	@PreAuthorize("hasPermission(#tipoProducto, 'WRITE')")
+	//@PreAuthorize("hasPermission(#tipoProducto, 'WRITE')")
 	public TipoProducto update(@Param("tipoProducto") TipoProducto tipoProducto) {
 		this.tipoProductoMapper.update(tipoProducto);
 		return tipoProducto;
 	}
 
 	@Override
-	@PreAuthorize("hasPermission(#tipProdId, 'DELETE')")
-	public int delete(@Param("tipProdId") int tipProdId) {
+	//@PreAuthorize("hasPermission(#tipProdId, 'DELETE')")
+	public int delete( int tipProdId) {
 		TipoProducto tipoProducto = new TipoProducto();
 		tipoProducto.setTipProdId(tipProdId);
-		this.accesControlListService.delete(tipoProducto);
+		//this.accesControlListService.delete(tipoProducto);
 		return this.tipoProductoMapper.delete(tipProdId);
 	}
 
 	@Override
-	@PostAuthorize("hasPermission(filterObject,'READ')")
-	@PostFilter("hasPermission(filterObject, 'READ')")
+	//@PostAuthorize("hasPermission(filterObject,'READ')")
+	//@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<TipoProducto> selectTipoProducto(TipoProducto tipoProducto) {
 		return this.tipoProductoMapper.selectTipoProducto(tipoProducto);
 	}

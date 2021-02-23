@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.services.TipoProductoService;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class TipoProductoController {
 	
 	@Autowired
@@ -54,11 +56,9 @@ public class TipoProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody @Valid TipoProducto tipoProducto, BindingResult bindingResult){
+	public ResponseEntity<?> update(@RequestBody TipoProducto tipoProducto){
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.NOT_ACCEPTABLE);
-		}
+		
 		TipoProducto result = this.tipoProductoService.update(tipoProducto);
 		
 		return new ResponseEntity<TipoProducto>(result, headers, HttpStatus.OK);
@@ -66,7 +66,6 @@ public class TipoProductoController {
 	
 	@RequestMapping(
 			value ="/tipoProducto/{tipProdId}", method =RequestMethod.DELETE,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> delete(@PathVariable int tipProdId){
