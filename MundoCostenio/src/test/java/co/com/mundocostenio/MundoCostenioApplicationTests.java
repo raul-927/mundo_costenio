@@ -7,9 +7,6 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 @SpringBootTest
 @MybatisTest
 class MundoCostenioApplicationTests {
-	
-	
-	
 
 	@Test
 	void contextLoads() {

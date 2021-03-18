@@ -14,6 +14,11 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Properties;
+
+import org.apache.ibatis.mapping.DatabaseIdProvider;
+import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
+
 @Configuration
 @EnableTransactionManagement
 @MapperScan(value="co.com.mundocostenio.mybatis.mappers")
@@ -40,6 +45,8 @@ public class MybatisContextConfig{
 	@Value("${mybatis.typeHandlersPackage}")
 	private String typeHandlersPackage;
 	
+	private DatabaseIdProvider database;
+	
 	@Bean
 	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
@@ -61,6 +68,7 @@ public class MybatisContextConfig{
 		sqlSessionFactory.setTypeAliasesPackage(this.typeAliasesPackage);
 		sqlSessionFactory.setTypeHandlersPackage(this.typeHandlersPackage);
 		sqlSessionFactory.setMapperLocations(mapperLocations);
+		//sqlSessionFactory.setDatabaseIdProvider(databaseProvider());
 		
 		return (SqlSessionFactory) sqlSessionFactory.getObject();
 	}
@@ -71,4 +79,14 @@ public class MybatisContextConfig{
 		return sqlSessionTemplate;
 	}
 	
+	@Bean
+	public DatabaseIdProvider databaseProvider() { 
+		Properties properties = new Properties();
+		properties.setProperty("sqlserver", "sqlserver");
+		properties.setProperty("DB2", "db2");
+		properties.setProperty("Oracle", "oracle");
+		properties.setProperty("MySQL", "mysql");
+		database.setProperties(properties);
+		return database;
+	}
 }

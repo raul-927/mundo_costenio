@@ -20,10 +20,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class MybatisContextConfigTest {
 	
 	
-	@Value("${jdbc.test.driverClassName}")
+	@Value("${jdbc.driverClassName}")
 	private String className;
 	
-	@Value("${jdbc.test.url}")
+	@Value("${jdbc.urltest}")
 	private String url;
 	
 	@Value("${jdbc.username}")
