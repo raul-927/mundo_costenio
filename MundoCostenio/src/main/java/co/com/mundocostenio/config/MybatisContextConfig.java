@@ -79,7 +79,7 @@ public class MybatisContextConfig{
 		return sqlSessionTemplate;
 	}
 	
-	@Bean
+	//@Bean
 	public DatabaseIdProvider databaseProvider() { 
 		Properties properties = new Properties();
 		properties.setProperty("sqlserver", "sqlserver");
