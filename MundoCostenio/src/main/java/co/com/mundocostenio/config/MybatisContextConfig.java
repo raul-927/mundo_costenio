@@ -13,11 +13,14 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 //import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+//import org.springframework.jndi.JndiObjectFactoryBean;
 
 import java.util.Properties;
 
+import javax.naming.NamingException;
+
 import org.apache.ibatis.mapping.DatabaseIdProvider;
-import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
+//import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 
 @Configuration
 @EnableTransactionManagement
@@ -48,7 +51,14 @@ public class MybatisContextConfig{
 	private DatabaseIdProvider database;
 	
 	@Bean
-	public DriverManagerDataSource dataSource() {
+	public DriverManagerDataSource dataSource() throws IllegalArgumentException, NamingException{
+		/*
+		 * JndiObjectFactoryBean bean = new JndiObjectFactoryBean();
+		 * bean.setJndiName(className);
+		 * bean.setProxyInterface(DriverManagerDataSource.class);
+		 * bean.setLookupOnStartup(false); bean.afterPropertiesSet();
+		 */
+        
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName(this.className);
 		driverManagerDataSource.setUrl(this.url);
