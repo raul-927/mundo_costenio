@@ -33,11 +33,11 @@ public class ProductoSqlProvider {
 		}}.toString();
 	}
 	
-	public String delete(int id) {
+	public String delete(Producto producto) {
 		return new SQL() {{
-			if(id > 0) {
+			if(producto.getProdId() > 0) {
 				DELETE_FROM("producto");
-				WHERE("prodId = " + id);
+				WHERE("prodId = " + producto.getProdId());
 			}
 			
 		}}.toString();

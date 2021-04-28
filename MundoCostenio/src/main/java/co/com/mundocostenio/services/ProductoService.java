@@ -7,6 +7,6 @@ import co.com.mundocostenio.domain.Producto;
 public interface ProductoService {
 	Producto insert(Producto producto);
 	Producto update(Producto producto);
-	int delete(int prodId);
+	int delete(Producto producto);
 	List<Producto> selectProducto(Producto producto);
 }

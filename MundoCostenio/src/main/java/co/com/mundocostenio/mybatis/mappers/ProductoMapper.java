@@ -27,7 +27,7 @@ public interface ProductoMapper {
 	int update(Producto producto);
 	
 	@DeleteProvider(type = ProductoSqlProvider.class, method ="delete")
-	int delete(int prodId);
+	int delete(Producto producto);
 	
 	
 	@SelectProvider(type = ProductoSqlProvider.class, method ="selectProducto")

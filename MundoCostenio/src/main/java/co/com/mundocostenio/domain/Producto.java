@@ -34,9 +34,6 @@ public class Producto implements Serializable{
 	
 	public Integer getId() {
 		id = prodId;
-		if(id == null) {
-			id = 0;
-		}
 		return id;
 	}
 	public TipoProducto getTipoProducto() {

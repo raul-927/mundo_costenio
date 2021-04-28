@@ -58,11 +58,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	@PreAuthorize("hasPermission(#prodId, 'DELETE')")
-	public int delete(@Param("prodId") int prodId) {
-		Producto producto = new Producto();
-		producto.setProdId(prodId);
+	public int delete(@Param("producto") Producto producto) {
 		this.accesControlListService.delete(producto);
-		return this.productoMapper.delete(prodId);
+		return this.productoMapper.delete(producto);
 	}
 
 	@Override
