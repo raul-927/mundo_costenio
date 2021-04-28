@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.TipoProducto;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.TipoProductoService;
 
 @RestController
@@ -58,19 +60,20 @@ public class TipoProductoController {
 	@ResponseBody
 	public ResponseEntity<?> update(@RequestBody TipoProducto tipoProducto){
 		HttpHeaders headers = new HttpHeaders();
-		
+		this.verificarTipoProducto(tipoProducto);
 		TipoProducto result = this.tipoProductoService.update(tipoProducto);
 		
 		return new ResponseEntity<TipoProducto>(result, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
-			value ="/tipoProducto/{tipProdId}", method =RequestMethod.DELETE,
+			value ="/tipoProducto", method =RequestMethod.DELETE,
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@PathVariable int tipProdId){
+	public ResponseEntity<?> delete(@RequestBody TipoProducto tipoProducto){
 		HttpHeaders headers = new HttpHeaders();
-		int result = this.tipoProductoService.delete(tipProdId);
+		this.verificarTipoProducto(tipoProducto);
+		int result = this.tipoProductoService.delete(tipoProducto.getTipProdId());
 		
 		return new ResponseEntity<Integer>(result, headers, HttpStatus.OK);
 	}
@@ -82,10 +85,27 @@ public class TipoProductoController {
 	@ResponseBody
 	public ResponseEntity<?> selectTipoProducto(@RequestBody TipoProducto tipoProducto){
 		HttpHeaders headers = new HttpHeaders();
-		
+		this.verificarTipoProducto(tipoProducto);
 		List<TipoProducto> result = this.tipoProductoService.selectTipoProducto(tipoProducto);
 		
 		return new ResponseEntity<List<TipoProducto>>(result, headers, HttpStatus.OK);
+	}
+	
+	private void verificarTipoProducto(TipoProducto tipoProducto) {
+		List<TipoProducto> tipoProductoResult = this.tipoProductoService.selectTipoProducto(tipoProducto);
+		if(tipoProductoResult.size() == 0) {
+			if(tipoProducto.getTipProdId()!= null || tipoProducto.getId() != null || tipoProducto.getDescTipoProducto()!=null) {
+				if(tipoProducto.getTipProdId()!= null && tipoProducto.getTipProdId() > 0) {
+					throw new ResourceNotFoundException("TipoProducto con id: " +tipoProducto.getTipProdId()+"  no encontrado");
+				}
+				else {
+					throw new ResourceNotFoundException("TipoProducto no encontrado");
+				}
+			}
+			else {
+				throw new ResourceNotFoundException("No existen registros en la tabla tipo_producto");
+			}
+		}
 	}
 
 }

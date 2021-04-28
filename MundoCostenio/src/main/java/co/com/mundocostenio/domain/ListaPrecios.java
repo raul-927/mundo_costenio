@@ -40,7 +40,7 @@ public class ListaPrecios implements Serializable{
 	public void setPrecioProductoList(List<PrecioProducto> precioProductoList) {
 		this.precioProductoList = precioProductoList;
 	}
-	public int getListaPrecioId() {
+	public Integer getListaPrecioId() {
 		return listaPrecioId;
 	}
 	public void setListaPrecioId(Integer listaPrecioId) {

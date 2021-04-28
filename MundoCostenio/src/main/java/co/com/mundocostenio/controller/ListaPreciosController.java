@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.ListaPrecios;
 import co.com.mundocostenio.domain.Producto;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.ListaPreciosService;
 
 @RestController
@@ -51,7 +53,6 @@ public class ListaPreciosController {
 		return new ResponseEntity<ListaPrecios>(listaPreciosResult, headers, HttpStatus.OK);
 	}
 	
-	
 	@RequestMapping(
 			value ="/listaPreciosSearch", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
@@ -59,7 +60,7 @@ public class ListaPreciosController {
 	@ResponseBody
 	public ResponseEntity<?> selectListaPrecios(@RequestBody ListaPrecios listaPrecios){ //@PathVariable int id
 		HttpHeaders headers = new HttpHeaders();
-		
+		this.verificarListaPrecios(listaPrecios);
 		List<ListaPrecios> listaPreciosResult = this.listaPreciosService.selectListaPrecios(listaPrecios);
 		return new ResponseEntity<List<ListaPrecios>>(listaPreciosResult, headers, HttpStatus.OK);
 	}
@@ -83,5 +84,22 @@ public class ListaPreciosController {
 		HttpHeaders headers = new HttpHeaders();
 		List<Producto> productosResult = this.listaPreciosService.selectNuevoProducto();
 		return new ResponseEntity<List<Producto>>(productosResult, headers, HttpStatus.OK);
+	}
+	
+	private void verificarListaPrecios(ListaPrecios listaPrecios) {
+		List<ListaPrecios> listaPreciosResult = this.listaPreciosService.selectListaPrecios(listaPrecios);
+		if(listaPreciosResult.size() == 0) {
+			if(listaPrecios.getListaPrecioId()!= null || listaPrecios.getId() != null || listaPrecios.getDescripcionLista()!=null) {
+				if(listaPrecios.getListaPrecioId()!= null && listaPrecios.getListaPrecioId() > 0) {
+					throw new ResourceNotFoundException("ListaPrecios con id: " +listaPrecios.getListaPrecioId()+"  no encontrado");
+				}
+				else {
+					throw new ResourceNotFoundException("ListaPrecios no encontrado");
+				}
+			}
+			else {
+				throw new ResourceNotFoundException("No existen registros en la tabla lista_precios");
+			}
+		}
 	}
 }

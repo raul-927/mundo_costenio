@@ -64,12 +64,12 @@ public class PersonasSqlProvider {
 	public String select(Persona persona) {
 		
 		return new SQL() {{
-			SELECT("p.persona_id, p.nombre, p.apellido, p.cedula, p.rol");
+			SELECT("p.persona_id, p.nombre, p.apellido, p.cedula");
 			SELECT("dir.direccion_id, dir.nro_puerta, dir.geo_localizacion");
 			SELECT("b.barrio_id, b.nombre_barrio");
 			SELECT("c.calle_id, c.tipo_calle, c.nombre_calle");
 			SELECT("dep.departamento_id, dep.nombre_departamento");
-			SELECT("usr.user_id, usr.nic, user.password, usr.enabled");
+			SELECT("usr.user_id, usr.nic, usr.password, usr.enabled");
 			
 			FROM("persona p");
 			FROM("direccion dir");
@@ -92,7 +92,7 @@ public class PersonasSqlProvider {
 				if(persona.getPersonaId()!= null && persona.getPersonaId() > 0) {
 					WHERE("p.persona_id = " + String.valueOf(persona.getPersonaId()));
 				}
-				else if(persona.getCedula() > 0) {
+				else if(persona.getCedula()!=null && persona.getCedula() > 0) {
 					WHERE("p.cedula = " + String.valueOf(persona.getCedula()));
 				}else {
 					if(persona.getNombre()!=null && persona.getNombre()!="") {
