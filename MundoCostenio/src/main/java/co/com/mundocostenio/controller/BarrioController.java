@@ -98,7 +98,7 @@ public class BarrioController {
 		if(barrioResult.size() == 0) {
 			if(barrio.getBarrioId()!= null || barrio.getId() != null || barrio.getNombreBarrio()!=null) {
 				if(barrio.getBarrioId()!= null && barrio.getBarrioId() > 0) {
-					throw new ResourceNotFoundException("Barrio con id: " +barrio.getBarrioId()+"  no encontrad0");
+					throw new ResourceNotFoundException("Barrio con id: " +barrio.getBarrioId()+"  no encontrado");
 				}
 				else {
 					throw new ResourceNotFoundException("Barrio no encontrado");
