@@ -69,7 +69,7 @@ public class ProductoController {
 	}
 	
 	@RequestMapping(
-			value ="/producto/{prodId}", method =RequestMethod.DELETE,
+			value ="/producto", method =RequestMethod.DELETE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
