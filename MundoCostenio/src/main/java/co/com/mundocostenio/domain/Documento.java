@@ -10,15 +10,15 @@ public class Documento implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int docId;
-	private String descripcion;
-	private List<TipoInscripcion> tiposInscripcion;
+	private Integer 				docId;
+	private String 					descripcion;
+	private List<TipoInscripcion> 	tiposInscripcion;
 	
 	
-	public int getDocId() {
+	public Integer getDocId() {
 		return docId;
 	}
-	public void setDocId(int docId) {
+	public void setDocId(Integer docId) {
 		this.docId = docId;
 	}
 	public String getDescripcion() {

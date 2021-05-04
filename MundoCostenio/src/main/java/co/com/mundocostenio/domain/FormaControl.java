@@ -12,10 +12,10 @@ public class FormaControl implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
-	private Integer formControlId;
+	private Integer 		id;
+	private Integer 		formControlId;
 	private TipoControlEnum tipoControl;
-	private Integer cantidad;
+	private Integer 		cantidad;
 	
 	public Integer getId() {
 		id = formControlId;

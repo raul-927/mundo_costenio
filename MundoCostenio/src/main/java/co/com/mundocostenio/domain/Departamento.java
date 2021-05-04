@@ -11,7 +11,7 @@ public class Departamento implements Serializable{
 	
 	private Integer		id;
 	private Integer 	departamentoId;
-	private String 	nombreDepartamento;
+	private String 		nombreDepartamento;
 
 	public Departamento() {};
 	

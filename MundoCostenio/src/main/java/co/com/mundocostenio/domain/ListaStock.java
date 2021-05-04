@@ -17,11 +17,11 @@ public class ListaStock implements Serializable{
 	@JsonIgnore
 	private Integer id;
 	
-	private Integer listStockId;
-	private String descripcion;
-	private LocalDate fecha;
-	private LocalTime hora;
-	private List<Stock>stockList;
+	private Integer 	listStockId;
+	private String 		descripcion;
+	private LocalDate 	fecha;
+	private LocalTime 	hora;
+	private List<Stock>	stockList;
 	
 	public Integer getId() {
 		id = listStockId;

@@ -8,10 +8,10 @@ public class Telefono implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private String signoPrefijo;
-	private int prefijo;
-	private int numero;
+	private int 	id;
+	private String 	signoPrefijo;
+	private int 	prefijo;
+	private int 	numero;
 	
 	
 	public int getId() {

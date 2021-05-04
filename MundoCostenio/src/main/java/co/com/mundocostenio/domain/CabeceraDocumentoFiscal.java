@@ -1,14 +1,19 @@
 package co.com.mundocostenio.domain;
 
-public class CabeceraDocumentoFiscal {
+import java.io.Serializable;
+
+public class CabeceraDocumentoFiscal implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
-	
 	private Integer cabDocFisId;
+	private int 	nroConstancia;
+	private int 	rut;
+	private String 	razonSocial;
+	private String 	direccion;
 	
-	private int nroConstancia;
-	private int rut;
-	private String razonSocial;
-	private String direccion;
 	public Integer getCabDocFisId() {
 		return cabDocFisId;
 	}

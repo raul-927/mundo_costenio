@@ -11,11 +11,11 @@ public class ListaPrecios implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private Integer listaPrecioId;
-	private String descripcionLista;
-	private FechaVigenciaListaPrecios fechaVigencia;
-	private List<PrecioProducto> precioProductoList;
+	private Integer 					id;
+	private Integer 					listaPrecioId;
+	private String 						descripcionLista;
+	private FechaVigenciaListaPrecios 	fechaVigencia;
+	private List<PrecioProducto> 		precioProductoList;
 	
 	public Integer getId() {
 		id = listaPrecioId;

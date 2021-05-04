@@ -13,14 +13,14 @@ public class FechaVigenciaListaPrecios implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer id;
-	private Integer fechaVigenciaId;
+	private Integer 	id;
+	private Integer 	fechaVigenciaId;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private LocalDate  fechaIni;
+	private LocalDate  	fechaIni;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private LocalDate  fechaFin;
+	private LocalDate  	fechaFin;
 	
 	public LocalDate  getFechaIni() {
 		return fechaIni;
