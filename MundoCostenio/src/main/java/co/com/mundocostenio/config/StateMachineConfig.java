@@ -43,10 +43,10 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
 	            throws Exception {
 	        transitions
 	            .withExternal()
-	                .source(States.STATE1).target(States.STATE1).event(Events.EVENT1)
+	                .source(States.STATE1).target(States.STATE2).event(Events.EVENT1)
 	                .and()
 	            .withExternal()
-	                .source(States.STATE1).target(States.STATE2).event(Events.EVENT2);
+	                .source(States.STATE2).target(States.STATE3).event(Events.EVENT2);
 	    }
 
 	    @Bean

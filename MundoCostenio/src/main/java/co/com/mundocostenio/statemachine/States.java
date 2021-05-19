@@ -2,5 +2,6 @@ package co.com.mundocostenio.statemachine;
 
 public enum States {
 	STATE1,
-	STATE2
+	STATE2,
+	STATE3
 }

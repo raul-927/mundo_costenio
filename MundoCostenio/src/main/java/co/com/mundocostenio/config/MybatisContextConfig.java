@@ -90,13 +90,11 @@ public class MybatisContextConfig{
 	}
 	
 	//@Bean
-	public DatabaseIdProvider databaseProvider() { 
-		Properties properties = new Properties();
-		properties.setProperty("sqlserver", "sqlserver");
-		properties.setProperty("DB2", "db2");
-		properties.setProperty("Oracle", "oracle");
-		properties.setProperty("MySQL", "mysql");
-		database.setProperties(properties);
-		return database;
-	}
+	/*
+	 * public DatabaseIdProvider databaseProvider() { Properties properties = new
+	 * Properties(); properties.setProperty("sqlserver", "sqlserver");
+	 * properties.setProperty("DB2", "db2"); properties.setProperty("Oracle",
+	 * "oracle"); properties.setProperty("MySQL", "mysql");
+	 * database.setProperties(properties); return database; }
+	 */
 }
