@@ -170,7 +170,7 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 		return aclEntryVoter;
 	}
 	
-	@Bean
+	//@Bean
 	public AffirmativeBased customAccessDecisionManager() {
 		List<AccessDecisionVoter<?>> decisionVoters = new ArrayList<AccessDecisionVoter<?>>();
 		decisionVoters.add(aclDeletePostVoter());
