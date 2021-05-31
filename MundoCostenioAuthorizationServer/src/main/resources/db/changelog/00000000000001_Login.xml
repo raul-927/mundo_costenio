@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <property name="autoIncrement" value="true"/>
+        
+    <changeSet id="00000000000001" author="rhernandez">
+    
+        <createTable tableName="users">
+            <column name="user_id" 			type="int" autoIncrement="true">
+                <constraints primaryKey="true" 	nullable="false"/>
+            </column>
+            <column name="username" 		 type="varchar(10)"/>
+            <column name="password" 		 type="varchar(20)"/>
+            <column name="enabled" 			 type="boolean"/>
+        </createTable>
+        
+        <createTable tableName="authorities">
+            <column name="authority_id" 		type="int" autoIncrement="true">
+                <constraints primaryKey="true" 	nullable="false"/>
+            </column>
+            <column name="authority"		type="enum('ROLE_ADMIN','ROLE_USER','ROLE_COUNTER','ROLE_SALES','ROLE_GUESS','ROLE_ANONIMOUS','ROLE_MARKETING','ROLE_RRHH','ROLE_PROMOUTION','ROLE_CONFIG')"/>
+        </createTable>
+        
+        <!-- <createTable tableName="rol">
+            <column name="rol_id" 			type="int" autoIncrement="true">
+                <constraints primaryKey="true" 	nullable="false"/>
+            </column>
+            <column name="rol_name"		type="enum('ADMIN','USER', 'COUNTER', 'SALES','GUESS','ANONIMOUS','MARKETING','RRHH','PROMOUTION','CONFIG')"/>
+        </createTable> -->
+        
+        <createTable tableName="user_authority">
+            <column name="user_auth_id" 		type="int" autoIncrement="true">
+                <constraints primaryKey="true" 	nullable="false"/>
+            </column>
+            <column name="user_id"		type="int"/>
+             <column name="authority_id"		type="int"/>
+        </createTable>
+        
+       <!--  <addForeignKeyConstraint  baseColumnNames="user_id"  
+            baseTableName="persona"  
+            constraintName="fk_persona_user"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="user_id"
+            referencedTableName="user"   
+            validate="true"/> -->
+        
+         <addForeignKeyConstraint  baseColumnNames="user_id"  
+            baseTableName="user_authority"  
+            constraintName="fk_user_authority_user"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="user_id"
+            referencedTableName="users"   
+            validate="true"/>
+            
+         <addForeignKeyConstraint  baseColumnNames="authority_id"  
+            baseTableName="user_authority"  
+            constraintName="fk_authority_user_authority"
+            onDelete="CASCADE"  
+            onUpdate="RESTRICT"  
+            referencedColumnNames="authority_id"
+            referencedTableName="authorities"   
+            validate="true"/>
+            
+         <addUniqueConstraint 
+            columnNames="authority"  
+            deferrable="true"  
+            disabled="true" 
+            initiallyDeferred="true"    
+            tableName="authorities"    
+            validate="true"/>
+        
+        <addUniqueConstraint 
+            columnNames="username"  
+            deferrable="true"  
+            disabled="true" 
+            initiallyDeferred="true"    
+            tableName="users"    
+            validate="true"/>
+    </changeSet>
+</databaseChangeLog>
