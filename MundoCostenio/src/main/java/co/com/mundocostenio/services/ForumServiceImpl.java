@@ -25,7 +25,7 @@ public class ForumServiceImpl implements ForumService {
 	private PostMapper postMapper;
 
 	@Override
-	@PreAuthorize(value ="hasRole('ROLE_USER')")
+	@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
 	@Transactional
 	public Post createPost(@Param("post")Post post) {
 		Integer id = accesControlListService.insert(post);

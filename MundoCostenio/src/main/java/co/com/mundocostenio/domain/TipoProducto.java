@@ -17,8 +17,21 @@ public class TipoProducto implements Serializable{
 	@NotNull(message =TipoProductoErrorMessage.DESCRIPCION_NULL)
 	@Size(min = 3, max = 30, message = TipoProductoErrorMessage.DESCRIPCION_LENGTH)
 	private String descTipoProducto;
+	private Integer id;
 	
 	
+	public Integer getId() {
+		return this.id;
+	}
+	
+	public void setId(Integer id) {
+		if(id !=null) {
+			this.id = id;
+		}else {
+			this.id = tipProdId;
+		}
+		
+	}
 	
 	public Integer getTipProdId() {
 		return tipProdId;
