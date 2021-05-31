@@ -40,14 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @Value("${spring.queries.roles-query}") private String rolesQuery;
 	 */
 	
-	@Autowired
-	private AuthenticationEntryPoint authEntryPoint;
+	//@Autowired
+	//private AuthenticationEntryPoint authEntryPoint;
 	
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	//@Bean
+	//public PasswordEncoder passwordEncoder() {
+	//	return new BCryptPasswordEncoder();
+	//}
 	
 	
 	/*

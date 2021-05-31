@@ -24,6 +24,7 @@ import org.springframework.security.access.method.MethodSecurityMetadataSource;
 import org.springframework.security.access.prepost.PreInvocationAuthorizationAdviceVoter;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.acls.AclEntryVoter;
+import org.springframework.security.acls.AclPermissionCacheOptimizer;
 import org.springframework.security.acls.AclPermissionEvaluator;
 import org.springframework.security.acls.domain.AclAuthorizationStrategy;
 import org.springframework.security.acls.domain.AclAuthorizationStrategyImpl;
@@ -68,7 +69,10 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	
 	@Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
-        return defaultMethodSecurityExpressionHandler;
+        DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
+        expressionHandler.setPermissionEvaluator(new AclPermissionEvaluator(aclService()));
+        expressionHandler.setPermissionCacheOptimizer(new AclPermissionCacheOptimizer(aclService()));
+        return expressionHandler;
     }
 	
 	@Bean
