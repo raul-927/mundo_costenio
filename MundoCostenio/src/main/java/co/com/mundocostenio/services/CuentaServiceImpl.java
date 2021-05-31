@@ -29,7 +29,7 @@ public class CuentaServiceImpl implements CuentaService {
 	@Transactional
 	public Cuenta insert(@Param("cuenta") Cuenta cuenta) {
 		this.cuentaMapper.insert(cuenta);
-		//this.accesControlListService.insert(cuenta);
+		this.accesControlListService.insert(cuenta);
 		return cuenta;
 	}
 
@@ -53,9 +53,9 @@ public class CuentaServiceImpl implements CuentaService {
 
 	@Override
 	@PostFilter("hasPermission(filterObject, 'READ')")
-	public List<Cuenta> select(@Param("cuenta") Cuenta cuenta) {
+	public List<Cuenta> select(Cuenta cuenta) {
 		List<Cuenta> cuentaResult = this.cuentaMapper.select(cuenta);
-		this.verificarCuenta(cuentaResult, cuenta);
+		//this.verificarCuenta(cuentaResult, cuenta);
 		return cuentaResult;
 	}
 	

@@ -41,11 +41,11 @@ public class ProductoServiceImpl implements ProductoService {
 	private ImpuestoMapper impuestoMapper;
 
 	@Override
-	//@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
+	@PreAuthorize(value ="hasRole('ROLE_MARKETING')")
 	@Transactional
 	public Producto insert(Producto producto) {
 		this.productoMapper.insert(producto);
-	//	this.accesControlListService.insert(producto);
+		this.accesControlListService.insert(producto);
 		return producto;
 	}
 
@@ -64,9 +64,9 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	//@PostAuthorize("hasPermission(#producto, 'READ')")
+	@PostAuthorize("hasPermission(filterObject,'READ')")
 	@PostFilter("hasPermission(filterObject, 'READ')")
-	public List<Producto> selectProducto(@Param("producto") Producto producto) {
+	public List<Producto> selectProducto(Producto producto) {
 		
 		List<Producto> productoList = this.productoMapper.selectProducto(producto);
 		for(Producto prod: productoList) {

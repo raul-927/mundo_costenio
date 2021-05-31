@@ -81,7 +81,7 @@ public class TipoProductoController {
 	}
 	
 	@RequestMapping(
-			value ="/tipoProductoSearch", method =RequestMethod.POST,
+			value ="/tipoProductos", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody

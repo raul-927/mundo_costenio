@@ -85,7 +85,7 @@ public class GrupoCuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta){
+	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta) throws ResourceNotFoundException{ 
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarGrupoCuenta(grupoCuenta);
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
@@ -96,7 +96,7 @@ public class GrupoCuentaController {
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
 		if(grupoCuentaResult.size() == 0) {
 			if(grupoCuenta.getGrupoCuentaId()!= null || grupoCuenta.getId() != null) {
-				if(grupoCuenta.getGrupoCuentaId()!= null && grupoCuenta.getId() > 0) {
+				if(grupoCuenta.getGrupoCuentaId()!= null && grupoCuenta.getGrupoCuentaId() > 0) {
 					throw new ResourceNotFoundException("GrupoCuenta con id: " +grupoCuenta.getGrupoCuentaId()+"  no encontrada");
 				}
 				else {

@@ -39,38 +39,25 @@ public class AccesControlListService<T> {
 		Integer id = Math.abs(object.hashCode());
 		//User users = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Authentication user = (Authentication)SecurityContextHolder.getContext().getAuthentication();
-    	System.out.println("user nombre: "+user.getName());
-    	System.out.println("user roles: "+user.getAuthorities());
     	System.out.println("Nombre: "+user.getName());
     	System.out.println("Roles: "+user.getAuthorities());
 		ObjectIdentity objectIdentity  = null;
 		MutableAcl mutableAcl = null;
-		
+
 		if(object instanceof Post) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.USER.name())) {
-					objectIdentity = new ObjectIdentityImpl(Post.class, id);
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-		            mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-		            mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-		            mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.USER.getDescripcion()), true);
-					break;
-				}
-			}
+			objectIdentity = new ObjectIdentityImpl(Post.class, id);
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+		    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+		    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.USER.getDescripcion()), true);
 		}else if(object instanceof Direccion) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(Direccion.class, ((Direccion)object).getDireccionId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-					mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-					mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-					mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);
-					break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(Direccion.class, ((Direccion)object).getDireccionId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);
 		}else if(object instanceof Calle) {
 			objectIdentity = new ObjectIdentityImpl(Calle.class, ((Calle)object).getCalleId());
 			mutableAcl  = mutableAclService.createAcl(objectIdentity);
@@ -79,72 +66,42 @@ public class AccesControlListService<T> {
 			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);	
 		}else if(object instanceof ListaPrecios) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(ListaPrecios.class, ((ListaPrecios)object).getListaPrecioId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.SALES.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(ListaPrecios.class, ((ListaPrecios)object).getListaPrecioId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.SALES.getDescripcion()), true);	
 		}else if(object instanceof Impuesto) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(Impuesto.class, ((Impuesto)object).getImpuestoId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(Impuesto.class, ((Impuesto)object).getImpuestoId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
 		}else if(object instanceof Cuenta) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(Cuenta.class, ((Cuenta)object).getCuentaId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(Cuenta.class, ((Cuenta)object).getCuentaId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
 		}else if(object instanceof GrupoCuenta) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(GrupoCuenta.class, ((GrupoCuenta)object).getGrupoCuentaId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(GrupoCuenta.class, ((GrupoCuenta)object).getGrupoCuentaId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.COUNTER.getDescripcion()), true);
 		}else if(object instanceof Producto) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(Producto.class, ((Producto)object).getProdId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(Producto.class, ((Producto)object).getProdId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
 		}else if(object instanceof TipoProducto) {
-			objectIdentity = new ObjectIdentityImpl(TipoProducto.class, ((TipoProducto)object).getId());
+			objectIdentity = new ObjectIdentityImpl(TipoProducto.class, ((TipoProducto)object).getTipProdId());
 			mutableAcl  = mutableAclService.createAcl(objectIdentity);
 			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
 			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
@@ -152,57 +109,33 @@ public class AccesControlListService<T> {
 			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
 			mutableAcl.insertAce(4, BasePermission.READ,   new PrincipalSid(user.getName()), true);
 		}else if(object instanceof Barrio) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(Barrio.class, ((Barrio)object).getBarrioId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(Barrio.class, ((Barrio)object).getBarrioId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);
 		}else if(object instanceof Persona) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(Persona.class, ((Persona)object).getPersonaId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(Persona.class, ((Persona)object).getPersonaId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
 		}else if(object instanceof co.com.mundocostenio.domain.User) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(co.com.mundocostenio.domain.User.class, ((co.com.mundocostenio.domain.User)object).getUserId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(co.com.mundocostenio.domain.User.class, ((co.com.mundocostenio.domain.User)object).getUserId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
 		}else if(object instanceof Rol) {
-			for(GrantedAuthority auth: user.getAuthorities()) {
-				if(auth.getAuthority().equals(RolesEnum.CONFIG.name())) {
-					objectIdentity = new ObjectIdentityImpl(Rol.class, ((Rol)object).getRolId());
-					mutableAcl  = mutableAclService.createAcl(objectIdentity);
-					mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
-				    mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-				    mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
-				    break;
-				}
-			}
-			
+			objectIdentity = new ObjectIdentityImpl(Rol.class, ((Rol)object).getRolId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
 		}
 		if(mutableAcl!=null) {
 			mutableAclService.updateAcl(mutableAcl);
