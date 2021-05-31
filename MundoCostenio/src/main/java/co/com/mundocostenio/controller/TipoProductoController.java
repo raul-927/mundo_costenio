@@ -75,14 +75,14 @@ public class TipoProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> selectTipoProducto(@RequestBody @Valid TipoProducto tipoProducto, BindingResult bindingResult){
+	public ResponseEntity<?> selectTipoProducto(@RequestBody TipoProducto tipoProducto, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.NOT_ACCEPTABLE);
 		}
-		TipoProducto result = this.tipoProductoService.selectTipoProducto(tipoProducto);
+		List<TipoProducto> result = this.tipoProductoService.selectTipoProducto(tipoProducto);
 		
-		return new ResponseEntity<TipoProducto>(result, headers, HttpStatus.OK);
+		return new ResponseEntity<List<TipoProducto>>(result, headers, HttpStatus.OK);
 	}
 
 }

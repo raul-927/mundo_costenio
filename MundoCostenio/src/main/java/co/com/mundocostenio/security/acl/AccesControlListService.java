@@ -42,7 +42,7 @@ public class AccesControlListService<T> {
 			mutableAcl.insertAce(0, BasePermission.WRITE, new PrincipalSid(user.getUsername()), true);
             mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
             mutableAcl.insertAce(2, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
-            mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.USER.getDescripcion()), true);
+            mutableAcl.insertAce(3, BasePermission.READ, new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
 		}else if(object instanceof Direccion) {
 			objectIdentity = new ObjectIdentityImpl(Direccion.class, ((Direccion)object).getDireccionId());
 			mutableAcl  = mutableAclService.createAcl(objectIdentity);

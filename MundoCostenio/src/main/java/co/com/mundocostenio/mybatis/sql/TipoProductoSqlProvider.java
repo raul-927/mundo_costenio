@@ -41,7 +41,7 @@ public class TipoProductoSqlProvider {
 		return new SQL() {{
 			SELECT("tip_prod_id, desc_tipo_producto");
 			FROM("tipo_producto");
-			if(tipoProducto.getTipProdId() > 0) {
+			if(tipoProducto!= null && tipoProducto.getTipProdId()!=null && tipoProducto.getTipProdId() > 0) {
 				WHERE("tip_prod_id = " + String.valueOf(tipoProducto.getTipProdId()));
 			}else if(tipoProducto.getDescTipoProducto()!=null && tipoProducto.getDescTipoProducto()!="") {
 				WHERE("desc_tipo_producto = " + "'".concat(tipoProducto.getDescTipoProducto()).concat("'"));

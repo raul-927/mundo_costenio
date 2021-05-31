@@ -1,5 +1,7 @@
 package co.com.mundocostenio.mybatis.mappers;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
@@ -25,6 +27,6 @@ public interface TipoProductoMapper {
 	
 	@SelectProvider(type = TipoProductoSqlProvider.class, method ="selectTipoProducto")
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.TipoProductoMapper.TipoProductoResult")
-	TipoProducto selectTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto);
+	List<TipoProducto> selectTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto);
 
 }
