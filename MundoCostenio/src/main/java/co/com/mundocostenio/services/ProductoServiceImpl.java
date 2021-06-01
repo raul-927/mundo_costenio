@@ -64,7 +64,7 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	@PostAuthorize("hasPermission(filterObject,'READ')")
+	//@PostAuthorize("hasPermission(filterObject,'READ')")
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Producto> selectProducto(Producto producto) {
 		

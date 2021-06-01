@@ -107,7 +107,6 @@ public class AccesControlListService<T> {
 			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.MARKETING.getDescripcion()), true);
-			mutableAcl.insertAce(4, BasePermission.READ,   new PrincipalSid(user.getName()), true);
 		}else if(object instanceof Barrio) {
 			objectIdentity = new ObjectIdentityImpl(Barrio.class, ((Barrio)object).getBarrioId());
 			mutableAcl  = mutableAclService.createAcl(objectIdentity);

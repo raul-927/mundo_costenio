@@ -43,7 +43,7 @@ public class ProductoController {
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
-			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.NOT_ACCEPTABLE);
 		}
 		
 		Producto productoResult = this.productoService.insert(producto);
