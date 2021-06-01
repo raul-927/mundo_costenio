@@ -92,7 +92,7 @@ public class BarrioController {
 		return new ResponseEntity<List<Barrio>>(barrioResult, headers, HttpStatus.OK);
 	}
 	
-	private void verificarBarrio(Barrio barrio) {
+	private void verificarBarrio(Barrio barrio) throws ResourceNotFoundException{
 		List<Barrio> barrioResult = this.barrioService.select(barrio);
 		if(barrioResult.size() == 0) {
 			if(barrio.getBarrioId()!= null || barrio.getId() != null || barrio.getNombreBarrio()!=null) {

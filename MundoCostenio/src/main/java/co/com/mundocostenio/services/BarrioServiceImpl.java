@@ -49,7 +49,6 @@ public class BarrioServiceImpl implements BarrioService {
 	}
 
 	@Override
-	@PostAuthorize("hasPermission(filterObject,'READ')")
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Barrio> select(Barrio barrio) {
 		return this.barrioMapper.select(barrio);

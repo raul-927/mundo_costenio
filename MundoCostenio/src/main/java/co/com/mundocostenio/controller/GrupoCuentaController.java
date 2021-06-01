@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,6 @@ import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.GrupoCuentaService;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class GrupoCuentaController {
 	
 	@Autowired
@@ -85,21 +85,23 @@ public class GrupoCuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta) throws ResourceNotFoundException{ 
+	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta){ 
 		HttpHeaders headers = new HttpHeaders();
-		this.verificarGrupoCuenta(grupoCuenta);
+		verificarGrupoCuenta(grupoCuenta);
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
 		return new ResponseEntity<List<GrupoCuenta>>(grupoCuentaResult, headers, HttpStatus.OK);
 	}
 	
-	private void verificarGrupoCuenta(GrupoCuenta grupoCuenta) {
+	private void verificarGrupoCuenta(GrupoCuenta grupoCuenta) throws ResourceNotFoundException {
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
 		if(grupoCuentaResult.size() == 0) {
 			if(grupoCuenta.getGrupoCuentaId()!= null || grupoCuenta.getId() != null) {
 				if(grupoCuenta.getGrupoCuentaId()!= null && grupoCuenta.getGrupoCuentaId() > 0) {
+					System.out.println("Entro por aca");
 					throw new ResourceNotFoundException("GrupoCuenta con id: " +grupoCuenta.getGrupoCuentaId()+"  no encontrada");
 				}
 				else {
+					System.out.println("Paso por aca");
 					throw new ResourceNotFoundException("GrupoCuenta no encontrada");
 				}
 			}

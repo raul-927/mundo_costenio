@@ -56,18 +56,21 @@ public class BarrioSqlProvider {
 			FROM("departamento d");
 			
 			WHERE("b.departamento_id = d.departamento_id");
-			if( barrio.getBarrioId() > 0) {
-				WHERE("barrio_id = "+ String.valueOf(barrio.getBarrioId()));
-			}else {
-				if(barrio.getNombreBarrio() !=null && barrio.getNombreBarrio() !=""){
-					WHERE("nombre_barrio LIKE " + "'%".concat(barrio.getNombreBarrio()).concat("%'"));
-				}
-				if(barrio.getDepartamento()!=null) {
-					if(barrio.getDepartamento().getNombreDepartamento()!=null && barrio.getDepartamento().getNombreDepartamento()!="") {
-						WHERE("d.nombre_departamento  LIKE" + "'%".concat(barrio.getDepartamento().getNombreDepartamento()).concat("%'"));
+			if(barrio !=null) {
+				if( barrio.getBarrioId()!=null && barrio.getBarrioId() > 0) {
+					WHERE("barrio_id = "+ String.valueOf(barrio.getBarrioId()));
+				}else {
+					if(barrio.getNombreBarrio() !=null && barrio.getNombreBarrio() !=""){
+						WHERE("nombre_barrio LIKE " + "'%".concat(barrio.getNombreBarrio()).concat("%'"));
+					}
+					if(barrio.getDepartamento()!=null) {
+						if(barrio.getDepartamento().getNombreDepartamento()!=null && barrio.getDepartamento().getNombreDepartamento()!="") {
+							WHERE("d.nombre_departamento  LIKE" + "'%".concat(barrio.getDepartamento().getNombreDepartamento()).concat("%'"));
+						}
 					}
 				}
 			}
+			
 		}}.toString();
 	}
 }
