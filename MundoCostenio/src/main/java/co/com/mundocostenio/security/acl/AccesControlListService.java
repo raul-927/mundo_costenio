@@ -24,6 +24,7 @@ import co.com.mundocostenio.domain.Impuesto;
 import co.com.mundocostenio.domain.ListaPrecios;
 import co.com.mundocostenio.domain.Persona;
 import co.com.mundocostenio.domain.Post;
+import co.com.mundocostenio.domain.PrecioProducto;
 import co.com.mundocostenio.domain.Producto;
 import co.com.mundocostenio.domain.Rol;
 import co.com.mundocostenio.domain.TipoProducto;
@@ -143,6 +144,13 @@ public class AccesControlListService<T> {
 			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
+		}else if(object instanceof PrecioProducto) {
+			objectIdentity = new ObjectIdentityImpl(PrecioProducto.class, ((PrecioProducto)object).getPrecioProdId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.SALES.getDescripcion()), true);
 		}
 		if(mutableAcl!=null) {
 			mutableAclService.updateAcl(mutableAcl);
@@ -178,6 +186,8 @@ public class AccesControlListService<T> {
 			oid = new ObjectIdentityImpl(Rol.class, ((Rol) object).getRolId());
 		}else if(object instanceof Departamento) {
 			oid = new ObjectIdentityImpl(Departamento.class, ((Departamento) object).getDepartamentoId());
+		}else if(object instanceof PrecioProducto) {
+			oid = new ObjectIdentityImpl(PrecioProducto.class, ((PrecioProducto) object).getPrecioProdId());
 		}
 		mutableAclService.deleteAcl(oid, true);
 	}

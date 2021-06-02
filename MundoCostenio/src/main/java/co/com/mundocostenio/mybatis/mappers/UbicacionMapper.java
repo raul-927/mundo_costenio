@@ -25,7 +25,7 @@ public interface UbicacionMapper {
 	void update(@Param("ubicacion") Ubicacion ubicacion);
 	
 	@DeleteProvider(type = UbicacionSqlProvider.class, method ="delete")
-	int delete(@Param("ubicacionId")int ubicacionId);
+	void delete(@Param("ubicacion")Ubicacion ubicacion);
 	
 	@SelectProvider(type = UbicacionSqlProvider.class, method ="select")
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.UbicacionMapper.UbicacionResult")

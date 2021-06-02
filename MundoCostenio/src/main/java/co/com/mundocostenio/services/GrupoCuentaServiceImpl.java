@@ -52,24 +52,6 @@ public class GrupoCuentaServiceImpl implements GrupoCuentaService {
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<GrupoCuenta> select(GrupoCuenta grupoCuenta) {
 		List<GrupoCuenta>grupoCuentaResult = this.grupoCuentaMapper.select(grupoCuenta);
-		
-		//verificarGrupoCuenta(grupoCuentaResult,grupoCuenta);
-		
 		return grupoCuentaResult;
 	}
-	
-	/*
-	 * private void verificarGrupoCuenta(List<GrupoCuenta>grupoCuentaResult,
-	 * GrupoCuenta grupoCuenta) throws ResourceNotFoundException{
-	 * 
-	 * if(grupoCuentaResult.size() == 0) { if(grupoCuenta.getGrupoCuentaId()!= null
-	 * || grupoCuenta.getId() != null) { if(grupoCuenta.getGrupoCuentaId()!= null &&
-	 * grupoCuenta.getGrupoCuentaId() > 0) { throw new
-	 * ResourceNotFoundException("Grupo Cuenta con id: "
-	 * +grupoCuenta.getGrupoCuentaId()+"  no encontrado"); } else { throw new
-	 * ResourceNotFoundException("Grupo Cuenta no encontrado"); } } else { throw new
-	 * ResourceNotFoundException("No existen registros en la tabla grupo_cuenta"); }
-	 * } }
-	 */
-
 }

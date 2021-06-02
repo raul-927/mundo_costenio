@@ -55,7 +55,7 @@ public class TipoProductoServiceImpl implements TipoProductoService {
 
 	@Override
 	//@PostAuthorize("hasPermission(filterObject,'READ')")
-	//@PostFilter("hasPermission(filterObject, 'READ')")
+	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<TipoProducto> selectTipoProducto(TipoProducto tipoProducto) {
 		return this.tipoProductoMapper.selectTipoProducto(tipoProducto);
 	}

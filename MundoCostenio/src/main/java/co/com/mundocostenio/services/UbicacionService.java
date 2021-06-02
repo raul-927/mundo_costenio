@@ -8,7 +8,7 @@ public interface UbicacionService {
 	
 	Ubicacion insert(Ubicacion ubicacion);
 	Ubicacion update(Ubicacion ubicacion);
-	int delete(int ubicacionId);
+	void delete(Ubicacion ubicacion);
 	
 	List<Ubicacion> select(Ubicacion ubicacion);
 

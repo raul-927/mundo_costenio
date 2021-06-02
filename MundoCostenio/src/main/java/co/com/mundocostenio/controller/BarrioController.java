@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
-import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.BarrioService;
 
 @RestController
@@ -84,7 +84,7 @@ public class BarrioController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>select(@RequestBody Barrio barrio){
+	public ResponseEntity<?>select(@RequestBody Barrio barrio) throws ResponseStatusException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarBarrio(barrio);
 		List<Barrio> barrioResult = this.barrioService.select(barrio);
@@ -92,19 +92,19 @@ public class BarrioController {
 		return new ResponseEntity<List<Barrio>>(barrioResult, headers, HttpStatus.OK);
 	}
 	
-	private void verificarBarrio(Barrio barrio) throws ResourceNotFoundException{
+	private void verificarBarrio(Barrio barrio) throws ResponseStatusException{
 		List<Barrio> barrioResult = this.barrioService.select(barrio);
 		if(barrioResult.size() == 0) {
 			if(barrio.getBarrioId()!= null || barrio.getId() != null || barrio.getNombreBarrio()!=null) {
 				if(barrio.getBarrioId()!= null && barrio.getBarrioId() > 0) {
-					throw new ResourceNotFoundException("Barrio con id: " +barrio.getBarrioId()+"  no encontrado");
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Barrio con id: " +barrio.getBarrioId()+"  no encontrado");
 				}
 				else {
-					throw new ResourceNotFoundException("Barrio no encontrado");
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Barrio no encontrado");
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla barrio");
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No existen registros en la tabla barrio");
 			}
 		}
 	}

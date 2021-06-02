@@ -34,11 +34,11 @@ public class UbicacionSqlProvider {
 		}}.toString();
 	}
 	
-	public String delete(int  ubicacionId) {
+	public String delete(Ubicacion ubicacion) {
 		return new SQL() {{
-			if(ubicacionId >0) {
+			if(ubicacion !=null && ubicacion.getUbicacionId()!=null && ubicacion.getUbicacionId()>0) {
 				DELETE_FROM("ubicacion");
-				WHERE("ubicacion_id = "+ubicacionId);
+				WHERE("ubicacion_id = "+String.valueOf(ubicacion.getUbicacionId()));
 			}
 		}}.toString();
 	}
