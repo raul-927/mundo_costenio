@@ -68,9 +68,9 @@ public class UbicacionController {
 	public ResponseEntity<?> delete(@RequestBody Ubicacion ubicacion){
 		HttpHeaders headers = new HttpHeaders();
 		verificar(ubicacion);
-		int ubicacionResult = this.ubicacionService.delete(ubicacion.getUbicacionId());
+		this.ubicacionService.delete(ubicacion);
 		
-		return new ResponseEntity<Integer>(ubicacionResult, headers, HttpStatus.OK);
+		return new ResponseEntity<Ubicacion>(ubicacion, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
