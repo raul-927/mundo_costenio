@@ -69,7 +69,7 @@ public class DepartamentoController {
 	public ResponseEntity<?> delete(@RequestBody Departamento departamento){
 		HttpHeaders headers = new HttpHeaders();
 		verificarDepartamento(departamento);
-		this.departamentoService.delete(departamento.getDepartamentoId());
+		this.departamentoService.delete(departamento);
 		
 		return new ResponseEntity<Departamento>(null,headers, HttpStatus.OK);
 	}

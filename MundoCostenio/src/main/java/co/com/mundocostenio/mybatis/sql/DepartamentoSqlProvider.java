@@ -33,11 +33,11 @@ public class DepartamentoSqlProvider {
 		}}.toString();
 	}
 	
-	public String delete(int departamentoId) {
+	public String delete(Departamento departamento) {
 		return new SQL() {{
-			if(departamentoId > 0) {
+			if(departamento!=null && departamento.getDepartamentoId()!=null && departamento.getDepartamentoId() > 0) {
 				DELETE_FROM("departamento");
-				WHERE("departamentoId = " + String.valueOf(departamentoId));
+				WHERE("departamentoId = " + String.valueOf(departamento.getDepartamentoId()));
 			}
 		}}.toString();
 	}

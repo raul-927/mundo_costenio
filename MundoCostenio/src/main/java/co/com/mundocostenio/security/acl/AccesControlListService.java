@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.Calle;
 import co.com.mundocostenio.domain.Cuenta;
+import co.com.mundocostenio.domain.Departamento;
 import co.com.mundocostenio.domain.Direccion;
 import co.com.mundocostenio.domain.GrupoCuenta;
 import co.com.mundocostenio.domain.Impuesto;
@@ -65,6 +66,13 @@ public class AccesControlListService<T> {
 			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
 			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);	
+		}else if(object instanceof Departamento) {
+			objectIdentity = new ObjectIdentityImpl(Departamento.class, ((Departamento)object).getDepartamentoId());
+			mutableAcl  = mutableAclService.createAcl(objectIdentity);
+			mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
+			mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(2, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
+			mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.CONFIG.getDescripcion()), true);
 		}else if(object instanceof ListaPrecios) {
 			objectIdentity = new ObjectIdentityImpl(ListaPrecios.class, ((ListaPrecios)object).getListaPrecioId());
 			mutableAcl  = mutableAclService.createAcl(objectIdentity);
@@ -141,7 +149,7 @@ public class AccesControlListService<T> {
 		}
 		return id;
 	}
-	
+
 	public void delete(T object) {
 		ObjectIdentity oid = null;
 		if(object instanceof Post) {
@@ -168,6 +176,8 @@ public class AccesControlListService<T> {
 			oid = new ObjectIdentityImpl(co.com.mundocostenio.domain.User.class, ((co.com.mundocostenio.domain.User) object).getUserId());
 		}else if(object instanceof Rol) {
 			oid = new ObjectIdentityImpl(Rol.class, ((Rol) object).getRolId());
+		}else if(object instanceof Departamento) {
+			oid = new ObjectIdentityImpl(Departamento.class, ((Departamento) object).getDepartamentoId());
 		}
 		mutableAclService.deleteAcl(oid, true);
 	}

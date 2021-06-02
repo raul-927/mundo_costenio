@@ -22,6 +22,7 @@ import co.com.mundocostenio.domain.Calle;
 import co.com.mundocostenio.domain.Producto;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
+import co.com.mundocostenio.exceptions.ProductNotFoundException;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.ProductoService;
 
@@ -56,13 +57,9 @@ public class ProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody @Valid Producto producto, BindingResult bindingResult) {
+	public ResponseEntity<?> update(@RequestBody Producto producto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarProducto(producto);
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
 		Producto productoResult = this.productoService.update(producto);
 		
 		return new ResponseEntity<Producto>(productoResult, headers, HttpStatus.OK);
@@ -73,7 +70,7 @@ public class ProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody Producto producto) {
+	public ResponseEntity<?> delete(@RequestBody Producto producto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarProducto(producto);
 		int result = this.productoService.delete(producto);
@@ -86,27 +83,31 @@ public class ProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody Producto producto) {
+	public ResponseEntity<?> select(@RequestBody Producto producto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
-		this.verificarProducto(producto);
-		List<Producto> productoResult = this.productoService.selectProducto(producto);
+		verificarProducto(producto);
 		
+		List<Producto> productoResult = this.productoService.selectProducto(producto);
 		return new ResponseEntity<List<Producto>>(productoResult, headers, HttpStatus.OK);
 	}
 	
-	private void verificarProducto(Producto producto) {
+	protected void verificarProducto(Producto producto) throws ResourceNotFoundException{
+		String mensaje =null;
 		List<Producto>productoResult = this.productoService.selectProducto(producto);
 		if(productoResult.size() == 0) {
 			if(producto.getProdId()!= null || producto.getId() != null || producto.getNombre()!=null) {
 				if(producto.getProdId()!= null && producto.getProdId() > 0) {
-					throw new ResourceNotFoundException("Producto con id: " +producto.getProdId()+"  no encontrado");
+					mensaje = "Producto con id: " +producto.getProdId()+"  no encontrado";
+					throw new ResourceNotFoundException(mensaje);
 				}
 				else {
-					throw new ResourceNotFoundException("Producto no encontrado");
+					mensaje = "Producto no encontrado";
+					throw new ResourceNotFoundException(mensaje);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla producto");
+				mensaje = "No existen registros en la tabla producto";
+				throw new ResourceNotFoundException(mensaje);
 			}
 		}
 	}

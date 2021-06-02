@@ -48,32 +48,13 @@ public class CuentaServiceImpl implements CuentaService {
 	public void delete(@Param("cuenta") Cuenta cuenta) {
 		this.select(cuenta);
 		this.cuentaMapper.delete(cuenta);
-
+		this.accesControlListService.delete(cuenta);
 	}
 
 	@Override
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Cuenta> select(Cuenta cuenta) {
 		List<Cuenta> cuentaResult = this.cuentaMapper.select(cuenta);
-		//this.verificarCuenta(cuentaResult, cuenta);
 		return cuentaResult;
 	}
-	
-	private void verificarCuenta(List<Cuenta>cuentaResult, Cuenta cuenta) {
-		
-		if(cuentaResult.size() == 0) {
-			if(cuenta.getCuentaId()!= null || cuenta.getId() != null) {
-				if(cuenta.getCuentaId()!= null && cuenta.getCuentaId() > 0) {
-					throw new ResourceNotFoundException("Cuenta con id: " +cuenta.getCuentaId()+"  no encontrada");
-				}
-				else {
-					throw new ResourceNotFoundException("Cuenta no encontrada");
-				}
-			}
-			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla cuenta");
-			}
-		}
-	}
-
 }

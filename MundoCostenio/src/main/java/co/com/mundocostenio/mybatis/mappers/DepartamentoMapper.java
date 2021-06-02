@@ -23,7 +23,7 @@ public interface DepartamentoMapper {
 	void update(@Param("departamento") Departamento departamento);
 	
 	@InsertProvider(type = DepartamentoSqlProvider.class, method ="delete")
-	void delete(@Param("departamentoId") int departamentoId);
+	void delete(@Param("departamento") Departamento departamento);
 	
 	
 	@SelectProvider(type = DepartamentoSqlProvider.class, method ="select")
