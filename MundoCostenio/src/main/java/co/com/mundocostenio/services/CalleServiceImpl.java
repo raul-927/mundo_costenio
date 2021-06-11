@@ -51,12 +51,7 @@ public class CalleServiceImpl implements CalleService {
 	@Transactional
 	@PreAuthorize(value="hasPermission(#calle, 'WRITE')")
 	public Calle update(@Param("calle") Calle calle) throws Exception {
-		if(calle!=null && calle.getCalleId()!=null && calle.getId()!=null) {
-			this.calleMapper.update(calle);
-		}
-		else {
-			throw new Exception("calleId no debe ser null");
-		}
+		this.calleMapper.update(calle);
 		return calle;
 	}
 
@@ -64,18 +59,11 @@ public class CalleServiceImpl implements CalleService {
 	@Transactional
 	@PreAuthorize(value="hasPermission(#calle, 'DELETE')")
 	public void delete(@Param("calle") Calle calle)throws Exception {
-		if(calle!=null && calle.getCalleId()!=null) {
-			this.calleMapper.delete(calle);
-			this.accesControlListService.delete(calle);
-		}
-		else {
-			throw new Exception("calleId no debe ser null");
-		}
-		
+		this.calleMapper.delete(calle);
+		this.accesControlListService.delete(calle);
 	}
 
 	@Override
-	//@PostAuthorize("hasPermission(filterObject,'READ')")
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Calle> select(Calle calle) {
 		return this.calleMapper.select(calle);
