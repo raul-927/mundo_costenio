@@ -3,7 +3,6 @@ package co.com.mundocostenio.exceptions;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
 
 	/**
@@ -11,15 +10,30 @@ public class ResourceNotFoundException extends RuntimeException{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String message;
+	private Throwable cause;
+	
 	public ResourceNotFoundException() {}
 	public ResourceNotFoundException(String message) {
 		super(message);
+		this.message = message;
 		System.out.println("message: "+this.getMessage());
 	}
 	public ResourceNotFoundException(String message, Throwable cause) {
-		super(message, cause)
-		;System.out.println("message: "+this.getMessage());
+		super(message, cause);
+		this.message = message;
+		this.cause = cause;
+		System.out.println("message: "+this.getMessage());
 		System.out.println("cause: "+this.getCause());
+	}
+	public String getMessage() {
+		return message;
+	}
+	/**
+	 * @return the cause
+	 */
+	public Throwable getCause() {
+		return cause;
 	}
 	
 

@@ -7,6 +7,6 @@ import co.com.mundocostenio.domain.Barrio;
 public interface BarrioService {
 	Barrio insert( Barrio barrio);
 	Barrio update( Barrio barrio);
-	int delete( int barrioId);
+	void delete( Barrio barrio);
 	List<Barrio> select( Barrio barrio);
 }

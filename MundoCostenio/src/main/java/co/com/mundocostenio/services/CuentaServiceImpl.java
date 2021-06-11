@@ -27,7 +27,7 @@ public class CuentaServiceImpl implements CuentaService {
 	@Override
 	@PreAuthorize(value ="hasRole('ROLE_COUNTER')")
 	@Transactional
-	public Cuenta insert(@Param("cuenta") Cuenta cuenta) {
+	public Cuenta insert(Cuenta cuenta) {
 		this.cuentaMapper.insert(cuenta);
 		this.accesControlListService.insert(cuenta);
 		return cuenta;

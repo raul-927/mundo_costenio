@@ -52,7 +52,7 @@ public class UbicacionController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Ubicacion ubicacion){
+	public ResponseEntity<?> update(@RequestBody Ubicacion ubicacion) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificar(ubicacion);
 		Ubicacion ubicacionResult = this.ubicacionService.update(ubicacion);
@@ -65,7 +65,7 @@ public class UbicacionController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody Ubicacion ubicacion){
+	public ResponseEntity<?> delete(@RequestBody Ubicacion ubicacion) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificar(ubicacion);
 		this.ubicacionService.delete(ubicacion);
@@ -78,7 +78,7 @@ public class UbicacionController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody Ubicacion ubicacion){
+	public ResponseEntity<?> select(@RequestBody Ubicacion ubicacion) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificar(ubicacion);
 		List<Ubicacion> ubicacionResult = this.ubicacionService.select(ubicacion);
@@ -86,19 +86,23 @@ public class UbicacionController {
 		return new ResponseEntity<List<Ubicacion>>(ubicacionResult, headers, HttpStatus.OK);
 	}
 	
-	private void verificar(Ubicacion ubicacion) {
+	private void verificar(Ubicacion ubicacion) throws ResourceNotFoundException{
+		String message ="";
 		List<Ubicacion> ubicacionResult = this.ubicacionService.select(ubicacion);
 		if(ubicacionResult.size() == 0) {
 			if(ubicacion.getUbicacionId()!= null || ubicacion.getNroPuerta()!=null || ubicacion.getGeoLocalizacion()!=null) {
 				if(ubicacion.getUbicacionId()!= null && ubicacion.getUbicacionId() > 0) {
-					throw new ResourceNotFoundException("Ubicacion con id: " +ubicacion.getUbicacionId()+"  no encontrada");
+					message = "Ubicacion con id: " +ubicacion.getUbicacionId()+"  no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("Ubicacion no encontrada");
+					message = "Ubicacion no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla ubicacion");
+				message = "No existen registros en la tabla ubicacion";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

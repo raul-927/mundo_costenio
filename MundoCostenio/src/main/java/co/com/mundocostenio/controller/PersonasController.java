@@ -56,7 +56,7 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>update(@RequestBody @Valid Persona persona, BindingResult bindingResult){
+	public ResponseEntity<?>update(@RequestBody @Valid Persona persona, BindingResult bindingResult) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarPersonas(persona);
 		if(bindingResult.hasErrors()) {
@@ -72,7 +72,7 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>delete(@RequestBody @Valid Persona persona, BindingResult bindingResult){
+	public ResponseEntity<?>delete(@RequestBody @Valid Persona persona, BindingResult bindingResult) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarPersonas(persona);
 		if(bindingResult.hasErrors()) {
@@ -89,7 +89,7 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<List<Persona>>select(@RequestBody Persona persona){
+	public ResponseEntity<List<Persona>>select(@RequestBody Persona persona) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarPersonas(persona);
 		List<Persona> personasList = this.personasService.select(persona);
@@ -97,19 +97,24 @@ public class PersonasController {
 		return new ResponseEntity<List<Persona>>(personasList, headers,HttpStatus.OK);
 	}
 	
-	private void verificarPersonas(Persona persona) {
+	private void verificarPersonas(Persona persona) throws ResourceNotFoundException{
+		String message = "";
 		List<Persona> personaResult = this.personasService.select(persona);
 		if(personaResult.size() == 0) {
 			if(persona.getPersonaId()!= null || persona.getId() != null || persona.getNombre()!=null) {
 				if(persona.getPersonaId()!= null && persona.getPersonaId() > 0) {
-					throw new ResourceNotFoundException("Persona con id: " +persona.getPersonaId()+"  no encontrada");
+					
+					message = "Persona con id: " +persona.getPersonaId()+"  no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("Persona no encontrada");
+					message = "Persona no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla persona");
+				message = "No existen registros en la tabla persona";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

@@ -33,6 +33,8 @@ public class CalleController {
 	@Autowired
 	private ErrorFieldVerify errorFieldVerify;
 	
+	private String message;
+	
 	
 	@RequestMapping(
 			value ="/calle", method =RequestMethod.POST,
@@ -58,13 +60,7 @@ public class CalleController {
 	public ResponseEntity<?> updateCalle(@RequestBody Calle calle)throws Exception{
 		HttpHeaders headers = new HttpHeaders();
 		verificarCalle(calle);
-		try {
-			this.calleService.update(calle);
-		}
-		catch(Exception e) {
-			FieldError fieldError = new FieldError("co.com.mundocostenio.domain.Calle", "calleId", e.getMessage());
-			return new ResponseEntity<FieldError>(fieldError, headers, HttpStatus.NOT_FOUND);
-		}
+		this.calleService.update(calle);
 		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
 	}
@@ -77,13 +73,8 @@ public class CalleController {
 	public ResponseEntity<?> deleteCalle(@RequestBody Calle calle) throws Exception{
 		HttpHeaders headers = new HttpHeaders();
 		verificarCalle(calle);
-		try {
-			this.calleService.delete(calle);
-		}
-		catch(Exception e) {
-			FieldError fieldError = new FieldError("co.com.mundocostenio.domain.Calle", "calleId", e.getMessage());
-			return new ResponseEntity<FieldError>(fieldError, headers, HttpStatus.NOT_FOUND);
-		}
+		this.calleService.delete(calle);
+		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
 	}
 	
@@ -92,7 +83,7 @@ public class CalleController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> showCalle(@RequestBody Calle calle){
+	public ResponseEntity<?> showCalle(@RequestBody Calle calle) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarCalle(calle);
 		List<Calle> calles = this.calleService.select(calle);
@@ -100,19 +91,22 @@ public class CalleController {
 		return new ResponseEntity<List<Calle>>(calles, headers, HttpStatus.OK);
 	}
 	
-	private void verificarCalle(Calle calle) {
+	private void verificarCalle(Calle calle){
 		List<Calle> calleResult = this.calleService.select(calle);
 		if(calleResult.size() == 0) {
 			if(calle.getCalleId()!= null || calle.getId() != null || calle.getNombreCalle()!=null || calle.getTipoCalle()!=null) {
 				if(calle.getCalleId()!= null && calle.getCalleId() > 0) {
-					throw new ResourceNotFoundException("Calle con id: " +calle.getCalleId()+"  no encontrada");
+					message = "Calle con id: " +calle.getCalleId()+"  no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("Calle no encontrada");
+					message = "Calle no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla calle");
+				message = "No existen registros en la tabla calle";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

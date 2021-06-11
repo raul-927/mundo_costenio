@@ -10,9 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Caja;
 import co.com.mundocostenio.mybatis.mappers.CajaMapper;
+import co.com.mundocostenio.security.acl.AccesControlListService;
 
 @Service("cajaService")
 public class CajaServiceImpl implements CajaService {
+	
+	@Autowired
+	private AccesControlListService<Caja> accesControlListService;
 	
 	@Autowired
 	private CajaMapper cajaMapper;
@@ -22,6 +26,7 @@ public class CajaServiceImpl implements CajaService {
 	@PreAuthorize(value ="hasRole('ROLE_USER', 'ROLE_ADMIN')")
 	public Caja insert(Caja caja) {
 		this.cajaMapper.insert(caja);
+		this.accesControlListService.insert(caja);
 		return caja;
 	}
 

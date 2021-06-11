@@ -59,7 +59,7 @@ public class GrupoCuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody @Valid GrupoCuenta grupoCuenta, BindingResult bindingResult){
+	public ResponseEntity<?> update(@RequestBody @Valid GrupoCuenta grupoCuenta, BindingResult bindingResult) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarGrupoCuenta(grupoCuenta);
 		if(bindingResult.hasErrors()) {
@@ -73,7 +73,7 @@ public class GrupoCuentaController {
 			value ="/grupoCuenta", method =RequestMethod.DELETE,
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody GrupoCuenta grupoCuenta){
+	public ResponseEntity<?> delete(@RequestBody GrupoCuenta grupoCuenta) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarGrupoCuenta(grupoCuenta);
 		this.grupoCuentaService.delete(grupoCuenta);
@@ -81,11 +81,11 @@ public class GrupoCuentaController {
 	}
 	
 	@RequestMapping(
-			value ="/grupoCuentaSearch", method =RequestMethod.POST,
+			value ="/grupoCuentas", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta){ 
+	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta) throws ResourceNotFoundException{ 
 		HttpHeaders headers = new HttpHeaders();
 		verificarGrupoCuenta(grupoCuenta);
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
@@ -93,20 +93,22 @@ public class GrupoCuentaController {
 	}
 	
 	private void verificarGrupoCuenta(GrupoCuenta grupoCuenta) throws ResourceNotFoundException {
+		String message ="";
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
 		if(grupoCuentaResult.size() == 0) {
 			if(grupoCuenta.getGrupoCuentaId()!= null || grupoCuenta.getId() != null) {
 				if(grupoCuenta.getGrupoCuentaId()!= null && grupoCuenta.getGrupoCuentaId() > 0) {
-					System.out.println("Entro por aca");
-					throw new ResourceNotFoundException("GrupoCuenta con id: " +grupoCuenta.getGrupoCuentaId()+"  no encontrada");
+					message = "GrupoCuenta con id: " +grupoCuenta.getGrupoCuentaId()+"  no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					System.out.println("Paso por aca");
-					throw new ResourceNotFoundException("GrupoCuenta no encontrada");
+					message = "GrupoCuenta no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla grupo_cuenta");
+				message = "No existen registros en la tabla grupo_cuenta";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

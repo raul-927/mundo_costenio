@@ -58,7 +58,7 @@ public class ListaPreciosController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> selectListaPrecios(@RequestBody ListaPrecios listaPrecios){ //@PathVariable int id
+	public ResponseEntity<?> selectListaPrecios(@RequestBody ListaPrecios listaPrecios) throws ResourceNotFoundException{ //@PathVariable int id
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarListaPrecios(listaPrecios);
 		List<ListaPrecios> listaPreciosResult = this.listaPreciosService.selectListaPrecios(listaPrecios);
@@ -86,19 +86,23 @@ public class ListaPreciosController {
 		return new ResponseEntity<List<Producto>>(productosResult, headers, HttpStatus.OK);
 	}
 	
-	private void verificarListaPrecios(ListaPrecios listaPrecios) {
+	private void verificarListaPrecios(ListaPrecios listaPrecios) throws ResourceNotFoundException{
+		String message = "";
 		List<ListaPrecios> listaPreciosResult = this.listaPreciosService.selectListaPrecios(listaPrecios);
 		if(listaPreciosResult.size() == 0) {
 			if(listaPrecios.getListaPrecioId()!= null || listaPrecios.getId() != null || listaPrecios.getDescripcionLista()!=null) {
 				if(listaPrecios.getListaPrecioId()!= null && listaPrecios.getListaPrecioId() > 0) {
-					throw new ResourceNotFoundException("ListaPrecios con id: " +listaPrecios.getListaPrecioId()+"  no encontrado");
+					message = "ListaPrecios con id: " +listaPrecios.getListaPrecioId()+"  no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("ListaPrecios no encontrado");
+					message = "ListaPrecios no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla lista_precios");
+				message = "No existen registros en la tabla lista_precios";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

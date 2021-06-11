@@ -12,7 +12,7 @@ public class BarrioSqlProvider {
 			INSERT_INTO("barrio");
 			
 			if(barrio.getNombreBarrio() != null && barrio.getNombreBarrio() !="") {
-				VALUES("nombre_barrio", barrio.getNombreBarrio());
+				VALUES("nombre_barrio", "'".concat(barrio.getNombreBarrio()).concat("'"));
 			}
 			if(barrio.getDepartamento()!=null) {
 				if(barrio.getDepartamento().getDepartamentoId() > 0) {
@@ -39,11 +39,11 @@ public class BarrioSqlProvider {
 		}}.toString();
 	}
 	
-	public String delete(int barrioId) {
+	public String delete(Barrio barrio) {
 		return new SQL() {{
-			if(barrioId >0) {
+			if(barrio !=null && barrio.getBarrioId()!=null && barrio.getBarrioId() >0) {
 				DELETE_FROM("barrio");
-				WHERE("barrio_id = "+barrioId);
+				WHERE("barrio_id = "+String.valueOf(barrio.getBarrioId()));
 			}
 		}}.toString();
 	}

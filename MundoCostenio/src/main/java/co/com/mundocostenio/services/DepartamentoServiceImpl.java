@@ -26,7 +26,7 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 	@Override
 	@Transactional
 	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
-	public Departamento insert(@Param("departamento")Departamento departamento) {
+	public Departamento insert(Departamento departamento) {
 		this.departamentoMapper.insert(departamento);
 		accesControlListService.insert(departamento);
 		return departamento;

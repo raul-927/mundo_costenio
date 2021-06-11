@@ -14,7 +14,7 @@ public class DepartamentoSqlProvider {
 		return new SQL() {{
 			INSERT_INTO("departamento");
 			if(departamento.getNombreDepartamento() != null && departamento.getNombreDepartamento() !="" ) {
-				VALUES("nombre_departamento",departamento.getNombreDepartamento());
+				VALUES("nombre_departamento","'".concat(departamento.getNombreDepartamento()).concat("'"));
 			}
 			
 		}}.toString();
@@ -47,7 +47,7 @@ public class DepartamentoSqlProvider {
 			SELECT("departamento_id, nombre_departamento");
 			FROM("departamento");
 			
-			if(departamento.getDepartamentoId() > 0) {
+			if(departamento!= null && departamento.getDepartamentoId()!=null && departamento.getDepartamentoId() > 0) {
 				WHERE("departamento_id = " + String.valueOf(departamento.getDepartamentoId()));
 			}else {
 				if(departamento.getNombreDepartamento()!=null && departamento.getNombreDepartamento()!="") {

@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
+import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.BarrioService;
 
 @RestController
@@ -55,7 +56,7 @@ public class BarrioController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>update(@RequestBody Barrio barrio){
+	public ResponseEntity<?>update(@RequestBody Barrio barrio) throws ResourceNotFoundException{ 
 		HttpHeaders headers = new HttpHeaders();
 		verificarBarrio(barrio);
 		Barrio barrioResult = this.barrioService.update(barrio);
@@ -68,15 +69,12 @@ public class BarrioController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>delete(@RequestBody @Valid Barrio barrio, BindingResult bindingResult){
+	public ResponseEntity<?>delete(@RequestBody Barrio barrio, BindingResult bindingResult) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 		verificarBarrio(barrio);
-		int barrioResult = this.barrioService.delete(barrio.getBarrioId());
+		this.barrioService.delete(barrio);
 		
-		return new ResponseEntity<Integer>(barrioResult, headers, HttpStatus.OK);
+		return new ResponseEntity<Integer>(null, headers, HttpStatus.OK);
 	}
 	
 	@RequestMapping(
@@ -84,7 +82,7 @@ public class BarrioController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>select(@RequestBody Barrio barrio) throws ResponseStatusException{
+	public ResponseEntity<?>select(@RequestBody Barrio barrio) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarBarrio(barrio);
 		List<Barrio> barrioResult = this.barrioService.select(barrio);
@@ -92,19 +90,23 @@ public class BarrioController {
 		return new ResponseEntity<List<Barrio>>(barrioResult, headers, HttpStatus.OK);
 	}
 	
-	private void verificarBarrio(Barrio barrio) throws ResponseStatusException{
+	private void verificarBarrio(Barrio barrio) throws ResourceNotFoundException{
+		String message ="";
 		List<Barrio> barrioResult = this.barrioService.select(barrio);
 		if(barrioResult.size() == 0) {
 			if(barrio.getBarrioId()!= null || barrio.getId() != null || barrio.getNombreBarrio()!=null) {
 				if(barrio.getBarrioId()!= null && barrio.getBarrioId() > 0) {
-					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Barrio con id: " +barrio.getBarrioId()+"  no encontrado");
+					message = "Barrio con id: " +barrio.getBarrioId()+"  no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Barrio no encontrado");
+					message = "Barrio no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No existen registros en la tabla barrio");
+				message = "No existen registros en la tabla barrio";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

@@ -57,7 +57,7 @@ public class CuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Cuenta cuenta){
+	public ResponseEntity<?> update(@RequestBody Cuenta cuenta) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarCuenta(cuenta);
 		Cuenta cuentaResult = this.cuentaService.update(cuenta);
@@ -70,7 +70,7 @@ public class CuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody Cuenta cuenta){
+	public ResponseEntity<?> delete(@RequestBody Cuenta cuenta) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarCuenta(cuenta);
 		this.cuentaService.delete(cuenta);
@@ -84,7 +84,7 @@ public class CuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody Cuenta cuenta){
+	public ResponseEntity<?> select(@RequestBody Cuenta cuenta) throws ResourceNotFoundException{ 
 		HttpHeaders headers = new HttpHeaders();
 		verificarCuenta(cuenta);
 		List<Cuenta> cuentaResult = this.cuentaService.select(cuenta);
@@ -93,19 +93,23 @@ public class CuentaController {
 	}
 	
 	
-	private void verificarCuenta(Cuenta cuenta) {
+	private void verificarCuenta(Cuenta cuenta) throws ResourceNotFoundException{
+		String message ="";
 		List<Cuenta> cuentaResult = this.cuentaService.select(cuenta);
 		if(cuentaResult.size() == 0) {
 			if(cuenta.getCuentaId()!= null || cuenta.getId() != null) {
 				if(cuenta.getCuentaId()!= null && cuenta.getCuentaId() > 0) {
-					throw new ResourceNotFoundException("Cuenta con id: " +cuenta.getCuentaId()+"  no encontrada");
+					message = "Cuenta con id: " +cuenta.getCuentaId()+"  no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("Cuenta no encontrada");
+					message = "Cuenta no encontrada";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla cuenta");
+				message ="No existen registros en la tabla cuenta";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

@@ -53,7 +53,7 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Departamento departamento){
+	public ResponseEntity<?> update(@RequestBody Departamento departamento) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarDepartamento(departamento);
 		Departamento departamentoResult = this.departamentoService.update(departamento);
@@ -66,7 +66,7 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody Departamento departamento){
+	public ResponseEntity<?> delete(@RequestBody Departamento departamento) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarDepartamento(departamento);
 		this.departamentoService.delete(departamento);
@@ -79,7 +79,7 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody Departamento departamento){
+	public ResponseEntity<?> select(@RequestBody Departamento departamento) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarDepartamento(departamento);
 		List<Departamento> departamentoResult = this.departamentoService.select(departamento);
@@ -87,19 +87,23 @@ public class DepartamentoController {
 		return new ResponseEntity<List<Departamento>>(departamentoResult,headers, HttpStatus.OK);
 	}
 	
-	private void verificarDepartamento(Departamento departamento) {
+	private void verificarDepartamento(Departamento departamento) throws ResourceNotFoundException{
+		String message ="";
 		List<Departamento> barrioResult = this.departamentoService.select(departamento);
 		if(barrioResult.size() == 0) {
 			if(departamento.getDepartamentoId()!= null || departamento.getId() != null || departamento.getNombreDepartamento()!=null) {
 				if(departamento.getDepartamentoId()!= null && departamento.getDepartamentoId() > 0) {
-					throw new ResourceNotFoundException("Departamento con id: " +departamento.getDepartamentoId()+"  no encontrado");
+					message = "Departamento con id: " +departamento.getDepartamentoId()+"  no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("Departamento no encontrado");
+					message = "Departamento no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla departamento");
+				message = "No existen registros en la tabla departamento";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

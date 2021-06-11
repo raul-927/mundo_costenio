@@ -25,7 +25,7 @@ public interface BarrioMapper {
 	void update(@Param("barrio") Barrio barrio);
 	
 	@DeleteProvider(type = BarrioSqlProvider.class, method ="delete")
-	int delete(@Param("barrioId") int barrioId);
+	void delete(@Param("barrio") Barrio barrio);
 	
 	@SelectProvider(type = BarrioSqlProvider.class, method ="select")
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.BarrioMapper.BarrioResult")

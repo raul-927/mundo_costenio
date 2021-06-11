@@ -92,22 +92,22 @@ public class ProductoController {
 	}
 	
 	protected void verificarProducto(Producto producto) throws ResourceNotFoundException{
-		String mensaje =null;
+		String message ="";
 		List<Producto>productoResult = this.productoService.selectProducto(producto);
 		if(productoResult.size() == 0) {
 			if(producto.getProdId()!= null || producto.getId() != null || producto.getNombre()!=null) {
 				if(producto.getProdId()!= null && producto.getProdId() > 0) {
-					mensaje = "Producto con id: " +producto.getProdId()+"  no encontrado";
-					throw new ResourceNotFoundException(mensaje);
+					message = "Producto con id: " +producto.getProdId()+"  no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					mensaje = "Producto no encontrado";
-					throw new ResourceNotFoundException(mensaje);
+					message = "Producto no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				mensaje = "No existen registros en la tabla producto";
-				throw new ResourceNotFoundException(mensaje);
+				message = "No existen registros en la tabla producto";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

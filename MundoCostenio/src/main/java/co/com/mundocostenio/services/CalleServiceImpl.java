@@ -66,6 +66,7 @@ public class CalleServiceImpl implements CalleService {
 	public void delete(@Param("calle") Calle calle)throws Exception {
 		if(calle!=null && calle.getCalleId()!=null) {
 			this.calleMapper.delete(calle);
+			this.accesControlListService.delete(calle);
 		}
 		else {
 			throw new Exception("calleId no debe ser null");

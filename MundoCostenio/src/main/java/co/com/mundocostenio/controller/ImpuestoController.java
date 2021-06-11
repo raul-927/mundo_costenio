@@ -55,7 +55,7 @@ public class ImpuestoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>update(@RequestBody Impuesto impuesto){
+	public ResponseEntity<?>update(@RequestBody Impuesto impuesto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarImpuesto(impuesto);
 		Impuesto impuestoResult = this.impuestoService.update(impuesto);
@@ -68,7 +68,7 @@ public class ImpuestoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>delete(@RequestBody Impuesto impuesto){
+	public ResponseEntity<?>delete(@RequestBody Impuesto impuesto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarImpuesto(impuesto);
 		this.impuestoService.delete(impuesto);
@@ -81,7 +81,7 @@ public class ImpuestoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>select(@RequestBody Impuesto impuesto){
+	public ResponseEntity<?>select(@RequestBody Impuesto impuesto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarImpuesto(impuesto);
 		List<Impuesto> impuestoList = this.impuestoService.select(impuesto);
@@ -89,19 +89,23 @@ public class ImpuestoController {
 		return new ResponseEntity<List<Impuesto>>(impuestoList, headers, HttpStatus.OK);
 	}
 	
-	private void verificarImpuesto(Impuesto impuesto) {
+	private void verificarImpuesto(Impuesto impuesto) throws ResourceNotFoundException{
+		String message = "";
 		List<Impuesto> impuestoResult = this.impuestoService.select(impuesto);
 		if(impuestoResult == null || impuestoResult.size() ==0) {
 			if(impuesto.getImpuestoId()!= null || impuesto.getId() != null) {
 				if(impuesto.getImpuestoId()!= null && impuesto.getImpuestoId() > 0) {
-					throw new ResourceNotFoundException("Impuesto con id: " +impuesto.getImpuestoId()+"  no encontrado");
+					message = "Impuesto con id: " +impuesto.getImpuestoId()+"  no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("Impuesto no encontrado");
+					message = "Impuesto no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla impuesto");
+				message = "No existen registros en la tabla impuesto";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}

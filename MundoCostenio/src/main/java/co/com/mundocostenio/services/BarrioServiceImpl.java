@@ -43,9 +43,10 @@ public class BarrioServiceImpl implements BarrioService {
 
 	@Override
 	@Transactional
-	@PreAuthorize("hasPermission(#barrioId, 'DELETE')")
-	public int delete(int barrioId) {
-		return this.barrioMapper.delete(barrioId);
+	@PreAuthorize("hasPermission(#barrio, 'DELETE')")
+	public void delete(Barrio barrio) {
+		this.barrioMapper.delete(barrio);
+		this.accesControlListService.delete(barrio);
 	}
 
 	@Override

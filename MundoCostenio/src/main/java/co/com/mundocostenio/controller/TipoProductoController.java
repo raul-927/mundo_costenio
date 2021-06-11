@@ -14,12 +14,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 
 import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.TipoProducto;
@@ -60,7 +62,7 @@ public class TipoProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody TipoProducto tipoProducto){
+	public ResponseEntity<?> update(@RequestBody TipoProducto tipoProducto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarTipoProducto(tipoProducto);
 		TipoProducto result = this.tipoProductoService.update(tipoProducto);
@@ -72,7 +74,7 @@ public class TipoProductoController {
 			value ="/tipoProducto", method =RequestMethod.DELETE,
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody TipoProducto tipoProducto){
+	public ResponseEntity<?> delete(@RequestBody TipoProducto tipoProducto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarTipoProducto(tipoProducto);
 		int result = this.tipoProductoService.delete(tipoProducto.getTipProdId());
@@ -85,7 +87,7 @@ public class TipoProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> selectTipoProducto(@RequestBody TipoProducto tipoProducto){
+	public ResponseEntity<?> selectTipoProducto(@RequestBody TipoProducto tipoProducto) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarTipoProducto(tipoProducto);
 		List<TipoProducto> result = this.tipoProductoService.selectTipoProducto(tipoProducto);
@@ -93,19 +95,23 @@ public class TipoProductoController {
 		return new ResponseEntity<List<TipoProducto>>(result, headers, HttpStatus.OK);
 	}
 	
-	private void verificarTipoProducto(TipoProducto tipoProducto) {
+	private void verificarTipoProducto(TipoProducto tipoProducto) throws ResourceNotFoundException{
+		String message ="";
 		List<TipoProducto> tipoProductoResult = this.tipoProductoService.selectTipoProducto(tipoProducto);
 		if(tipoProductoResult.size() == 0) {
 			if(tipoProducto.getTipProdId()!= null || tipoProducto.getId() != null || tipoProducto.getDescTipoProducto()!=null) {
 				if(tipoProducto.getTipProdId()!= null && tipoProducto.getTipProdId() > 0) {
-					throw new ResourceNotFoundException("TipoProducto con id: " +tipoProducto.getTipProdId()+"  no encontrado");
+					message = "TipoProducto con id: " +tipoProducto.getTipProdId()+"  no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 				else {
-					throw new ResourceNotFoundException("TipoProducto no encontrado");
+					message = "TipoProducto no encontrado";
+					throw new ResourceNotFoundException(message);
 				}
 			}
 			else {
-				throw new ResourceNotFoundException("No existen registros en la tabla tipo_producto");
+				message = "No existen registros en la tabla tipo_producto";
+				throw new ResourceNotFoundException(message);
 			}
 		}
 	}
