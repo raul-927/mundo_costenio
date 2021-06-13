@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import co.com.mundocostenio.domain.Barrio;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -59,6 +60,9 @@ public class BarrioController {
 	public ResponseEntity<?>update(@RequestBody Barrio barrio) throws ResourceNotFoundException{ 
 		HttpHeaders headers = new HttpHeaders();
 		verificarBarrio(barrio);
+		if(barrio.getBarrioId()==null || barrio.getBarrioId() ==0) {
+			throw new BindingResultException("barrioId no debe ser null o cero");
+		}
 		Barrio barrioResult = this.barrioService.update(barrio);
 		
 		return new ResponseEntity<Barrio>(barrioResult, headers, HttpStatus.OK);
@@ -69,9 +73,12 @@ public class BarrioController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>delete(@RequestBody Barrio barrio, BindingResult bindingResult) throws ResourceNotFoundException{
+	public ResponseEntity<?>delete(@RequestBody Barrio barrio) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificarBarrio(barrio);
+		if(barrio.getBarrioId()==null || barrio.getBarrioId() ==0) {
+			throw new BindingResultException("barrioId no debe ser null o cero");
+		}
 		this.barrioService.delete(barrio);
 		
 		return new ResponseEntity<Integer>(null, headers, HttpStatus.OK);

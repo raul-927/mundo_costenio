@@ -24,6 +24,7 @@ import co.com.mundocostenio.domain.Cuenta;
 import co.com.mundocostenio.domain.Departamento;
 import co.com.mundocostenio.domain.GrupoCuenta;
 import co.com.mundocostenio.domain.ListaPrecios;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -59,12 +60,11 @@ public class GrupoCuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody @Valid GrupoCuenta grupoCuenta, BindingResult bindingResult) throws ResourceNotFoundException{
+	public ResponseEntity<?> update(@RequestBody GrupoCuenta grupoCuenta){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarGrupoCuenta(grupoCuenta);
-		if(bindingResult.hasErrors()) {
-			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
-			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		if(grupoCuenta.getGrupoCuentaId() ==null || grupoCuenta.getGrupoCuentaId() ==0) {
+			throw new BindingResultException("grupoCuentaId no debe ser null o cero");
 		}
 		GrupoCuenta grupoCuentaResult = this.grupoCuentaService.update(grupoCuenta);
 		return new ResponseEntity<GrupoCuenta>(grupoCuentaResult, headers, HttpStatus.OK);
@@ -76,6 +76,9 @@ public class GrupoCuentaController {
 	public ResponseEntity<?> delete(@RequestBody GrupoCuenta grupoCuenta) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarGrupoCuenta(grupoCuenta);
+		if(grupoCuenta.getGrupoCuentaId() ==null || grupoCuenta.getGrupoCuentaId() ==0) {
+			throw new BindingResultException("grupoCuentaId no debe ser null o cero");
+		}
 		this.grupoCuentaService.delete(grupoCuenta);
 		return new ResponseEntity<GrupoCuenta>(null, headers, HttpStatus.OK);
 	}

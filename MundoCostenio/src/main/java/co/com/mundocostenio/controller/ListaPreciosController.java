@@ -58,7 +58,7 @@ public class ListaPreciosController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> selectListaPrecios(@RequestBody ListaPrecios listaPrecios) throws ResourceNotFoundException{ //@PathVariable int id
+	public ResponseEntity<?> selectListaPrecios(@RequestBody ListaPrecios listaPrecios){ //@PathVariable int id
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarListaPrecios(listaPrecios);
 		List<ListaPrecios> listaPreciosResult = this.listaPreciosService.selectListaPrecios(listaPrecios);

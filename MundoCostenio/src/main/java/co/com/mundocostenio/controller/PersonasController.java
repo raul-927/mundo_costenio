@@ -21,6 +21,7 @@ import co.com.mundocostenio.domain.Barrio;
 //import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 
 import co.com.mundocostenio.domain.Persona;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -56,11 +57,11 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>update(@RequestBody @Valid Persona persona, BindingResult bindingResult) throws ResourceNotFoundException{
+	public ResponseEntity<?>update(@RequestBody Persona persona){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarPersonas(persona);
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		if(persona.getPersonaId() == null || persona.getPersonaId() ==0) {
+			throw new BindingResultException("personaId no debe ser null o cero");
 		}
 		Persona personaResult = this.personasService.update(persona);
 		
@@ -72,11 +73,11 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>delete(@RequestBody @Valid Persona persona, BindingResult bindingResult) throws ResourceNotFoundException{
+	public ResponseEntity<?>delete(@RequestBody Persona persona){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarPersonas(persona);
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<List<FieldError>>(bindingResult.getFieldErrors(), headers,HttpStatus.INTERNAL_SERVER_ERROR);
+		if(persona.getPersonaId() == null || persona.getPersonaId() ==0) {
+			throw new BindingResultException("personaId no debe ser null o cero");
 		}
 		this.personasService.delete(persona.getPersonaId());
 		
@@ -89,7 +90,7 @@ public class PersonasController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<List<Persona>>select(@RequestBody Persona persona) throws ResourceNotFoundException{
+	public ResponseEntity<List<Persona>>select(@RequestBody Persona persona){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarPersonas(persona);
 		List<Persona> personasList = this.personasService.select(persona);

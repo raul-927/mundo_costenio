@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Ubicacion;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -52,9 +53,12 @@ public class UbicacionController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Ubicacion ubicacion) throws ResourceNotFoundException{
+	public ResponseEntity<?> update(@RequestBody Ubicacion ubicacion){
 		HttpHeaders headers = new HttpHeaders();
 		verificar(ubicacion);
+		if(ubicacion.getUbicacionId() == null || ubicacion.getUbicacionId() ==0) {
+			throw new BindingResultException("ubicacionId no debe ser null o cero");
+		}
 		Ubicacion ubicacionResult = this.ubicacionService.update(ubicacion);
 		
 		return new ResponseEntity<Ubicacion>(ubicacionResult, headers, HttpStatus.OK);
@@ -68,6 +72,9 @@ public class UbicacionController {
 	public ResponseEntity<?> delete(@RequestBody Ubicacion ubicacion) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();
 		verificar(ubicacion);
+		if(ubicacion.getUbicacionId() == null || ubicacion.getUbicacionId() ==0) {
+			throw new BindingResultException("ubicacionId no debe ser null o cero");
+		}
 		this.ubicacionService.delete(ubicacion);
 		
 		return new ResponseEntity<Ubicacion>(ubicacion, headers, HttpStatus.OK);

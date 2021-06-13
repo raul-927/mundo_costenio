@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Impuesto;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -55,9 +56,12 @@ public class ImpuestoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>update(@RequestBody Impuesto impuesto) throws ResourceNotFoundException{
+	public ResponseEntity<?>update(@RequestBody Impuesto impuesto){
 		HttpHeaders headers = new HttpHeaders();
 		verificarImpuesto(impuesto);
+		if(impuesto.getImpuestoId() ==null || impuesto.getImpuestoId() ==0) {
+			throw new BindingResultException("impuestoId no debe ser null o cero");
+		}
 		Impuesto impuestoResult = this.impuestoService.update(impuesto);
 		
 		return new ResponseEntity<Impuesto>(impuestoResult, headers, HttpStatus.OK);
@@ -68,9 +72,12 @@ public class ImpuestoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>delete(@RequestBody Impuesto impuesto) throws ResourceNotFoundException{
+	public ResponseEntity<?>delete(@RequestBody Impuesto impuesto){
 		HttpHeaders headers = new HttpHeaders();
 		verificarImpuesto(impuesto);
+		if(impuesto.getImpuestoId() ==null || impuesto.getImpuestoId() ==0) {
+			throw new BindingResultException("impuestoId no debe ser null o cero");
+		}
 		this.impuestoService.delete(impuesto);
 		
 		return new ResponseEntity<Impuesto>(impuesto, headers, HttpStatus.OK);
@@ -81,7 +88,7 @@ public class ImpuestoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?>select(@RequestBody Impuesto impuesto) throws ResourceNotFoundException{
+	public ResponseEntity<?>select(@RequestBody Impuesto impuesto){
 		HttpHeaders headers = new HttpHeaders();
 		verificarImpuesto(impuesto);
 		List<Impuesto> impuestoList = this.impuestoService.select(impuesto);

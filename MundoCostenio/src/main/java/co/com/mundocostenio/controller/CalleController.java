@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -45,7 +46,9 @@ public class CalleController {
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
-			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			
+			//throw new BindingResultException(bindingResult.getAllErrors().toString());
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.BAD_REQUEST);
 		}
 		Calle calleResult = this.calleService.insert(calle);
 		
@@ -60,6 +63,9 @@ public class CalleController {
 	public ResponseEntity<?> updateCalle(@RequestBody Calle calle)throws Exception{
 		HttpHeaders headers = new HttpHeaders();
 		verificarCalle(calle);
+		if(calle.getCalleId() ==null || calle.getCalleId() == 0) {
+			throw new BindingResultException("calleId no debe ser null o cero");
+		}
 		this.calleService.update(calle);
 		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
@@ -73,6 +79,9 @@ public class CalleController {
 	public ResponseEntity<?> deleteCalle(@RequestBody Calle calle) throws Exception{
 		HttpHeaders headers = new HttpHeaders();
 		verificarCalle(calle);
+		if(calle.getCalleId() ==null || calle.getCalleId() == 0) {
+			throw new BindingResultException("calleId no debe ser null o cero");
+		}
 		this.calleService.delete(calle);
 		
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);

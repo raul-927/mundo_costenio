@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Cuenta;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -45,7 +46,7 @@ public class CuentaController {
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
-			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.BAD_REQUEST);
 		}
 		Cuenta cuentaResult = this.cuentaService.insert(cuenta);
 		
@@ -57,9 +58,12 @@ public class CuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Cuenta cuenta) throws ResourceNotFoundException{
+	public ResponseEntity<?> update(@RequestBody Cuenta cuenta){
 		HttpHeaders headers = new HttpHeaders();
 		verificarCuenta(cuenta);
+		if(cuenta.getCuentaId() == null || cuenta.getCuentaId() ==0) {
+			throw new BindingResultException("cuentaId no debe ser null o cero");
+		}
 		Cuenta cuentaResult = this.cuentaService.update(cuenta);
 		
 		return new ResponseEntity<Cuenta>(cuentaResult, headers, HttpStatus.OK);
@@ -70,9 +74,12 @@ public class CuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody Cuenta cuenta) throws ResourceNotFoundException{
+	public ResponseEntity<?> delete(@RequestBody Cuenta cuenta){
 		HttpHeaders headers = new HttpHeaders();
 		verificarCuenta(cuenta);
+		if(cuenta.getCuentaId() == null || cuenta.getCuentaId() ==0) {
+			throw new BindingResultException("cuentaId no debe ser null o cero");
+		}
 		this.cuentaService.delete(cuenta);
 		
 		return new ResponseEntity<Cuenta>(cuenta, headers, HttpStatus.OK);
@@ -84,7 +91,7 @@ public class CuentaController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody Cuenta cuenta) throws ResourceNotFoundException{ 
+	public ResponseEntity<?> select(@RequestBody Cuenta cuenta){ 
 		HttpHeaders headers = new HttpHeaders();
 		verificarCuenta(cuenta);
 		List<Cuenta> cuentaResult = this.cuentaService.select(cuenta);

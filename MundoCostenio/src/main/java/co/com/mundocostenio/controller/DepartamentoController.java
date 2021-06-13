@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Departamento;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -53,9 +54,12 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Departamento departamento) throws ResourceNotFoundException{
+	public ResponseEntity<?> update(@RequestBody Departamento departamento){
 		HttpHeaders headers = new HttpHeaders();
 		verificarDepartamento(departamento);
+		if(departamento.getDepartamentoId()==null || departamento.getDepartamentoId() ==0) {
+			throw new BindingResultException("departamentoId no debe ser null o cero");
+		}
 		Departamento departamentoResult = this.departamentoService.update(departamento);
 		
 		return new ResponseEntity<Departamento>(departamentoResult,headers, HttpStatus.OK);
@@ -66,9 +70,12 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody Departamento departamento) throws ResourceNotFoundException{
+	public ResponseEntity<?> delete(@RequestBody Departamento departamento){
 		HttpHeaders headers = new HttpHeaders();
 		verificarDepartamento(departamento);
+		if(departamento.getDepartamentoId()==null || departamento.getDepartamentoId() ==0) {
+			throw new BindingResultException("departamentoId no debe ser null o cero");
+		}
 		this.departamentoService.delete(departamento);
 		
 		return new ResponseEntity<Departamento>(null,headers, HttpStatus.OK);
@@ -79,7 +86,7 @@ public class DepartamentoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> select(@RequestBody Departamento departamento) throws ResourceNotFoundException{
+	public ResponseEntity<?> select(@RequestBody Departamento departamento){
 		HttpHeaders headers = new HttpHeaders();
 		verificarDepartamento(departamento);
 		List<Departamento> departamentoResult = this.departamentoService.select(departamento);

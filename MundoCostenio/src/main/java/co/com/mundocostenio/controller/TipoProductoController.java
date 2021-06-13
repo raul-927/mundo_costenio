@@ -25,6 +25,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.TipoProducto;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
@@ -62,9 +63,12 @@ public class TipoProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody TipoProducto tipoProducto) throws ResourceNotFoundException{
+	public ResponseEntity<?> update(@RequestBody TipoProducto tipoProducto){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarTipoProducto(tipoProducto);
+		if(tipoProducto.getTipProdId() == null || tipoProducto.getTipProdId() ==0) {
+			throw new  BindingResultException("tipProdId no debe ser null o cero");
+		}
 		TipoProducto result = this.tipoProductoService.update(tipoProducto);
 		
 		return new ResponseEntity<TipoProducto>(result, headers, HttpStatus.OK);
@@ -74,9 +78,12 @@ public class TipoProductoController {
 			value ="/tipoProducto", method =RequestMethod.DELETE,
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody TipoProducto tipoProducto) throws ResourceNotFoundException{
+	public ResponseEntity<?> delete(@RequestBody TipoProducto tipoProducto){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarTipoProducto(tipoProducto);
+		if(tipoProducto.getTipProdId() == null || tipoProducto.getTipProdId() ==0) {
+			throw new  BindingResultException("tipProdId no debe ser null o cero");
+		}
 		int result = this.tipoProductoService.delete(tipoProducto.getTipProdId());
 		
 		return new ResponseEntity<Integer>(result, headers, HttpStatus.OK);

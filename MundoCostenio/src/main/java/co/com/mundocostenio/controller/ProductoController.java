@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.mundocostenio.domain.Calle;
 import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ProductNotFoundException;
@@ -57,9 +58,12 @@ public class ProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestBody Producto producto) throws ResourceNotFoundException{
+	public ResponseEntity<?> update(@RequestBody Producto producto){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarProducto(producto);
+		if(producto.getProdId() ==null || producto.getProdId() == 0) {
+			throw new BindingResultException("prodId no debe ser null o cero");
+		}
 		Producto productoResult = this.productoService.update(producto);
 		
 		return new ResponseEntity<Producto>(productoResult, headers, HttpStatus.OK);
@@ -70,9 +74,12 @@ public class ProductoController {
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody Producto producto) throws ResourceNotFoundException{
+	public ResponseEntity<?> delete(@RequestBody Producto producto){
 		HttpHeaders headers = new HttpHeaders();
 		this.verificarProducto(producto);
+		if(producto.getProdId() ==null || producto.getProdId() == 0) {
+			throw new BindingResultException("prodId no debe ser null o cero");
+		}
 		int result = this.productoService.delete(producto);
 		
 		return new ResponseEntity<Integer>(result, headers, HttpStatus.OK);
