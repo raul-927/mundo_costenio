@@ -29,7 +29,7 @@ public interface CalleMapper {
 	void update(@Param("calle") Calle calle);
 	
 	@DeleteProvider(type = CalleSqlProvider.class, method ="delete")
-	void delete(@Param("calle") Calle calle) throws SQLException;
+	void delete(@Param("calle") Calle calle);
 	
 	@SelectProvider(type = CalleSqlProvider.class, method = "select")
 	@ResultMap("co.com.mundocostenio.mybatis.mappers.CalleMapper.CalleResult")

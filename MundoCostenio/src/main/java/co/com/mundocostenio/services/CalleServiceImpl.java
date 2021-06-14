@@ -50,7 +50,7 @@ public class CalleServiceImpl implements CalleService {
 	@Override
 	@Transactional
 	@PreAuthorize(value="hasPermission(#calle, 'WRITE')")
-	public Calle update(Calle calle) throws Exception {
+	public Calle update(Calle calle){
 		this.calleMapper.update(calle);
 		return calle;
 	}
@@ -58,7 +58,7 @@ public class CalleServiceImpl implements CalleService {
 	@Override
 	@Transactional
 	@PreAuthorize(value="hasPermission(#calle, 'DELETE')")
-	public void delete(Calle calle)throws Exception {
+	public void delete(Calle calle){
 		this.calleMapper.delete(calle);
 		this.accesControlListService.delete(calle);
 	}
