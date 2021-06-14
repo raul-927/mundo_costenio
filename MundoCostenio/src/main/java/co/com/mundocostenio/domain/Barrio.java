@@ -2,9 +2,6 @@ package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Barrio implements Serializable{

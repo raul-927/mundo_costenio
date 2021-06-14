@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 
 import co.com.mundocostenio.annotations.Cedula;
 import co.com.mundocostenio.annotations.CedulaExistente;
-import co.com.mundocostenio.enumerator.RolesEnum;
 import co.com.mundocostenio.messageerror.PersonasErrorMessage;
 
 public class Persona implements Serializable{

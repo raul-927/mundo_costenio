@@ -1,10 +1,6 @@
 package co.com.mundocostenio.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import co.com.mundocostenio.domain.Direccion;
 
 public class RolesDTO implements Serializable{
 	

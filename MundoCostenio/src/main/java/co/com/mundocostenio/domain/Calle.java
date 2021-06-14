@@ -3,7 +3,6 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import co.com.mundocostenio.enumerator.TipoCalleEnum;
 import co.com.mundocostenio.messageerror.CalleErrorMessage;
-import co.com.mundocostenio.messageerror.PersonasErrorMessage;
 
 public class Calle implements Serializable{
 	

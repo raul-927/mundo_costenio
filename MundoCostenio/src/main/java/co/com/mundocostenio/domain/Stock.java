@@ -1,8 +1,6 @@
 package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

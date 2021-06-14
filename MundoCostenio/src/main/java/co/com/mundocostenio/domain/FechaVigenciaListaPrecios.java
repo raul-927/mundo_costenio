@@ -3,8 +3,6 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class FechaVigenciaListaPrecios implements Serializable{

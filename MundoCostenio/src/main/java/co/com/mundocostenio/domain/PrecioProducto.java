@@ -2,7 +2,6 @@ package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class PrecioProducto implements Serializable{
 	/**
