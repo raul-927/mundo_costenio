@@ -1,9 +1,6 @@
 package co.com.mundocostenio.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.mundocostenio.domain.Departamento;
 import co.com.mundocostenio.domain.Post;
-import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.ForumService;
 
 @RestController
