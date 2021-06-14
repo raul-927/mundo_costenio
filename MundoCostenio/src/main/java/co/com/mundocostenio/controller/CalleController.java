@@ -46,7 +46,6 @@ public class CalleController {
 		HttpHeaders headers = new HttpHeaders();
 		if(bindingResult.hasErrors()) {
 			List<ErrorField> fieldErrorList = errorFieldVerify.verificarCamposVacios(bindingResult.getFieldErrors());
-			
 			//throw new BindingResultException(bindingResult.getAllErrors().toString());
 			return new ResponseEntity<List<ErrorField>>(fieldErrorList, headers,HttpStatus.BAD_REQUEST);
 		}

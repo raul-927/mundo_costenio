@@ -41,8 +41,6 @@ public class AccesControlListService<T> {
 		Integer id = Math.abs(object.hashCode());
 		//User users = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Authentication user = (Authentication)SecurityContextHolder.getContext().getAuthentication();
-    	System.out.println("Nombre: "+user.getName());
-    	System.out.println("Roles: "+user.getAuthorities());
 		ObjectIdentity objectIdentity  = null;
 		MutableAcl mutableAcl = null;
 
