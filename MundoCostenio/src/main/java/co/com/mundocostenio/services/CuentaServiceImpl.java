@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Cuenta;
-import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.mybatis.mappers.CuentaMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 

@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.com.mundocostenio.annotations.Cedula;
-import co.com.mundocostenio.dto.NroVerifCedula;
 import co.com.mundocostenio.jni.ControlCedulaJni;
 
 

@@ -2,7 +2,6 @@ package co.com.mundocostenio.mybatis.mappers;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;

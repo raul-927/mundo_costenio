@@ -1,11 +1,7 @@
 package co.com.mundocostenio.mybatis.sql;
 
-import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.domain.Departamento;
 
 public class DepartamentoSqlProvider {

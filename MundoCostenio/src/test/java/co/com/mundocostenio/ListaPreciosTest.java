@@ -2,7 +2,6 @@ package co.com.mundocostenio;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import co.com.mundocostenio.domain.FechaVigenciaListaPrecios;

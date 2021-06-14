@@ -3,8 +3,6 @@ package co.com.mundocostenio.services;
 import java.util.List;
 
 import co.com.mundocostenio.domain.Asiento;
-import co.com.mundocostenio.domain.ListaPrecios;
-import co.com.mundocostenio.domain.MedioDePago;
 import co.com.mundocostenio.domain.Pago;
 import co.com.mundocostenio.domain.Producto;
 

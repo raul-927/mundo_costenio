@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.PrecioProducto;
-import co.com.mundocostenio.domain.TipoProducto;
 import co.com.mundocostenio.mybatis.mappers.PrecioProductoMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 

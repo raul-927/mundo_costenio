@@ -2,7 +2,6 @@ package co.com.mundocostenio.mybatis.sql;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.Calle;
 import co.com.mundocostenio.domain.Ubicacion;
 
 

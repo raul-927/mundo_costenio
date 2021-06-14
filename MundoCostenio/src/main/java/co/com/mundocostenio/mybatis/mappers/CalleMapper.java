@@ -1,6 +1,5 @@
 package co.com.mundocostenio.mybatis.mappers;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.DeleteProvider;
