@@ -59,7 +59,7 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 		return listaPrecios;
 	}
 	@Override
-	@PostFilter("hasPermission(filterObject, 'READ')")
+	@PostFilter("hasPermission(#listaPrecios, 'READ')")
 	public List<ListaPrecios> selectListaPrecios(ListaPrecios listaPrecios) {
 		return this.listaPreciosMapper.selectListaPrecios(listaPrecios);
 	}
