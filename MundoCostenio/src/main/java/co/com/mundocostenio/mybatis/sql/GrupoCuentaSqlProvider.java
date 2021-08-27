@@ -65,6 +65,7 @@ public class GrupoCuentaSqlProvider {
 					}
 				}
 			}
+			ORDER_BY("grupo_cuenta_id");
 		}}.toString();
 	}
 }

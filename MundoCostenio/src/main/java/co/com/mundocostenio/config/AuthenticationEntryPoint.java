@@ -13,13 +13,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
-	@Override
+	@Override 
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx)
       throws IOException{
         response.addHeader("WWW-Authenticate", "Basic realm=" +getRealmName());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        System.out.println("EEERRORRR: "+authEx.getMessage());
         PrintWriter writer = response.getWriter();
-        writer.println("HTTP Status 401 - " + authEx.getMessage());
+        writer.println("HTTP Status 401 - " + authEx.getCause());
+        //writer.println("CAUSE - "+authEx.getCause());
     }
 
 	@Override

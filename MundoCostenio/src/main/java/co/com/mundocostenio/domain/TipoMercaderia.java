@@ -3,6 +3,12 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import co.com.mundocostenio.messageerror.CalleErrorMessage;
+import co.com.mundocostenio.messageerror.TipoMercaderiaErrorMessage;
+
 public class TipoMercaderia implements Serializable {
 
 	/**
@@ -12,7 +18,12 @@ public class TipoMercaderia implements Serializable {
 	
 	private Integer id;
 	private Integer tipMercId;
+	
+	@NotNull(message=TipoMercaderiaErrorMessage.FORMA_CONTROL_NOT_NULL)
 	private FormaControl formaControl;
+	
+	@Size(min=2, max=15, message=TipoMercaderiaErrorMessage.NOMBRE_SIZE)
+	@NotNull(message=TipoMercaderiaErrorMessage.NOMBRE_NOT_NULL)
 	private String nombre;
 	
 	public Integer getId() {

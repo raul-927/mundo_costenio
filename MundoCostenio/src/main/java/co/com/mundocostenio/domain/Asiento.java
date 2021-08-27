@@ -5,9 +5,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import co.com.mundocostenio.enumerator.TipoCuentaEnum;
+import co.com.mundocostenio.messageerror.AsientoErrorMessage;
 
 public class Asiento implements Serializable{
 
@@ -20,15 +24,35 @@ public class Asiento implements Serializable{
 	
 	private Integer 	asientoId;
 	
+	@NotNull(message =AsientoErrorMessage.NRO_ASIENTO_NOT_NULL)
 	private Integer		asientoNro;
+	
+	@NotNull(message = AsientoErrorMessage.DESCRIPCION_NOT_NULL)
+	@Size(min = 3, max = 20, message = AsientoErrorMessage.NOMBRE_SIZE)
 	private String		descripcion;
+	
+	@NotNull(message = AsientoErrorMessage.CUENTA_DEBE_NOT_NULL)
 	private Cuenta		cuentaDebe;
+	
+	@NotNull(message = AsientoErrorMessage.MONTO_DEBE_NOT_NULL)
 	private BigDecimal 	montoDebe;
+	
+	@NotNull(message = AsientoErrorMessage.CUENTA_HABER_NOT_NULL)
 	private Cuenta		cuentaHaber;
+	
+	@NotNull(message = AsientoErrorMessage.MONTO_HABER_NOT_NULL)
 	private BigDecimal 	montoHaber;
+	
+	@NotNull(message =AsientoErrorMessage.CAJA_NOT_NULL)
 	private Caja		caja;
+	
+	@NotNull(message =AsientoErrorMessage.FECHA_NOT_NULL)
 	private LocalDate	fecha;
+	
+	@NotNull(message = AsientoErrorMessage.HORA_NOT_NULL)
 	private LocalTime	hora;
+	
+	@NotNull(message = AsientoErrorMessage.TIPO_CUENTA_NOT_NULL)
 	private TipoCuentaEnum tipoCuenta;
 	
 	public Integer getId() {

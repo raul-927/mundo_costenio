@@ -10,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import co.com.mundocostenio.annotations.CedulaExistente;
 import co.com.mundocostenio.domain.Persona;
 import co.com.mundocostenio.dto.NroVerifCedula;
+import co.com.mundocostenio.jni.ControlCedulaJni;
 import co.com.mundocostenio.services.PersonasService;
 
 
 
 public class ValidoCedulaExistente extends NroVerifCedula implements ConstraintValidator<CedulaExistente, Integer>{
+	
+	@Autowired
+	private ControlCedulaJni controlCedulaJni;
 	
 	@Autowired
 	private PersonasService personasService;

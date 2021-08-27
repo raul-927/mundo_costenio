@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.GrupoCuentaService;
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class GrupoCuentaController {
 	
 	@Autowired
@@ -115,7 +117,7 @@ public class GrupoCuentaController {
 	@ResponseBody
 	public ResponseEntity<?> findAll(){
 		HttpHeaders headers = new HttpHeaders();
-		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(null);
+		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(new GrupoCuenta());
 		return new ResponseEntity<List<GrupoCuenta>>(grupoCuentaResult, headers, HttpStatus.OK);
 	}
 

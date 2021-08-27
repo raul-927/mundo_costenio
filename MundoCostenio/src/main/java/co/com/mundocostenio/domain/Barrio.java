@@ -2,7 +2,13 @@ package co.com.mundocostenio.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import co.com.mundocostenio.messageerror.BarrioErrorMessage;
 
 public class Barrio implements Serializable{
 	/**
@@ -13,7 +19,12 @@ public class Barrio implements Serializable{
 	private Integer		  id;
 	
 	private Integer 	  barrioId;
+	
+	@NotNull(message = BarrioErrorMessage.NOMBRE_BARRIO_NOT_NULL)
+	@Size(min =3, max = 20, message =BarrioErrorMessage.NOMBRE_SIZE)
 	private String 		  nombreBarrio;
+	
+	@NotNull(message = BarrioErrorMessage.DEPARTAMENTO_NOT_NULL)
 	private Departamento  departamento;
 	
 	public Barrio() {};

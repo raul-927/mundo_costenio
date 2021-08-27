@@ -4,7 +4,7 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.AsientoMapper">
 	<resultMap type="co.com.mundocostenio.domain.Asiento" id="AsientoResult">
   	
-  		<id		property = "asientoId" 	 column = "asiento_id"/>
+  		<id		property ="asientoId" 	 column = "asiento_id"/>
   		<result property ="asientoNro" 	 column ="asiento_nro"/>
  		<result property ="nombreBarrio" column ="nombre_barrio"/>
  		<result property ="montoDebe" 	 column ="monto_debe"/>

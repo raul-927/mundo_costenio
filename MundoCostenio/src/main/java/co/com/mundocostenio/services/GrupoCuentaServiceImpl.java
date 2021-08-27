@@ -32,7 +32,7 @@ public class GrupoCuentaServiceImpl implements GrupoCuentaService {
 
 	@Override
 	@Transactional
-	@PreAuthorize(value="hasPermission(#grupoCuenta, 'WRITE')")
+	@PreAuthorize( value="hasPermission(#grupoCuenta, 'WRITE')")
 	public GrupoCuenta update(GrupoCuenta grupoCuenta) {
 		this.select(grupoCuenta);
 		this.grupoCuentaMapper.update(grupoCuenta);

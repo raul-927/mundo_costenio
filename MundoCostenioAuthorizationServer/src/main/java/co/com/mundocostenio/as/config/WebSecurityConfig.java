@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +21,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${spring.queries.users-query}")
@@ -26,7 +29,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Value("${spring.queries.authorities-query}")
 	private String authoritiesQuery;
-   
+	
+	@Override
+    public void configure(HttpSecurity http) throws Exception {
+
+        // add http.cors()
+    	//http.cors().and().csrf().disable();
+        http.cors().and().csrf().disable().authorizeRequests()
+                //.antMatchers("/login/**").permitAll()
+                .anyRequest().permitAll(); // Authenticate users with HTTP basic authentication
+
+        // REST is stateless
+        //http.sessionManagement()
+          //     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
+	
     @Bean
     public UserDetailsService userDetailsService(DriverManagerDataSource dataSource) {
 	    var userDetailsManager = new JdbcUserDetailsManager(dataSource);

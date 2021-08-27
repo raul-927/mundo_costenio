@@ -19,6 +19,7 @@ public class TipoProducto implements Serializable{
 	@NotNull(message =TipoProductoErrorMessage.DESCRIPCION_NULL)
 	@Size(min = 3, max = 30, message = TipoProductoErrorMessage.DESCRIPCION_LENGTH)
 	private String descTipoProducto;
+	
 	@NotNull(message= TipoProductoErrorMessage.CUENTA_NOT_NULL)
 	private Cuenta cuenta;
 	

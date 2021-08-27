@@ -47,7 +47,7 @@ public class ListaPreciosTest {
 		
 	}
 	
-	//@Test
+	@Test
 	void insertListaPrecios() {
 		ListaPrecios 				listaPrecios 	   = new ListaPrecios();
 		FechaVigenciaListaPrecios 	fechaVigencia 	   = new FechaVigenciaListaPrecios();
@@ -209,7 +209,7 @@ public class ListaPreciosTest {
 		}
 	}
 	
-	//@Test
+	@Test
 		void updateListaPrecios() {
 			ListaPrecios listaPrecios = new ListaPrecios();
 			listaPrecios.setListaPrecioId(LISTA_PRECIO_ID);
@@ -219,7 +219,7 @@ public class ListaPreciosTest {
 			}
 		}
 		
-		//@Test
+		@Test
 		void deleteListaPrecios() {
 			ListaPrecios listaPrecios = new ListaPrecios();
 			listaPrecios.setListaPrecioId(LISTA_PRECIO_ID);

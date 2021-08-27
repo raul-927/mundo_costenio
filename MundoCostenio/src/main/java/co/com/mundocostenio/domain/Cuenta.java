@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import co.com.mundocostenio.enumerator.TipoCuentaEnum;
+import co.com.mundocostenio.messageerror.CuentaErrorMessage;
 
 public class Cuenta implements Serializable{
 
@@ -24,17 +25,17 @@ public class Cuenta implements Serializable{
 	
 	private Integer 		cuentaId;
 	
-	@NotNull(message=" cuentaDesc no debe ser null")
-	@Size(min=3, max=30, message="cuentaDesc debe contener entre 3 y 30 caracteres")
+	@NotNull(message=CuentaErrorMessage.CUENTA_DESC_NOT_NULL)
+	@Size(min=3, max=30, message=CuentaErrorMessage.CUENTA_DESC_SIZE)
 	private String 			cuentaDesc;
 	
-	@NotNull(message="tipoCuenta no debe ser null")
+	@NotNull(message=CuentaErrorMessage.TIPO_CUENTA_NOT_NULL)
 	private TipoCuentaEnum	tipoCuenta;
 	private LocalDate 		cuentaFecha;
 	private LocalTime 		cuentaHora;
 	private String			cuentaUsuario;
 	
-	@NotNull(message="grupoCuenta no debe ser null")
+	@NotNull(message=CuentaErrorMessage.GRUPO_CUENTA_NOT_NULL)
 	private GrupoCuenta		grupoCuenta;
 	
 	public Integer getId() {
@@ -88,7 +89,7 @@ public class Cuenta implements Serializable{
 	@Override
 	public int hashCode() {
 		LocalDateTime localDateTime = LocalDateTime.now();
-		final int prime = 31;
+		final int prime = localDateTime.getMinute() + localDateTime.getHour() + localDateTime.getDayOfMonth() + localDateTime.getMonthValue() + localDateTime.getYear();
 		int result = 1;
 		result =  prime * result + ((cuentaId == null) ? 0 : cuentaId.hashCode());
 		result += prime * result + ((cuentaDesc == null) ? 0 : cuentaDesc.hashCode());
