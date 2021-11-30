@@ -110,7 +110,7 @@ public class CalleController {
 				}
 			}
 			else {
-				message = "No existen registros en la tabla calle";
+				message = "No existe ninguna Calle registrada";
 				throw new ResourceNotFoundException(message);
 			}
 		}

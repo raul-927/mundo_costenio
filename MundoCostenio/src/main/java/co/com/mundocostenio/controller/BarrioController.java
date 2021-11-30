@@ -109,7 +109,7 @@ public class BarrioController {
 				}
 			}
 			else {
-				message = "No existen registros en la tabla barrio";
+				message = "No existe ningun Barrio registrado";
 				throw new ResourceNotFoundException(message);
 			}
 		}

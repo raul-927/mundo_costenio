@@ -110,7 +110,7 @@ public class ImpuestoController {
 				}
 			}
 			else {
-				message = "No existen registros en la tabla impuesto";
+				message = "No existe ningún Impuesto ingresado";
 				throw new ResourceNotFoundException(message);
 			}
 		}

@@ -109,7 +109,7 @@ public class ProductoController {
 				}
 			}
 			else {
-				message = "No existen registros en la tabla producto";
+				message = "No existe ningún Producto registrado";
 				throw new ResourceNotFoundException(message);
 			}
 		}

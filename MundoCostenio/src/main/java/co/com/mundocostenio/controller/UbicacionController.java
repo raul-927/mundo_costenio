@@ -108,7 +108,7 @@ public class UbicacionController {
 				}
 			}
 			else {
-				message = "No existen registros en la tabla ubicacion";
+				message = "No existe ninguna Ubicacion registrado";
 				throw new ResourceNotFoundException(message);
 			}
 		}

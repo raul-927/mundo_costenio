@@ -30,6 +30,13 @@ public class AsientoServiceImpl implements AsientoService {
 	@Override
 	@Transactional
 	public List<Asiento> insert(Pago pago, Producto producto) {
+		if(pago.getTarjeta()!=null) {
+			
+		}
+		List<Asiento> returnAsiento = this.pagoContado(pago, producto);
+		return returnAsiento;
+	}
+	private List<Asiento> pagoContado(Pago pago, Producto producto){
 		ListaPrecios listaPreciosActual = this.listaPreciosService.selectActualListaPrecios();
 		Cuenta cuentaL1 = pago.getCuenta();
 		BigDecimal montoDebeL1 = null;

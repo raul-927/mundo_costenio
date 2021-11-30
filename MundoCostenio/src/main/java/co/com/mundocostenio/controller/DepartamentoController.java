@@ -108,7 +108,7 @@ public class DepartamentoController {
 				}
 			}
 			else {
-				message = "No existen registros en la tabla departamento";
+				message = "No existe ningún Departamento ingresado";
 				throw new ResourceNotFoundException(message);
 			}
 		}
