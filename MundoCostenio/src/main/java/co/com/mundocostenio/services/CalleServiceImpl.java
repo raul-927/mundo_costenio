@@ -31,8 +31,8 @@ public class CalleServiceImpl implements CalleService {
 	private StateMachine<States, Events> stateMachine;
 
 	@Override
-	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
 	@Transactional
+	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
 	public Calle insert(@Param("calle") Calle calle) {
 		this.calleMapper.insert(calle);
 		accesControlListService.insert(calle);
