@@ -42,6 +42,7 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 		this.precioProductoMapper.insertListaAndPrecioProducto(listaPrecios.getListaPrecioId(), listaPrecios.getPrecioProductoList());
 		return listaPrecios;
 	}
+	
 	@Override
 	@PostFilter("hasPermission(#listaPrecios, 'READ')")
 	public List<ListaPrecios> selectListaPrecios(ListaPrecios listaPrecios) {

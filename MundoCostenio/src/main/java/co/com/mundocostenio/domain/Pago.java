@@ -19,7 +19,7 @@ public class Pago implements Serializable{
 	private Cuenta     cuenta;
 	private Tarjeta    tarjeta;
 	private Persona    persona;
-	private Asiento    asiento;
+	//private Asiento    asiento;
 	private Caja 	   caja;
 	private Producto   producto;
 	
@@ -52,12 +52,11 @@ public class Pago implements Serializable{
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	public Asiento getAsiento() {
-		return asiento;
-	}
-	public void setAsiento(Asiento asiento) {
-		this.asiento = asiento;
-	}
+
+	/*
+	 * public Asiento getAsiento() { return asiento; } public void
+	 * setAsiento(Asiento asiento) { this.asiento = asiento; }
+	 */
 	public Caja getCaja() {
 		return caja;
 	}
