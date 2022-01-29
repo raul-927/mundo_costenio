@@ -22,9 +22,12 @@ import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.ImpuestoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 
 @RestController
+@Api(value = "/impuesto", description = "Operaciones con los impuestos")
 public class ImpuestoController {
 	
 	@Autowired
@@ -82,6 +85,10 @@ public class ImpuestoController {
 		return new ResponseEntity<Impuesto>(impuesto, headers, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Busca los impuestos según los parámetros enviados",
+		    notes = "Multiple status values can be provided with comma seperated strings",
+		    response = Impuesto.class,
+		    responseContainer = "List")
 	@RequestMapping(
 			value ="/impuestos", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},

@@ -86,7 +86,7 @@ public class CuentaController {
 	
 	
 	@RequestMapping(
-			value ="/cuentas", method =RequestMethod.POST,
+			value ="/cuenta", method =RequestMethod.GET,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody

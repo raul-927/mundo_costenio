@@ -23,9 +23,12 @@ import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;
 import co.com.mundocostenio.services.GrupoCuentaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@Api(value = "/grupoCuenta", description="End point para trabajar con los grupos de cuenta")
 public class GrupoCuentaController {
 	
 	@Autowired
@@ -34,7 +37,8 @@ public class GrupoCuentaController {
 	@Autowired
 	private ErrorFieldVerify errorFieldVerify;
 	
-	
+	@ApiOperation(value = "Ingresa nuevo grupo de cuenta",
+		    response = GrupoCuenta.class)
 	@RequestMapping(
 			value ="/grupoCuenta", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
@@ -79,7 +83,7 @@ public class GrupoCuentaController {
 	}
 	
 	@RequestMapping(
-			value ="/grupoCuentas", method =RequestMethod.POST,
+			value ="/grupoCuenta", method =RequestMethod.GET,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
@@ -110,9 +114,9 @@ public class GrupoCuentaController {
 			}
 		}
 	}
-	
+	/*
 	@RequestMapping(
-			value ="/grupoCuenta", method =RequestMethod.GET,
+			value ="/grupoCuentas", method =RequestMethod.GET,
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> findAll(){
@@ -120,5 +124,5 @@ public class GrupoCuentaController {
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(new GrupoCuenta());
 		return new ResponseEntity<List<GrupoCuenta>>(grupoCuentaResult, headers, HttpStatus.OK);
 	}
-
+	*/
 }
