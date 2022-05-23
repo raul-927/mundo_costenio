@@ -12,7 +12,7 @@ import co.com.mundocostenio.jni.ControlCedulaJni;
 
 public class ValidoCedula implements ConstraintValidator<Cedula, Integer>
 {
-	@Autowired
+	//@Autowired
 	private ControlCedulaJni controlCedulaJni;
 	
 	@Override

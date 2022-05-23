@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class CustomInMemoryUserDetailsManager implements UserDetailsService {
 
 	
-	  private Map<String, User> users = new HashMap<String, User>();
+	  private Map<String, User> users = new HashMap<>();
 	  
 	  public CustomInMemoryUserDetailsManager(Collection<User> users) { 
 		  for (User user : users) { 
@@ -26,8 +26,6 @@ public class CustomInMemoryUserDetailsManager implements UserDetailsService {
 	  
 		  if (user == null) { 
 			  throw new UsernameNotFoundException(username); 
-		  } User userNew = new User(user.getUsername(), user.getPassword(), user.getAuthorities(), user.getLastname(), user.getAge());
-		  
-		  return userNew; 
+		  } return new User(user.getUsername(), user.getPassword(), user.getAuthorities(), user.getLastname(), user.getAge()); 
 	}
 }

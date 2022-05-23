@@ -11,39 +11,39 @@
     <changeSet id="00000000000007" author="rhernandez">
     
         <createTable tableName="tag">
-            <column name="tag_id" 			type="int" autoIncrement="true">
+            <column name="tag_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="nombre_tag" 		type="varchar(50)"/>
         </createTable>
         
         <createTable tableName="tipo_inscripcion">
-            <column name="tip_insc_id" 			type="int" autoIncrement="true">
+            <column name="tip_insc_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="tipo" 		type="varchar(50)"/>
         </createTable>
         
         <createTable tableName="documento">
-            <column name="doc_id" 			type="int" autoIncrement="true">
+            <column name="doc_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="descripcion" 		type="varchar(50)"/>
         </createTable>
         
         <createTable tableName="formulario">
-            <column name="form_id" 			type="int" autoIncrement="true">
+            <column name="form_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="nombre_formulario" 		type="varchar(50)"/>
         </createTable>
         
          <createTable tableName="tip_insc_tag">
-            <column name="tip_insc__tag_id" 	type="int" autoIncrement="true">
+            <column name="tip_insc__tag_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
-            <column name="tip_insc_id" 		type="int"/>
-            <column name="tag_id" 			type="int"/>
+            <column name="tip_insc_id" 		type="bigint"/>
+            <column name="tag_id" 			type="bigint"/>
         </createTable>
         
         <addForeignKeyConstraint  baseColumnNames="tip_insc_id"  
@@ -65,11 +65,11 @@
             validate="true"/>
         
          <createTable tableName="documentos_tip_insc">
-            <column name="tip_insc__doc_id" 	type="int" autoIncrement="true">
+            <column name="tip_insc__doc_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
-            <column name="tip_insc_id" 		type="int"/>
-            <column name="doc_id" 			type="int"/>
+            <column name="tip_insc_id" 		type="bigint"/>
+            <column name="doc_id" 			type="bigint"/>
         </createTable>
         
         <addForeignKeyConstraint  baseColumnNames="tip_insc_id"  
@@ -93,11 +93,11 @@
             
             
             <createTable tableName="formularios_documentos">
-            <column name="form_doc_id" 	type="int" autoIncrement="true">
+            <column name="form_doc_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
-            <column name="form_id" 		type="int"/>
-            <column name="doc_id" 			type="int"/>
+            <column name="form_id" 		type="bigint"/>
+            <column name="doc_id" 			type="bigint"/>
         </createTable>
         
         

@@ -29,8 +29,8 @@ public class Persona implements Serializable{
 	@Size(min = 3, max = 15, message = PersonasErrorMessage.APELLIDO_LENGHT)
 	private String apellido;
 	
-	@Cedula(message = PersonasErrorMessage.CEDULA_INVALIDA)
-	@CedulaExistente(message=PersonasErrorMessage.CEDULA_INEXISTENTE)
+	//@Cedula(message = PersonasErrorMessage.CEDULA_INVALIDA)
+	//@CedulaExistente(message=PersonasErrorMessage.CEDULA_INEXISTENTE)
 	private Integer cedula;
 	
 	private User user;

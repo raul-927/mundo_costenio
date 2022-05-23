@@ -11,19 +11,20 @@ import org.springframework.transaction.annotation.Transactional;
 import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.mybatis.mappers.BarrioMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
-
+import co.com.mundocostenio.enumerator.RolesEnum;
+import co.com.mundocostenio.constants.RolesConstant;
 
 @Service("barrioService")
 public class BarrioServiceImpl implements BarrioService {
 	
 	@Autowired
 	private AccesControlListService<Barrio> accesControlListService;
-	
+	private static final RolesEnum ROLE_CONFIG_enum = RolesEnum.CONFIG;
 	@Autowired
 	private BarrioMapper barrioMapper;
 
 	@Override
-	@PreAuthorize(value ="hasRole('ROLE_CONFIG')")
+	@PreAuthorize(value = "hasRole('"+RolesConstant.ROLE_CONFIG+"')")
 	@Transactional
 	public Barrio insert(Barrio barrio) {
 		this.barrioMapper.insert(barrio);

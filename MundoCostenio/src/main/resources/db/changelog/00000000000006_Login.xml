@@ -11,7 +11,7 @@
     <changeSet id="00000000000006" author="rhernandez">
     
         <createTable tableName="user">
-            <column name="user_id" 			type="int" autoIncrement="true">
+            <column name="user_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="nic" 		 	 	 type="varchar(10)"/>
@@ -20,18 +20,18 @@
         </createTable>
         
         <createTable tableName="rol">
-            <column name="rol_id" 			type="int" autoIncrement="true">
+            <column name="rol_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="rol_name"		type="enum('ADMIN','USER', 'COUNTER', 'SALES','GUESS','ANONIMOUS','MARKETING','RRHH','PROMOUTION','CONFIG')"/>
         </createTable>
         
         <createTable tableName="user_rol">
-            <column name="user_rol_id" 			type="int" autoIncrement="true">
+            <column name="user_rol_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
-            <column name="user_id"		type="int"/>
-             <column name="rol_id"		type="int"/>
+            <column name="user_id"		type="bigint"/>
+             <column name="rol_id"		type="bigint"/>
         </createTable>
         
         <addForeignKeyConstraint  baseColumnNames="user_id"  

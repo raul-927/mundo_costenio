@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="content" 		type="varchar(255)"/>
-            <column name="calle_id" 	type="int"/>
+            <column name="calle_id" 	type="bigint"/>
         </createTable>
         
         <createTable tableName="barrio">
@@ -23,7 +23,7 @@
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="nombre_barrio" 	type="varchar(50)"/>
-            <column name="departamento_id" 	type="int"/>
+            <column name="departamento_id" 	type="bigint"/>
         </createTable>
         
         <createTable tableName="departamento">
@@ -39,12 +39,12 @@
             </column>
             <column name="nro_puerta" type="int"/>
             <column name="geo_localizacion" type="varchar(50)"/>
-            <column name="barrio_id" type="int"/>
+            <column name="barrio_id" type="bigint"/>
         </createTable>
         
         
         <createTable tableName="calle">
-            <column name="calle_id" 	type="int" autoIncrement="true">
+            <column name="calle_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="tipo_calle" type="ENUM('C','K','DG','CI','AV','V','TR','AK','AC')"/>
@@ -55,8 +55,8 @@
             <column name="dir_calles_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="direccion_id"  type="int"/>
-            <column name="calle_id" type="int"/>
+            <column name="direccion_id"  type="bigint"/>
+            <column name="calle_id" type="bigint"/>
         </createTable>
         
         <createTable tableName="fecha_vig_list_prec">
@@ -71,16 +71,16 @@
             <column name="lista_precio_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="fecha_vig_id"  		   type="int"/>
+            <column name="fecha_vig_id"  		   type="bigint"/>
             <column name="descripcion_lista" 	   type="varchar(50)"/>
         </createTable>
         
         <createTable tableName="list_prod_and_prec_prod">
-            <column name="id" 	type="int" autoIncrement="true">
+            <column name="id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="lis_prec_id" 	type="int"/>
-            <column name="prec_prod_id" type="int"/>
+            <column name="lis_prec_id" 	type="bigint"/>
+            <column name="prec_prod_id" type="bigint"/>
         </createTable>
         
         <createTable tableName="persona">
@@ -90,40 +90,40 @@
             <column name="nombre" 	type="varchar(50)"/>
             <column name="apellido" type="varchar(50)"/>
             <column name="cedula"	type="int"/>
-            <column name="user_id"	type="int"/>
+            <column name="user_id"	type="bigint"/>
         </createTable>
         
         <createTable tableName="persona_direcciones">
-            <column name="direccion_personas_id" 	type="int" autoIncrement="true">
+            <column name="direccion_personas_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="direccion_id" type="int"/>
-            <column name="persona_id"	type="int"/>
+            <column name="direccion_id" type="bigint"/>
+            <column name="persona_id"	type="bigint"/>
         </createTable>
         
         <createTable tableName="precio_producto">
-            <column name="precio_prod_id" 	type="int" autoIncrement="true">
+            <column name="precio_prod_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="prod_id" 	type="int"/>
-            <column name="monto"	type="int"/>
+            <column name="prod_id" 	type="bigint"/>
+            <column name="monto"	type="bigint"/>
         </createTable>
         
          <createTable tableName="producto">
             <column name="prod_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="tipo_prod_id" 	type="int"/>
+            <column name="tipo_prod_id" 	type="bigint"/>
             <column name="nombre"			type="varchar(50)"/>
-             <column name="impuesto_id" 	type="int"/>
+             <column name="impuesto_id" 	type="bigint"/>
         </createTable>
         
         <createTable tableName="tipo_producto">
-            <column name="tip_prod_id" 	type="bigint" autoIncrement="true">
+            <column name="tipo_prod_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="desc_tipo_producto" 	type="varchar(50)"/>
-            <column name="cuenta_id" 			type="int"/>
+            <column name="cuenta_id" 			type="bigint"/>
         </createTable>
 
          <addForeignKeyConstraint  baseColumnNames="departamento_id"  
@@ -149,7 +149,7 @@
 	        constraintName="fk_lista_precios_fecha_vig"
 	        onDelete="CASCADE"  
 	        onUpdate="RESTRICT"  
-	        referencedColumnNames="fecha_vig_id"   
+	        referencedColumnNames="fecha_vigencia_id"   
 	        referencedTableName="fecha_vig_list_prec"   
 	        validate="true"/>
 
@@ -186,7 +186,7 @@
             onDelete="CASCADE"  
             onUpdate="RESTRICT"  
             referencedColumnNames="persona_id"   
-            referencedTableName="personas"   
+            referencedTableName="persona"   
             validate="true"/>
 
         <addForeignKeyConstraint  baseColumnNames="direccion_id"  
@@ -216,14 +216,7 @@
             referencedTableName="tipo_producto"   
             validate="true"/>
             
-      <addForeignKeyConstraint  baseColumnNames="cuenta_id"  
-            baseTableName="tipo_producto"  
-            constraintName="fk_tipo_producto_cuenta"
-            onDelete="CASCADE"  
-            onUpdate="RESTRICT"  
-            referencedColumnNames="cuenta_id"
-            referencedTableName="cuenta"   
-            validate="true"/>
+      
 
        <addUniqueConstraint 
             columnNames="fecha_ini, fecha_fin"  

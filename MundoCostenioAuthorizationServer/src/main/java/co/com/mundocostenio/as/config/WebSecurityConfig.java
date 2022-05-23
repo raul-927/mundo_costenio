@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Bean
     public UserDetailsService userDetailsService(DriverManagerDataSource dataSource) {
-	    var userDetailsManager = new JdbcUserDetailsManager(dataSource);
+    	JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
 	    userDetailsManager.setUsersByUsernameQuery(usersQuery);
 	    userDetailsManager.setAuthoritiesByUsernameQuery(authoritiesQuery);
     return userDetailsManager;

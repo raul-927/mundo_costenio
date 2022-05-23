@@ -11,23 +11,23 @@
     <changeSet id="00000000000004" author="rhernandez">
     
         <createTable tableName="asiento">
-            <column name="asiento_id" 			type="int" autoIncrement="true">
+            <column name="asiento_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="asiento_nro" 		type="int"/>
             <column name="descripcion" 		type="varchar(50)"/>
-            <column name="cuenta_debe_id" 	type="int"/>
+            <column name="cuenta_debe_id" 	type="bigint"/>
             <column name="monto_debe" 		type="decimal"/>
-            <column name="cuenta_haber_id" 	type="int"/>
+            <column name="cuenta_haber_id" 	type="bigint"/>
             <column name="monto_haber" 		type="decimal"/>
-            <column name="caja_id" 			type="int"/>
+            <column name="caja_id" 			type="bigint"/>
             <column name="fecha" 			type="date"/>
             <column name="hora" 			type="time"/>
             <column name="tipo_cuenta" 	   type="ENUM('VENTA','IMPOSITIVO','PRODUCTO','RETIRO','GASTOS','INGRESO','DEUDAS','PATRIMONIO','EGRESO')"/>
         </createTable>
         
         <createTable tableName="caja">
-            <column name="caja_id" 			type="int" autoIncrement="true">
+            <column name="caja_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="estado" 			type="enum('OPEN','CLOSED')"/>
@@ -60,7 +60,7 @@
             onDelete="CASCADE"  
             onUpdate="RESTRICT"  
             referencedColumnNames="caja_id"   
-            referencedTableName="cuenta"   
+            referencedTableName="caja"   
             validate="true"/>
 
     </changeSet>

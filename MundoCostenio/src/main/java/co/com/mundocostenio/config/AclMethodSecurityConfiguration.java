@@ -36,8 +36,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.context.annotation.AdviceMode;
 
-import co.com.mundocostenio.domain.Post;
-
 @Configuration
 @EnableTransactionManagement
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true, mode= AdviceMode.PROXY)
@@ -45,8 +43,8 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	
 	private static final String className 	="com.mysql.cj.jdbc.Driver";
 	private static final String url 		= "jdbc:mysql://localhost/mundocostenio_db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	private static final String userName 	="root";
-	private static final String passWord 	="";
+	private static final String userName 	="raraherher";
+	private static final String passWord 	="Trkusr1234@";
 	
 	@Autowired
     MethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler;
@@ -162,7 +160,6 @@ public class AclMethodSecurityConfiguration extends GlobalMethodSecurityConfigur
 	public AclEntryVoter aclReadPostVoter() {
 		Permission[] requirePermission = {BasePermission.READ};
 		AclEntryVoter aclEntryVoter = new AclEntryVoter(aclService(),"ACL_POST_READ",requirePermission);
-		aclEntryVoter.setProcessDomainObjectClass(Post.class);
 		return aclEntryVoter;
 	}
 	

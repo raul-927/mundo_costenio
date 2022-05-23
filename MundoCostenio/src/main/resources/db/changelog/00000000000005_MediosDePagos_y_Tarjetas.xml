@@ -11,19 +11,19 @@
     <changeSet id="00000000000005" author="rhernandez">
     
         <createTable tableName="tarjeta">
-            <column name="tarj_id" 			type="int" autoIncrement="true">
+            <column name="tarj_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="nro_verif" 		 type="int"/>
             <column name="nro_tarj" 		 type="bigint"/>
             <column name="nombre" 			 type="varchar(50)"/>
             <column name="fecha_vencimiento" type="date"/>
-            <column name="cuenta_id" 		 type="int"/>
-            <column name="persona_id" 		 type="int"/>
+            <column name="cuenta_id" 		 type="bigint"/>
+            <column name="persona_id" 		 type="bigint"/>
         </createTable>
         
         <createTable tableName="pago">
-            <column name="pag_id" 			type="int" autoIncrement="true">
+            <column name="pag_id" 			type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" 	nullable="false"/>
             </column>
             <column name="cuotas" 			type="int"/>
@@ -31,12 +31,12 @@
             <column name="descripcion"		type="varchar(50)"/>
             
             
-            <column name="cuenta_id" 		type="int"/>
-            <column name="tarj_id" 			type="int"/>
-            <column name="persona_id" 		type="int"/>
-            <column name="asiento_id" 		type="int"/>
-            <column name="caja_id" 			type="int"/>
-            <column name="prod_id" 			type="int"/>
+            <column name="cuenta_id" 		type="bigint"/>
+            <column name="tarj_id" 			type="bigint"/>
+            <column name="persona_id" 		type="bigint"/>
+            <column name="asiento_id" 		type="bigint"/>
+            <column name="caja_id" 			type="bigint"/>
+            <column name="prod_id" 			type="bigint"/>
         </createTable>
         
          <addForeignKeyConstraint  baseColumnNames="cuenta_id"  

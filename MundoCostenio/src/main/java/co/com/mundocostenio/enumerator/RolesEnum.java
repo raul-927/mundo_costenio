@@ -15,10 +15,10 @@ public enum RolesEnum implements Serializable{
 	CONFIG(10, "ROLE_CONFIG");
 	
 	private int rolId;
-	private String descripcion;
+	private final String descripcion;
 	
 	
-	private RolesEnum(int rolId, String descripcion) {
+	private RolesEnum(int rolId, final String descripcion) {
 		this.rolId = rolId;
 		this.descripcion = descripcion;
 	}
@@ -28,7 +28,7 @@ public enum RolesEnum implements Serializable{
 		return this.rolId;
 	}
 	
-	public String getDescripcion() {
+	public final String getDescripcion() {
 		return this.descripcion;
 	}
 
