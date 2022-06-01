@@ -36,7 +36,6 @@ public class AccesControlListService<T> {
 	
 	public int insert(T object) {
 		
-		
 		Integer id = Math.abs(object.hashCode());
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
 		ObjectIdentity objectIdentity  = null;
