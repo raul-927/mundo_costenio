@@ -35,9 +35,6 @@ public class AccesControlListService<T> {
 	private static final String DOMAIN ="co.com.mundocostenio.domain.";
 	
 	public int insert(T object) {
-		
-		
-		
 		Integer id = Math.abs(object.hashCode());
 		Authentication user = SecurityContextHolder.getContext().getAuthentication();
 		ObjectIdentity objectIdentity  = null;
