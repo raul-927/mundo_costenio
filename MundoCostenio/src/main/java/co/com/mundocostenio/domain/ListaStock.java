@@ -17,23 +17,17 @@ public class ListaStock implements Serializable{
 	@JsonIgnore
 	private Integer id;
 	
-	private Integer 	listStockId;
+	private Integer 	listaStockId;
 	private String 		descripcion;
 	private LocalDate 	fecha;
 	private LocalTime 	hora;
 	private List<Stock>	stockList;
 	
 	public Integer getId() {
-		id = listStockId;
+		id = listaStockId;
 		return id;
 	}
 	
-	public Integer getListStockId() {
-		return listStockId;
-	}
-	public void setListStockId(Integer listStockId) {
-		this.listStockId = listStockId;
-	}
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -57,5 +51,13 @@ public class ListaStock implements Serializable{
 	}
 	public void setStockList(List<Stock> stockList) {
 		this.stockList = stockList;
+	}
+
+	public Integer getListaStockId() {
+		return listaStockId;
+	}
+
+	public void setListaStockId(Integer listaStockId) {
+		this.listaStockId = listaStockId;
 	}
 }

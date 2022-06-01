@@ -10,17 +10,17 @@ public class Documento implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer 				docId;
+	private Integer 				documentoId;
 	private String 					descripcion;
 	private List<TipoInscripcion> 	tiposInscripcion;
 	
+	public Integer getDocumentoId() {
+		return documentoId;
+	}
+	public void setDocumentoId(Integer documentoId) {
+		this.documentoId = documentoId;
+	}
 	
-	public Integer getDocId() {
-		return docId;
-	}
-	public void setDocId(Integer docId) {
-		this.docId = docId;
-	}
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -33,5 +33,6 @@ public class Documento implements Serializable{
 	public void setTiposInscripcion(List<TipoInscripcion> tiposInscripcion) {
 		this.tiposInscripcion = tiposInscripcion;
 	}
+	
 
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="co.com.mundocostenio.mybatis.mappers.PagoMapper">
+	<resultMap type="co.com.mundocostenio.domain.Pago" id="PagoResult">
+  	
+  		<id		property ="pagoId" 			column ="pago_id"/>
+ 		<result property ="cuotas" 			column ="cuotas"/>
+ 		<result property ="importe" 		column ="importe"/>
+ 		<result property ="descripcion" 	column ="descripcion"/>
+ 		<result property ="tipoFormaPago" 	column ="tipo_forma_pago"/>
+ 		
+ 		<association property="cuenta" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.CuentaMapper.CuentaResult"/>
+ 			
+ 		<association property="tarjeta" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.TarjetaMapper.TarjetaResult"/>
+ 			
+ 		<association property="persona" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.PersonaMapper.PersonaResult"/>
+ 		
+ 		<association property="asiento" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.AsientoMapper.AsientoResult"/>
+ 		
+ 		<association property="caja" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.CajaMapper.CajaResult"/>
+ 		
+ 		<association property="producto" 
+ 			resultMap="co.com.mundocostenio.mybatis.mappers.ProductoMapper.ProductoResult"/>
+  	</resultMap>
+</mapper>

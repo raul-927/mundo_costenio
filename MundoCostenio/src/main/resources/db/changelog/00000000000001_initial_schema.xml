@@ -59,7 +59,7 @@
             <column name="calle_id" type="bigint"/>
         </createTable>
         
-        <createTable tableName="fecha_vig_list_prec">
+        <createTable tableName="fecha_vigencia_lista_precios">
             <column name="fecha_vigencia_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
@@ -71,7 +71,7 @@
             <column name="lista_precio_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="fecha_vig_id"  		   type="bigint"/>
+            <column name="fecha_vigencia_id"  		   type="bigint"/>
             <column name="descripcion_lista" 	   type="varchar(50)"/>
         </createTable>
         
@@ -110,7 +110,7 @@
         </createTable>
         
          <createTable tableName="producto">
-            <column name="prod_id" 	type="bigint" autoIncrement="true">
+            <column name="producto_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="tipo_prod_id" 	type="bigint"/>
@@ -144,16 +144,16 @@
             referencedTableName="barrio"   
             validate="true"/>
             
-        <addForeignKeyConstraint  baseColumnNames="fecha_vig_id"  
+        <addForeignKeyConstraint  baseColumnNames="fecha_vigencia_id"  
 	        baseTableName="lista_precios"  
 	        constraintName="fk_lista_precios_fecha_vig"
 	        onDelete="CASCADE"  
 	        onUpdate="RESTRICT"  
 	        referencedColumnNames="fecha_vigencia_id"   
-	        referencedTableName="fecha_vig_list_prec"   
+	        referencedTableName="fecha_vigencia_lista_precios"   
 	        validate="true"/>
 
-        <addForeignKeyConstraint  baseColumnNames="lis_prec_id"  
+        <addForeignKeyConstraint  baseColumnNames="lista_precio_id"  
             baseTableName="list_prod_and_prec_prod"  
             constraintName="fk_lis_prod_prec_prod_lis_prec"
             onDelete="CASCADE"  
@@ -198,12 +198,12 @@
             referencedTableName="direccion"   
             validate="true"/>
 
-        <addForeignKeyConstraint  baseColumnNames="prod_id"  
+        <addForeignKeyConstraint  baseColumnNames="producto_id"  
             baseTableName="precio_producto"  
             constraintName="fk_precio_producto_producto"
             onDelete="CASCADE"  
             onUpdate="RESTRICT"  
-            referencedColumnNames="prod_id"   
+            referencedColumnNames="producto_id"   
             referencedTableName="producto"   
             validate="true"/>
 

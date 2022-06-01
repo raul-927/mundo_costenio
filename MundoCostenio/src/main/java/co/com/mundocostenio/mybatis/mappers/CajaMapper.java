@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import co.com.mundocostenio.domain.Caja;
 import co.com.mundocostenio.mybatis.sql.CajaSqlProvider;
 
-
 public interface CajaMapper {
 	
 	
@@ -19,7 +18,11 @@ public interface CajaMapper {
 	void insert(@Param("caja") Caja caja);
 	
 	@SelectProvider(type = CajaSqlProvider.class, method ="select")
-	@ResultMap("co.com.mundocostenio.mybatis.mappers.BarrioMapper.BarrioResult")
+	@ResultMap("co.com.mundocostenio.mybatis.mappers.CajaMapper.CajaResult")
 	List<Caja> select(@Param("caja") Caja caja);
+	
+	@SelectProvider(type = CajaSqlProvider.class, method = "cargoCajaActual")
+	@ResultMap("co.com.mundocostenio.mybatis.mappers.CajaMapper.CajaResult")
+	Caja cargoCajaActual();
 
 }

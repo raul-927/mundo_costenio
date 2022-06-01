@@ -68,4 +68,18 @@ public class CajaSqlProvider {
 			
 		}}.toString();
 	}
+	
+	public String cargoCajaActual(){
+		return new SQL(){{
+			SELECT("caja_id, caja_estado, caja_fecha, caja_hora, caja_usr");
+			FROM("caja"); 
+			WHERE("caja_id = ("+selectMaxIdCaja()+")");
+		}}.toString();
+	}
+	private String selectMaxIdCaja(){
+		return new SQL(){{
+			SELECT("MAX(caja_id)");
+			FROM("caja");
+		}}.toString();
+	}
 }

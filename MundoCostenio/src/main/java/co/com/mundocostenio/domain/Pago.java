@@ -3,6 +3,8 @@ package co.com.mundocostenio.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import co.com.mundocostenio.enumerator.TipoFormaPago;
+
 public class Pago implements Serializable{
 
 	/**
@@ -19,9 +21,11 @@ public class Pago implements Serializable{
 	private Cuenta     cuenta;
 	private Tarjeta    tarjeta;
 	private Persona    persona;
-	//private Asiento    asiento;
+	private Asiento    asiento;
 	private Caja 	   caja;
 	private Producto   producto;
+	
+	private TipoFormaPago tipoFormaPago;
 	
 	
 	
@@ -90,5 +94,17 @@ public class Pago implements Serializable{
 	public Integer getId() {
 		id = pagoId;
 		return id;
+	}
+	public TipoFormaPago getTipoFormaPago() {
+		return tipoFormaPago;
+	}
+	public void setTipoFormaPago(TipoFormaPago tipoFormaPago) {
+		this.tipoFormaPago = tipoFormaPago;
+	}
+	public Asiento getAsiento() {
+		return asiento;
+	}
+	public void setAsiento(Asiento asiento) {
+		this.asiento = asiento;
 	}
 }

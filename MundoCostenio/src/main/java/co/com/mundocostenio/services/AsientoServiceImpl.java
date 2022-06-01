@@ -2,6 +2,7 @@ package co.com.mundocostenio.services;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +10,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.mundocostenio.domain.Asiento;
+import co.com.mundocostenio.domain.Caja;
 import co.com.mundocostenio.domain.Cuenta;
 import co.com.mundocostenio.domain.ListaPrecios;
 import co.com.mundocostenio.domain.Pago;
 import co.com.mundocostenio.domain.PrecioProducto;
 import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.enumerator.TipoCuentaEnum;
+import co.com.mundocostenio.enumerator.TipoFormaPago;
 import co.com.mundocostenio.mybatis.mappers.AsientoMapper;
+import co.com.mundocostenio.mybatis.mappers.CajaMapper;
+import co.com.mundocostenio.mybatis.mappers.CuentaMapper;
 
 @Service("asientoService")
 public class AsientoServiceImpl implements AsientoService {
 	
 	@Autowired
 	private AsientoMapper asientoMapper;
+	
+	@Autowired
+	private CajaMapper cajaMapper;
+	
+	@Autowired
+	private CuentaMapper cuentaMapper;
 	
 	@Autowired
 	private ListaPreciosService listaPreciosService;
@@ -101,6 +113,125 @@ public class AsientoServiceImpl implements AsientoService {
 			asResult.add(as);
 		}
 		return asResult;
+	}
+	
+	public void ingresarAsientoContable(Pago pago,Producto producto) {
+		Caja cajaActual  = this.cajaMapper.cargoCajaActual();
+		int cuentaId = pago.getCuenta().getCuentaId();
+		int maxNumAsientoContable = this.asientoMapper.selectMaxNroAsiento();
+		switch (pago.getTipoFormaPago()) {
+		case EF:
+			pagoEfectivo(pago, cajaActual, maxNumAsientoContable);
+			break;
+		case TC:
+			pagoTarjetaCredito();
+			break;
+		case CE:
+			pagoCreditoEfectivo();
+			break;
+		case DP:
+			pagoDepositoBancario();
+			break;
+		}
+		ArrayList<Asiento> asientoContableList = new ArrayList<Asiento>();
+		
+		Caja caja = this.cajaMapper.cargoCajaActual();
+		Cuenta asCuentaL1 = this.cuentaMapper.selectCuentaByCuentaId(formasDePagoDesc.getFormasDePagoCuenta());
+		BigDecimal asCuentaDebeMontoL1 = new BigDecimal((double)producto.);
+		BigDecimal asCuentaHaberMontoL1 = new BigDecimal((double)00);
+		
+		Producto prod = new Producto();//this.productoMapper.findTratamientoById(tratamientoPaciente.getTratamId());
+		List<Cuenta> cuentaImp = this.cuentaMapper.select(prod.getImpuesto().getCuentaImpuesto());
+		
+		Cuenta cuentaProducto = new Cuenta();
+		cuentaProducto.setCuentaId(12);
+		cuentaProducto.setCuentaDesc(prod.getNombre());
+		cuentaProducto.setTipoCuenta(TipoCuentaEnum.PRODUCTO);
+	
+		
+		int asConNro = this.asientoMapper.selectMaxNroAsiento();
+		Asiento asientoContableL1 = new Asiento();
+		Asiento asientoContableL2 = new Asiento();
+		Asiento asientoContableL3 = new Asiento();
+		
+		asientoContableL1.setAsientoNro(asConNro);
+		asientoContableL2.setAsientoNro(asConNro);
+		asientoContableL3.setAsientoNro(asConNro);
+		
+		asientoContableL1.setCaja(caja);
+		asientoContableL2.setCaja(caja);
+		asientoContableL3.setCaja(caja);
+		
+		BigDecimal asImpDebeMonto = new BigDecimal("00");
+		BigDecimal impuesto = prod.getImpuesto().getImpuestoValor();
+		BigDecimal aux = asCuentaDebeMontoL1.multiply(impuesto);
+		BigDecimal divisor = new BigDecimal("100.00");
+		BigDecimal resultado = aux.divide(divisor);
+		BigDecimal asImpHaberMonto = new BigDecimal("00");
+		this.total = asCuentaDebeMontoL1.subtract(resultado);
+		asImpHaberMonto.add(resultado);
+
+		asientoContableL1.setCuentaDebe(asCuentaL1);
+		asientoContableL1.setCuentaHaber(asCuentaL1);
+		asientoContableL1.setMontoDebe(asCuentaDebeMontoL1);
+		asientoContableL1.setMontoHaber(asCuentaHaberMontoL1);
+		asientoContableL1.setDescripcion(asCuentaL1.getCuentaDesc());
+		asientoContableL1.setTipoCuenta(asCuentaL1.getTipoCuenta());
+
+		asientoContableL2.setCuentaDebe(cuentaImp.get(0));
+		asientoContableL2.setCuentaHaber(cuentaImp.get(0));
+		asientoContableL2.setMontoDebe(asImpDebeMonto);
+		asientoContableL2.setMontoHaber(resultado);
+		asientoContableL2.setDescripcion(cuentaImp.get(0).getCuentaDesc());
+		asientoContableL2.setTipoCuenta(cuentaImp.get(0).getTipoCuenta());
+
+		asientoContableL3.setCuentaDebe(cuentaProducto);
+		asientoContableL3.setCuentaHaber(cuentaProducto);
+		asientoContableL3.setMontoDebe(asImpDebeMonto);
+		asientoContableL3.setMontoHaber(total);
+		asientoContableL3.setDescripcion(cuentaProducto.getCuentaDesc());
+		asientoContableL3.setTipoCuenta(cuentaProducto.getTipoCuenta());
+	
+		asientoContableList.add(asientoContableL1);
+		asientoContableList.add(asientoContableL2);
+		asientoContableList.add(asientoContableL3);
+		
+		Iterator<Asiento> it = asientoContableList.iterator();
+		
+		while(it.hasNext()){
+			this.asientoMapper.insert(it.next());
+		}	
+	}
+	
+	private void pagoEfectivo(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
+		String desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(pago.getCuenta().getCuentaId());
+		String pagoEfCuenta = desCuentaFormaDePago;
+		pago.setCaja(cajaActual);
+		pago.setCuenta(pagoEfCuenta);
+		pago.setAsiento(maxNumAsientoContable);
+		this.formasDePagosService.insertTratamientoPagoEfectivo(tratamientoPaciente, (PagoEfectivo) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
+	}
+	
+	private void pagoTarjetaCredito() {
+		DescCuentaFormaDePago desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(cuentaId);
+		String pagoTarjCuenta = desCuentaFormaDePago.getCuentaDesc();
+		((PagoTarjeta) formaDePago).setTarjetaCajaId(cajaActual.getCajaId());
+		((PagoTarjeta) formaDePago).setTarjCuenta(pagoTarjCuenta);
+		((PagoTarjeta) formaDePago).setAsientoNro(maxNumAsientoContable.getMaxNum());
+		this.formasDePagosService.insertTratamientoPagoTarjeta(tratamientoPaciente,(PagoTarjeta) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
+	}
+	
+	private void pagoCreditoEfectivo() {
+		DescCuentaFormaDePago desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(cuentaId);
+		String pagoEfCuenta = desCuentaFormaDePago.getCuentaDesc();
+		((PagoCredito) formaDePago).setPagoEfCajaId(cajaActual.getCajaId());
+		((PagoCredito) formaDePago).setPagoEfCuenta(pagoEfCuenta);
+		((PagoCredito) formaDePago).setAsientoNro(maxNumAsientoContable.getMaxNum());
+		this.formasDePagosService.insertTratamientoPagoEfectivo(tratamientoPaciente, (PagoCredito) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
+	}
+	
+	private void pagoDepositoBancario() {
+		
 	}
 
 	@Override
