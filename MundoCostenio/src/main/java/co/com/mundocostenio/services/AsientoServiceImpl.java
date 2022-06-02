@@ -124,20 +124,20 @@ public class AsientoServiceImpl implements AsientoService {
 			pagoEfectivo(pago, cajaActual, maxNumAsientoContable);
 			break;
 		case TC:
-			pagoTarjetaCredito();
+			pagoTarjetaCredito(pago, cajaActual, maxNumAsientoContable);
 			break;
 		case CE:
-			pagoCreditoEfectivo();
+			pagoCreditoEfectivo(pago, cajaActual, maxNumAsientoContable);
 			break;
 		case DP:
-			pagoDepositoBancario();
+			pagoDepositoBancario(pago, cajaActual, maxNumAsientoContable);
 			break;
 		}
 		ArrayList<Asiento> asientoContableList = new ArrayList<Asiento>();
 		
 		Caja caja = this.cajaMapper.cargoCajaActual();
-		Cuenta asCuentaL1 = this.cuentaMapper.selectCuentaByCuentaId(formasDePagoDesc.getFormasDePagoCuenta());
-		BigDecimal asCuentaDebeMontoL1 = new BigDecimal((double)producto.);
+		List<Cuenta> asCuentaL1 = this.cuentaMapper.select(pago.getCuenta());
+		BigDecimal asCuentaDebeMontoL1 = new BigDecimal((double)producto.getId());
 		BigDecimal asCuentaHaberMontoL1 = new BigDecimal((double)00);
 		
 		Producto prod = new Producto();//this.productoMapper.findTratamientoById(tratamientoPaciente.getTratamId());
@@ -171,12 +171,12 @@ public class AsientoServiceImpl implements AsientoService {
 		this.total = asCuentaDebeMontoL1.subtract(resultado);
 		asImpHaberMonto.add(resultado);
 
-		asientoContableL1.setCuentaDebe(asCuentaL1);
-		asientoContableL1.setCuentaHaber(asCuentaL1);
+		asientoContableL1.setCuentaDebe(asCuentaL1.get(0));
+		asientoContableL1.setCuentaHaber(asCuentaL1.get(0));
 		asientoContableL1.setMontoDebe(asCuentaDebeMontoL1);
 		asientoContableL1.setMontoHaber(asCuentaHaberMontoL1);
-		asientoContableL1.setDescripcion(asCuentaL1.getCuentaDesc());
-		asientoContableL1.setTipoCuenta(asCuentaL1.getTipoCuenta());
+		asientoContableL1.setDescripcion(asCuentaL1.get(0).getCuentaDesc());
+		asientoContableL1.setTipoCuenta(asCuentaL1.get(0).getTipoCuenta());
 
 		asientoContableL2.setCuentaDebe(cuentaImp.get(0));
 		asientoContableL2.setCuentaHaber(cuentaImp.get(0));
@@ -212,7 +212,7 @@ public class AsientoServiceImpl implements AsientoService {
 		this.formasDePagosService.insertTratamientoPagoEfectivo(tratamientoPaciente, (PagoEfectivo) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
 	}
 	
-	private void pagoTarjetaCredito() {
+	private void pagoTarjetaCredito(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
 		DescCuentaFormaDePago desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(cuentaId);
 		String pagoTarjCuenta = desCuentaFormaDePago.getCuentaDesc();
 		((PagoTarjeta) formaDePago).setTarjetaCajaId(cajaActual.getCajaId());
@@ -221,7 +221,7 @@ public class AsientoServiceImpl implements AsientoService {
 		this.formasDePagosService.insertTratamientoPagoTarjeta(tratamientoPaciente,(PagoTarjeta) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
 	}
 	
-	private void pagoCreditoEfectivo() {
+	private void pagoCreditoEfectivo(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
 		DescCuentaFormaDePago desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(cuentaId);
 		String pagoEfCuenta = desCuentaFormaDePago.getCuentaDesc();
 		((PagoCredito) formaDePago).setPagoEfCajaId(cajaActual.getCajaId());
@@ -230,7 +230,7 @@ public class AsientoServiceImpl implements AsientoService {
 		this.formasDePagosService.insertTratamientoPagoEfectivo(tratamientoPaciente, (PagoCredito) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
 	}
 	
-	private void pagoDepositoBancario() {
+	private void pagoDepositoBancario(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
 		
 	}
 
