@@ -52,7 +52,7 @@
         </createTable>
         
         <createTable tableName="direccion_calles">
-            <column name="dir_calles_id" 	type="bigint" autoIncrement="true">
+            <column name="direccion_calles_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="direccion_id"  type="bigint"/>
@@ -79,8 +79,8 @@
             <column name="id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="lis_prec_id" 	type="bigint"/>
-            <column name="prec_prod_id" type="bigint"/>
+            <column name="lista_precio_id" 	type="bigint"/>
+            <column name="precio_producto_id" type="bigint"/>
         </createTable>
         
         <createTable tableName="persona">
@@ -102,10 +102,10 @@
         </createTable>
         
         <createTable tableName="precio_producto">
-            <column name="precio_prod_id" 	type="bigint" autoIncrement="true">
+            <column name="precio_producto_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="prod_id" 	type="bigint"/>
+            <column name="producto_id" 	type="bigint"/>
             <column name="monto"	type="bigint"/>
         </createTable>
         
@@ -113,13 +113,13 @@
             <column name="producto_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="tipo_prod_id" 	type="bigint"/>
+            <column name="tipo_producto_id" 	type="bigint"/>
             <column name="nombre"			type="varchar(50)"/>
              <column name="impuesto_id" 	type="bigint"/>
         </createTable>
         
         <createTable tableName="tipo_producto">
-            <column name="tipo_prod_id" 	type="bigint" autoIncrement="true">
+            <column name="tipo_producto_id" 	type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="desc_tipo_producto" 	type="varchar(50)"/>
@@ -162,12 +162,12 @@
             referencedTableName="lista_precios"   
             validate="true"/>
             
-       	<addForeignKeyConstraint  baseColumnNames="prec_prod_id"  
+       	<addForeignKeyConstraint  baseColumnNames="precio_producto_id"  
 	    	baseTableName="list_prod_and_prec_prod"  
 	        constraintName="fk_lis_prod_prec_precio_producto"
 	       	onDelete="CASCADE"  
 	        onUpdate="RESTRICT"  
-	        referencedColumnNames="precio_prod_id"   
+	        referencedColumnNames="precio_producto_id"   
 	        referencedTableName="precio_producto"   
 	        validate="true"/>
 	            
@@ -207,12 +207,12 @@
             referencedTableName="producto"   
             validate="true"/>
 
-        <addForeignKeyConstraint  baseColumnNames="tipo_prod_id"  
+        <addForeignKeyConstraint  baseColumnNames="tipo_producto_id"  
             baseTableName="producto"  
             constraintName="fk_producto_tipo_producto"
             onDelete="CASCADE"  
             onUpdate="RESTRICT"  
-            referencedColumnNames="tipo_prod_id"   
+            referencedColumnNames="tipo_producto_id"   
             referencedTableName="tipo_producto"   
             validate="true"/>
             
@@ -223,7 +223,7 @@
             deferrable="true"  
             disabled="true" 
             initiallyDeferred="true"    
-            tableName="fecha_vig_list_prec"    
+            tableName="fecha_vigencia_lista_precios"    
             validate="true"/>
     </changeSet>
 </databaseChangeLog>

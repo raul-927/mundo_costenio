@@ -11,9 +11,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -69,16 +71,18 @@ public class GrupoCuentaController {
 		return new ResponseEntity<GrupoCuenta>(grupoCuentaResult, headers, HttpStatus.OK);
 	}
 	@RequestMapping(
-			value ="/grupoCuenta", method =RequestMethod.DELETE,
+			value ="/grupoCuenta/{grupoCuentaId}", method =RequestMethod.DELETE,
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public ResponseEntity<?> delete(@RequestBody GrupoCuenta grupoCuenta) throws ResourceNotFoundException{
+	public ResponseEntity<?> delete(@PathVariable int grupoCuentaId) throws ResourceNotFoundException{
+		GrupoCuenta gp = new GrupoCuenta();
+		gp.setGrupoCuentaId(grupoCuentaId);
 		HttpHeaders headers = new HttpHeaders();
-		this.verificarGrupoCuenta(grupoCuenta);
-		if(grupoCuenta.getGrupoCuentaId() ==null || grupoCuenta.getGrupoCuentaId() ==0) {
+		this.verificarGrupoCuenta(gp);
+		if(gp.getGrupoCuentaId() ==null || gp.getGrupoCuentaId() ==0) {
 			throw new BindingResultException("grupoCuentaId no debe ser null o cero");
 		}
-		this.grupoCuentaService.delete(grupoCuenta);
+		this.grupoCuentaService.delete(gp);
 		return new ResponseEntity<GrupoCuenta>(null, headers, HttpStatus.OK);
 	}
 	
@@ -89,6 +93,9 @@ public class GrupoCuentaController {
 	@ResponseBody
 	public ResponseEntity<?> select(@RequestBody GrupoCuenta grupoCuenta) throws ResourceNotFoundException{ 
 		HttpHeaders headers = new HttpHeaders();
+		if(grupoCuenta == null) {
+			grupoCuenta = new GrupoCuenta();
+		}
 		verificarGrupoCuenta(grupoCuenta);
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
 		return new ResponseEntity<List<GrupoCuenta>>(grupoCuentaResult, headers, HttpStatus.OK);
@@ -114,7 +121,7 @@ public class GrupoCuentaController {
 			}
 		}
 	}
-	/*
+	
 	@RequestMapping(
 			value ="/grupoCuentas", method =RequestMethod.GET,
 			produces ={MediaType.APPLICATION_JSON_VALUE})
@@ -124,5 +131,4 @@ public class GrupoCuentaController {
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(new GrupoCuenta());
 		return new ResponseEntity<List<GrupoCuenta>>(grupoCuentaResult, headers, HttpStatus.OK);
 	}
-	*/
 }

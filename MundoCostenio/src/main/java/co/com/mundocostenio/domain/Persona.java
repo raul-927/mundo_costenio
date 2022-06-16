@@ -37,7 +37,7 @@ public class Persona implements Serializable{
 	
 	private List<Direccion> direcciones;
 	
-	public Persona() {};
+	public Persona() {}
 	
 	public Persona(Integer personaId, String nombre, String apellido, Integer cedula,
 			List<Direccion> direcciones, User user) {

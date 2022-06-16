@@ -36,7 +36,7 @@ public class ListaPreciosSqlProvider {
 	}
 
 	public String selectListaPrecios(ListaPrecios listaPrecios) {
-		String sql =  new SQL() {{
+		return new SQL() {{
 			SELECT("l.lista_precio_id, l.descripcion_lista");
 			SELECT("f.fecha_vigencia_id, f.fecha_ini,f.fecha_fin");
 			SELECT("pre.precio_prod_id, pre.monto");
@@ -95,11 +95,10 @@ public class ListaPreciosSqlProvider {
 				}
 			}
 		}}.toString();
-		return sql;
 	}
 	
 	public String selectActualListaPrecios() {
-		String query = 
+		return 
 		 new SQL() {{
 			SELECT("l.lista_precio_id, l.descripcion_lista");
 			SELECT("f.fecha_vigencia_id, f.fecha_ini,f.fecha_fin");
@@ -124,8 +123,6 @@ public class ListaPreciosSqlProvider {
 			WHERE("CURRENT_DATE() > f.fecha_ini");
 			WHERE("f.fecha_fin = '01/01/3030'");
 		}}.toString();
-		System.out.print(query);
-		return query;
 	}
 	
 	public String selectNuevoProducto() {
