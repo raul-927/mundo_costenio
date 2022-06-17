@@ -36,15 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     public void configure(HttpSecurity http) throws Exception {
-        // add http.cors()
-    	//http.cors().and().csrf().disable();
         http.cors().and().csrf().disable().authorizeRequests()
-                //.antMatchers("/login/**").permitAll()
-                .anyRequest().permitAll(); // Authenticate users with HTTP basic authentication
-
-        // REST is stateless
-        //http.sessionManagement()
-          //     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .anyRequest().permitAll();
     }
 	
 	@Override
@@ -61,7 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return userDetailsManager;
     }
     
-    @Bean
+    @SuppressWarnings("deprecation")
+	@Bean
     public PasswordEncoder passwordEncoder() {
     return NoOpPasswordEncoder.getInstance();
     }
