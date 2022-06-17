@@ -21,7 +21,6 @@ public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
         System.out.println("EEERRORRR: "+authEx.getMessage());
         PrintWriter writer = response.getWriter();
         writer.println("HTTP Status 401 - " + authEx.getCause());
-        //writer.println("CAUSE - "+authEx.getCause());
     }
 
 	@Override
