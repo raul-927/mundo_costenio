@@ -24,8 +24,8 @@ public class CuentaServiceImpl implements CuentaService {
 	private AccesControlListService<Cuenta> accesControlListService;
 
 	@Override
-	@PreAuthorize(value ="hasRole('ROLE_COUNTER')")
 	@Transactional
+	@PreAuthorize(value ="hasRole('ROLE_COUNTER')")
 	public Cuenta insert(Cuenta cuenta) {
 		this.cuentaMapper.insert(cuenta);
 		this.accesControlListService.insert(cuenta);

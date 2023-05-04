@@ -190,10 +190,10 @@ public class AsientoServiceImpl implements AsientoService {
 			pagoEfectivo(pago, cajaActual, maxNumAsientoContable);
 			break;
 		case TC:
-			pagoTarjetaCredito(pago, cajaActual, maxNumAsientoContable);
+			//pagoTarjetaCredito(pago, cajaActual, maxNumAsientoContable);
 			break;
 		case CE:
-			pagoCreditoEfectivo(pago, cajaActual, maxNumAsientoContable);
+			//pagoCreditoEfectivo(pago, cajaActual, maxNumAsientoContable);
 			break;
 		case DP:
 			pagoDepositoBancario(pago, cajaActual, maxNumAsientoContable);
@@ -266,31 +266,31 @@ public class AsientoServiceImpl implements AsientoService {
 		
 		
 		
-		String desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(pago.getCuenta().getCuentaId());
-		String pagoEfCuenta = desCuentaFormaDePago;
+		//String desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(pago.getCuenta().getCuentaId());
+		//String pagoEfCuenta = desCuentaFormaDePago;
 		pago.setCaja(cajaActual);
-		pago.setCuenta(pagoEfCuenta);
-		pago.setAsiento(maxNumAsientoContable);
-		this.formasDePagosService.insertTratamientoPagoEfectivo(tratamientoPaciente, (PagoEfectivo) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
+		//pago.setCuenta(pagoEfCuenta);
+		//pago.setAsiento(maxNumAsientoContable);
+		//this.formasDePagosService.insertTratamientoPagoEfectivo(tratamientoPaciente, (PagoEfectivo) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
 	}
 	
-	private void pagoTarjetaCredito(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
+	/*private void pagoTarjetaCredito(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
 		DescCuentaFormaDePago desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(cuentaId);
 		String pagoTarjCuenta = desCuentaFormaDePago.getCuentaDesc();
 		((PagoTarjeta) formaDePago).setTarjetaCajaId(cajaActual.getCajaId());
 		((PagoTarjeta) formaDePago).setTarjCuenta(pagoTarjCuenta);
 		((PagoTarjeta) formaDePago).setAsientoNro(maxNumAsientoContable.getMaxNum());
 		this.formasDePagosService.insertTratamientoPagoTarjeta(tratamientoPaciente,(PagoTarjeta) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
-	}
+	}*/
 	
-	private void pagoCreditoEfectivo(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
+	/*private void pagoCreditoEfectivo(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
 		DescCuentaFormaDePago desCuentaFormaDePago = this.formasDePagosService.cuentaFormaDePagoDesc(cuentaId);
 		String pagoEfCuenta = desCuentaFormaDePago.getCuentaDesc();
 		((PagoCredito) formaDePago).setPagoEfCajaId(cajaActual.getCajaId());
 		((PagoCredito) formaDePago).setPagoEfCuenta(pagoEfCuenta);
 		((PagoCredito) formaDePago).setAsientoNro(maxNumAsientoContable.getMaxNum());
 		this.formasDePagosService.insertTratamientoPagoEfectivo(tratamientoPaciente, (PagoCredito) formaDePago, formasDePagoDesc.getFormasDePagoCuenta());
-	}
+	}*/
 	
 	private void pagoDepositoBancario(Pago pago, Caja cajaActual, int maxNumAsientoContable) {
 		

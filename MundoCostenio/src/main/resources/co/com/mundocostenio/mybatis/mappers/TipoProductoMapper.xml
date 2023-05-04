@@ -4,7 +4,7 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.TipoProductoMapper">
 	<resultMap type="co.com.mundocostenio.domain.TipoProducto" id="TipoProductoResult">
   	
-  		<id		property = "tipProdId" 		column = "tip_prod_id"/>
+  		<id		property = "tipProdId" 		column = "tipo_producto_id"/>
  		<result property ="descTipoProducto" 	column ="desc_tipo_producto"/>
  		
  		<association property="cuenta"

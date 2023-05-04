@@ -13,7 +13,7 @@ public class ProductoSqlProvider {
 				VALUES("nombre", "'".concat(producto.getNombre()).concat("'"));
 			}
 			if(producto.getTipoProducto() !=null) {
-				VALUES("tipo_prod_id", "'".concat(String.valueOf(producto.getTipoProducto().getTipProdId())).concat("'"));
+				VALUES("tipo_producto_id", "'".concat(String.valueOf(producto.getTipoProducto().getTipProdId())).concat("'"));
 			}
 			if(producto.getImpuesto()!=null && producto.getImpuesto().getImpuestoId() > 0) {
 				VALUES("impuesto_id", String.valueOf(producto.getImpuesto().getImpuestoId()));
