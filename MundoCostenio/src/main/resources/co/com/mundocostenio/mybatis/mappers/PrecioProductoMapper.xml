@@ -4,7 +4,7 @@
 	namespace="co.com.mundocostenio.mybatis.mappers.PrecioProductoMapper">
 	<resultMap type="co.com.mundocostenio.domain.PrecioProducto" id="PrecioProductoResult">
   	
-  		<id		property = "precioProdId" 	column = "precio_prod_id"/>
+  		<id		property = "precioProdId" 	column = "precio_producto_id"/>
  		<result property ="monto" 	column ="monto"/>
  		
  		<association property="producto" 

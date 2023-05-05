@@ -98,6 +98,19 @@ public class CuentaController {
 		return new ResponseEntity<List<Cuenta>>(cuentaResult, headers, HttpStatus.OK);
 	}
 	
+	@RequestMapping(
+			value ="/cuentas", method =RequestMethod.GET,
+			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public ResponseEntity<?> selectAll(){ 
+		HttpHeaders headers = new HttpHeaders();
+		//verificarCuenta(cuenta);
+		List<Cuenta> cuentaResult = this.cuentaService.select(new Cuenta());
+		
+		return new ResponseEntity<List<Cuenta>>(cuentaResult, headers, HttpStatus.OK);
+	}
+	
+	
 	
 	private void verificarCuenta(Cuenta cuenta) throws ResourceNotFoundException{
 		String message ="";

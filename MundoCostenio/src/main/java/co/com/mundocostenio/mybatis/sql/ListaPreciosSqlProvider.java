@@ -14,7 +14,7 @@ public class ListaPreciosSqlProvider {
 				VALUES("descripcion_lista", "'".concat(String.valueOf(insert.getDescripcionLista())).concat("'"));
 			}
 			if(insert.getFechaVigencia() != null) {
-				VALUES("fecha_vig_id", String.valueOf(insert.getFechaVigencia().getFechaVigenciaId()));
+				VALUES("fecha_vigencia_id", String.valueOf(insert.getFechaVigencia().getFechaVigenciaId()));
 			}
 		}}.toString();
 	}
@@ -26,7 +26,7 @@ public class ListaPreciosSqlProvider {
 				SET("descripcion_lista", "'".concat(String.valueOf(update.getDescripcionLista())).concat("'"));
 			}
 			if(update.getFechaVigencia() != null) {
-				SET("fecha_vig_id", String.valueOf(update.getFechaVigencia().getFechaVigenciaId()));
+				SET("fecha_vigencia_id", String.valueOf(update.getFechaVigencia().getFechaVigenciaId()));
 			}
 		}}.toString();
 	}
@@ -39,25 +39,25 @@ public class ListaPreciosSqlProvider {
 		return new SQL() {{
 			SELECT("l.lista_precio_id, l.descripcion_lista");
 			SELECT("f.fecha_vigencia_id, f.fecha_ini,f.fecha_fin");
-			SELECT("pre.precio_prod_id, pre.monto");
-			SELECT("pro.prod_id, pro.nombre");
-			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			SELECT("pre.precio_producto_id, pre.monto");
+			SELECT("pro.producto_id, pro.nombre");
+			SELECT("t.tipo_producto_id, t.desc_tipo_producto");
 			
 			FROM("lista_precios l");
-			FROM("fecha_vig_list_prec f");
+			FROM("fecha_vigencia_lista_precios f");
 			FROM("precio_producto pre");
 			FROM("producto pro");
 			FROM("tipo_producto t");
 			FROM("list_prod_and_prec_prod ls");
 			
-			WHERE("l.fecha_vig_id = f.fecha_vigencia_id"); 
-			WHERE("l.lista_precio_id = ls.lis_prec_id"); 
-			WHERE("ls.prec_prod_id = pre.precio_prod_id"); 
-			WHERE("pre.prod_id = pro.prod_id"); 
-			WHERE("pro.tipo_prod_id = t.tip_prod_id");
+			WHERE("l.fecha_vigencia_id = f.fecha_vigencia_id"); 
+			WHERE("l.lista_precio_id = ls.lista_precio_id"); 
+			WHERE("ls.precio_producto_id = pre.precio_producto_id"); 
+			WHERE("pre.producto_id = pro.producto_id"); 
+			WHERE("pro.tipo_producto_id = t.tipo_producto_id");
 			
 			if(listaPrecios != null) {
-				if(listaPrecios.getListaPrecioId() > 0) {
+				if(listaPrecios.getListaPrecioId()!= null && listaPrecios.getListaPrecioId() > 0) {
 					WHERE("l.lista_precio_id = "  + String.valueOf(listaPrecios.getListaPrecioId()));
 				} else {
 					if(listaPrecios.getDescripcionLista()!= null && listaPrecios.getDescripcionLista() != "") {
@@ -102,38 +102,55 @@ public class ListaPreciosSqlProvider {
 		 new SQL() {{
 			SELECT("l.lista_precio_id, l.descripcion_lista");
 			SELECT("f.fecha_vigencia_id, f.fecha_ini,f.fecha_fin");
-			SELECT("pre.precio_prod_id, pre.monto");
-			SELECT("pro.prod_id, pro.nombre");
-			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			SELECT("pre.precio_producto_id, pre.monto");
+			SELECT("pro.producto_id, pro.nombre");
+			SELECT("t.tipo_producto_id, t.desc_tipo_producto");
 			
 			FROM("lista_precios l");
-			FROM("fecha_vig_list_prec f");
+			FROM("fecha_vigencia_lista_precios f");
 			FROM("precio_producto pre");
 			FROM("producto pro");
 			FROM("tipo_producto t");
 			FROM("list_prod_and_prec_prod ls");
 			
-			WHERE("l.fecha_vig_id = f.fecha_vigencia_id"); 
-			WHERE("l.lista_precio_id = ls.lis_prec_id"); 
-			WHERE("ls.prec_prod_id = pre.precio_prod_id"); 
-			WHERE("pre.prod_id = pro.prod_id"); 
-			WHERE("pro.tipo_prod_id = t.tip_prod_id");
+			WHERE("l.fecha_vigencia_id = f.fecha_vigencia_id"); 
+			WHERE("l.lista_precio_id = ls.lista_precio_id"); 
+			WHERE("ls.precio_producto_id = pre.precio_producto_id"); 
+			WHERE("pre.producto_id = pro.producto_id"); 
+			WHERE("pro.tipo_producto_id = t.tipo_producto_id");
 			WHERE("CURRENT_DATE() BETWEEN f.fecha_ini AND f.fecha_fin");
 			OR();
 			WHERE("CURRENT_DATE() > f.fecha_ini");
-			WHERE("f.fecha_fin = '01/01/3030'");
+			WHERE("f.fecha_fin = '3030-01-01'");
 		}}.toString();
 	}
 	
 	public String selectNuevoProducto() {
 		String query = 
 		 new SQL() {{
-			SELECT("p.prod_id, p.nombre");
-			SELECT("t.tip_prod_id, t.desc_tipo_producto");
-			FROM("producto p");
-			FROM("tipo_producto t");
-			WHERE("p.tipo_prod_id = t.tip_prod_id");
-			WHERE("p.prod_id NOT IN (" + verificarProductoExistenteEnListaActual() + ")");
+			 SELECT("p.producto_id, p.nombre");
+			 SELECT("t.tipo_producto_id, t.desc_tipo_producto");
+			 SELECT("ct.cuenta_id, ct.cuenta_desc, ct.tipo_cuenta, ct.cuenta_fecha, ct.cuenta_hora, ct.cuenta_usuario");
+			 SELECT("gct.grupo_cuenta_id, gct.tipo_grupo_cuenta, gct.grupo_cuenta_desc");
+			 SELECT("i.impuesto_id, i.impuesto_desc, i.impuesto_desc_abrv, i.impuesto_valor, i.tipo_impuesto");
+			 SELECT("ci.cuenta_id, ci.cuenta_desc, ci.tipo_cuenta, ci.cuenta_fecha, ci.cuenta_hora, ci.cuenta_usuario");
+			 SELECT("gci.grupo_cuenta_id, gci.tipo_grupo_cuenta, gci.grupo_cuenta_desc");
+				
+			 FROM("producto p");
+			 FROM("tipo_producto t");
+			 FROM("cuenta ct");
+			 FROM("grupo_cuenta gct");
+			 FROM("impuesto i");
+			 FROM("cuenta ci");
+			 FROM("grupo_cuenta gci");
+				
+			 WHERE("p.tipo_producto_id = t.tipo_producto_id");
+			 WHERE("t.cuenta_id = ct.cuenta_id");
+			 WHERE("ct.grupo_cuenta_id = gct.grupo_cuenta_id");
+			 WHERE("p.impuesto_id = i.impuesto_id");
+			 WHERE("i.cuenta_id = ci.cuenta_id");
+			 WHERE("ci.grupo_cuenta_id = gci.grupo_cuenta_id");
+			 WHERE("p.producto_id NOT IN (" + verificarProductoExistenteEnListaActual() + ")");
 		}}.toString();
 		System.out.print(query);
 		return query;
@@ -141,25 +158,25 @@ public class ListaPreciosSqlProvider {
 	
 	private String verificarProductoExistenteEnListaActual() {
 		return new SQL() {{
-			SELECT("pro.prod_id");
+			SELECT("pro.producto_id");
 			
 			FROM("producto pro");
 			FROM("lista_precios l");
-			FROM("fecha_vig_list_prec f");
+			FROM("fecha_vigencia_lista_precios f");
 			FROM("precio_producto pre");
 			
 			FROM("tipo_producto t");
 			FROM("list_prod_and_prec_prod ls");
 			
-			WHERE("l.fecha_vig_id = f.fecha_vigencia_id"); 
-			WHERE("l.lista_precio_id = ls.lis_prec_id"); 
-			WHERE("ls.prec_prod_id = pre.precio_prod_id"); 
-			WHERE("pre.prod_id = pro.prod_id"); 
-			WHERE("pro.tipo_prod_id = t.tip_prod_id");
+			WHERE("l.fecha_vigencia_id = f.fecha_vigencia_id"); 
+			WHERE("l.lista_precio_id = ls.lista_precio_id"); 
+			WHERE("ls.precio_producto_id = pre.precio_producto_id"); 
+			WHERE("pre.producto_id = pro.producto_id"); 
+			WHERE("pro.tipo_producto_id = t.tipo_producto_id");
 			WHERE("CURRENT_DATE() BETWEEN f.fecha_ini AND f.fecha_fin");
 			OR();
 			WHERE("CURRENT_DATE() > f.fecha_ini");
-			WHERE("f.fecha_fin = '01/01/3030'");
+			WHERE("f.fecha_fin = '3030-01-01'");
 		}}.toString();
 	}
 	

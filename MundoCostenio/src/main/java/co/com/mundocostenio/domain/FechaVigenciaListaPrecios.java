@@ -33,13 +33,13 @@ public class FechaVigenciaListaPrecios implements Serializable{
 		this.fechaFin = fechaFin;
 	}
 	public Integer getFechaVigenciaId() {
+		id = fechaVigenciaId;
 		return fechaVigenciaId;
 	}
 	public void setFechaVigenciaId(Integer fechaVigenciaId) {
 		this.fechaVigenciaId = fechaVigenciaId;
 	}
 	public Integer getId() {
-		id = fechaVigenciaId;
 		return id;
 	}
 	@Override

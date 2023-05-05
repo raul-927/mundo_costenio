@@ -15,7 +15,6 @@ public class PrecioProducto implements Serializable{
 	private Integer  monto;
 	
 	public Integer getId() {
-		id = precioProdId;
 		return id;
 	}
 	
@@ -32,6 +31,7 @@ public class PrecioProducto implements Serializable{
 		this.monto = monto;
 	}
 	public Integer getPrecioProdId() {
+		id = precioProdId;
 		return precioProdId;
 	}
 	public void setPrecioProdId(Integer precioProdId) {

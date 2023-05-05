@@ -20,7 +20,7 @@ public interface ProductoMapper {
 	
 	
 	@InsertProvider(type = ProductoSqlProvider.class, method ="insert")
-	@Options(useGeneratedKeys=true, keyProperty="prodId", keyColumn = "prod_id") 
+	@Options(useGeneratedKeys=true, keyProperty="prodId", keyColumn = "producto_id") 
 	int insert(Producto producto);
 	
 	@UpdateProvider(type = ProductoSqlProvider.class, method ="update")

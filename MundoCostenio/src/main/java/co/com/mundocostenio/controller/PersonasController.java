@@ -100,8 +100,8 @@ public class PersonasController {
 	private void verificarPersonas(Persona persona) throws ResourceNotFoundException{
 		String message = "";
 		List<Persona> personaResult = this.personasService.select(persona);
-		if(personaResult.size() == 0) {
-			if(persona.getPersonaId()!= null || persona.getId() != null || persona.getNombre()!=null) {
+		if(personaResult.isEmpty()) {
+			if(persona != null && (persona.getPersonaId()!= null || persona.getId() != null || persona.getNombre()!=null)) {
 				if(persona.getPersonaId()!= null && persona.getPersonaId() > 0) {
 					
 					message = "Persona con id: " +persona.getPersonaId()+"  no encontrada";

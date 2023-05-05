@@ -4,20 +4,33 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ListaPrecios implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@JsonIgnore
 	private Integer 					id;
 	private Integer 					listaPrecioId;
 	private String 						descripcionLista;
 	private FechaVigenciaListaPrecios 	fechaVigencia;
 	private List<PrecioProducto> 		precioProductoList;
 	
-	public Integer getId() {
+	
+	
+	public Integer getListaPrecioId() {
 		id = listaPrecioId;
+		return listaPrecioId;
+	}
+	public void setListaPrecioId(Integer listaPrecioId) {
+		this.listaPrecioId = listaPrecioId;
+	}
+	
+	public Integer getId() {
+		this.id = listaPrecioId;
 		return id;
 	}
 	
@@ -38,12 +51,6 @@ public class ListaPrecios implements Serializable{
 	}
 	public void setPrecioProductoList(List<PrecioProducto> precioProductoList) {
 		this.precioProductoList = precioProductoList;
-	}
-	public Integer getListaPrecioId() {
-		return listaPrecioId;
-	}
-	public void setListaPrecioId(Integer listaPrecioId) {
-		this.listaPrecioId = listaPrecioId;
 	}
 	
 	@Override

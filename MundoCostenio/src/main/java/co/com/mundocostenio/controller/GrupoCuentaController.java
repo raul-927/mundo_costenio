@@ -103,7 +103,7 @@ public class GrupoCuentaController {
 	private void verificarGrupoCuenta(GrupoCuenta grupoCuenta) throws ResourceNotFoundException {
 		String message ="";
 		List<GrupoCuenta> grupoCuentaResult = this.grupoCuentaService.select(grupoCuenta);
-		if(grupoCuentaResult.size() == 0) {
+		if(grupoCuentaResult.isEmpty()) {
 			if(grupoCuenta.getGrupoCuentaId()!= null || grupoCuenta.getId() != null) {
 				if(grupoCuenta.getGrupoCuentaId()!= null && grupoCuenta.getGrupoCuentaId() > 0) {
 					message = "GrupoCuenta con id: " +grupoCuenta.getGrupoCuentaId()+"  no encontrada";

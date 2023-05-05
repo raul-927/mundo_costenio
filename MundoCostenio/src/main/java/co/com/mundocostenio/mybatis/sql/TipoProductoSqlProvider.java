@@ -32,7 +32,7 @@ public class TipoProductoSqlProvider {
 		return new SQL() {{
 			if(tipProdId > 0) {
 				DELETE_FROM("tipo_producto");
-				WHERE("tip_prod_id = " + String.valueOf(tipProdId));
+				WHERE("tipo_producto_id = " + String.valueOf(tipProdId));
 			}
 			
 		}}.toString();
@@ -40,7 +40,7 @@ public class TipoProductoSqlProvider {
 	
 	public String selectTipoProducto(TipoProducto tipoProducto) {
 		return new SQL() {{
-			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			SELECT("t.tipo_producto_id, t.desc_tipo_producto");
 			SELECT("c.cuenta_id, c.cuenta_desc, c.tipo_cuenta, c.cuenta_fecha, c.cuenta_hora, c.cuenta_usuario");
 			SELECT("g.grupo_cuenta_id, g.tipo_grupo_cuenta, g.grupo_cuenta_desc");
 			
@@ -52,7 +52,7 @@ public class TipoProductoSqlProvider {
 			WHERE("c.grupo_cuenta_id = g.grupo_cuenta_id");
 			if(tipoProducto != null) {
 				if(tipoProducto.getTipProdId()!= null && tipoProducto.getTipProdId() > 0) {
-					WHERE("tip_prod_id = " + String.valueOf(tipoProducto.getTipProdId()));
+					WHERE("tipo_producto_id = " + String.valueOf(tipoProducto.getTipProdId()));
 				}else if(tipoProducto.getDescTipoProducto()!=null && tipoProducto.getDescTipoProducto()!="") {
 					WHERE("desc_tipo_producto = " + "'".concat(tipoProducto.getDescTipoProducto()).concat("'"));
 				}

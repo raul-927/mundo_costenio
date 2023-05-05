@@ -45,8 +45,8 @@ public class ProductoSqlProvider {
 	
 	public String selectProducto(Producto producto) {
 		return new SQL() {{
-			SELECT("p.prod_id, p.nombre");
-			SELECT("t.tip_prod_id, t.desc_tipo_producto");
+			SELECT("p.producto_id, p.nombre");
+			SELECT("t.tipo_producto_id, t.desc_tipo_producto");
 			SELECT("ct.cuenta_id, ct.cuenta_desc, ct.tipo_cuenta, ct.cuenta_fecha, ct.cuenta_hora, ct.cuenta_usuario");
 			SELECT("gct.grupo_cuenta_id, gct.tipo_grupo_cuenta, gct.grupo_cuenta_desc");
 			SELECT("i.impuesto_id, i.impuesto_desc, i.impuesto_desc_abrv, i.impuesto_valor, i.tipo_impuesto");
@@ -61,7 +61,7 @@ public class ProductoSqlProvider {
 			FROM("cuenta ci");
 			FROM("grupo_cuenta gci");
 			
-			WHERE("p.tipo_prod_id = t.tip_prod_id");
+			WHERE("p.tipo_producto_id = t.tipo_producto_id");
 			WHERE("t.cuenta_id = ct.cuenta_id");
 			WHERE("ct.grupo_cuenta_id = gct.grupo_cuenta_id");
 			WHERE("p.impuesto_id = i.impuesto_id");

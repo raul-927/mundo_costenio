@@ -98,7 +98,7 @@ public class CalleController {
 	
 	private void verificarCalle(Calle calle){
 		List<Calle> calleResult = this.calleService.select(calle);
-		if(calleResult.size() == 0) {
+		if(calleResult.isEmpty()) {
 			if(calle.getCalleId()!= null || calle.getId() != null || calle.getNombreCalle()!=null || calle.getTipoCalle()!=null) {
 				if(calle.getCalleId()!= null && calle.getCalleId() > 0) {
 					message = "Calle con id: " +calle.getCalleId()+"  no encontrada";

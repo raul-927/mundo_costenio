@@ -10,7 +10,7 @@ public class FechaVigenciaListaPreciosSqlProvider {
 	
 	public String insert(FechaVigenciaListaPrecios insert) {
 		return new SQL() {{
-			INSERT_INTO("fecha_vig_list_prec");
+			INSERT_INTO("fecha_vigencia_lista_precios");
 			if(insert.getFechaIni()!= null) {
 				System.out.println("fechaIni: "+insert.getFechaIni());
 				VALUES("fecha_ini","'".concat(insert.getFechaIni().toString()).concat("'"));
@@ -25,7 +25,7 @@ public class FechaVigenciaListaPreciosSqlProvider {
 	public String selectFechaVigenciaById(int id) {
 		return new SQL() {{
 			SELECT("*");
-			FROM("fecha_vig_list_prec");
+			FROM("fecha_vigencia_lista_precios");
 			WHERE("id = " + String.valueOf(id));
 		}}.toString();
 	}

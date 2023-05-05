@@ -96,7 +96,7 @@ public class UbicacionController {
 	private void verificar(Ubicacion ubicacion) throws ResourceNotFoundException{
 		String message ="";
 		List<Ubicacion> ubicacionResult = this.ubicacionService.select(ubicacion);
-		if(ubicacionResult.size() == 0) {
+		if(ubicacionResult.isEmpty()) {
 			if(ubicacion.getUbicacionId()!= null || ubicacion.getNroPuerta()!=null || ubicacion.getGeoLocalizacion()!=null) {
 				if(ubicacion.getUbicacionId()!= null && ubicacion.getUbicacionId() > 0) {
 					message = "Ubicacion con id: " +ubicacion.getUbicacionId()+"  no encontrada";

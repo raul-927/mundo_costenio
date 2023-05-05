@@ -63,7 +63,6 @@ public class CalleServiceImpl implements CalleService {
 	}
 
 	@Override
-	@PostAuthorize(value="hasPermission(filterObject, 'READ')")
 	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<Calle> select(Calle calle) {
 		return this.calleMapper.select(calle);

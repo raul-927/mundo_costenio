@@ -97,7 +97,7 @@ public class TipoProductoController {
 	private void verificarTipoProducto(TipoProducto tipoProducto) throws ResourceNotFoundException{
 		String message ="";
 		List<TipoProducto> tipoProductoResult = this.tipoProductoService.selectTipoProducto(tipoProducto);
-		if(tipoProductoResult.size() == 0) {
+		if(tipoProductoResult.isEmpty()) {
 			if(tipoProducto.getTipProdId()!= null || tipoProducto.getId() != null || tipoProducto.getDescTipoProducto()!=null) {
 				if(tipoProducto.getTipProdId()!= null && tipoProducto.getTipProdId() > 0) {
 					message = "TipoProducto con id: " +tipoProducto.getTipProdId()+"  no encontrado";

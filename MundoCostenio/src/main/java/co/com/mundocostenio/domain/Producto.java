@@ -16,10 +16,7 @@ public class Producto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore
-	private Integer 		id;
-	
-	
+	private Integer id;
 	private Integer 		prodId;
 	
 	@NotNull(message = ProductoErrorMessage.NOMBRE_NULL)
@@ -32,10 +29,15 @@ public class Producto implements Serializable{
 	@NotNull(message = ProductoErrorMessage.IMPUESTO_NOT_NULL)
 	private Impuesto 		impuesto;
 	
-	public Integer getId() {
-		id = prodId;
-		return id;
+	
+	public Producto() {}
+	public Producto(Integer prodId, String nombre, Impuesto impuesto) {
+		this.prodId = prodId;
+		this.nombre = nombre;
+		this.impuesto = impuesto;
+		this.id = prodId;
 	}
+
 	public TipoProducto getTipoProducto() {
 		return tipoProducto;
 	}
@@ -53,6 +55,11 @@ public class Producto implements Serializable{
 	}
 	public void setProdId(Integer prodId) {
 		this.prodId = prodId;
+	}
+	
+	public Integer getId() {
+		this.id = prodId;
+		return id;
 	}
 	public Impuesto getImpuesto() {
 		return impuesto;
@@ -73,4 +80,5 @@ public class Producto implements Serializable{
 		result += prime * result + ((localDateTime ==null)? 0:localDateTime.hashCode());
 		return result;
 	}
+	
 }

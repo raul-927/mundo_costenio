@@ -95,8 +95,8 @@ public class DepartamentoController {
 	
 	private void verificarDepartamento(Departamento departamento) throws ResourceNotFoundException{
 		String message ="";
-		List<Departamento> barrioResult = this.departamentoService.select(departamento);
-		if(barrioResult.size() == 0) {
+		List<Departamento> departamentoResult = this.departamentoService.select(departamento);
+		if(departamentoResult.isEmpty()) {
 			if(departamento.getDepartamentoId()!= null || departamento.getId() != null || departamento.getNombreDepartamento()!=null) {
 				if(departamento.getDepartamentoId()!= null && departamento.getDepartamentoId() > 0) {
 					message = "Departamento con id: " +departamento.getDepartamentoId()+"  no encontrado";

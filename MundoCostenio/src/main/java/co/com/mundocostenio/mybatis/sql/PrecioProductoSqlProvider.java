@@ -12,7 +12,7 @@ public class PrecioProductoSqlProvider {
 		return new SQL() {{
 			
 			INSERT_INTO("precio_producto");
-			INTO_COLUMNS("monto", "prod_id");
+			INTO_COLUMNS("monto", "producto_id");
 			for(PrecioProducto precProd: precioProductoList) {
 				INTO_VALUES("'".concat(String.valueOf(precProd.getMonto())).concat("'"), "'".concat(String.valueOf(precProd.getProducto().getProdId())).concat("'"));
 				ADD_ROW();
@@ -25,7 +25,7 @@ public class PrecioProductoSqlProvider {
 	public String insertListaAndPrecioProducto(int listaId, List<PrecioProducto> precioProductoList) {
 		String resultado = new SQL() {{
 			INSERT_INTO("list_prod_and_prec_prod");
-			INTO_COLUMNS("lis_prec_id", "prec_prod_id");
+			INTO_COLUMNS("lista_precio_id", "precio_producto_id");
 			for(PrecioProducto precProd: precioProductoList) {
 				INTO_VALUES(String.valueOf(listaId), String.valueOf(precProd.getPrecioProdId()));
 				ADD_ROW();
@@ -47,11 +47,11 @@ public class PrecioProductoSqlProvider {
 			FROM("lista_precios l");
 			FROM("list_prod_and_prec_prod ls");
 			
-			WHERE("l.id = ls.lis_prec_id");
-			WHERE("ls.prec_prod_id = pre.id");
-			WHERE("pre.prod_id = pro.id");
-			WHERE("pro.tipo_prod_id = t.id");
-			WHERE("l.id = " + String.valueOf(id));
+			WHERE("l.lista_precio_id = ls.lista_precio_id");
+			WHERE("ls.precio_producto_id = pre.precio_producto_id");
+			WHERE("pre.producto_id = pro.producto_id");
+			WHERE("pro.tipo_producto_id = t.tipo_producto_id");
+			WHERE("l.lista_precio_id = " + String.valueOf(id));
 		}}.toString();
 	}
 }

@@ -18,7 +18,7 @@ public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
       throws IOException{
         response.addHeader("WWW-Authenticate", "Basic realm=" +getRealmName());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        System.out.println("EEERRORRR: "+authEx.getMessage());
+        System.out.println("AUTHENTICATION ERROR: "+authEx.getMessage());
         PrintWriter writer = response.getWriter();
         writer.println("HTTP Status 401 - " + authEx.getCause());
     }

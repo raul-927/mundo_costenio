@@ -69,7 +69,7 @@ public class CuentaSqlProvider {
 	}
 	
 	public String select(Cuenta cuenta) {
-		return new SQL() {{
+		SQL sql = new SQL() {{
 			SELECT("c.cuenta_id, c.cuenta_desc, c.tipo_cuenta, c.cuenta_fecha, c.cuenta_hora, c.cuenta_usuario");
 			SELECT("g.grupo_cuenta_id, g.tipo_grupo_cuenta, g.grupo_cuenta_desc");
 			FROM("cuenta c");
@@ -110,6 +110,8 @@ public class CuentaSqlProvider {
 					}
 				}
 			}
-		}}.toString();
+		}};
+		System.out.print("SQL: "+sql.toString());
+		return sql.toString();
 	}
 }

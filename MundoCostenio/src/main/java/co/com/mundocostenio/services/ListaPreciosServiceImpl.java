@@ -34,19 +34,19 @@ public class ListaPreciosServiceImpl implements ListaPreciosService {
 	@Transactional
 	@PreAuthorize("hasRole('ROLE_SALES')")
 	public ListaPrecios insert(ListaPrecios listaPrecios) {
-		Integer id = this.accesControlListService.insert(listaPrecios);
-		listaPrecios.setListaPrecioId(id);
 		this.fechaVigenciaMapper.insert(listaPrecios.getFechaVigencia());
 		this.precioProductoMapper.insert(listaPrecios.getPrecioProductoList());
 		this.listaPreciosMapper.insert(listaPrecios);
 		this.precioProductoMapper.insertListaAndPrecioProducto(listaPrecios.getListaPrecioId(), listaPrecios.getPrecioProductoList());
+		Integer id = this.accesControlListService.insert(listaPrecios);
 		return listaPrecios;
 	}
 	
 	@Override
-	@PostFilter("hasPermission(#listaPrecios, 'READ')")
+	@PostFilter("hasPermission(filterObject, 'READ')")
 	public List<ListaPrecios> selectListaPrecios(ListaPrecios listaPrecios) {
-		return this.listaPreciosMapper.selectListaPrecios(listaPrecios);
+		List<ListaPrecios> listaPrecioResult =  this.listaPreciosMapper.selectListaPrecios(listaPrecios);
+		return listaPrecioResult;
 	}
 
 	@Override
