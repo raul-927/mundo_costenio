@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,6 +65,7 @@ public class CalleServiceImpl implements CalleService {
 
 	@Override
 	@PostFilter("hasPermission(filterObject, 'READ')")
+	//@PostAuthorize(value="hasPermission(filterObject, 'READ')")
 	public List<Calle> select(Calle calle) {
 		return this.calleMapper.select(calle);
 	}

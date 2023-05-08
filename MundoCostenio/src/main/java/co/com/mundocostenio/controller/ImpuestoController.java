@@ -117,7 +117,7 @@ public class ImpuestoController {
 				}
 			}
 			else {
-				message = "No existe ningún Impuesto ingresado";
+				message = "IMPUESTO: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

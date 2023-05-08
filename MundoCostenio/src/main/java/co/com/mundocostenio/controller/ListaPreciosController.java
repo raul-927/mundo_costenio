@@ -109,7 +109,7 @@ public class ListaPreciosController {
 				}
 			}
 			else {
-				message = "No existe ninguna Lista de Precios registradas";
+				message = "LISTA PRECIO: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

@@ -108,7 +108,7 @@ public class DepartamentoController {
 				}
 			}
 			else {
-				message = "No existe ningún Departamento ingresado";
+				message = "DEPARTAMENTO: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

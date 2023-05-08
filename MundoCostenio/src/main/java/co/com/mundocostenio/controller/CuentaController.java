@@ -127,7 +127,7 @@ public class CuentaController {
 				}
 			}
 			else {
-				message ="No existe ninguna Cuenta registrada";
+				message = "CUENTA: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

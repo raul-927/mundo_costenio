@@ -110,7 +110,7 @@ public class CalleController {
 				}
 			}
 			else {
-				message = "No existe ninguna Calle registrada";
+				message = "CALLE: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

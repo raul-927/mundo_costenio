@@ -115,7 +115,7 @@ public class GrupoCuentaController {
 				}
 			}
 			else {
-				message = "No existe ningún Grupo de Cuentas registrado";
+				message = "GRUPO CUENTA: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

@@ -108,7 +108,7 @@ public class UbicacionController {
 				}
 			}
 			else {
-				message = "No existe ninguna Ubicacion registrado";
+				message = "UBICACION: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

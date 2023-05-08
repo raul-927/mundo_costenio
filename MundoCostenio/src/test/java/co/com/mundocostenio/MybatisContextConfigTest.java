@@ -14,9 +14,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@EnableTransactionManagement
-@MapperScan(value="co.com.mundocostenio.mybatis.mappers")
+//@Configuration
+//@EnableTransactionManagement
+//@MapperScan(value="co.com.mundocostenio.mybatis.mappers")
 public class MybatisContextConfigTest {
 	
 	
@@ -41,7 +41,7 @@ public class MybatisContextConfigTest {
 	@Value("${mybatis.typeHandlersPackage}")
 	private String typeHandlersPackage;
 	
-	@Bean
+	//@Bean
 	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName(this.className);
@@ -52,7 +52,7 @@ public class MybatisContextConfigTest {
 		
 	}
 	
-	@Bean
+	//@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -66,7 +66,7 @@ public class MybatisContextConfigTest {
 		return (SqlSessionFactory) sqlSessionFactory.getObject();
 	}
 	
-	@Bean
+	//@Bean
 	public SqlSessionTemplate sqlSession() throws Exception {
 		SqlSessionTemplate sqlSessionTemplate= new SqlSessionTemplate(sqlSessionFactory());
 		return sqlSessionTemplate;

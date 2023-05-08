@@ -3,6 +3,7 @@ package co.com.mundocostenio;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import co.com.mundocostenio.domain.FechaVigenciaListaPrecios;
 import co.com.mundocostenio.domain.ListaPrecios;

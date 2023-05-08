@@ -113,7 +113,7 @@ public class PersonasController {
 				}
 			}
 			else {
-				message = "No existe ninguna Persona registrada";
+				message = "PERSONA: No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

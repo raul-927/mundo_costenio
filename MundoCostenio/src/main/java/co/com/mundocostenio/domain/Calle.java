@@ -29,7 +29,18 @@ public class Calle implements Serializable{
 	@Size(min=2, max=15, message=CalleErrorMessage.NOMBRE_CALLE_SIZE)
 	private String nombreCalle;
 	
+	public Calle() {}
+	
+	public Calle(Integer calleId, String nombreCalle) {
+		this.calleId = calleId;
+		this.nombreCalle = nombreCalle;
+		this.id = calleId;
+		
+	}
+	
+	
 	public Integer getCalleId() {
+		id = calleId;
 		return calleId;
 	}
 	public void setCalleId(Integer calleId) {
