@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.mundocostenio.domain.Cuenta;
+import co.com.mundocostenio.domain.model.Cuenta;
 import co.com.mundocostenio.mybatis.mappers.CuentaMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 
@@ -36,8 +36,11 @@ public class CuentaServiceImpl implements CuentaService {
 	@Transactional
 	@PreAuthorize(value="hasPermission(#cuenta, 'WRITE')")
 	public Cuenta update(@Param("cuenta") Cuenta cuenta) {
-		this.select(cuenta);
-		this.cuentaMapper.update(cuenta);
+		List<Cuenta> cuentas = this.select(cuenta);
+		if(!cuentas.isEmpty()) {
+			this.cuentaMapper.update(cuenta);
+		}
+		
 		return cuenta;
 	}
 

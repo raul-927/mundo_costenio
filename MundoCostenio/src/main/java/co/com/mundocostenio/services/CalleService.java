@@ -2,7 +2,7 @@ package co.com.mundocostenio.services;
 
 import java.util.List;
 
-import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.domain.model.Calle;
 
 public interface CalleService {
 	Calle insert(Calle calle);

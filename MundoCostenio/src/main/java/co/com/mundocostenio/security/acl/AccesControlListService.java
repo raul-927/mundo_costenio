@@ -12,19 +12,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import co.com.mundocostenio.domain.Barrio;
-import co.com.mundocostenio.domain.Calle;
-import co.com.mundocostenio.domain.Cuenta;
-import co.com.mundocostenio.domain.Departamento;
-import co.com.mundocostenio.domain.Direccion;
-import co.com.mundocostenio.domain.GrupoCuenta;
-import co.com.mundocostenio.domain.Impuesto;
-import co.com.mundocostenio.domain.ListaPrecios;
-import co.com.mundocostenio.domain.Persona;
-import co.com.mundocostenio.domain.PrecioProducto;
-import co.com.mundocostenio.domain.Producto;
-import co.com.mundocostenio.domain.Rol;
-import co.com.mundocostenio.domain.TipoProducto;
+import co.com.mundocostenio.domain.model.Barrio;
+import co.com.mundocostenio.domain.model.Calle;
+import co.com.mundocostenio.domain.model.Cuenta;
+import co.com.mundocostenio.domain.model.Departamento;
+import co.com.mundocostenio.domain.model.Direccion;
+import co.com.mundocostenio.domain.model.GrupoCuenta;
+import co.com.mundocostenio.domain.model.Impuesto;
+import co.com.mundocostenio.domain.model.ListaPrecios;
+import co.com.mundocostenio.domain.model.Persona;
+import co.com.mundocostenio.domain.model.PrecioProducto;
+import co.com.mundocostenio.domain.model.Producto;
+import co.com.mundocostenio.domain.model.Rol;
+import co.com.mundocostenio.domain.model.TipoProducto;
 import co.com.mundocostenio.enumerator.RolesEnum;
 
 @Component
@@ -132,7 +132,7 @@ public class AccesControlListService<T> {
 				mutableAcl.insertAce(3, BasePermission.READ,   new GrantedAuthoritySid(RolesEnum.RRHH.getDescripcion()), true);
 				break;
 			case DOMAIN+"User":
-				objectIdentity = new ObjectIdentityImpl(co.com.mundocostenio.domain.User.class, ((co.com.mundocostenio.domain.User)object).getUserId());
+				objectIdentity = new ObjectIdentityImpl(co.com.mundocostenio.domain.model.User.class, ((co.com.mundocostenio.domain.model.User)object).getUserId());
 				mutableAcl  = mutableAclService.createAcl(objectIdentity);
 				mutableAcl.insertAce(0, BasePermission.WRITE,  new PrincipalSid(user.getName()), true);
 				mutableAcl.insertAce(1, BasePermission.DELETE, new GrantedAuthoritySid(RolesEnum.ADMIN.getDescripcion()), true);
@@ -195,7 +195,7 @@ public class AccesControlListService<T> {
 				oid = new ObjectIdentityImpl(Persona.class, ((Persona) object).getPersonaId());
 				break;
 			case DOMAIN+"User":
-				oid = new ObjectIdentityImpl(co.com.mundocostenio.domain.User.class, ((co.com.mundocostenio.domain.User) object).getUserId());
+				oid = new ObjectIdentityImpl(co.com.mundocostenio.domain.model.User.class, ((co.com.mundocostenio.domain.model.User) object).getUserId());
 				break;
 			case DOMAIN+"Rol":
 				oid = new ObjectIdentityImpl(Rol.class, ((Rol) object).getRolId());

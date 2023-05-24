@@ -8,11 +8,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.mundocostenio.domain.Barrio;
 import co.com.mundocostenio.mybatis.mappers.BarrioMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 import co.com.mundocostenio.enumerator.RolesEnum;
 import co.com.mundocostenio.constants.RolesConstant;
+import co.com.mundocostenio.domain.model.Barrio;
 
 @Service("barrioService")
 public class BarrioServiceImpl implements BarrioService {

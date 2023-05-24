@@ -2,6 +2,8 @@ package co.com.mundocostenio.enumerator;
 
 import java.io.Serializable;
 
+import javax.persistence.Enumerated;
+
 public enum TipoCalleEnum implements Serializable{
 	C(1, "CALLE"), 
 	K(2,"CARRERA"),
@@ -30,6 +32,22 @@ public enum TipoCalleEnum implements Serializable{
 
 	public String getDescripcion() {
 		return descripcion;
+	}
+	
+	public static TipoCalleEnum getTipoCalleById(int id) {
+		try {
+			return TipoCalleEnum.valueOf(String.valueOf(id));
+		}catch(IllegalArgumentException ex) {
+			throw new RuntimeException("Valor no valido: "+id+". Error: "+ex);
+		}
+	}
+	
+	public static TipoCalleEnum getTipoCalleByDescripcion(String descripcion) {
+		try {
+			return TipoCalleEnum.valueOf(descripcion);
+		}catch(IllegalArgumentException ex) {
+			throw new RuntimeException("Tipo de calle inválido:"+descripcion+". Error: "+ex);
+		}
 	}
 	
 	

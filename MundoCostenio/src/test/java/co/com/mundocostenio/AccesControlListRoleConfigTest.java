@@ -19,7 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 
-import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.domain.model.Calle;
 import co.com.mundocostenio.enumerator.TipoCalleEnum;
 import co.com.mundocostenio.services.CalleService;
 
@@ -60,7 +60,7 @@ public class AccesControlListRoleConfigTest {
 			calle.setTipoCalle(TipoCalleEnum.K);
 		    Calle calleResult = calleService.update(calle);
 		    assertNotNull(calleResult);
-		    assertEquals("PRUEBA-UPDATE", calleResult.getNombreCalle());
+		    assertEquals(NOMBRE_CALLE_UPDATE, calleResult.getNombreCalle());
 		});
 
 	  Assertions.assertEquals(ACCES_IS_DENIED, thrown.getMessage());
@@ -76,7 +76,7 @@ public class AccesControlListRoleConfigTest {
 		calle.setTipoCalle(TipoCalleEnum.K);
 		Calle calleResult = calleService.update(calle);
 		assertNotNull(calleResult);
-		assertEquals("PRUEBA-UPDATE", calleResult.getNombreCalle());
+		assertEquals(NOMBRE_CALLE_UPDATE, calleResult.getNombreCalle());
 	  
 	}
 	

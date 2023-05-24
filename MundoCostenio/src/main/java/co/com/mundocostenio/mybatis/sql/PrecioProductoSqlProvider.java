@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.PrecioProducto;
+import co.com.mundocostenio.domain.model.PrecioProducto;
 
 public class PrecioProductoSqlProvider {
 	

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
-import co.com.mundocostenio.domain.Persona;
+import co.com.mundocostenio.domain.model.Persona;
 import co.com.mundocostenio.mybatis.sql.PersonasSqlProvider;
 
 

@@ -2,7 +2,7 @@ package co.com.mundocostenio.services;
 
 import java.util.List;
 
-import co.com.mundocostenio.domain.TipoProducto;
+import co.com.mundocostenio.domain.model.TipoProducto;
 
 public interface TipoProductoService {
 	

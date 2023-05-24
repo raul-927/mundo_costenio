@@ -12,7 +12,7 @@ import org.springframework.statemachine.StateMachine;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.domain.model.Calle;
 import co.com.mundocostenio.mybatis.mappers.CalleMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 import co.com.mundocostenio.statemachine.Events;

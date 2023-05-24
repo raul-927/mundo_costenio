@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import co.com.mundocostenio.domain.Barrio;
+
+import co.com.mundocostenio.domain.model.Barrio;
 import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;

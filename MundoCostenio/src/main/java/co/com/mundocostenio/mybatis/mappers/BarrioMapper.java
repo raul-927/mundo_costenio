@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
-import co.com.mundocostenio.domain.Barrio;
+import co.com.mundocostenio.domain.model.Barrio;
 import co.com.mundocostenio.mybatis.sql.BarrioSqlProvider;
 
 

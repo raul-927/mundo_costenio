@@ -10,14 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import co.com.mundocostenio.domain.Cuenta;
+import co.com.mundocostenio.domain.model.Cuenta;
 import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
@@ -36,10 +31,10 @@ public class CuentaController {
 	private ErrorFieldVerify errorFieldVerify;
 	
 	
-	@RequestMapping(
-			value ="/cuenta", method =RequestMethod.POST,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(
+            value = "/cuenta",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> insert(@RequestBody @Valid Cuenta cuenta, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
@@ -52,10 +47,10 @@ public class CuentaController {
 		return new ResponseEntity<Cuenta>(cuentaResult, headers, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value ="/cuenta", method =RequestMethod.PUT,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@PutMapping(
+            value = "/cuenta",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> update(@RequestBody Cuenta cuenta){
 		HttpHeaders headers = new HttpHeaders();
@@ -68,10 +63,10 @@ public class CuentaController {
 		return new ResponseEntity<Cuenta>(cuentaResult, headers, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value ="/cuenta", method =RequestMethod.DELETE,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@DeleteMapping(
+            value = "/cuenta",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> delete(@RequestBody Cuenta cuenta){
 		HttpHeaders headers = new HttpHeaders();
@@ -85,10 +80,10 @@ public class CuentaController {
 	}
 	
 	
-	@RequestMapping(
-			value ="/cuenta", method =RequestMethod.GET,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(
+            value = "/cuentas",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> select(@RequestBody Cuenta cuenta){ 
 		HttpHeaders headers = new HttpHeaders();
@@ -98,9 +93,9 @@ public class CuentaController {
 		return new ResponseEntity<List<Cuenta>>(cuentaResult, headers, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value ="/cuentas", method =RequestMethod.GET,
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(
+            value = "/cuenta",
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> selectAll(){ 
 		HttpHeaders headers = new HttpHeaders();

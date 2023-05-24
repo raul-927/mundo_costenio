@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
-import co.com.mundocostenio.domain.Caja;
+
+import co.com.mundocostenio.domain.model.Caja;
 import co.com.mundocostenio.mybatis.sql.CajaSqlProvider;
 
 public interface CajaMapper {

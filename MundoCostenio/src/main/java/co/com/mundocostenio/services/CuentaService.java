@@ -2,7 +2,7 @@ package co.com.mundocostenio.services;
 
 import java.util.List;
 
-import co.com.mundocostenio.domain.Cuenta;
+import co.com.mundocostenio.domain.model.Cuenta;
 
 public interface CuentaService {
 	

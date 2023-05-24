@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.mundocostenio.domain.GrupoCuenta;
+import co.com.mundocostenio.domain.model.GrupoCuenta;
 import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
@@ -28,7 +28,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},allowedHeaders = "*", allowCredentials = "true")
 @Api(value = "/grupoCuenta", description="End point para trabajar con los grupos de cuenta")
 public class GrupoCuentaController {
 	
@@ -86,7 +86,7 @@ public class GrupoCuentaController {
 	}
 	
 	@RequestMapping(
-			value ="/grupoCuenta", method =RequestMethod.GET,
+			value ="/grupoCuentaSearch", method =RequestMethod.POST,
 			consumes ={MediaType.APPLICATION_JSON_VALUE},
 			produces ={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
@@ -115,7 +115,7 @@ public class GrupoCuentaController {
 				}
 			}
 			else {
-				message = "GRUPO CUENTA: No existen registros disponibles para mostrar";
+				message = "GRUPO CUENTA No existen registros disponibles para mostrar";
 				throw new ResourceNotFoundException(message);
 			}
 		}

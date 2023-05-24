@@ -2,7 +2,7 @@ package co.com.mundocostenio.services;
 
 import java.util.List;
 
-import co.com.mundocostenio.domain.GrupoCuenta;
+import co.com.mundocostenio.domain.model.GrupoCuenta;
 
 public interface GrupoCuentaService {
 	GrupoCuenta insert(GrupoCuenta grupoCuenta);

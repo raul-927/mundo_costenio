@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 
-import co.com.mundocostenio.domain.Direccion;
+import co.com.mundocostenio.domain.model.Direccion;
 import co.com.mundocostenio.mybatis.sql.DireccionSqlProvider;
 
 

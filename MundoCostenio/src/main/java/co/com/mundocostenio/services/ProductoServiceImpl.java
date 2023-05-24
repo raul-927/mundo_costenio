@@ -9,8 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.mundocostenio.domain.Impuesto;
-import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.domain.model.Impuesto;
+import co.com.mundocostenio.domain.model.Producto;
 import co.com.mundocostenio.mybatis.mappers.ImpuestoMapper;
 import co.com.mundocostenio.mybatis.mappers.ProductoMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;

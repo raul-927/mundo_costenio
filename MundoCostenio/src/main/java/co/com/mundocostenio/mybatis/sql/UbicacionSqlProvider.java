@@ -2,7 +2,7 @@ package co.com.mundocostenio.mybatis.sql;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.Ubicacion;
+import co.com.mundocostenio.domain.model.Ubicacion;
 
 
 public class UbicacionSqlProvider {

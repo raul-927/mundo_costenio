@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
 
-import co.com.mundocostenio.domain.FechaVigenciaListaPrecios;
+import co.com.mundocostenio.domain.model.FechaVigenciaListaPrecios;
 import co.com.mundocostenio.mybatis.sql.FechaVigenciaListaPreciosSqlProvider;
 
 

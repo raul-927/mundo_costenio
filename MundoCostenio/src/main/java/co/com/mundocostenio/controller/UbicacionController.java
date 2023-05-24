@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.mundocostenio.domain.Ubicacion;
+import co.com.mundocostenio.domain.model.Ubicacion;
 import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;

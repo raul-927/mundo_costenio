@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
-import co.com.mundocostenio.domain.TipoProducto;
+import co.com.mundocostenio.domain.model.TipoProducto;
 import co.com.mundocostenio.mybatis.sql.TipoProductoSqlProvider;
 
 public interface TipoProductoMapper {

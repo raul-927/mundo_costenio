@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.Stock;
+import co.com.mundocostenio.domain.model.Stock;
 
 public class StockSqlProvider {
 	

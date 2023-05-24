@@ -8,7 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.mundocostenio.domain.GrupoCuenta;
+import co.com.mundocostenio.domain.model.GrupoCuenta;
 import co.com.mundocostenio.mybatis.mappers.GrupoCuentaMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;
 

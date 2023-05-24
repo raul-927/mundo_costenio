@@ -11,8 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import co.com.mundocostenio.domain.ListaPrecios;
-import co.com.mundocostenio.domain.Producto;
+
+import co.com.mundocostenio.domain.model.ListaPrecios;
+import co.com.mundocostenio.domain.model.Producto;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
 import co.com.mundocostenio.exceptions.ResourceNotFoundException;

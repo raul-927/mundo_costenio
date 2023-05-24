@@ -2,7 +2,7 @@ package co.com.mundocostenio.mybatis.sql;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.Departamento;
+import co.com.mundocostenio.domain.model.Departamento;
 
 public class DepartamentoSqlProvider {
 	

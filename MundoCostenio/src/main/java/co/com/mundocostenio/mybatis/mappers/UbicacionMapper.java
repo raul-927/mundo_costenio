@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
-import co.com.mundocostenio.domain.Ubicacion;
+import co.com.mundocostenio.domain.model.Ubicacion;
 import co.com.mundocostenio.mybatis.sql.UbicacionSqlProvider;
 
 

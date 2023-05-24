@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
 
-import co.com.mundocostenio.domain.Departamento;
+import co.com.mundocostenio.domain.model.Departamento;
 import co.com.mundocostenio.mybatis.sql.DepartamentoSqlProvider;
 
 

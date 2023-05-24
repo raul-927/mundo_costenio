@@ -2,7 +2,7 @@ package co.com.mundocostenio.services;
 
 import java.util.List;
 
-import co.com.mundocostenio.domain.Impuesto;
+import co.com.mundocostenio.domain.model.Impuesto;
 
 public interface ImpuestoService {
 	Impuesto insert(Impuesto impuesto);

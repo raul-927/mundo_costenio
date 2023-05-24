@@ -8,8 +8,9 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.SelectProvider;
-import co.com.mundocostenio.domain.ListaPrecios;
-import co.com.mundocostenio.domain.Producto;
+
+import co.com.mundocostenio.domain.model.ListaPrecios;
+import co.com.mundocostenio.domain.model.Producto;
 import co.com.mundocostenio.mybatis.sql.ListaPreciosSqlProvider;
 
 @Mapper

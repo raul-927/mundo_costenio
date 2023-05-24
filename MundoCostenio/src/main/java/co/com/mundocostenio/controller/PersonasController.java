@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
-//import com.nimbusds.oauth2.sdk.http.HTTPResponse;
-
-import co.com.mundocostenio.domain.Persona;
+import co.com.mundocostenio.domain.model.Persona;
 import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;

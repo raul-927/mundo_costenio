@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.client.InMemoryClientDetails
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 @Configuration
 @EnableAuthorizationServer
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 	
 	@Value("${jwt.key}")
@@ -43,7 +43,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                .scopes("read")
         .and()
                 .withClient("resourceserver")
-                .secret("resourceserversecret");
+                .secret("resourceserversecret")
+                .authorizedGrantTypes(SCOPE_CLIENT_CREDENTIALS, SCOPE_AUTHORIZATION_CODE, SCOPE_PASSWORD, SCOPE_REFRESH_TOKEN)
+                .scopes("read");
     }
 
     @Override

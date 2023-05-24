@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.jdbc.SQL;
 
-import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.domain.model.Calle;
 
 public class CalleSqlProvider {
 	

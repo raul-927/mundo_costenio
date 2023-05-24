@@ -2,9 +2,9 @@ package co.com.mundocostenio.services;
 
 import java.util.List;
 
-import co.com.mundocostenio.domain.Asiento;
-import co.com.mundocostenio.domain.Pago;
-import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.domain.model.Asiento;
+import co.com.mundocostenio.domain.model.Pago;
+import co.com.mundocostenio.domain.model.Producto;
 
 public interface AsientoService {
 	

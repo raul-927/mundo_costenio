@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import co.com.mundocostenio.domain.FechaVigenciaListaPrecios;
-import co.com.mundocostenio.domain.ListaPrecios;
-import co.com.mundocostenio.domain.PrecioProducto;
-import co.com.mundocostenio.domain.Producto;
-import co.com.mundocostenio.domain.TipoProducto;
+
+import co.com.mundocostenio.domain.model.FechaVigenciaListaPrecios;
+import co.com.mundocostenio.domain.model.ListaPrecios;
+import co.com.mundocostenio.domain.model.PrecioProducto;
+import co.com.mundocostenio.domain.model.Producto;
+import co.com.mundocostenio.domain.model.TipoProducto;
 import co.com.mundocostenio.mybatis.mappers.ListaPreciosMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.springframework.stereotype.Component;
 
-import co.com.mundocostenio.domain.Producto;
+import co.com.mundocostenio.domain.model.Producto;
 import co.com.mundocostenio.mybatis.sql.ProductoSqlProvider;
 
 

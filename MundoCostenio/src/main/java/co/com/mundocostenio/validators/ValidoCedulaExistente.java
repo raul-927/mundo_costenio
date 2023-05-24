@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import co.com.mundocostenio.annotations.CedulaExistente;
-import co.com.mundocostenio.domain.Persona;
+import co.com.mundocostenio.domain.model.Persona;
 import co.com.mundocostenio.dto.NroVerifCedula;
 import co.com.mundocostenio.jni.ControlCedulaJni;
 import co.com.mundocostenio.services.PersonasService;

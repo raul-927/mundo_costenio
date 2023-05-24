@@ -7,7 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.mundocostenio.domain.Direccion;
+import co.com.mundocostenio.domain.model.Direccion;
 import co.com.mundocostenio.mybatis.mappers.CalleMapper;
 import co.com.mundocostenio.mybatis.mappers.DireccionMapper;
 import co.com.mundocostenio.security.acl.AccesControlListService;

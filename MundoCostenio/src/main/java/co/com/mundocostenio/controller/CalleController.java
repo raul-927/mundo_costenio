@@ -10,13 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import co.com.mundocostenio.domain.Calle;
+import co.com.mundocostenio.domain.model.Calle;
 import co.com.mundocostenio.exceptions.BindingResultException;
 import co.com.mundocostenio.exceptions.ErrorField;
 import co.com.mundocostenio.exceptions.ErrorFieldVerify;
@@ -35,10 +31,10 @@ public class CalleController {
 	private String message;
 	
 	
-	@RequestMapping(
-			value ="/calle", method =RequestMethod.POST,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(
+            value = "/calle",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> insertCalle(@RequestBody @Valid Calle calle, BindingResult bindingResult){
 		HttpHeaders headers = new HttpHeaders();
@@ -51,10 +47,10 @@ public class CalleController {
 		return new ResponseEntity<Calle>(calleResult, headers, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value ="/calle", method =RequestMethod.PUT,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@PutMapping(
+            value = "/calle",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> updateCalle(@RequestBody Calle calle)throws Exception{
 		HttpHeaders headers = new HttpHeaders();
@@ -67,10 +63,10 @@ public class CalleController {
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value ="/calle", method =RequestMethod.DELETE,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@DeleteMapping(
+            value = "/calle",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> deleteCalle(@RequestBody Calle calle) throws Exception{
 		HttpHeaders headers = new HttpHeaders();
@@ -83,10 +79,10 @@ public class CalleController {
 		return new ResponseEntity<Calle>(calle, headers, HttpStatus.OK);
 	}
 	
-	@RequestMapping(
-			value ="/calles", method =RequestMethod.POST,
-			consumes ={MediaType.APPLICATION_JSON_VALUE},
-			produces ={MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(
+            value = "/calles",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> showCalle(@RequestBody Calle calle) throws ResourceNotFoundException{
 		HttpHeaders headers = new HttpHeaders();

@@ -3,7 +3,7 @@ package co.com.mundocostenio.mybatis.sql;
 import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Component;
 
-import co.com.mundocostenio.domain.FechaVigenciaListaPrecios;
+import co.com.mundocostenio.domain.model.FechaVigenciaListaPrecios;
 
 @Component("fechaVigenciaListaPreciosSqlProvider")
 public class FechaVigenciaListaPreciosSqlProvider {
